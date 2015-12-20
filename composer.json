@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*"
+        "laravel/framework": "5.1.*",
+        "barryvdh/laravel-debugbar": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -14,6 +15,7 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
         "illuminate/html": "5.*"
+
     },
     "autoload": {
         "classmap": [
@@ -48,5 +50,6 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "illuminate/html": "5.*"
 }
