@@ -4,6 +4,10 @@
     <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{--
+    true    => https
+    false   => http
+    --}}
     {!! HTML::style('css/app.css', array(), true) !!}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     {!! HTML::script('js/_general_js.js', array(), true) !!}
