@@ -1,0 +1,26 @@
+.list_delete_btn{
+    margin-left:10px;
+}
+.item_row{
+    display: inline-block;
+    width:90%;
+}
+
+.big-checkbox {width: 22px; height: 22px;}
+
+/*FR CUSTOM THEME*/
+body{
+    /*background-color: #e5ffe5;*/
+    background-image: url('../image/paper.jpg');
+}
+/*end of FR CUSTOM THEME*/
+
+/*nicEditor*/
+.nicEdit-main {
+    background-color: white;
+    height: 200px;
+}
+.nice_editor{
+    margin: 10px 0px 10px 0px;
+}
+
