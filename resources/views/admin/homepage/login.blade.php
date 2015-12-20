@@ -4,7 +4,7 @@
     <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ URL::secure_asset('css/app.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     {!! HTML::script('js/_general_js.js', array(), true) !!}
 
