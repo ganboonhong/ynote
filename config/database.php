@@ -1,10 +1,10 @@
 <?php
 
-/*$url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $host       = $url["host"];
 $username   = $url["user"];
 $password   = $url["pass"];
-$database   = substr($url["path"], 1);*/
+$database   = substr($url["path"], 1);
 
 
 return [
@@ -59,7 +59,7 @@ return [
             'prefix'   => '',
         ],
 
-        'mysql' => [
+        /*'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
             'database'  => env('DB_DATABASE', 'forge'),
@@ -69,9 +69,9 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
-        ],
+        ],*/
 
-        /*'mysql' => [
+        'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST'    , $host),
             'database'  => env('DB_DATABASE', $database),
@@ -81,7 +81,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
-        ],*/
+        ],
 
         'pgsql' => [
             'driver'   => 'pgsql',
