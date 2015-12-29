@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    //return view('welcome');
-    redirect()->route('auth/login');
-});
+Route::get('/', 'Auth\AuthController@getLogin');
 
 Route::get('test', function(){
     return view('test');
