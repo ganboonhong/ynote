@@ -1,12 +1,12 @@
 @extends('admin.templates.list')
 
 @section('header_title')
-    使用者名單
+    User List
 @stop
 
 @section('title')
-    使用者名單
-    <a href="{{route('user_create')}}" class="btn btn-success btn-sm list_delete_btn" title="新增使用者">
+    User List
+    <a href="{{route('user_create')}}" class="btn btn-success btn-sm list_delete_btn" title="Create">
         <span class="glyphicon glyphicon-leaf"></span>
     </a>
 
@@ -23,7 +23,7 @@
                     <input type="checkbox" value="" class="big-checkbox" id="first_checkbox">
                 </label>
             </span>
-            <a class="list-group-item item_row active">使用者名單</a>
+            <a class="list-group-item item_row active">User List</a>
             <button class="btn btn-danger btn-sm list_delete_btn" id="delete_all_btn" style="display: none">
                 <span class="glyphicon glyphicon-trash"></span>
             </button>
