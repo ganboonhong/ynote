@@ -26,12 +26,12 @@
 
     <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" name="password" class="form-control" id="password" placeholder="Use the same password">
+        <input type="password" name="password" class="form-control" id="password" placeholder="Leave it empty to use the same password">
     </div>
 
     <div class="form-group">
         <label for="password">Password (Required):</label>
-        <input type="password" name="password_2" class="form-control" id="password_2" placeholder="Use the same password">
+        <input type="password" name="password_2" class="form-control" id="password_2" placeholder="Leave it empty to use the same password">
     </div>
 
     <div class="form-group">
