@@ -11,5 +11,3 @@
     <label for="invisible">不公開</label>
     <input name="visible" id="invisible" type="radio" value="N">
 </div>
-
-<button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">新增</button>

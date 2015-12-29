@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-        <label for="name_en">Name(Eng):</label>
+        <label for="name_en">Name (Eng):</label>
         <input type="text" name="name_en" class="form-control" id="name_en" value="{{$category->name_en}}">
     </div>
 
