@@ -1,20 +1,13 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">TINKER</a>
+            <a class="navbar-brand" href="#">FRANCODE</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                {{--<li class="active"><a href="#">Home</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
-                    </ul>
-                </li>--}}
                 <li><a href="/admin/function">System</a></li>
                 <li><a href="/admin/category">Category</a></li>
+                <li><a href="/admin/user">Users</a></li>
                 <li><a href="#">Article</a></li>
             </ul>
 

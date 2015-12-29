@@ -12,8 +12,9 @@ class PrivilegesTableSeeder extends Seeder
     public function run()
     {
         DB::table('privileges')->insert([
-            ['level' => '100', 'name' => '最高權限'],
-            ['level' => '50', 'name' => '管理者']
+            ['level' => '100',  'name' => 'Root' ],
+            ['level' => '50 ',  'name' => 'Admin'],
+            ['level' => '10 ',  'name' => 'Guest'],
         ]);
     }
 }
