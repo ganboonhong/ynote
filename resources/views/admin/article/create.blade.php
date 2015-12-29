@@ -17,7 +17,7 @@
             </div>
 
             <div class="form-group">
-                <label for="name">Title(Eng):</label>
+                <label for="name">Title (Eng):</label>
                 <input type="text" name="title_en" class="form-control" id="title_en">
             </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="nice_editor form-group">
-                <label for="name">Content(Eng)</label>
+                <label for="name">Content (Eng)</label>
                 <textarea name="content_en" id="content_en" style="width:100%" class="nice_editor"></textarea>
             </div>
 
@@ -54,7 +54,7 @@
                         name: "required"
                     }
                 });
-            })
+            });
 
             /*
             //nicEditor
