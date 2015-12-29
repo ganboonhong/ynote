@@ -1,11 +1,11 @@
 @extends('admin.templates.create')
 
 @section('title')
-    修改使用者資訊
+    Editing User Information
 @stop
 
 @section('title')
-    新增修改使用者資訊使用者
+    Editing User Information
 @stop
 
 @section('content')
@@ -13,7 +13,7 @@
     {!! Form::open(array('route' => array('user_update', $user->user_id), 'id' => 'user_form')) !!}
 
     <div class="form-group">
-        <label for="name">名稱</label>
+        <label for="name">User Name</label>
         <input type="text" name="name" class="form-control" id="name"
                value="{{$user->name}}">
     </div>
@@ -25,17 +25,17 @@
     </div>
 
     <div class="form-group">
-        <label for="password">密碼:</label>
-        <input type="password" name="password" class="form-control" id="password" placeholder="無須修改請勿填寫">
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Use the same password">
     </div>
 
     <div class="form-group">
-        <label for="password">確認密碼:</label>
-        <input type="password" name="password_2" class="form-control" id="password_2" placeholder="無須修改請勿填寫">
+        <label for="password">Password (Required):</label>
+        <input type="password" name="password_2" class="form-control" id="password_2" placeholder="Use the same password">
     </div>
 
     <div class="form-group">
-        <label for="password">權限:</label>
+        <label for="privilege">Privilege:</label>
         <select class="form-control" name="level">
             @foreach( $privileges as $privilege )
                 <option value="{{$privilege->level}}"
@@ -48,7 +48,7 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary form-control">新增</button>
+    <button type="submit" class="btn btn-primary form-control">Save</button>
     {!! Form::close() !!}
 
     <script>

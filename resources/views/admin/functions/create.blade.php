@@ -1,18 +1,18 @@
 @extends('admin.templates.create')
 
     @section('title')
-        新增功能
+        Creating a new function
     @stop
 
     @section('title')
-        新增功能
+        Creating a new function
     @stop
 
     @section('content')
 
         {!! Form::open(array('url' => 'admin/function', 'id' => 'function_form')) !!}
             <div class="form-group">
-                <label for="name">名稱:</label>
+                <label for="name">Function Name:</label>
                 <input type="text" name="name" class="form-control" id="name">
             </div>
 
@@ -24,11 +24,10 @@
                 @endforeach
             </select>
 
-            <button type="submit" class="btn btn-primary form-control" style="margin-top: 10px">新增</button>
+            <button type="submit" class="btn btn-primary form-control" style="margin-top: 10px">Create</button>
         {!! Form::close() !!}
 
         <script>
-
             $(function(){
                 $('#function_form').validate({
                     rules:{
@@ -36,7 +35,6 @@
                     }
                 });
             })
-
         </script>
 
     @stop

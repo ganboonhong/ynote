@@ -1,11 +1,11 @@
 @extends('admin.templates.create')
 
 @section('title_header')
-    新增使用者
+    Creating a new user
 @stop
 
 @section('title')
-    新增使用者
+    Creating a new user
 @stop
 
 @section('content')
@@ -13,7 +13,7 @@
     {!! Form::open(array('url' => 'admin/user', 'id' => 'user_form')) !!}
 
         <div class="form-group">
-            <label for="name">名稱</label>
+            <label for="name">Name</label>
             <input type="text" name="name" class="form-control" id="name" >
         </div>
 
@@ -23,17 +23,17 @@
         </div>
 
         <div class="form-group">
-            <label for="password">密碼:</label>
+            <label for="password">Password:</label>
             <input type="password" name="password" class="form-control" id="password">
         </div>
 
         <div class="form-group">
-            <label for="password">確認密碼:</label>
+            <label for="password">Password (Confirm):</label>
             <input type="password" name="password_2" class="form-control" id="password_2">
         </div>
 
         <div class="form-group">
-            <label for="password">權限:</label>
+            <label for="privilege">Privilege:</label>
             <select class="form-control" name="level">
                 @foreach( $privileges as $privilege )
                     <option value="{{$privilege->level}}">
@@ -43,7 +43,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary form-control">新增</button>
+        <button type="submit" class="btn btn-primary form-control">Create</button>
     {!! Form::close() !!}
 
 

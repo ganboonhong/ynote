@@ -1,11 +1,11 @@
 @extends('admin.templates.list')
 
     @section('header_title')
-        文章分類
+        Categories
     @stop
 
     @section('title')
-        文章分類
+        Categories
         <a href="{{route('category_create')}}" class="btn btn-success btn-sm list_delete_btn">
             <span class="glyphicon glyphicon-leaf" title="新增"></span>
         </a>
@@ -24,7 +24,7 @@
                         </label>
                     </span>
 
-                    <a class="list-group-item item_row active">文章分類</a>
+                    <a class="list-group-item item_row active">Categories</a>
                         <button class="btn btn-danger btn-sm list_delete_btn" id="delete_all_btn" style="display: none">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>

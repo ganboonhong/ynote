@@ -1,23 +1,23 @@
 @extends('admin.templates.create')
 
     @section('title')
-        編輯功能分類
+        Editing Function Type
     @stop
 
     @section('title')
-        編輯功能分類
+        Editing Function Type
     @stop
 
     @section('content')
 
         {!! Form::open(array('route' => array('function_type_update', $function_type->admin_function_type_id))) !!}
         <div class="form-group">
-            <label for="name">名稱:</label>
+            <label for="name">Function Type Name:</label>
             <input type="text" name="name" class="form-control" id="name" value="{{$function_type->name}}">
             <input type="hidden" name="id" value="{{$function_type->admin_function_type_id}}"/>
         </div>
 
-        <button type="submit" class="btn btn-primary form-control" style="margin-top: 10px">修改</button>
+        <button type="submit" class="btn btn-primary form-control" style="margin-top: 10px">Save</button>
         {!! Form::close() !!}
 
     @stop

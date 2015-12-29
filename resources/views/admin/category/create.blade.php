@@ -22,8 +22,6 @@
         <input type="text" name="name_en" class="form-control" id="name_en">
     </div>
 
-    @include('admin.partials.footer_elements')
-
     {!! Form::close() !!}
 
 

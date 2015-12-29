@@ -1,11 +1,11 @@
 @extends('admin.templates.create')
 
     @section('title')
-        編輯功能
+        Editing Function
     @stop
 
     @section('title')
-        編輯功能
+        Editing Function
     @stop
 
     @section('content')
@@ -13,7 +13,7 @@
         {{--{!! Form::open(array('url' => 'admin/function/update')) !!}--}}
         {!! Form::open(array('route' => array('function_update', $function->admin_function_id))) !!}
         <div class="form-group">
-            <label for="name">名稱:</label>
+            <label for="name">Function Name:</label>
             <input type="text" name="name" class="form-control" id="name" value="{{$function->name}}">
             <input type="hidden" name="id" value="{{$function->admin_function_id}}"/>
         </div>
@@ -32,7 +32,7 @@
             @endforeach
         </select>
 
-        <button type="submit" class="btn btn-primary form-control" style="margin-top: 10px">修改</button>
+        <button type="submit" class="btn btn-primary form-control" style="margin-top: 10px">Save</button>
         {!! Form::close() !!}
 
     @stop

@@ -1,13 +1,13 @@
 <div class="form-group">
-    <label for="sort">重要性:</label>
+    <label for="sort">Priority:</label>
     <input type="text" name="sort" class="form-control" id="sort">
 </div>
 
-<div>
+<div>Visible
         <span style="margin-right:10px ; ">
-            <label for="visible">公開</label>
+            <label for="visible">Yes</label>
             <input name="visible" id="visible" type="radio" value="Y" checked>
         </span>
-    <label for="invisible">不公開</label>
+    <label for="invisible">No</label>
     <input name="visible" id="invisible" type="radio" value="N">
 </div>
