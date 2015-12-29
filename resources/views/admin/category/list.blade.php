@@ -7,7 +7,7 @@
     @section('title')
         Categories
         <a href="{{route('category_create')}}" class="btn btn-success btn-sm list_delete_btn">
-            <span class="glyphicon glyphicon-leaf" title="新增"></span>
+            <span class="glyphicon glyphicon-leaf" title="Create"></span>
         </a>
     @stop
 
