@@ -21,21 +21,20 @@
         <input type="text" name="name_en" class="form-control" id="name_en" value="{{$category->name_en}}">
     </div>
 
-    @include('admin.partials.footer_elements')
-
-    {{--<div style="margin-bottom: 20px;">
-        公開
+    <div style="margin-bottom: 20px;">
+        Visible
         <span style="margin-left:10px ;margin-right:10px ; ">
-            <label for="visible_Y">是</label>
+            <label for="visible_Y">Yes</label>
             <input name="visible" id="visible_Y" type="radio" value="Y"
-                   @if($category->visible == 'Y') {{'checked'}} @endif>
+            @if($category->visible == 'Y') {{'checked'}} @endif>
         </span>
-        <label for="visible_N">否</label>
-        <input name="visible" id="visible_N" type="radio" value="N"
-                    @if($category->visible == 'N') {{'checked'}} @endif>
-    </div>--}}
 
-    <button type="submit" class="btn btn-primary form-control">修改</button>
+        <label for="visible_N">No</label>
+        <input name="visible" id="visible_N" type="radio" value="N"
+            @if($category->visible == 'N') {{'checked'}} @endif>
+    </div>
+
+    <button type="submit" class="btn btn-primary form-control">Save</button>
     {!! Form::close() !!}
 
 
@@ -45,7 +44,6 @@
                 name:"required"
             }
         })
-
     </script>
 
 @stop
