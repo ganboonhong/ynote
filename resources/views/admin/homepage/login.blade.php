@@ -236,7 +236,7 @@
                     <input type="password"  name="password" placeholder="Password" />
                     <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
                     <div class="remember-forgot">
-                        <div class="row">
+                        {{--<div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox">
                                     <label>
@@ -248,7 +248,7 @@
                             <div class="col-md-6 forgot-pass-content">
                                 <a href="javascription:void(0)" class="forgot-pass" style="color: black">Forgot Password</a>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </form>
             </div>

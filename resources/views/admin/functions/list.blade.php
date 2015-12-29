@@ -1,11 +1,11 @@
 @extends('admin.templates.list')
 
     @section('header_title')
-        System Function
+        System Functions
     @stop
 
     @section('title')
-        System Function
+        System Functions
         <a href="{{route('function_create')}}" class="btn btn-success btn-sm list_delete_btn">
             <span class="glyphicon glyphicon-leaf" title="Create"></span>
         </a>

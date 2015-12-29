@@ -1,22 +1,23 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">FRANCODE</a>
+            <a class="navbar-brand">FRANCODE</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li><a href="/admin/function">System</a></li>
+                <li><a href="/admin/function">Function</a></li>
+                <li><a href="/admin/function_type">Function Type</a></li>
                 <li><a href="/admin/category">Category</a></li>
                 <li><a href="/admin/user">Users</a></li>
                 <li><a href="/admin/article/create">Article</a></li>
             </ul>
 
-            <form class="navbar-form navbar-left navbar-right" role="search">
+            {{--<form class="navbar-form navbar-left navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+            </form>--}}
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/admin/user/edit/{{Auth::user()->user_id}}"><span class="glyphicon glyphicon-user"></span> {{Auth::user()->email}}</a></li>
