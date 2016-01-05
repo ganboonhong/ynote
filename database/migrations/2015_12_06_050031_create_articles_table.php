@@ -15,7 +15,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->increments  ('article_id');
             $table->integer     ('category_id')->unsigned();
-            //$table->integer     ('user_id')->unsigned();
+            $table->integer     ('user_id')->unsigned();
             $table->integer     ('admin_function_type_id')->unsigned();
             $table->string      ('title', 100);
             $table->string      ('title_en', 150);
@@ -45,7 +45,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::drop('articles', function (Blueprint $table) {
             $table->dropForeign('articles_category_id_foreign');
-            //$table->dropForeign('articles_user_id_foreign');
+            $table->dropForeign('articles_user_id_foreign');
             $table->dropForeign('articles_admin_function_type_id_foreign');
         });
     }

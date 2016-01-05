@@ -1,7 +1,7 @@
 @extends('admin.templates.list')
 
     @section('header_title')
-        System Functions
+        Articles
     @stop
 
     @section('title')

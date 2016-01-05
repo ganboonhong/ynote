@@ -8,7 +8,7 @@
                 <li><a href="/admin/function_type">Type</a></li>
                 {{--<li><a href="/admin/function">Function</a></li>--}}
                 <li><a href="/admin/category">Categories</a></li>
-                <li><a href="/admin/article/create">Articles</a></li>
+                <li><a href="/admin/article">Articles</a></li>
                 <li><a href="/admin/user">Users</a></li>
             </ul>
 

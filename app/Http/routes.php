@@ -59,7 +59,11 @@ Route::group(['prefix' => 'admin', 'middleware'  => 'auth'], function(){
                 'as'    => 'article_edit'
             ])->where('id', '[0-9]+');
 
-
+        Route::post('update/{id}',
+            [
+                'uses'  => 'ArticleController@update',
+                'as'    => 'article_update'
+            ]);
 
     });
 

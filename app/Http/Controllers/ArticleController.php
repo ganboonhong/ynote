@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
@@ -46,7 +47,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $input = (array)$request->all();
-        Log::info($input);
+        $input['user_id'] = Auth::user()->user_id;
         $article = Article::create($input);
         $article->save();
 
@@ -72,7 +73,11 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        $categories = Category::all();
+        $function_types = AdminFunctionType::all();
+
+        return view('admin.article.edit', compact('article', 'categories', 'function_types'));
     }
 
     /**
@@ -84,7 +89,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = (array)$request->except('_token');
+        $input['user_id'] = Auth::user()->user_id;
+        Article::where('article_id', $id)->update($input);
+
+        return $this->index();
     }
 
     /**
