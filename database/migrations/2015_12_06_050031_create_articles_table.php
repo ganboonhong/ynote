@@ -15,7 +15,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->increments  ('article_id');
             $table->integer     ('category_id')->unsigned();
-            $table->integer     ('user_id')->unsigned();
+            //$table->integer     ('user_id')->unsigned();
             $table->integer     ('admin_function_type_id')->unsigned();
             $table->string      ('title', 100);
             $table->string      ('title_en', 150);
@@ -23,14 +23,16 @@ class CreateArticlesTable extends Migration
             $table->enum        ('version_en', ['Y', 'N'])->default('N');
             $table->text        ('content');
             $table->text        ('content_en');
-            $table->text        ('sources');
+            $table->text        ('reference');
             $table->integer     ('hits')->unsigned();
             $table->enum        ('visible', ['Y', 'N'])->default('Y');
             $table->integer     ('sort')->unsigned();
 
             $table->foreign     ('category_id')->references('category_id')->on('categories');
             $table->foreign     ('admin_function_type_id')->references('admin_function_type_id')->on('admin_function_types');
-            $table->foreign     ('user_id')->references('user_id')->on('users');
+            //$table->foreign     ('user_id')->references('user_id')->on('users');
+
+            $table->timestamps();
         });
     }
 
@@ -43,7 +45,8 @@ class CreateArticlesTable extends Migration
     {
         Schema::drop('articles', function (Blueprint $table) {
             $table->dropForeign('articles_category_id_foreign');
-            $table->dropForeign('articles_user_id_foreign');
+            //$table->dropForeign('articles_user_id_foreign');
+            $table->dropForeign('articles_admin_function_type_id_foreign');
         });
     }
 }

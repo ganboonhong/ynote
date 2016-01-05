@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\AdminFunctionType;
+use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -18,7 +20,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        return view('admin.article.list', compact('articles'));
     }
 
     /**
@@ -42,7 +45,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = (array)$request->all();
+        Log::info($input);
+        $article = Article::create($input);
+        $article->save();
+
+        return $this->index();
     }
 
     /**
@@ -87,6 +95,13 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::find($id)->delete();
+        return $this->index();
+    }
+
+    public function deleteMultipleItems(Request $request)
+    {
+        Article::destroy($request->checkboxes);
+        return $this->index();
     }
 }

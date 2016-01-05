@@ -35,7 +35,31 @@ Route::group(['prefix' => 'admin', 'middleware'  => 'auth'], function(){
 
     Route::group(['prefix' => 'article'], function(){
 
-        Route::get('create', 'ArticleController@create');
+        Route::get('/', 'ArticleController@index');
+        Route::post('/', 'ArticleController@store');
+
+        Route::get('create', [
+            'uses'  => 'ArticleController@create',
+            'as'    => 'article_create'
+        ]);
+
+        Route::post('delete_multiple_items',[
+            'uses'  => 'ArticleController@deleteMultipleItems',
+            'as'    => 'article_delete_multiple_items'
+        ]);
+
+        Route::get('destroy/{id}', [
+            'uses'  => 'ArticleController@destroy',
+            'as'    => 'article_destroy'
+        ])->where('id', '[0-9]+');
+
+        Route::get('edit/{id}',
+            [
+                'uses'  => 'ArticleController@edit',
+                'as'    => 'article_edit'
+            ])->where('id', '[0-9]+');
+
+
 
     });
 

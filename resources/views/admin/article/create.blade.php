@@ -41,15 +41,53 @@
             </div>
 
             <div class="form-group">
-                <label for="sel1">Category：</label>
-                <select name="function_type" class="form-control" id="sel1">
+                <label for="sel1">Function Type：</label>
+                <select name="admin_function_type_id" class="form-control">
                     @foreach( $function_types as $function_type )
                         <option value="{{$function_type->admin_function_type_id}}">{{$function_type->name}}</option>
                     @endforeach
                 </select>
             </div>
 
-        @include('admin.partials.footer_elements')
+            <div class="form-group">
+                <label for="reference">Reference:</label>
+                <input type="text" name="sort" class="form-control" id="sort">
+            </div>
+
+            <div class="form-group">
+                <label for="sort">Priority:</label>
+                <input type="text" name="sort" class="form-control" id="sort">
+            </div>
+
+            <div>Visible:
+            <span style="margin-right:10px ; ">
+                <label for="visible">Yes</label>
+                <input name="visible" id="visible" type="radio" value="Y" checked>
+            </span>
+                <label for="invisible">No</label>
+                <input name="visible" id="invisible" type="radio" value="N">
+            </div>
+
+            <div>Chinese Version:
+                <span style="margin-right:10px ; ">
+                    <label for="version_cht_yes">Yes</label>
+                    <input name="version_cht" id="version_cht_yes" type="radio" value="Y" checked>
+                </span>
+                <label for="version_cht_no">No</label>
+                <input name="version_cht" id="version_cht_no" type="radio" value="N">
+            </div>
+
+            <div>English Version:
+                    <span style="margin-right:10px ; ">
+                        <label for="version_en_yes">Yes</label>
+                        <input name="version_en" id="version_en_yes" type="radio" value="Y" checked>
+                    </span>
+                <label for="version_en_no">No</label>
+                <input name="version_en" id="version_en_no" type="radio" value="N">
+            </div>
+
+            <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
+
 
         {!! Form::close() !!}
 
