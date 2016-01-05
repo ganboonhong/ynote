@@ -40,6 +40,15 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="sel1">Category：</label>
+                <select name="function_type" class="form-control" id="sel1">
+                    @foreach( $function_types as $function_type )
+                        <option value="{{$function_type->admin_function_type_id}}">{{$function_type->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
         @include('admin.partials.footer_elements')
 
         {!! Form::close() !!}

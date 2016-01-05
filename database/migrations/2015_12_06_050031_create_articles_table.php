@@ -16,6 +16,7 @@ class CreateArticlesTable extends Migration
             $table->increments  ('article_id');
             $table->integer     ('category_id')->unsigned();
             $table->integer     ('user_id')->unsigned();
+            $table->integer     ('admin_function_type_id')->unsigned();
             $table->string      ('title', 100);
             $table->string      ('title_en', 150);
             $table->enum        ('version_cht', ['Y', 'N'])->default('Y');
@@ -28,6 +29,7 @@ class CreateArticlesTable extends Migration
             $table->integer     ('sort')->unsigned();
 
             $table->foreign     ('category_id')->references('category_id')->on('categories');
+            $table->foreign     ('admin_function_type_id')->references('admin_function_type_id')->on('admin_function_types');
             $table->foreign     ('user_id')->references('user_id')->on('users');
         });
     }

@@ -5,10 +5,10 @@
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li><a href="/admin/function_type">Function Type</a></li>
-                <li><a href="/admin/function">Function</a></li>
-                <li><a href="/admin/category">Categories of Article</a></li>
-                <li><a href="/admin/article/create">Article</a></li>
+                <li><a href="/admin/function_type">Type</a></li>
+                {{--<li><a href="/admin/function">Function</a></li>--}}
+                <li><a href="/admin/category">Categories</a></li>
+                <li><a href="/admin/article/create">Articles</a></li>
                 <li><a href="/admin/user">Users</a></li>
             </ul>
 
