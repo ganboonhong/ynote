@@ -1,10 +1,19 @@
 <?php
+$localhostIP = array("127.0.0.1", "::1");
 
-$url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$host       = $url["host"];
-$username   = $url["user"];
-$password   = $url["pass"];
-$database   = substr($url["path"], 1);
+if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
+    $url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $host       = $url["host"];
+    $username   = $url["user"];
+    $password   = $url["pass"];
+    $database   = substr($url["path"], 1);
+}else{
+    $url        = "";
+    $host       = "";
+    $username   = "";
+    $password   = "";
+    $database   = "";
+}
 
 
 return [
