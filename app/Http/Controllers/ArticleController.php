@@ -155,7 +155,9 @@ class ArticleController extends Controller
     public function itemList(){
 
         $articles = Article::where('visible', 'Y')
-            ->where('version_cht', 'Y')->get();
+            ->where('version_cht', 'Y')
+            ->where('admin_function_type_id', '2')
+            ->get();
 
         return view('frontend.article.list', compact('articles'));
     }

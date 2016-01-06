@@ -12,6 +12,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
+            'name' => '程式設計',
+            'name_en' => 'Programming'
+        ]);
+
+        DB::table('categories')->insert([
             'name' => '食物',
             'name_en' => 'Food'
         ]);
@@ -19,11 +24,6 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             'name' => '旅遊',
             'name_en' => 'Travelling'
-        ]);
-
-        DB::table('categories')->insert([
-            'name' => '程式設計',
-            'name_en' => 'Programming'
         ]);
     }
 }
