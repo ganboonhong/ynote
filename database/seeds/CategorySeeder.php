@@ -20,5 +20,10 @@ class CategorySeeder extends Seeder
             'name' => '旅遊',
             'name_en' => 'Travelling'
         ]);
+
+        DB::table('categories')->insert([
+            'name' => '程式設計',
+            'name_en' => 'Programming'
+        ]);
     }
 }

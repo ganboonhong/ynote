@@ -108,7 +108,7 @@
 
             </table>
 
-        <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
+        <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Done</button>
 
         {!! Form::close() !!}
 
