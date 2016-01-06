@@ -1,34 +1,27 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Makes "field" always required. Nothing and blanks are invalid.</title>
-    <link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+    <title>Bootstrap Template</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
 
+        @media screen and (min-width: 768px) and (max-width: 979px) {
+         .title{
+             display: none;
+         }
+        }
+    </style>
 </head>
 <body>
-<form id="myform">
-    <label for="field">Required: </label>
-    <input type="text" class="left" id="field" name="field">
-    <br/>
-    <input type="submit" value="Validate!">
-</form>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
-<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
-<script>
-    // just for the demos, avoids form submit
-    jQuery.validator.setDefaults({
-        debug: true,
-        success: "valid"
-    });
-    $( "#myform" ).validate({
-        rules: {
-            field: {
-                required: true
-            }
-        }
-    });
-</script>
+
+<div class="row">
+    <div class="col-md-10 col-sm-10 col-xs-12 title">title</div>
+    <div class="col-md-10 col-sm-10 col-xs-12">content</div>
+    <div class="col-md-2  col-sm-2  col-xs-12 ">categories</div>
+</div>
+
 </body>
 </html>

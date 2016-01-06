@@ -17,6 +17,8 @@ Route::get('test', function(){
     return view('test');
 });
 
+Route::get('article/{id}', 'ArticleController@show');
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

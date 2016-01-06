@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Tests\Input\ArgvInputTest;
 
 class ArticleController extends Controller
 {
@@ -62,7 +63,10 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $categories = Category::all();
+
+        return view('frontend.article.detail', compact('article', 'categories'));
     }
 
     /**
