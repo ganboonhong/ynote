@@ -10,7 +10,7 @@
 
     @section('content')
 
-        {!! Form::open(array('route' => array('article_update', $article->article_id))) !!}
+        {!! Form::open(array('route' => array('article_update', $article->article_id), 'files'=>true)) !!}
             <div class="form-group">
                 <label for="name">Title:</label>
                 <input type="text" name="title" class="form-control" id="title" value="{{$article->title}}">
@@ -19,6 +19,16 @@
             <div class="form-group">
                 <label for="name">Title (Eng):</label>
                 <input type="text" name="title_en" class="form-control" id="title_en" value="{{$article->title_en}}">
+            </div>
+
+            <div class="form-group">
+                <div>
+                    @if($article->list_pic != "")
+                        <img src='/uploads/{{$article->list_pic}}' style="width: 100px;">
+                    @endif
+                </div>
+                <label for="image">Image:</label>
+                {!! Form::input('file', 'list_pic', $article->list_pic) !!}
             </div>
 
             <div class="nice_editor form-group">

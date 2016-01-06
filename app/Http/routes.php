@@ -13,25 +13,44 @@
 
 Route::get('/', 'Auth\AuthController@getLogin');
 
-Route::get('test', function(){
-    return view('test');
-});
-
 Route::get('article/{id}', 'ArticleController@show');
 
-// Authentication routes...
+// -----------------------  Authentication routes    ----------------------------------
+
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout',
             [
                 'uses'  =>  'Auth\AuthController@getLogout',
                 'as'    =>  'admin_logout'
-            ]);
+            ]
+);
 
-// Registration routes...
+// -----------------------  Frontend    ----------------------------------
+
+Route::get('/article-category/{id}',[
+    'uses'  => 'ArticleController@itemListWithCategory',
+    'as'    => 'item_list_with_category'
+])->where('id', '[0-9]+');
+
+Route::group(['prefix' => 'article'], function(){
+
+    Route::get('/', 'ArticleController@itemList');
+
+    Route::get('/{id}', [
+        'uses'  => 'ArticleController@show',
+        'as'    => 'article_detail'
+    ])->where('id', '[0-9]+');
+
+});
+
+// -----------------------  Registration    ----------------------------------
+
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+
+// -----------------------  Admin   ----------------------------------
 
 Route::group(['prefix' => 'admin', 'middleware'  => 'auth'], function(){
 

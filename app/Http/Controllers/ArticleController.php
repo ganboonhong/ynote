@@ -10,8 +10,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Tests\Input\ArgvInputTest;
+
+use Validator;
+use Redirect;
+use Session;
 
 class ArticleController extends Controller
 {
@@ -47,8 +53,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $fileName = "";
+
+        if($request->list_pic != ""){
+            $destinationPath = 'uploads'; // upload path
+            $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+        }
+
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
+        $input['list_pic'] = $fileName;
         $article = Article::create($input);
         $article->save();
 
@@ -63,7 +79,10 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::findOrFail($id);
+        //admin_function_type_id = 2 //部落格
+        $article = Article::where('visible', 'Y')
+            ->where('admin_function_type_id', '2')
+            ->findOrFail($id);
         $categories = Category::all();
 
         return view('frontend.article.detail', compact('article', 'categories'));
@@ -93,7 +112,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if(Input::file('list_pic') != ""){
+            $destinationPath = 'uploads'; // upload path
+            $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+        }
+
         $input = (array)$request->except('_token');
+
+        if(Input::file('list_pic')!=""){
+            $input['list_pic'] = $fileName;
+        }else{
+            unset($input['list_pic']);
+        }
+
         $input['user_id'] = Auth::user()->user_id;
         Article::where('article_id', $id)->update($input);
 
@@ -116,5 +150,24 @@ class ArticleController extends Controller
     {
         Article::destroy($request->checkboxes);
         return $this->index();
+    }
+
+    public function itemList(){
+
+        $articles = Article::where('visible', 'Y')
+            ->where('version_cht', 'Y')->get();
+
+        return view('frontend.article.list', compact('articles'));
+    }
+
+    public function itemListWithCategory($id){
+        $articles = Article::where('visible', 'Y')
+            ->where('version_cht', 'Y')
+            ->where('category_id', $id)
+            ->get();
+
+        $category = Category::findOrFail($id);
+
+        return view('frontend.article.list', compact('articles', 'category'));
     }
 }

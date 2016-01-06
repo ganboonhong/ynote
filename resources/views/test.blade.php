@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
-    <title>Bootstrap Template</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <style>
-
-        @media screen and (min-width: 768px) and (max-width: 979px) {
-         .title{
-             display: none;
-         }
-        }
-    </style>
-</head>
+<html>
 <body>
-
-<div class="row">
-    <div class="col-md-10 col-sm-10 col-xs-12 title">title</div>
-    <div class="col-md-10 col-sm-10 col-xs-12">content</div>
-    <div class="col-md-2  col-sm-2  col-xs-12 ">categories</div>
+<div class="about-section">
+    <div class="text-content">
+        <div class="span7 offset1">
+            @if(Session::has('success'))
+                <div class="alert-box success">
+                    <h2>{!! Session::get('success') !!}</h2>
+                </div>
+            @endif
+            <div class="secure">Upload form</div>
+            {!! Form::open(array('url'=>'apply/upload','method'=>'POST', 'files'=>true)) !!}
+            <div class="control-group">
+                <div class="controls">
+                    {!! Form::file('image') !!}
+                    <p class="errors">{!!$errors->first('image')!!}</p>
+                    @if(Session::has('error'))
+                        <p class="errors">{!! Session::get('error') !!}</p>
+                    @endif
+                </div>
+            </div>
+            <div id="success"> </div>
+            {!! Form::submit('Submit', array('class'=>'send-btn')) !!}
+            {!! Form::close() !!}
+        </div>
+    </div>
 </div>
 
 </body>

@@ -10,7 +10,7 @@
 
     @section('content')
 
-        {!! Form::open(array('url' => 'admin/article', 'id' => 'article_form')) !!}
+        {!! Form::open(array('url' => 'admin/article', 'id' => 'article_form', 'files'=>true)) !!}
             <div class="form-group">
                 <label for="name">Title:</label>
                 <input type="text" name="title" class="form-control" id="title">
@@ -19,6 +19,11 @@
             <div class="form-group">
                 <label for="name">Title (Eng):</label>
                 <input type="text" name="title_en" class="form-control" id="title_en">
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image:</label>
+                {!! Form::file('list_pic') !!}
             </div>
 
             <div class="nice_editor form-group">
@@ -88,11 +93,11 @@
                 <td>English Version:</td>
                 <td>
                     <label for="version_en_yes">Yes</label>
-                    <input name="version_en" id="version_en_yes" type="radio" value="Y" checked>
+                    <input name="version_en" id="version_en_yes" type="radio" value="Y" >
                 </td>
                 <td>
                     <label for="version_en_no">No</label>
-                    <input name="version_en" id="version_en_no" type="radio" value="N">
+                    <input name="version_en" id="version_en_no" type="radio" value="N" checked>
                 </td>
             </tr>
 

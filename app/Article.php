@@ -23,6 +23,7 @@ class Article extends Model
             'reference',
             'hits',
             'visible',
-            'sort'
+            'sort',
+            'list_pic'
         ];
 }

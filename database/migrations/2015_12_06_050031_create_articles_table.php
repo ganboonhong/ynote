@@ -25,12 +25,13 @@ class CreateArticlesTable extends Migration
             $table->text        ('content_en');
             $table->text        ('reference');
             $table->integer     ('hits')->unsigned();
+            $table->string      ('list_pic');
             $table->enum        ('visible', ['Y', 'N'])->default('Y');
             $table->integer     ('sort')->unsigned();
 
             $table->foreign     ('category_id')->references('category_id')->on('categories');
             $table->foreign     ('admin_function_type_id')->references('admin_function_type_id')->on('admin_function_types');
-            //$table->foreign     ('user_id')->references('user_id')->on('users');
+            $table->foreign     ('user_id')->references('user_id')->on('users');
 
             $table->timestamps();
         });

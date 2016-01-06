@@ -10,13 +10,10 @@
             margin: 50px;
         }
         .category-container{
-            margin: 70px 50px 50px 10px ;
+            margin: 60px 50px 50px 10px ;
         }
         .category-ul{
             list-style-type: none;
-        }
-        .category-ul a{
-            text-decoration: none;
         }
         .reference{
             margin-top: 30px;
@@ -25,8 +22,8 @@
             .content{
                 margin: 200px 50px 50px 10px ;
             }
-            .navbar{
-                position: absolute;
+            .category-container{
+                margin: 10px 50px 50px 10px ;
             }
         }
     </style>
@@ -45,12 +42,14 @@
                     本人自行撰寫
                 @endif
             </p>
+            {{--<img src="../uploads/{{$article->list_pic}}"/>--}}
         </div>
 
         <div class="col-md-2  col-sm-2  col-xs-12 category-container">
             <ul class="category-ul">
+                <li style="font-size: 20px;">類別</li>
                 @foreach($categories as $category)
-                    <a href="" class="category-link" {{--style="text-decoration: none"--}}>
+                    <a href="{{route('item_list_with_category', ['id'=> $category->category_id])}}" class="category-link" style="text-decoration: none">
                         <li>{{$category->name}}</li>
                     </a>
                 @endforeach
