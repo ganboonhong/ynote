@@ -60,50 +60,55 @@
 
             <div class="form-group">
                 <label for="priority">Priority:</label>
-                <input type="text" name="sort" class="form-control" id="priority"  value="{{$article->priority}}">
+                <input type="text" name="sort" class="form-control" id="priority"  value="{{$article->sort}}">
             </div>
 
-            <div>Visible:
-            <span style="margin-right:10px ; ">
-                <label for="visible">Yes</label>
-                <input name="visible" id="visible" type="radio" value="Y"
-                        @if($article->visible == 'Y') checked @endif
-                        >
-            </span>
-                <label for="invisible">No</label>
-                <input name="visible" id="invisible" type="radio" value="N"
-                       @if($article->visible == 'N') checked @endif
-                        >
-            </div>
+            <table style="width:30%">
+                <tr>
+                    <td>Visible:</td>
+                    <td>
+                        <label for="visible">Yes</label>
+                        <input name="visible" id="visible" type="radio" value="Y"
+                               @if($article->visible == 'Y') checked @endif>
+                    </td>
+                    <td>
+                        <label for="invisible">No</label>
+                        <input name="visible" id="invisible" type="radio" value="N"
+                               @if($article->visible == 'N') checked @endif>
+                    </td>
+                </tr>
 
-            <div>Chinese Version:
-                <span style="margin-right:10px ; ">
-                    <label for="version_cht_yes">Yes</label>
-                    <input name="version_cht" id="version_cht_yes" type="radio" value="Y"
-                           @if($article->version_cht == 'Y') checked @endif
-                            >
-                </span>
-                <label for="version_cht_no">No</label>
-                <input name="version_cht" id="version_cht_no" type="radio" value="N"
-                       @if($article->version_cht == 'N') checked @endif
-                        >
-            </div>
+                <tr>
+                    <td>Chinese Version:</td>
+                    <td>
+                        <label for="version_cht_yes">Yes</label>
+                        <input name="version_cht" id="version_cht_yes" type="radio" value="Y"
+                               @if($article->version_cht == 'Y') checked @endif>
+                    </td>
+                    <td>
+                        <label for="version_cht_no">No</label>
+                        <input name="version_cht" id="version_cht_no" type="radio" value="N"
+                               @if($article->version_cht == 'N') checked @endif>
+                    </td>
+                </tr>
 
-            <div>English Version:
-                    <span style="margin-right:10px ; ">
+                <tr>
+                    <td>English Version:</td>
+                    <td>
                         <label for="version_en_yes">Yes</label>
                         <input name="version_en" id="version_en_yes" type="radio" value="Y"
-                               @if($article->version_en == 'Y') checked @endif
-                                >
-                    </span>
-                <label for="version_en_no">No</label>
-                <input name="version_en" id="version_en_no" type="radio" value="N"
-                       @if($article->version_en == 'N') checked @endif
-                        >
-            </div>
+                               @if($article->version_en == 'Y') checked @endif>
+                    </td>
+                    <td>
+                        <label for="version_en_no">No</label>
+                        <input name="version_en" id="version_en_no" type="radio" value="N"
+                               @if($article->version_en == 'N') checked @endif>
+                    </td>
+                </tr>
 
-            <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
+            </table>
 
+        <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
 
         {!! Form::close() !!}
 
@@ -128,7 +133,7 @@
 
             tinymce.init({
                 selector: 'textarea',
-                height: 500,
+                height: 300,
                 plugins: [
                     'advlist autolink lists link image charmap print preview anchor',
                     'searchreplace visualblocks code fullscreen',
