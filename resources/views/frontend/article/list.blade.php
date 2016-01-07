@@ -10,6 +10,8 @@
         }
         .title{
             margin-top: 10px;
+            width: 100%;
+            height: 50px;
         }
         .list-pics{
             height: 150px;
@@ -35,11 +37,18 @@
 
     <div class="article-category">
         類別:
-        @if(isset($category))
-            {{$category->name}}
-        @else
-            {{'所有'}}
-        @endif
+        <select id="article-category-selector">
+            <option selected value="{{url('article')}}">所有</option>
+            @foreach($categories as $category)
+                <option value="{{route('item_list_with_category', ['id'=> $category->category_id])}}"
+                    @if(isset($selected_category))
+                        @if($selected_category->category_id == $category->category_id)
+                            selected
+                        @endif
+                    @endif
+                        >{{$category->name}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="list-item-container">
@@ -53,4 +62,12 @@
         @endforeach
     </div>
 
+
+    <script>
+        $(function(){
+            $('#article-category-selector').change(function(){
+                window.open($(this).val(), '_self');
+            })
+        })
+    </script>
 @stop

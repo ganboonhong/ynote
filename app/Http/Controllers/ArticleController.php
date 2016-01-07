@@ -79,9 +79,8 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //admin_function_type_id = 2 //部落格
         $article = Article::where('visible', 'Y')
-            ->where('admin_function_type_id', '2')
+            ->where('admin_function_type_id', '1')  //部落格
             ->findOrFail($id);
         $categories = Category::all();
 
@@ -118,12 +117,22 @@ class ArticleController extends Controller
             $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
             $fileName = rand(11111,99999).'.'.$extension; // renameing image
             Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+
+            $localhostIP = array("127.0.0.1", "::1");
+
+            if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
+                $cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
+            }
         }
 
         $input = (array)$request->except('_token');
 
         if(Input::file('list_pic')!=""){
             $input['list_pic'] = $fileName;
+            if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
+                $cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
+                $input['cloudinary_api_response'] = $cloudinary_api_response;
+            }
         }else{
             unset($input['list_pic']);
         }
@@ -156,10 +165,12 @@ class ArticleController extends Controller
 
         $articles = Article::where('visible', 'Y')
             ->where('version_cht', 'Y')
-            ->where('admin_function_type_id', '2')
+            ->where('admin_function_type_id', '1')
             ->get();
 
-        return view('frontend.article.list', compact('articles'));
+        $categories = Category::all();
+
+        return view('frontend.article.list', compact('articles', 'categories'));
     }
 
     public function itemListWithCategory($id){
@@ -168,8 +179,9 @@ class ArticleController extends Controller
             ->where('category_id', $id)
             ->get();
 
-        $category = Category::findOrFail($id);
+        $selected_category = Category::findOrFail($id);
+        $categories = Category::all();
 
-        return view('frontend.article.list', compact('articles', 'category'));
+        return view('frontend.article.list', compact('articles', 'selected_category', 'categories'));
     }
 }

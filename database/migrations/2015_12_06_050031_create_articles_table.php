@@ -24,6 +24,7 @@ class CreateArticlesTable extends Migration
             $table->text        ('content');
             $table->text        ('content_en');
             $table->text        ('reference');
+            $table->text        ('cloudinary_api_response');
             $table->integer     ('hits')->unsigned();
             $table->string      ('list_pic');
             $table->enum        ('visible', ['Y', 'N'])->default('Y');
