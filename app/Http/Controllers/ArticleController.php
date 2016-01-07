@@ -24,6 +24,7 @@ use Session;
 include 'Cloudinary/src/Cloudinary.php';
 include 'Cloudinary/src/Uploader.php';
 include 'Cloudinary/src/settings.php';
+//include '../../../public/uploads';
 
 
 class ArticleController extends Controller
@@ -75,7 +76,7 @@ class ArticleController extends Controller
                 //$cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
                 $default_upload_options = array("tags" => "basic_sample");
 
-                $files["named_local"] = \Cloudinary\Uploader::upload('http://res.cloudinary.com/hrm4jb60z/image/upload/c_fill,h_150,w_200/yipgijl9veun9p770olh.jpg',
+                $files["named_local"] = \Cloudinary\Uploader::upload('../../../public/uploads/'.$fileName,
                     array_merge($default_upload_options, array("public_id" => "francis")));
 
             }
