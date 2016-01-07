@@ -58,7 +58,9 @@
                     {{--<img src="../uploads/{{$article->list_pic}}" class="list-pics" />--}}
                     <img src="{{json_decode($article->cloudinary_api_response)->url}}" class="list-pics" />
                 </a>
-                <p class="title">{{$article->title}}</p>
+                <a href="{{route('article_detail',['id' => $article->article_id])}}">
+                    <p class="title">{{$article->title}}</p>
+                </a>
             </div>
         @endforeach
     </div>

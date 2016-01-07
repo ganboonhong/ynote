@@ -36,7 +36,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::orderBy('sort', 'desc')->get();
         return view('admin.article.list', compact('articles'));
     }
 
@@ -98,6 +98,7 @@ class ArticleController extends Controller
     {
         $article = Article::where('visible', 'Y')
             ->where('admin_function_type_id', '2')  //部落格
+            ->orderBy('sort', 'desc')
             ->findOrFail($id);
         $categories = Category::all();
 
@@ -180,6 +181,7 @@ class ArticleController extends Controller
         $articles = Article::where('visible', 'Y')
             ->where('version_cht', 'Y')
             ->where('admin_function_type_id', '2')
+            ->orderBy('sort', 'desc')
             ->get();
 
         $categories = Category::all();
@@ -191,6 +193,7 @@ class ArticleController extends Controller
         $articles = Article::where('visible', 'Y')
             ->where('version_cht', 'Y')
             ->where('category_id', $id)
+            ->orderBy('sort', 'desc')
             ->get();
 
         $selected_category = Category::findOrFail($id);
