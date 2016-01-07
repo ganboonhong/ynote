@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdminFunctionType;
 use App\Article;
 use App\Category;
+use Askaoru\LaravelCloudinary\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -74,7 +75,8 @@ class ArticleController extends Controller
             $localhostIP = array("127.0.0.1", "::1");
 
             if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-                $cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
+                //$cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
+                $cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
             }
         }
 

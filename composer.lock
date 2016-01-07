@@ -4,9 +4,64 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "96f1965d4a7f373100ae95d6cafbffbd",
-    "content-hash": "09a48dc7cddb0f6d91b8114087caaf70",
+    "hash": "50d04b5bde9945b855e59b4782caa727",
+    "content-hash": "4aa4b21ef72f8ef7936a6f995af606d5",
     "packages": [
+        {
+            "name": "askaoru/laravel-cloudinary",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/askaoru/LaravelCloudinary.git",
+                "reference": "b9c19dc56a5d3114346214524b5b1006592098bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/askaoru/LaravelCloudinary/zipball/b9c19dc56a5d3114346214524b5b1006592098bb",
+                "reference": "b9c19dc56a5d3114346214524b5b1006592098bb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Askaoru\\LaravelCloudinary\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Akira Kaoru",
+                    "email": "askaoru04@gmail.com",
+                    "homepage": "http://askaoru.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5.1 wrapper for Cloudinary HTTP API",
+            "homepage": "https://github.com/Askaoru/LaravelCloudinary",
+            "keywords": [
+                "Askaoru",
+                "Laravel 5.1",
+                "cloudinary",
+                "image manipulation",
+                "laravel"
+            ],
+            "time": "2015-10-16 09:57:06"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
