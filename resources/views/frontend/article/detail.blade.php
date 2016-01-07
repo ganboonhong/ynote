@@ -18,6 +18,25 @@
         .reference{
             margin-top: 30px;
         }
+        .article-link{
+
+            /* These are technically the same, but use both */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+
+            -ms-word-break: break-all;
+            /* This is the dangerous one in WebKit, as it breaks things wherever */
+            word-break: break-all;
+            /* Instead use this non-standard one: */
+            word-break: break-word;
+
+            /* Adds a hyphen where the word breaks, if supported (No Blink) */
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+
+        }
         @media screen and (max-width: 768px) and (min-width: 0px) {
             .content{
                 margin: 200px 50px 50px 10px ;
@@ -37,7 +56,7 @@
             <p class="reference">
                 資料來源：
                 @if($article->reference != "")
-                    <a href="{{$article->reference}}" target="_blank">{{$article->reference}}</a>
+                    <a class="article-link" href="{{$article->reference}}" target="_blank">{{$article->reference}}</a>
                 @else
                     本人自行撰寫
                 @endif
