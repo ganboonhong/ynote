@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 <label for="reference">Reference:</label>
-                <input type="text" name="sort" class="form-control" id="sort">
+                <input type="text" name="reference" class="form-control" id="sort">
             </div>
 
             <div class="form-group">
