@@ -24,7 +24,8 @@
             <div class="form-group">
                 <div>
                     @if($article->list_pic != "")
-                        <img src='/uploads/{{$article->list_pic}}' style="width: 100px;">
+                        {{--<img src='/uploads/{{$article->list_pic}}' style="width: 100px;">--}}
+                        <img src='{{json_decode($article->cloudinary_api_response)->url}}' style="width: 100px;">
                     @endif
                 </div>
                 <label for="image">Image:</label>

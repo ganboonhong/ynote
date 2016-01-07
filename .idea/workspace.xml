@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97e61dac-1128-4d5c-ba1d-d5a3e896376b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Article.php" afterPath="$PROJECT_DIR$/app/Article.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/article/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/article/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/article/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/article/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/frontend/article/list.blade.php" afterPath="$PROJECT_DIR$/resources/views/frontend/article/list.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ynote.iws" />
@@ -26,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ArticleController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ArticleController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ArticleController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2772021">
-              <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+            <state vertical-scroll-proportion="-115.73077">
+              <caret line="177" column="4" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="4" />
               <folding>
                 <element signature="e#40#66#0#PHP" expanded="true" />
               </folding>
@@ -38,81 +42,54 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helpers.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
+      <file leaf-file-name="list.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/frontend/article/list.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.692307">
-              <caret line="493" column="13" selection-start-line="493" selection-start-column="13" selection-end-line="493" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.5206738">
+              <caret line="58" column="83" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Cloudinary/src/settings.php">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/article/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.65384614">
-              <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+            <state vertical-scroll-proportion="-9.807693">
+              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
+      <file leaf-file-name="Article.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Article.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+            <state vertical-scroll-proportion="-17.653847">
+              <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/app.php">
+      <file leaf-file-name="laravel.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.23077">
-              <caret line="199" column="75" selection-start-line="199" selection-start-column="75" selection-end-line="199" selection-end-column="75" />
+            <state vertical-scroll-proportion="-64.48276">
+              <caret line="110" column="17" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="26" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cloudinary.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/cloudinary.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.769231">
-              <caret line="18" column="84" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="84" />
-              <folding />
-            </state>
+          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cloudinary.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/config/cloudinary.php">
+      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/article/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.962264">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cloudinary.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.471698">
-              <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.592592">
-              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+            <state vertical-scroll-proportion="-6.5384617">
+              <caret line="26" column="97" selection-start-line="26" selection-start-column="97" selection-end-line="26" selection-end-column="97" />
               <folding />
             </state>
           </provider>
@@ -163,17 +140,12 @@
         <option value="$PROJECT_DIR$/resources/views/test.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ApplyController.php" />
         <option value="$PROJECT_DIR$/resources/views/upload.blade.php" />
-        <option value="$PROJECT_DIR$/app/Article.php" />
-        <option value="$PROJECT_DIR$/storage/logs/laravel.log" />
-        <option value="$PROJECT_DIR$/resources/views/admin/article/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/article/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/navbar/navbar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/article/detail.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/database/seeds/FunctionTypeSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/CategorySeeder.php" />
-        <option value="$PROJECT_DIR$/resources/views/frontend/article/list.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_12_06_050031_create_articles_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Cloudinary.php" />
         <option value="$PROJECT_DIR$/composer.json" />
@@ -181,7 +153,12 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php" />
         <option value="$PROJECT_DIR$/config/cloudinary.php" />
+        <option value="$PROJECT_DIR$/storage/logs/laravel.log" />
+        <option value="$PROJECT_DIR$/resources/views/admin/article/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Article.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/article/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" />
+        <option value="$PROJECT_DIR$/resources/views/frontend/article/list.blade.php" />
       </list>
     </option>
   </component>
@@ -266,7 +243,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value=".env&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;.e&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/cloudinary.php&#10;cl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/askaoru/laravel-cloudinary/src/Facades/Cloudinary.php&#10;app.&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/app.php&#10;data&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;routes&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;route&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;articlecon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;nav&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/navbar/navbar.blade.php&#10;articlecont&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;log&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lar&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lara&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;article&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;detail&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/detail.blade.php&#10;ArticleController&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;articl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;l&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;laravel&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;applycon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ApplyController.php&#10;8729b8331c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/4b5d78208bc9e0d048729b8331c0b772&#10;list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/list.blade.php&#10;create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;article/list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/list.blade.php&#10;f8acd874d61352b784375598cbcbfb8b&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/f8acd874d61352b784375598cbcbfb8b&#10;RouteCollection.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/symfony/routing/RouteCollection.php&#10;plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;cate&#9;null&#9;null&#10;datab&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;categorycon&#9;null&#9;null&#10;category&#9;null&#9;null&#10;da&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;ROUTES&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;login&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/homepage/login.blade.php&#10;routes.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php" />
+    <property name="SearchEverywhereHistoryKey" value="list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/list.blade.php&#10;edit&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/edit.blade.php&#10;laravel&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;article/create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;.env&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;.e&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/cloudinary.php&#10;cl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/askaoru/laravel-cloudinary/src/Facades/Cloudinary.php&#10;app.&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/app.php&#10;data&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;routes&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;route&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;articlecon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;nav&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/navbar/navbar.blade.php&#10;articlecont&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;log&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lar&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lara&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;article&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;detail&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/detail.blade.php&#10;ArticleController&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;articl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;l&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;applycon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ApplyController.php&#10;8729b8331c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/4b5d78208bc9e0d048729b8331c0b772&#10;create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;article/list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/list.blade.php&#10;f8acd874d61352b784375598cbcbfb8b&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/f8acd874d61352b784375598cbcbfb8b&#10;RouteCollection.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/symfony/routing/RouteCollection.php&#10;plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;cate&#9;null&#9;null&#10;datab&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;categorycon&#9;null&#9;null&#10;category&#9;null&#9;null&#10;da&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;ROUTES&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;login&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/homepage/login.blade.php&#10;routes.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php" />
     <property name="FullScreen" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test.php" />
   </component>
@@ -617,16 +594,16 @@
       <workItem from="1451448102353" duration="1554000" />
       <workItem from="1451989076072" duration="15576000" />
       <workItem from="1452043565865" duration="32877000" />
-      <workItem from="1452131982634" duration="10521000" />
+      <workItem from="1452131982634" duration="13580000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88865000" />
+    <option name="totallyTimeSpent" value="91924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -636,10 +613,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37765205" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37765205" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281471" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -679,6 +656,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41653904">
           <caret line="16" column="75" selection-start-line="16" selection-start-column="75" selection-end-line="16" selection-end-column="75" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -701,6 +679,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5206738">
           <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -764,6 +743,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2692308">
           <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="10" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -771,6 +751,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46860644">
           <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -785,6 +766,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2848392">
           <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -792,6 +774,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15620214">
           <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -799,6 +782,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.23077">
           <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -823,47 +807,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44257274">
           <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Article.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2863706">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="614" column="0" selection-start-line="614" selection-start-column="0" selection-end-line="614" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/frontend/navbar/navbar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07810107">
           <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/article/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="94" selection-start-line="99" selection-start-column="94" selection-end-line="99" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/article/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="116" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -914,14 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/article/list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_12_06_050031_create_articles_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.346153">
@@ -954,58 +897,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.23077">
-          <caret line="199" column="75" selection-start-line="199" selection-start-column="75" selection-end-line="199" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Facades/Cloudinary.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28412256">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/cloudinary.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231">
-          <caret line="18" column="84" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/config/cloudinary.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.962264">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.471698">
-          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.592592">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1034,14 +929,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Cloudinary/src/settings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Cloudinary/src/Uploader.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7176166">
@@ -1050,21 +937,120 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/config/cloudinary.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35942492">
+          <caret line="23" column="73" selection-start-line="23" selection-start-column="73" selection-end-line="23" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/cloudinary.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20826952">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23430322">
+          <caret line="174" column="65" selection-start-line="174" selection-start-column="65" selection-end-line="174" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41653904">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20926517">
+          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5214724">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.692307">
+        <state vertical-scroll-proportion="0.34609494">
           <caret line="493" column="13" selection-start-line="493" selection-start-column="13" selection-end-line="493" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Cloudinary/src/settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02603369">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-64.48276">
+          <caret line="110" column="17" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/article/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617">
+          <caret line="26" column="97" selection-start-line="26" selection-start-column="97" selection-end-line="26" selection-end-column="97" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ArticleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2772021">
-          <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+        <state vertical-scroll-proportion="-115.73077">
+          <caret line="177" column="4" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="4" />
           <folding>
             <element signature="e#40#66#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Article.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.653847">
+          <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/article/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693">
+          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/article/list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5206738">
+          <caret line="58" column="83" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
+          <folding />
         </state>
       </provider>
     </entry>

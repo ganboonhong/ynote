@@ -24,6 +24,7 @@ class Article extends Model
             'hits',
             'visible',
             'sort',
-            'list_pic'
+            'list_pic',
+            'cloudinary_api_response'
         ];
 }

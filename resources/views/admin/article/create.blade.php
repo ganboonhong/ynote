@@ -103,7 +103,7 @@
 
         </table>
 
-            <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
+            <button type="submit" id="submit-btn" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
 
 
         {!! Form::close() !!}
@@ -118,6 +118,13 @@
                         name: "required"
                     }
                 });
+
+                $('#article_form').submit(function(){
+                    if($('[name="list_pic"]').val() == ""){
+                        alert('Please upload an image');
+                        return false;
+                    }
+                })
             });
 
             /*

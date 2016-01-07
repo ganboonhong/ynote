@@ -55,7 +55,8 @@
         @foreach($articles as $article)
             <div class="col-md-3 col-sm-4 col-xs-12 item">
                 <a href="{{route('article_detail',['id' => $article->article_id])}}">
-                    <img src="../uploads/{{$article->list_pic}}" class="list-pics" />
+                    {{--<img src="../uploads/{{$article->list_pic}}" class="list-pics" />--}}
+                    <img src="{{json_decode($article->cloudinary_api_response)->url}}" class="list-pics" />
                 </a>
                 <p class="title">{{$article->title}}</p>
             </div>

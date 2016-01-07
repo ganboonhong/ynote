@@ -70,26 +70,17 @@ class ArticleController extends Controller
             $fileName = $rawFileName.'.'.$extension; // renameing image
             Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
 
-            $localhostIP = array("127.0.0.1", "::1");
+            //note: Cloudinary related
+            $default_upload_options = array("tags" => "basic_sample");
+            $cloudinary_api_response = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
+                array_merge($default_upload_options, array("public_id" => $rawFileName)));
 
-            if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-                //$cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
-                //$cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
-                $default_upload_options = array("tags" => "basic_sample");
-
-                $cloudinary_api_response = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
-                    array_merge($default_upload_options, array("public_id" => $rawFileName)));
-
-            }
         }
 
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
         $input['list_pic'] = $fileName;
-
-        if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-            $input['cloudinary_api_response'] = $cloudinary_api_response;
-        }
+        $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
 
         $article = Article::create($input);
         $article->save();
@@ -138,19 +129,25 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
 
-        if(Input::file('list_pic') != ""){
-            $destinationPath = 'uploads'; // upload path
-            $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-            $fileName = rand(11111,99999).'.'.$extension; // renameing image
-            Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
-        }
-
         $input = (array)$request->except('_token');
 
-        if(Input::file('list_pic')!=""){
+        if(Input::file('list_pic') != ""){
+            $destinationPath    = 'uploads'; // upload path
+            $extension          = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
+            $rawFileName        = rand(11111,99999);
+            $fileName           = $rawFileName.'.'.$extension; // renameing image
+            Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+
+            //note: Cloudinary related
+            $default_upload_options     = array("tags" => "basic_sample");
+            $cloudinary_api_response    = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
+                array_merge($default_upload_options, array("public_id" => $rawFileName)));
+
+            $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
             $input['list_pic'] = $fileName;
         }else{
             unset($input['list_pic']);
+            unset($input['cloudinary_api_response']);
         }
 
         $input['user_id'] = Auth::user()->user_id;
@@ -177,7 +174,8 @@ class ArticleController extends Controller
         return $this->index();
     }
 
-    public function itemList(){
+    public function itemList()
+    {
 
         $articles = Article::where('visible', 'Y')
             ->where('version_cht', 'Y')
