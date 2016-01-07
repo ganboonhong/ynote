@@ -19,6 +19,16 @@ use Validator;
 use Redirect;
 use Session;
 
+require 'Cloudinary.php';
+require 'Uploader.php';
+
+\Cloudinary::config(array(
+    "cloud_name" => "xxxxx",
+    "api_key" => "xxxxxxxxxx",
+    "api_secret" => "_xxxxxxxxxxxxxx"
+));
+
+
 class ArticleController extends Controller
 {
     /**
@@ -60,11 +70,24 @@ class ArticleController extends Controller
             $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
             $fileName = rand(11111,99999).'.'.$extension; // renameing image
             Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+
+            $localhostIP = array("127.0.0.1", "::1");
+
+            if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
+
+                $cloudinary_api_response = \Cloudinary\Uploader::upload($_FILES["fileToUpload"]['tmp_name']);
+            }
         }
 
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
         $input['list_pic'] = $fileName;
+
+        if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
+            $cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
+            $input['cloudinary_api_response'] = $cloudinary_api_response;
+        }
+
         $article = Article::create($input);
         $article->save();
 
@@ -117,22 +140,12 @@ class ArticleController extends Controller
             $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
             $fileName = rand(11111,99999).'.'.$extension; // renameing image
             Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
-
-            $localhostIP = array("127.0.0.1", "::1");
-
-            if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-                $cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
-            }
         }
 
         $input = (array)$request->except('_token');
 
         if(Input::file('list_pic')!=""){
             $input['list_pic'] = $fileName;
-            if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-                $cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
-                $input['cloudinary_api_response'] = $cloudinary_api_response;
-            }
         }else{
             unset($input['list_pic']);
         }
