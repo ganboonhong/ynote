@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97e61dac-1128-4d5c-ba1d-d5a3e896376b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/image/editor/DSC_0070_-_Copy.JPG" afterPath="$PROJECT_DIR$/public/image/editor/DSC_0070_-_Copy.JPG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php" afterPath="$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/cloudinary.php" afterPath="$PROJECT_DIR$/config/cloudinary.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ynote.iws" />
@@ -79,21 +78,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cloudinary.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cloudinary.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/cloudinary.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.3461537">
-              <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.4486983">
+              <caret line="18" column="83" selection-start-line="18" selection-start-column="83" selection-end-line="18" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cloudinary.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Cloudinary.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68781304">
-              <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+            <state vertical-scroll-proportion="-10.264151">
+              <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -132,7 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/seeds/PrivilegesTableSeeder.php" />
         <option value="$PROJECT_DIR$/app/Category.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/functions/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/functions/edit.blade.php" />
@@ -183,6 +181,7 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" />
         <option value="$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php" />
+        <option value="$PROJECT_DIR$/config/cloudinary.php" />
       </list>
     </option>
   </component>
@@ -717,12 +716,12 @@
       <workItem from="1451448102353" duration="1554000" />
       <workItem from="1451989076072" duration="15576000" />
       <workItem from="1452043565865" duration="32877000" />
-      <workItem from="1452131982634" duration="5894000" />
+      <workItem from="1452131982634" duration="6272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84238000" />
+    <option name="totallyTimeSpent" value="84616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
@@ -1147,18 +1146,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/cloudinary.php">
+    <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.3461537">
-          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        <state vertical-scroll-proportion="-10.264151">
+          <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/askaoru/laravel-cloudinary/src/Cloudinary.php">
+    <entry file="file://$PROJECT_DIR$/config/cloudinary.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68781304">
-          <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.4486983">
+          <caret line="18" column="83" selection-start-line="18" selection-start-column="83" selection-end-line="18" selection-end-column="83" />
           <folding />
         </state>
       </provider>
