@@ -76,7 +76,7 @@ class ArticleController extends Controller
 
             if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
                 //$cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
-                $cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
+                //$cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
             }
         }
 
@@ -85,7 +85,7 @@ class ArticleController extends Controller
         $input['list_pic'] = $fileName;
 
         if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-            $input['cloudinary_api_response'] = $cloudinary_api_response;
+            //$input['cloudinary_api_response'] = $cloudinary_api_response;
         }
 
         $article = Article::create($input);
