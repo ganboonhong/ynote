@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => '食物',
+            'name' => '美食',
             'name_en' => 'Food'
         ]);
 

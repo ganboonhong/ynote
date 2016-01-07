@@ -37,7 +37,7 @@
             <p class="reference">
                 資料來源：
                 @if($article->reference != "")
-                    <a>{{$article->reference}}</a>
+                    <a href="{{$article->reference}}" target="_blank">{{$article->reference}}</a>
                 @else
                     本人自行撰寫
                 @endif
