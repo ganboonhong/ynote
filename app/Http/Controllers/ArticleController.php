@@ -20,14 +20,10 @@ use Validator;
 use Redirect;
 use Session;
 
-/*require 'Cloudinary.php';
-require 'Uploader.php';
 
-\Cloudinary::config(array(
-    "cloud_name" => "hrm4jb60z",
-    "api_key" => "412778331858946",
-    "api_secret" => "rOZysk_SOThUqvefOQFkSZTQstU"
-));*/
+include 'Cloudinary/src/Cloudinary.php';
+include 'Cloudinary/src/Uploader.php';
+include 'Cloudinary/src/settings.php';
 
 
 class ArticleController extends Controller
@@ -77,6 +73,11 @@ class ArticleController extends Controller
             if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
                 //$cloudinary_api_response = \Cloudinary\Uploader::upload("/uploads/$fileName");
                 //$cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
+                $default_upload_options = array("tags" => "basic_sample");
+
+                $files["named_local"] = \Cloudinary\Uploader::upload('/uploads/'.$fileName,
+                    array_merge($default_upload_options, array("public_id" => "custom_name1")));
+
             }
         }
 
