@@ -76,7 +76,7 @@ class ArticleController extends Controller
                 //$cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
                 $default_upload_options = array("tags" => "basic_sample");
 
-                $files["named_local"] = \Cloudinary\Uploader::upload('../../../public/uploads/'.$fileName,
+                $files["named_local"] = \Cloudinary\Uploader::upload(public_path().$fileName,
                     array_merge($default_upload_options, array("public_id" => "francis")));
 
             }
