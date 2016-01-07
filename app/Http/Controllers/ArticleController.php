@@ -97,7 +97,7 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::where('visible', 'Y')
-            ->where('admin_function_type_id', '1')  //部落格
+            ->where('admin_function_type_id', '2')  //部落格
             ->findOrFail($id);
         $categories = Category::all();
 
@@ -179,7 +179,7 @@ class ArticleController extends Controller
 
         $articles = Article::where('visible', 'Y')
             ->where('version_cht', 'Y')
-            ->where('admin_function_type_id', '1')
+            ->where('admin_function_type_id', '2')
             ->get();
 
         $categories = Category::all();
