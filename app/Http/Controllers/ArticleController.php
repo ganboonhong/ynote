@@ -66,7 +66,8 @@ class ArticleController extends Controller
         if($request->list_pic != ""){
             $destinationPath = 'uploads'; // upload path
             $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            $rawFileName = rand(11111,99999);
+            $fileName = $rawFileName.'.'.$extension; // renameing image
             Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
 
             $localhostIP = array("127.0.0.1", "::1");
@@ -76,8 +77,8 @@ class ArticleController extends Controller
                 //$cloudinary_api_response = Cloudinary::upload('/uploads/'.$fileName, $fileName);
                 $default_upload_options = array("tags" => "basic_sample");
 
-                $files["named_local"] = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
-                    array_merge($default_upload_options, array("public_id" => "francis")));
+                $cloudinary_api_response = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
+                    array_merge($default_upload_options, array("public_id" => $rawFileName)));
 
             }
         }
@@ -87,7 +88,7 @@ class ArticleController extends Controller
         $input['list_pic'] = $fileName;
 
         if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-            //$input['cloudinary_api_response'] = $cloudinary_api_response;
+            $input['cloudinary_api_response'] = $cloudinary_api_response;
         }
 
         $article = Article::create($input);
