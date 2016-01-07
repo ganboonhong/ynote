@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('admin', 'Auth\AuthController@getLogin');
+Route::get('/', 'Auth\AuthController@getLogin');
 
 Route::get('article/{id}', 'ArticleController@show');
 
@@ -27,8 +27,6 @@ Route::get('auth/logout',
 );
 
 // -----------------------  Frontend    ----------------------------------
-
-Route::get('/', 'ArticleController@itemList');
 
 Route::get('/article-category/{id}',[
     'uses'  => 'ArticleController@itemListWithCategory',
