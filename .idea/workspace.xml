@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97e61dac-1128-4d5c-ba1d-d5a3e896376b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminFunctionTypeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminFunctionTypeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/ExampleTest.php" afterPath="$PROJECT_DIR$/tests/ExampleTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/config/database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ynote.iws" />
@@ -42,8 +39,8 @@
       <file leaf-file-name="AdminFunctionTypeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminFunctionTypeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-57.53846">
-              <caret line="88" column="7" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+            <state vertical-scroll-proportion="-7.1923075">
+              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
               <folding>
                 <element signature="e#40#66#0#PHP" expanded="true" />
               </folding>
@@ -51,14 +48,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplyController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplyController.php">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09686609">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-              <folding>
-                <element signature="e#40#50#0#PHP" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.268018">
+              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ArticleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="24.846153">
+              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,17 +144,17 @@
         <option value="$PROJECT_DIR$/resources/views/frontend/article/detail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/article/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/article/list.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/templates/general.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/category/list.blade.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/tests/ExampleTest.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminFunctionController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminFunctionTypeController.php" />
         <option value="$PROJECT_DIR$/storage/logs/laravel.log" />
         <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -361,7 +366,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="da&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;laravel&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;servicecon&#9;null&#9;null&#10;/command&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/symfony/console/Tests/Fixtures/Style/SymfonyStyle/command&#10;routes&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;app.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/app.php&#10;gener&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/templates/general.blade.php&#10;detail&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/detail.blade.php&#10;edit&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/edit.blade.php&#10;create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;article&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;detai&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/detail.blade.php&#10;list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/list.blade.php&#10;route&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;article/create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;.env&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;.e&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/cloudinary.php&#10;cl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/askaoru/laravel-cloudinary/src/Facades/Cloudinary.php&#10;app.&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/app.php&#10;data&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;articlecon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;nav&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/navbar/navbar.blade.php&#10;articlecont&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;log&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lar&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lara&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;ArticleController&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;articl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;l&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;applycon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ApplyController.php&#10;8729b8331c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/4b5d78208bc9e0d048729b8331c0b772&#10;article/list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/list.blade.php&#10;f8acd874d61352b784375598cbcbfb8b&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/f8acd874d61352b784375598cbcbfb8b&#10;RouteCollection.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/symfony/routing/RouteCollection.php&#10;plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;cate&#9;null&#9;null&#10;datab&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;categorycon&#9;null&#9;null&#10;category&#9;null&#9;null&#10;ROUTES&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;login&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/homepage/login.blade.php&#10;routes.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php" />
+    <property name="SearchEverywhereHistoryKey" value="git&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.gitignore&#10;da&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;laravel&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;servicecon&#9;null&#9;null&#10;/command&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/symfony/console/Tests/Fixtures/Style/SymfonyStyle/command&#10;routes&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;app.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/app.php&#10;gener&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/templates/general.blade.php&#10;detail&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/detail.blade.php&#10;edit&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/edit.blade.php&#10;create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;article&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;detai&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/detail.blade.php&#10;list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/article/list.blade.php&#10;route&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;article/create&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/create.blade.php&#10;.env&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;.e&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/.env&#10;c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/cloudinary.php&#10;cl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/askaoru/laravel-cloudinary/src/Facades/Cloudinary.php&#10;app.&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/app.php&#10;data&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;articlecon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;nav&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/frontend/navbar/navbar.blade.php&#10;articlecont&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;log&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lar&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lara&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;ArticleController&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;articl&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ArticleController.php&#10;l&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/logs/laravel.log&#10;applycon&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/Controllers/ApplyController.php&#10;8729b8331c&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/4b5d78208bc9e0d048729b8331c0b772&#10;article/list&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/article/list.blade.php&#10;f8acd874d61352b784375598cbcbfb8b&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/storage/framework/views/f8acd874d61352b784375598cbcbfb8b&#10;RouteCollection.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/vendor/symfony/routing/RouteCollection.php&#10;plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;cate&#9;null&#9;null&#10;datab&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/config/database.php&#10;categorycon&#9;null&#9;null&#10;category&#9;null&#9;null&#10;ROUTES&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php&#10;login&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/resources/views/admin/homepage/login.blade.php&#10;routes.php&#9;FILE&#9;file:///Library/WebServer/Documents/Laravel/ynote/app/Http/routes.php" />
     <property name="FullScreen" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test.php" />
   </component>
@@ -716,26 +721,35 @@
       <workItem from="1452214150959" duration="2868000" />
       <workItem from="1452302118579" duration="298000" />
       <workItem from="1452333959041" duration="2351000" />
-      <workItem from="1452405733017" duration="3354000" />
+      <workItem from="1452405733017" duration="4463000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106339000" />
+    <option name="totallyTimeSpent" value="107448000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936507" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32863188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32804233" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37566137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37566137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -964,13 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ArticleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.716981">
-          <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/frontend/article/list.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3905053">
@@ -1025,14 +1032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17525773">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1136,23 +1135,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24216524">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding>
+            <element signature="e#40#50#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ArticleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="24.846153">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminFunctionTypeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-57.53846">
-          <caret line="88" column="7" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+        <state vertical-scroll-proportion="-7.1923075">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
           <folding>
             <element signature="e#40#66#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplyController.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09686609">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding>
-            <element signature="e#40#50#0#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.268018">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -29,6 +29,18 @@ include 'Cloudinary/src/settings.php';
 
 class ArticleController extends Controller
 {
+    private $article;
+
+    /**
+     * Using service container in constructor to instantiate a class
+     *
+     * @param Article $article
+     */
+    public function __construct(Article $article)
+    {
+        $this->article = $article;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +48,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('sort', 'desc')->get();
+        $articles = $this->article->orderBy('sort', 'desc')->get();
         return view('admin.article.list', compact('articles'));
     }
 
@@ -82,7 +94,7 @@ class ArticleController extends Controller
         $input['list_pic'] = $fileName;
         $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
 
-        $article = Article::create($input);
+        $article = $this->article->create($input);
         $article->save();
 
         return $this->index();
@@ -96,7 +108,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::where('visible', 'Y')
+        $article = $this->article->where('visible', 'Y')
             ->where('admin_function_type_id', '2')  //部落格
             ->orderBy('sort', 'desc')
             ->findOrFail($id);
@@ -113,7 +125,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $article = Article::find($id);
+        $article = $this->article->find($id);
         $categories = Category::all();
         $function_types = AdminFunctionType::all();
 
@@ -152,7 +164,7 @@ class ArticleController extends Controller
         }
 
         $input['user_id'] = Auth::user()->user_id;
-        Article::where('article_id', $id)->update($input);
+        $this->article->where('article_id', $id)->update($input);
 
         return $this->index();
     }
@@ -165,20 +177,20 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        Article::find($id)->delete();
+        $this->article->find($id)->delete();
         return $this->index();
     }
 
     public function deleteMultipleItems(Request $request)
     {
-        Article::destroy($request->checkboxes);
+        $this->article->destroy($request->checkboxes);
         return $this->index();
     }
 
     public function itemList()
     {
 
-        $articles = Article::where('visible', 'Y')
+        $articles = $this->article->where('visible', 'Y')
             ->where('version_cht', 'Y')
             ->where('admin_function_type_id', '2')
             ->orderBy('sort', 'desc')
@@ -190,7 +202,7 @@ class ArticleController extends Controller
     }
 
     public function itemListWithCategory($id){
-        $articles = Article::where('visible', 'Y')
+        $articles = $this->article->where('visible', 'Y')
             ->where('version_cht', 'Y')
             ->where('category_id', $id)
             ->orderBy('sort', 'desc')
