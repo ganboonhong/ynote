@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('pic');
+            $table->text('cloudinary_api_response');
 
             $table->integer('level');
         });

@@ -33,14 +33,13 @@
         .author{
             background-color: #FFFFFF;
             height: 100vh;
-            width: 10vw;
         }
     </style>
 @stop
 
 @section('content')
 
-    <div>
+
         <div class="col-md-3 col-sm-4 col-xs-12 author">
         </div>
 
@@ -75,7 +74,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    
 
 
     <script>

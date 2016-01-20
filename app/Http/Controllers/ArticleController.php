@@ -31,6 +31,7 @@ class ArticleController extends Controller implements AdminListInterface
     private $article;
     private $user;
     private $blog;
+    private $destinationPath;
 
     /**
      * Using service container in constructor to instantiate a class
@@ -42,6 +43,7 @@ class ArticleController extends Controller implements AdminListInterface
         $this->article = $article;
         $this->user = Auth::user();
         $this->blog = AdminFunctionType::where('code', 'blog')->select('admin_function_type_id')->first();
+        $this->destinationPath = 'uploads';
     }
 
     /**
@@ -80,13 +82,12 @@ class ArticleController extends Controller implements AdminListInterface
         $fileName = "";
 
         if($request->list_pic != ""){
-            $destinationPath = 'uploads'; // upload path
-            $extension = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-            $rawFileName = rand(11111,99999);
-            $fileName = $rawFileName.'.'.$extension; // renameing image
-            Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+            $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
+            $rawFileName    = rand(11111,99999);
+            $fileName       = $rawFileName.'.'.$extension; // renameing image
+            Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
 
-            //note: Cloudinary related
+            // Cloudinary related
             $default_upload_options = array("tags" => "basic_sample");
             $cloudinary_api_response = \Cloudinary\Uploader::upload(
                 public_path().'/uploads/'.$fileName,
@@ -150,13 +151,12 @@ class ArticleController extends Controller implements AdminListInterface
         $input = (array)$request->except('_token');
 
         if(Input::file('list_pic') != ""){
-            $destinationPath    = 'uploads'; // upload path
             $extension          = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
             $rawFileName        = rand(11111,99999);
             $fileName           = $rawFileName.'.'.$extension; // renameing image
-            Input::file('list_pic')->move($destinationPath, $fileName); // uploading file to given path
+            Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
 
-            //note: Cloudinary related
+            //Cloudinary related
             $default_upload_options     = array("tags" => "basic_sample");
             $cloudinary_api_response    = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
                 array_merge($default_upload_options, array("public_id" => $rawFileName)));

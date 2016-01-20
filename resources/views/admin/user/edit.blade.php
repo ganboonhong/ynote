@@ -10,7 +10,7 @@
 
 @section('content')
 
-    {!! Form::open(array('route' => array('user_update', $user->user_id), 'id' => 'user_form')) !!}
+    {!! Form::open(array('route' => array('user_update', $user->user_id), 'id' => 'user_form', 'files' => true)) !!}
 
     <div class="form-group">
         <label for="name">User Name</label>
@@ -22,6 +22,16 @@
         <label for="name">E-mail:</label>
         <input type="text" name="email" class="form-control" id="email"
                value="{{$user->email}}">
+    </div>
+
+    <div class="form-group">
+        <label for="image">Image:</label>
+        @if($user->pic != "")
+            <div>
+                <img src="{{json_decode($user->cloudinary_api_response)->url}}" style="width: 100px;">
+            </div>
+        @endif
+        {!! Form::file('pic') !!}
     </div>
 
     <div class="form-group">

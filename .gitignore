@@ -7,3 +7,4 @@ config/database.php
 public/uploads
 .idea
 .idea/workspace.xml
+todo.txt

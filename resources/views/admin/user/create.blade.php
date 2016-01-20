@@ -10,7 +10,7 @@
 
 @section('content')
 
-    {!! Form::open(array('url' => 'admin/user', 'id' => 'user_form')) !!}
+    {!! Form::open(array('url' => 'admin/user', 'id' => 'user_form', 'files' => true)) !!}
 
         <div class="form-group">
             <label for="name">Name</label>
@@ -20,6 +20,11 @@
         <div class="form-group">
             <label for="name">E-mail:</label>
             <input type="text" name="email" class="form-control" id="email">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+            {!! Form::file('pic') !!}
         </div>
 
         <div class="form-group">
@@ -69,6 +74,13 @@
                     }
                 }
             });
+
+            /*$('#user_form').submit(function(){
+             if($('[name="pic"]').val() == ""){
+                alert('Please upload an image');
+                return false;
+             }
+             })*/
         })
 
     </script>

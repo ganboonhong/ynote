@@ -9,9 +9,22 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\AdminListInterface;
+use Illuminate\Support\Facades\Input;
+
+include 'Cloudinary/src/Cloudinary.php';
+include 'Cloudinary/src/Uploader.php';
+include 'Cloudinary/src/settings.php';
 
 class UserController extends Controller implements AdminListInterface
 {
+
+    private $destinationPath;
+
+    public function __construct()
+    {
+        $this->destinationPath = 'uploads';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +58,31 @@ class UserController extends Controller implements AdminListInterface
     public function store(Request $request)
     {
         $input = (array)$request->all();
+
+        if($request->hasFile('pic')){
+            $pic            = $request->file('pic');
+            $rawFileName    = rand(111111, 999999);
+            $extension      = $pic->getClientOriginalExtension();
+            $fileName       = $rawFileName. '.' .$extension;
+
+            Input::file('pic')->move($this->destinationPath, $fileName);
+
+            //Cloudinary related
+            $default_upload_options     = array("tags" => "basic_sample");
+            $cloudinary_api_response    = \Cloudinary\Uploader::upload(
+                public_path().'/'.$this->destinationPath.'/'.$fileName,
+                array_merge($default_upload_options, array("public_id" => $rawFileName))
+            );
+
+            $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+            $input['pic'] = $fileName;
+        }
+
         $user = User::create($input);
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return redirect()->action('UserController@index');
+        return $this->index();
     }
 
     /**
@@ -87,16 +120,44 @@ class UserController extends Controller implements AdminListInterface
     public function update(Request $request, $id)
     {
         $user           = User::find($id);
-        $user->name     = $request->name;
+
+        /*$user->name     = $request->name;
         $user->email    = $request->email;
-        $user->level    = $request->level;
+        $user->level    = $request->level;*/
+
+        $input = (array)$request->all();
+
         if( $request->password != "")
         {
             $user->password = bcrypt($request->password);
         }
-        $user->save();
 
-        return redirect()->action('UserController@index');
+        if($request->hasFile('pic')){
+            $pic            = $request->file('pic');
+            $rawFileName    = rand(111111, 999999);
+            $extension      = $pic->getClientOriginalExtension();
+            $fileName       = $rawFileName. '.' .$extension;
+
+            Input::file('pic')->move($this->destinationPath, $fileName);
+
+            //Cloudinary related
+            $default_upload_options     = array("tags" => "basic_sample");
+            $cloudinary_api_response    = \Cloudinary\Uploader::upload(
+                public_path().'/'.$this->destinationPath.'/'.$fileName,
+                array_merge($default_upload_options, array("public_id" => $rawFileName))
+            );
+
+            $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+            $input['pic'] = $fileName;
+
+        }else{
+            unset($input['cloudinary_api_response']);
+            unset($input['pic']);
+        }
+
+        $user->update($input);
+
+        return $this->index();
     }
 
     /**
@@ -109,7 +170,7 @@ class UserController extends Controller implements AdminListInterface
     {
         User::find($id)->delete();
 
-        return redirect()->action('UserController@index');
+        return $this->index();
     }
 
     /**
@@ -121,6 +182,6 @@ class UserController extends Controller implements AdminListInterface
     {
         User::destroy($request->checkboxes);
 
-        return redirect()->action('UserController@index');
+        return $this->index();
     }
 }
