@@ -8,9 +8,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller implements AdminListInterface
 {
+    private $user;
+    private $category;
+
+    /**
+     * Using service container in constructor to instantiate a class
+     *
+     * @param Category $category
+     */
+    public function __construct(Category $category){
+        $this->category = $category;
+        $this->user = Auth::user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +32,8 @@ class CategoryController extends Controller implements AdminListInterface
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->user->categories()->get();
+
         return view('admin.category.list', compact('categories'));
     }
 
@@ -41,19 +56,10 @@ class CategoryController extends Controller implements AdminListInterface
     public function store(Request $request)
     {
         $input = (array)$request->all();
-        Category::create($input);
-        return $this->index();
-    }
+        $input['user_id'] = $this->user->user_id;
+        $this->category->create($input);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return $this->index();
     }
 
     /**
@@ -64,7 +70,8 @@ class CategoryController extends Controller implements AdminListInterface
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->category->findOrFail($id);
+
         return view('admin.category.edit', compact('category'));
     }
 
@@ -77,10 +84,9 @@ class CategoryController extends Controller implements AdminListInterface
      */
     public function update(Request $request, $id)
     {
-        Category::find($id)->update([
-            'name'      => $request->name,
-            'name_en'   => $request->name_en,
-            'visible'   => $request->visible]);
+        $input = (array)$request->all();
+        $input['user_id'] = $this->user->user_id;
+        $this->category->find($id)->update($input);
 
         return $this->index();
     }
@@ -93,7 +99,8 @@ class CategoryController extends Controller implements AdminListInterface
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        $this->category->find($id)->delete();
+
         return $this->index();
     }
 
@@ -102,9 +109,10 @@ class CategoryController extends Controller implements AdminListInterface
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function deleteMultipleItems(Request $request){
+    public function deleteMultipleItems(Request $request)
+    {
+        $this->category->destroy($request->checkboxes);
 
-        Category::destroy($request->checkboxes);
         return $this->index();
     }
 }

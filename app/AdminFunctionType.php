@@ -10,5 +10,5 @@ class AdminFunctionType extends Model
 
     protected $primaryKey = 'admin_function_type_id';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'user_id', 'name_en', 'code'];
 }

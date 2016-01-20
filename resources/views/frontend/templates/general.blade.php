@@ -38,9 +38,9 @@
 </head>
 <body>
 
-@include('frontend.navbar.navbar')
+{{--@include('frontend.navbar.navbar')--}}
 
-<div class="container">
+<div class="">
     @yield('content')
 </div>
 

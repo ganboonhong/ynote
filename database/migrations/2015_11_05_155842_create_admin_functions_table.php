@@ -29,10 +29,8 @@ class CreateAdminFunctionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('admin_functions', function(Blueprint $table){
+        Schema::drop('admin_functions', function(Blueprint $table){
             $table->dropForeign('admin_functions_admin_function_type_id_foreign');
         });
-        Schema::drop('admin_functions');
-        Schema::drop('admin_function_types');
     }
 }

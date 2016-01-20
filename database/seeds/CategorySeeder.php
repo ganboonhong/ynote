@@ -12,18 +12,21 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => '程式設計',
+            'name' => 'Programming',
             'name_en' => 'Programming',
+            'user_id' => 1
         ]);
 
         DB::table('categories')->insert([
-            'name' => '美食',
-            'name_en' => 'Food'
+            'name' => 'Food',
+            'name_en' => 'Food',
+            'user_id' => 1
         ]);
 
         DB::table('categories')->insert([
-            'name' => '旅遊',
-            'name_en' => 'Travelling'
+            'name' => 'Travelling',
+            'name_en' => 'Travelling',
+            'user_id' => 1
         ]);
     }
 }

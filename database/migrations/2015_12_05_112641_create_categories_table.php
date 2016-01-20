@@ -17,7 +17,10 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('name_en');
             $table->integer('sort')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

@@ -16,10 +16,10 @@
                 <input type="text" name="title" class="form-control" id="title">
             </div>
 
-            <div class="form-group">
+            {{--<div class="form-group">
                 <label for="name">Title (Eng):</label>
                 <input type="text" name="title_en" class="form-control" id="title_en">
-            </div>
+            </div>--}}
 
             <div class="form-group">
                 <label for="image">Image:</label>
@@ -31,10 +31,10 @@
                 <textarea name="content" id="content" style="width:100%"></textarea>
             </div>
 
-            <div class="nice_editor form-group">
-                <label for="name">Content (Eng)</label>
+            {{--<div class="nice_editor form-group">
+                <label for="name">Content (English)</label>
                 <textarea name="content_en" id="content_en" style="width:100%" class="nice_editor"></textarea>
-            </div>
+            </div>--}}
 
             <div class="form-group">
                 <label for="sel1">Category：</label>
@@ -64,20 +64,20 @@
                 <input type="text" name="sort" class="form-control" id="sort">
             </div>
 
-        <table style="width:30%">
+        <table>
             <tr>
                 <td>Visible:</td>
                 <td>
-                    <label for="visible">Yes</label>
+                    <label for="visible" style="margin-left: 10px;">Yes</label>
                     <input name="visible" id="visible" type="radio" value="Y" checked>
                 </td>
                 <td>
-                    <label for="invisible">No</label>
+                    <label for="invisible" style="margin-left: 10px;">No</label>
                     <input name="visible" id="invisible" type="radio" value="N">
                 </td>
             </tr>
 
-            <tr>
+            {{--<tr>
                 <td>Chinese Version:</td>
                 <td>
                     <label for="version_cht_yes">Yes</label>
@@ -99,7 +99,7 @@
                     <label for="version_en_no">No</label>
                     <input name="version_en" id="version_en_no" type="radio" value="N" checked>
                 </td>
-            </tr>
+            </tr>--}}
 
         </table>
 
@@ -119,12 +119,12 @@
                     }
                 });
 
-                $('#article_form').submit(function(){
+                /*$('#article_form').submit(function(){
                     if($('[name="list_pic"]').val() == ""){
                         alert('Please upload an image');
                         return false;
                     }
-                })
+                })*/
             });
 
             /*

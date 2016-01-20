@@ -17,7 +17,7 @@
             height: 150px;
         }
         .article-category{
-            margin-top: 100px;
+            margin-top: 10px;
         }
         @media screen and (max-width: 768px) and (min-width: 0px){
             .list-item-container{
@@ -30,39 +30,51 @@
                 margin-top: 150px;
             }
         }
+        .author{
+            background-color: #FFFFFF;
+            height: 100vh;
+            width: 10vw;
+        }
     </style>
 @stop
 
 @section('content')
 
-    <div class="article-category">
-        類別:
-        <select id="article-category-selector">
-            <option selected value="{{url('article')}}">所有</option>
-            @foreach($categories as $category)
-                <option value="{{route('item_list_with_category', ['id'=> $category->category_id])}}"
-                    @if(isset($selected_category))
-                        @if($selected_category->category_id == $category->category_id)
-                            selected
-                        @endif
-                    @endif
-                        >{{$category->name}}</option>
-            @endforeach
-        </select>
-    </div>
+    <div>
+        <div class="col-md-3 col-sm-4 col-xs-12 author">
+        </div>
 
-    <div class="list-item-container">
-        @foreach($articles as $article)
-            <div class="col-md-3 col-sm-4 col-xs-12 item">
-                <a href="{{route('article_detail',['id' => $article->article_id])}}">
-                    {{--<img src="../uploads/{{$article->list_pic}}" class="list-pics" />--}}
-                    <img src="{{json_decode($article->cloudinary_api_response)->url}}" class="list-pics" />
-                </a>
-                <a href="{{route('article_detail',['id' => $article->article_id])}}">
-                    <p class="title">{{$article->title}}</p>
-                </a>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+            <div class="article-category">
+                Categories:
+                <select id="article-category-selector">
+                    <option selected value="{{url('article')}}">All</option>
+                    @foreach($categories as $category)
+                        <option value="{{route('item_list_with_category', ['id'=> $category->category_id])}}"
+                            @if(isset($selected_category))
+                                @if($selected_category->category_id == $category->category_id)
+                                    selected
+                                @endif
+                            @endif
+                                >{{$category->name}}</option>
+                    @endforeach
+                </select>
             </div>
-        @endforeach
+
+            <div class="list-item-container">
+                @foreach($articles as $article)
+                    <div class="col-md-3 col-sm-4 col-xs-12 item">
+                        <a href="{{route('article_detail',['id' => $article->article_id])}}">
+                            {{--<img src="../uploads/{{$article->list_pic}}" class="list-pics" />--}}
+                            {{--<img src="{{json_decode($article->cloudinary_api_response)->url}}" class="list-pics" />--}}
+                        </a>
+                        <a href="{{route('article_detail',['id' => $article->article_id])}}">
+                            <p class="title">{{$article->title}}</p>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
 

@@ -19,17 +19,18 @@ use Symfony\Component\Console\Tests\Input\ArgvInputTest;
 use Validator;
 use Redirect;
 use Session;
-
+use App\AdminListInterface;
 
 include 'Cloudinary/src/Cloudinary.php';
 include 'Cloudinary/src/Uploader.php';
 include 'Cloudinary/src/settings.php';
-//include '../../../public/uploads';
 
 
-class ArticleController extends Controller
+class ArticleController extends Controller implements AdminListInterface
 {
     private $article;
+    private $user;
+    private $blog;
 
     /**
      * Using service container in constructor to instantiate a class
@@ -39,6 +40,8 @@ class ArticleController extends Controller
     public function __construct(Article $article)
     {
         $this->article = $article;
+        $this->user = Auth::user();
+        $this->blog = AdminFunctionType::where('code', 'blog')->select('admin_function_type_id')->first();
     }
 
     /**
@@ -48,7 +51,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = $this->article->orderBy('sort', 'desc')->get();
+        $articles = $this->user->articles()->orderBy('sort', 'desc')->get();
+
         return view('admin.article.list', compact('articles'));
     }
 
@@ -84,18 +88,18 @@ class ArticleController extends Controller
 
             //note: Cloudinary related
             $default_upload_options = array("tags" => "basic_sample");
-            $cloudinary_api_response = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
-                array_merge($default_upload_options, array("public_id" => $rawFileName)));
-
+            $cloudinary_api_response = \Cloudinary\Uploader::upload(
+                public_path().'/uploads/'.$fileName,
+                array_merge($default_upload_options, array("public_id" => $rawFileName))
+            );
         }
 
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
         $input['list_pic'] = $fileName;
-        $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+        //$input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
 
-        $article = $this->article->create($input);
-        $article->save();
+        $this->article->create($input);
 
         return $this->index();
     }
@@ -108,11 +112,12 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = $this->article->where('visible', 'Y')
-            ->where('admin_function_type_id', '2')  //部落格
+        $article = $this->user->articles()
+            ->where('visible', 'Y')
+            ->where('admin_function_type_id', $this->blog->admin_function_type_id)
             ->orderBy('sort', 'desc')
             ->findOrFail($id);
-        $categories = Category::all();
+        $categories = $this->user->categories()->get();
 
         return view('frontend.article.detail', compact('article', 'categories'));
     }
@@ -126,7 +131,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = $this->article->find($id);
-        $categories = Category::all();
+        $categories = $this->user->categories()->get();
         $function_types = AdminFunctionType::all();
 
         return view('admin.article.edit', compact('article', 'categories', 'function_types'));
@@ -178,38 +183,40 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $this->article->find($id)->delete();
+
         return $this->index();
     }
 
     public function deleteMultipleItems(Request $request)
     {
         $this->article->destroy($request->checkboxes);
+
         return $this->index();
     }
 
     public function itemList()
     {
-
-        $articles = $this->article->where('visible', 'Y')
+        $articles = $this->user->articles()
+            ->where('visible', 'Y')
             ->where('version_cht', 'Y')
-            ->where('admin_function_type_id', '2')
+            ->where('admin_function_type_id', $this->blog->admin_function_type_id)
             ->orderBy('sort', 'desc')
             ->get();
 
-        $categories = Category::all();
+        $categories = $this->user->categories()->get();
 
         return view('frontend.article.list', compact('articles', 'categories'));
     }
 
     public function itemListWithCategory($id){
-        $articles = $this->article->where('visible', 'Y')
+        $articles = $this->user->articles()->where('visible', 'Y')
             ->where('version_cht', 'Y')
             ->where('category_id', $id)
             ->orderBy('sort', 'desc')
             ->get();
 
         $selected_category = Category::findOrFail($id);
-        $categories = Category::all();
+        $categories = $this->user->categories()->get();
 
         return view('frontend.article.list', compact('articles', 'selected_category', 'categories'));
     }

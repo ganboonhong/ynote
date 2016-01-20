@@ -9,7 +9,9 @@
                 {{--<li><a href="/admin/function">Function</a></li>--}}
                 <li><a href="/admin/category">Categories</a></li>
                 <li><a href="/admin/article">Articles</a></li>
-                <li><a href="/admin/user">Users</a></li>
+                @if(\Illuminate\Support\Facades\Auth::user()->level > 99)
+                    <li><a href="/admin/user">Users</a></li>
+                @endif
             </ul>
 
             {{--<form class="navbar-form navbar-left navbar-right" role="search">

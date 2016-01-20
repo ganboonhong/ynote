@@ -12,15 +12,17 @@ class FunctionTypeSeeder extends Seeder
     public function run()
     {
         DB::table('admin_function_types')->insert([
-            'name' => '部落格',
+            'name' => 'Blog',
             'name_en' => 'Blog',
-            'code' => 'blog'
+            'code' => 'blog',
+            'user_id' => '1'
         ]);
 
         DB::table('admin_function_types')->insert([
-            'name' => '日記',
+            'name' => 'Diary',
             'name_en' => 'Diary',
-            'code' => 'diary'
+            'code' => 'diary',
+            'user_id' => '1'
         ]);
     }
 }

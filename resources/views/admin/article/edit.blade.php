@@ -16,10 +16,10 @@
                 <input type="text" name="title" class="form-control" id="title" value="{{$article->title}}">
             </div>
 
-            <div class="form-group">
-                <label for="name">Title (Eng):</label>
+            {{--<div class="form-group">
+                <label for="name">Title (English):</label>
                 <input type="text" name="title_en" class="form-control" id="title_en" value="{{$article->title_en}}">
-            </div>
+            </div>--}}
 
             <div class="form-group">
                 <div>
@@ -37,10 +37,10 @@
                 <textarea name="content" id="content" style="width:100%">{{$article->content}}</textarea>
             </div>
 
-            <div class="nice_editor form-group">
+            {{--<div class="nice_editor form-group">
                 <label for="name">Content (Eng)</label>
                 <textarea name="content_en" id="content_en" style="width:100%" class="nice_editor">{{$article->content_en}}</textarea>
-            </div>
+            </div>--}}
 
             <div class="form-group">
                 <label for="sel1">Category：</label>
@@ -89,7 +89,7 @@
                     </td>
                 </tr>
 
-                <tr>
+                {{--<tr>
                     <td>Chinese Version:</td>
                     <td>
                         <label for="version_cht_yes">Yes</label>
@@ -115,7 +115,7 @@
                         <input name="version_en" id="version_en_no" type="radio" value="N"
                                @if($article->version_en == 'N') checked @endif>
                     </td>
-                </tr>
+                </tr>--}}
 
             </table>
 

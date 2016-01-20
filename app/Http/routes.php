@@ -85,7 +85,6 @@ Route::group(['prefix' => 'admin', 'middleware'  => 'auth'], function(){
                 'uses'  => 'ArticleController@update',
                 'as'    => 'article_update'
             ]);
-
     });
 
     Route::group(['prefix' => 'category'], function(){
@@ -221,6 +220,5 @@ Route::group(['prefix' => 'admin', 'middleware'  => 'auth'], function(){
             [   'uses'  => 'UserController@deleteMultipleItems',
                 'as'    => 'delete_multiple_items'
             ]);
-
     });
 });

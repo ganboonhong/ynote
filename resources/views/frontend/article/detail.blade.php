@@ -54,19 +54,16 @@
             <h1>{{$article->title}}</h1>
             {!! $article->content !!}
             <p class="reference">
-                資料來源：
                 @if($article->reference != "")
+                    Source：
                     <a class="article-link" href="{{$article->reference}}" target="_blank">{{$article->reference}}</a>
-                @else
-                    本人自行撰寫
                 @endif
             </p>
-            {{--<img src="../uploads/{{$article->list_pic}}"/>--}}
         </div>
 
         <div class="col-md-2  col-sm-2  col-xs-12 category-container">
             <ul class="category-ul">
-                <li style="font-size: 20px;">類別</li>
+                <li style="font-size: 20px;">Categories</li>
                 @foreach($categories as $category)
                     <a href="{{route('item_list_with_category', ['id'=> $category->category_id])}}" class="category-link" style="text-decoration: none">
                         <li>{{$category->name}}</li>

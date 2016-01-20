@@ -17,7 +17,10 @@ class CreateAdminFunctionTypesTable extends Migration
             $table->string('name', 100);
             $table->string('name_en', 100);
             $table->string('code', 50)->unique();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateAdminFunctionTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_function_types');
+        Schema::drop('admin_function_types');
     }
 }

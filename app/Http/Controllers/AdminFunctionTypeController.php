@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\AdminListInterface;
 
-class AdminFunctionTypeController extends Controller
+class AdminFunctionTypeController extends Controller implements AdminListInterface
 {
     private $adminFunctionType;
+    private $user;
 
     /**
      * Using service container in constructor to instantiate a class
@@ -21,6 +24,7 @@ class AdminFunctionTypeController extends Controller
     public function __construct(AdminFunctionType $adminFunctionType)
     {
         $this->adminFunctionType = $adminFunctionType;
+        $this->user = Auth::user();
     }
 
     /**
@@ -30,7 +34,8 @@ class AdminFunctionTypeController extends Controller
      */
     public function index()
     {
-        $function_types = $this->adminFunctionType->all();
+        $function_types = $this->user->functionTypes()->get();
+
         return view('admin.functions.type_list', compact('function_types'));
     }
 
@@ -53,7 +58,9 @@ class AdminFunctionTypeController extends Controller
     public function store(Request $request)
     {
         $input = (array)$request->all();
+        $input['user_id'] = $this->user->user_id;
         $this->adminFunctionType->create($input);
+
         return $this->index();
     }
 
@@ -77,6 +84,7 @@ class AdminFunctionTypeController extends Controller
     public function edit($id)
     {
         $function_type = $this->adminFunctionType->find($id);
+
         return view('admin.functions.type_edit', compact('function_type'));
     }
 
@@ -89,9 +97,10 @@ class AdminFunctionTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $function_type = $this->adminFunctionType->find($id);
-        $function_type->name = $request->name;
-        $function_type->save();
+        $input = (array)$request->all();
+        $input['user_id'] = $this->user->user_id;
+        $this->adminFunctionType->find($id)->update($input);
+
         return $this->index();
     }
 
@@ -103,9 +112,9 @@ class AdminFunctionTypeController extends Controller
      */
     public function destroy($id)
     {
-        $function_type = $this->adminFunctionType->find($id);
-        $function_type->delete();
-        return redirect('admin/function_type');
+        $this->adminFunctionType->find($id)->delete();
+
+        return $this->index();
     }
 
     /**
@@ -116,6 +125,7 @@ class AdminFunctionTypeController extends Controller
     public function deleteMultipleItems(Request $request){
 
         $this->adminFunctionType->destroy($request->checkboxes);
-        return redirect('admin/function_type');
+
+        return $this->index();
     }
 }

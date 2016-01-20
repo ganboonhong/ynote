@@ -38,4 +38,30 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /**
+     * A user has many function types.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function functionTypes()
+    {
+        return $this->hasMany('App\AdminFunctionType');
+    }
+
+    /**
+     * A user has many categories.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        return $this->hasMany('App\Category');
+    }
+
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
 }
