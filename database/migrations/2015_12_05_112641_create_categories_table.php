@@ -16,7 +16,6 @@ class CreateCategoriesTable extends Migration
             $table->increments('category_id');
             $table->string('name');
             $table->string('name_en');
-            $table->enum('visible', ['Y', 'N'])->default('Y');;
             $table->integer('sort')->unsigned();
             $table->timestamps();
         });

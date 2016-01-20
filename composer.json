@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "ganboonhong/ynote",
+    "description": "Combination of blog and diary.",
+    "keywords": ["ynote", "blog", "diary"],
     "license": "MIT",
     "type": "project",
     "require": {

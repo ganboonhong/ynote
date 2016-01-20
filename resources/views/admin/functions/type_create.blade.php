@@ -16,6 +16,16 @@
         <input type="text" name="name" class="form-control" id="name">
     </div>
 
+    <div class="form-group">
+        <label for="name_en">Function Type Name (English):</label>
+        <input type="text" name="name_en" class="form-control" id="name_en">
+    </div>
+
+    <div class="form-group">
+        <label for="code">Code:</label>
+        <input type="text" name="code" class="form-control" id="code">
+    </div>
+
     <button type="submit" class="btn btn-primary form-control">Create</button>
     {!! Form::close() !!}
 

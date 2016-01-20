@@ -15,6 +15,8 @@ class CreateAdminFunctionTypesTable extends Migration
         Schema::create('admin_function_types', function (Blueprint $table) {
             $table->increments('admin_function_type_id');
             $table->string('name', 100);
+            $table->string('name_en', 100);
+            $table->string('code', 50)->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateAdminFunctionTypesTable extends Migration
      */
     public function down()
     {
-        //Schema::drop('admin_function_types');
+        Schema::dropIfExists('admin_function_types');
     }
 }
