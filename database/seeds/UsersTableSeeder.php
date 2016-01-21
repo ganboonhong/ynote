@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         $user->email    = 'ganboonhong@gmail.com';
         $user->level    = 100;
         $user->name     = 'Francis';
+        $user->description = 'Stay hungry, stay foolish.';
         $user->save();
 
         $user = new \App\User();

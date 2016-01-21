@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', 'Auth\AuthController@getLogin');
+//Route::get('/', 'Auth\AuthController@getLogin');
+Route::get('/', function(){
+    return view('test');
+});
 
 Route::get('article/{id}', 'ArticleController@show');
 
@@ -28,21 +31,20 @@ Route::get('auth/logout',
 
 // -----------------------  Frontend    ----------------------------------
 
-Route::get('/article-category/{id}',[
+Route::get('{user_id}/article-category/{id}',[
     'uses'  => 'ArticleController@itemListWithCategory',
     'as'    => 'item_list_with_category'
+])->where('user_id', '[0-9]+')
+->where('id', '[0-9]+');
+
+
+Route::get('{user_id}/article', 'ArticleController@itemList')->where('user_id', '[0-9]+');
+
+Route::get('article/{id}', [
+    'uses'  => 'ArticleController@show',
+    'as'    => 'article_detail'
 ])->where('id', '[0-9]+');
 
-Route::group(['prefix' => 'article'], function(){
-
-    Route::get('/', 'ArticleController@itemList');
-
-    Route::get('/{id}', [
-        'uses'  => 'ArticleController@show',
-        'as'    => 'article_detail'
-    ])->where('id', '[0-9]+');
-
-});
 
 // -----------------------  Registration    ----------------------------------
 

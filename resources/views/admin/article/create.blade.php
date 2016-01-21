@@ -119,12 +119,12 @@
                     }
                 });
 
-                /*$('#article_form').submit(function(){
+                $('#article_form').submit(function(){
                     if($('[name="list_pic"]').val() == ""){
                         alert('Please upload an image');
                         return false;
                     }
-                })*/
+                })
             });
 
             /*

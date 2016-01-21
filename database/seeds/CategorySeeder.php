@@ -28,5 +28,17 @@ class CategorySeeder extends Seeder
             'name_en' => 'Travelling',
             'user_id' => 1
         ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Life',
+            'name_en' => 'Life',
+            'user_id' => 1
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Go Green',
+            'name_en' => 'Go Green',
+            'user_id' => 1
+        ]);
     }
 }

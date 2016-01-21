@@ -25,6 +25,12 @@
     </div>
 
     <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" name="description" class="form-control" id="description"
+               value="{{$user->description}}">
+    </div>
+
+    <div class="form-group">
         <label for="image">Image:</label>
         @if($user->pic != "")
             <div>

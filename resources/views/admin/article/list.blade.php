@@ -36,7 +36,7 @@
             </span>
 
             <a href="{{route('article_edit', ['id' => $article->article_id])}}" class="list-group-item item_row">
-                {{$article->title_en}}
+                {{$article->title}}
             </a>
             <a href="{{route('article_destroy', ['id' => $article->article_id])}}" class="btn btn-danger btn-sm list_delete_btn">
                 <span class="glyphicon glyphicon-remove"></span>

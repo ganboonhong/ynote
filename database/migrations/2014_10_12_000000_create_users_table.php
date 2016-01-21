@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('pic');
             $table->text('cloudinary_api_response');
-
+            $table->text('description');
             $table->integer('level');
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdminFunctionType;
 use App\Article;
 use App\Category;
+use App\User;
 use Askaoru\LaravelCloudinary\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
@@ -98,7 +99,7 @@ class ArticleController extends Controller implements AdminListInterface
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
         $input['list_pic'] = $fileName;
-        //$input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+        $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
 
         $this->article->create($input);
 
@@ -194,8 +195,10 @@ class ArticleController extends Controller implements AdminListInterface
         return $this->index();
     }
 
-    public function itemList()
+    public function itemList($user_id)
     {
+        $user = User::find($user_id);
+
         $articles = $this->user->articles()
             ->where('visible', 'Y')
             ->where('version_cht', 'Y')
@@ -203,12 +206,15 @@ class ArticleController extends Controller implements AdminListInterface
             ->orderBy('sort', 'desc')
             ->get();
 
-        $categories = $this->user->categories()->get();
+        $categories = $this->user->categories()->orderBy('name')->get();
 
-        return view('frontend.article.list', compact('articles', 'categories'));
+        return view('frontend.article.list', compact('articles', 'categories', 'user'));
     }
 
-    public function itemListWithCategory($id){
+    public function itemListWithCategory($user_id, $id)
+    {
+        $user = User::find($user_id);
+
         $articles = $this->user->articles()->where('visible', 'Y')
             ->where('version_cht', 'Y')
             ->where('category_id', $id)
@@ -216,8 +222,8 @@ class ArticleController extends Controller implements AdminListInterface
             ->get();
 
         $selected_category = Category::findOrFail($id);
-        $categories = $this->user->categories()->get();
+        $categories = $this->user->categories()->orderBy('name')->get();
 
-        return view('frontend.article.list', compact('articles', 'selected_category', 'categories'));
+        return view('frontend.article.list', compact('articles', 'selected_category', 'categories', 'user'));
     }
 }

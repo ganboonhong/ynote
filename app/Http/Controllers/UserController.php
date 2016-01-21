@@ -130,6 +130,8 @@ class UserController extends Controller implements AdminListInterface
         if( $request->password != "")
         {
             $user->password = bcrypt($request->password);
+        }else{
+            unset($input['password']);
         }
 
         if($request->hasFile('pic')){
