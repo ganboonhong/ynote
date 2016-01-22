@@ -33,7 +33,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+    <meta property="og:image"         content="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-prn2/v/t1.0-9/10501987_932818420062153_1300948715847735878_n.jpg?oh=edff9e9706c5f372dbf9f9a1944b7e91&oe=573561B2" />
 
 </head>
 <body>
