@@ -7,6 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <meta property="og:url"           content="http://y-note.herokuapp.com/2/article-category/12" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-prn2/v/t1.0-9/10501987_932818420062153_1300948715847735878_n.jpg?oh=edff9e9706c5f372dbf9f9a1944b7e91&oe=573561B2" />
+    <meta property="fb:app_id"        content="994567687256622"/>
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {!! HTML::style('css/frontend/general.css') !!}
 
@@ -28,13 +35,6 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/sharer/cool-share/plugin.css" media="all" rel="stylesheet" />
     <script src="/sharer/cool-share/plugin.js"></script>
-
-    <meta property="og:url"           content="http://y-note.herokuapp.com/2/article-category/12" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Your Website Title" />
-    <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-prn2/v/t1.0-9/10501987_932818420062153_1300948715847735878_n.jpg?oh=edff9e9706c5f372dbf9f9a1944b7e91&oe=573561B2" />
-    <meta property="fb:app_id"        content="994567687256622"/>
 
 </head>
 <body>
