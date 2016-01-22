@@ -24,6 +24,11 @@
     {!! HTML::script('js/tinymce/tinymce.min.js') !!}
     {{--{!! HTML::script('js/nicEditor/nicEdit.js') !!}--}}
 
+    {{--sharer plugin--}}
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/sharer/cool-share/plugin.css" media="all" rel="stylesheet" />
+    <script src="/sharer/cool-share/plugin.js"></script>
+
 </head>
 <body>
 
@@ -75,11 +80,13 @@
                     </a>
                 @endforeach
             </ul>
+            <span class="socialShare"></span>
         </div>
     </div>
     {{--Author_side_bar-end--}}
 
     @yield('content')
+
 </div>
 
 </body>
@@ -91,4 +98,20 @@
 
         $( document ).tooltip();
     })
+
+
+    var url = window.location.href;
+
+    var options = {
+
+        twitter: {
+            text: 'Check out this awesome jQuery Social Buttons Plugin! ',
+            via: 'Tutorialzine'
+        },
+
+        facebook : true,
+        googlePlus : true
+    };
+
+    $('.socialShare').shareButtons(url, options);
 </script>
