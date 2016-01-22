@@ -1,58 +1,9 @@
 @extends('frontend.templates.general')
 
 @section('head')
-
     <title>{{$article->title}}</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <style>
-        .content{
-            background-color: #ffffff;
-            margin: 0 50px 50px 400px;
-            overflow: hidden;
-        }
-        .category-container{
-            margin: 60px 50px 50px 10px ;
-        }
-        .category-ul{
-            list-style-type: none;
-        }
-        .reference{
-            margin-top: 30px;
-        }
-        .article-link{
-
-            /* These are technically the same, but use both */
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-
-            -ms-word-break: break-all;
-            /* This is the dangerous one in WebKit, as it breaks things wherever */
-            word-break: break-all;
-            /* Instead use this non-standard one: */
-            word-break: break-word;
-
-            /* Adds a hyphen where the word breaks, if supported (No Blink) */
-            -ms-hyphens: auto;
-            -moz-hyphens: auto;
-            -webkit-hyphens: auto;
-            hyphens: auto;
-
-        }
-        @media screen and (max-width: 768px) and (min-width: 0px) {
-            .content{
-                margin: 0 50px 50px 10px;
-            }
-            .category-container{
-                margin: 10px 50px 50px 10px ;
-            }
-        }
-        @media screen and (max-width: 992px) and (min-width: 768px){
-            .content{
-                margin: 0 50px 50px 30%;
-            }
-        }
-
-    </style>
+    {!! HTML::style('css/frontend/article/detail.css') !!}
 @stop
 
 @section('content')
