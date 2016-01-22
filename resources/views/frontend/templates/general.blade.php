@@ -29,7 +29,7 @@
     <link href="/sharer/cool-share/plugin.css" media="all" rel="stylesheet" />
     <script src="/sharer/cool-share/plugin.js"></script>
 
-    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+    <meta property="og:url"           content="http://y-note.herokuapp.com/2/article-category/12" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
