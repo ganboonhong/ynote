@@ -130,10 +130,13 @@
                 <a href="{{Illuminate\Support\Facades\Config::get('app.domain').'/'.$user->user_id.'/article'}}">
                     <li class="category
                         @if(!isset($selected_category))
-                    {{'selected-category'}}
-                    @endif
-                            ">
-                        <span class="@if(!isset($selected_category)){{'category-name-selected'}}@endif">All</span></li>
+                            {{'selected-category'}}
+                        @endif
+                    ">
+                        <span class="@if(!isset($selected_category)){{'category-name-selected'}}@endif">
+                            All (<span>{{$article_amount['total']}}</span>)
+                        </span>
+                    </li>
                 </a>
                 @foreach($categories as $category)
                     <a href="{{Illuminate\Support\Facades\Config::get('app.domain').'/'.$user->user_id.'/article-category/'.$category->category_id}}">
@@ -149,7 +152,7 @@
                                 {{'category-name-selected'}}
                                 @endif
                                 @endif">
-                                    {{$category->name}}
+                                    {{$category->name}} (<span>{{$article_amount[$category->category_id]}}</span>)
                                 </span>
                         </li>
                     </a>

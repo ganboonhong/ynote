@@ -39,7 +39,7 @@
 
                 <a href="{{route('category_edit', ['id' => $category->category_id])}}"
                    class="list-group-item item_row">
-                    {{$category->name_en}}
+                    {{$category->name}}
                 </a>
                 <a href="{{route('category_destroy', ['id' => $category->category_id])}}"
                    class="btn btn-danger btn-sm list_delete_btn">

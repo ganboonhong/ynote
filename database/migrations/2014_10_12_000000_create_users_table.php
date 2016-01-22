@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->text('cloudinary_api_response');
             $table->text('description');
             $table->integer('level');
+            $table->dateTime('last_login');
         });
     }
 

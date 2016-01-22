@@ -33,6 +33,10 @@ class ArticleController extends Controller implements AdminListInterface
     private $user;
     private $blog;
     private $destinationPath;
+    private $categories;
+    private $article_index_url;
+    private $article_amount;
+    private $total;
 
     /**
      * Using service container in constructor to instantiate a class
@@ -45,6 +49,15 @@ class ArticleController extends Controller implements AdminListInterface
         $this->user = Auth::user();
         $this->blog = AdminFunctionType::where('code', 'blog')->select('admin_function_type_id')->first();
         $this->destinationPath = 'uploads';
+        $this->categories = $this->user->categories()->orderBy('name')->get();
+        $this->article_index_url = 'admin/article';
+
+        foreach( $this->categories as $category){
+            $this->article_amount[$category->category_id] = $category->articles()->count();
+            $this->total += $category->articles()->count();
+        }
+
+        $this->article_amount['total'] = $this->total;
     }
 
     /**
@@ -55,8 +68,9 @@ class ArticleController extends Controller implements AdminListInterface
     public function index()
     {
         $articles = $this->user->articles()->orderBy('sort', 'desc')->get();
+        $user = $this->user;
 
-        return view('admin.article.list', compact('articles'));
+        return view('admin.article.list', compact('articles', 'user'));
     }
 
     /**
@@ -66,7 +80,7 @@ class ArticleController extends Controller implements AdminListInterface
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = $this->categories;
         $function_types = AdminFunctionType::all();
 
         return view('admin.article.create', compact('categories', 'function_types'));
@@ -103,7 +117,7 @@ class ArticleController extends Controller implements AdminListInterface
 
         $this->article->create($input);
 
-        return $this->index();
+        return Redirect::to($this->article_index_url);
     }
 
     /**
@@ -125,9 +139,10 @@ class ArticleController extends Controller implements AdminListInterface
             ->findOrFail($id);
 
         $selected_category = Category::findOrFail($category_id);
-        $categories = $this->user->categories()->orderBy('name')->get();
+        $categories = $this->categories;
+        $article_amount = $this->article_amount;
 
-        return view('frontend.article.detail', compact('article', 'categories', 'selected_category', 'user'));
+        return view('frontend.article.detail', compact('article', 'categories', 'selected_category', 'user', 'article_amount'));
     }
 
     /**
@@ -177,8 +192,8 @@ class ArticleController extends Controller implements AdminListInterface
 
         $input['user_id'] = Auth::user()->user_id;
         $this->article->where('article_id', $id)->update($input);
-
-        return $this->index();
+        
+        return Redirect::to($this->article_index_url);
     }
 
     /**
@@ -191,14 +206,14 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $this->article->find($id)->delete();
 
-        return $this->index();
+        return Redirect::to($this->article_index_url);
     }
 
     public function deleteMultipleItems(Request $request)
     {
         $this->article->destroy($request->checkboxes);
 
-        return $this->index();
+        return Redirect::to($this->article_index_url);
     }
 
     public function itemList($user_id)
@@ -212,9 +227,10 @@ class ArticleController extends Controller implements AdminListInterface
             ->orderBy('sort', 'desc')
             ->get();
 
-        $categories = $this->user->categories()->orderBy('name')->get();
+        $categories = $this->categories;
+        $article_amount = $this->article_amount;
 
-        return view('frontend.article.list', compact('articles', 'categories', 'user'));
+        return view('frontend.article.list', compact('articles', 'categories', 'user', 'article_amount'));
     }
 
     public function itemListWithCategory($user_id, $id)
@@ -228,8 +244,9 @@ class ArticleController extends Controller implements AdminListInterface
             ->get();
 
         $selected_category = Category::findOrFail($id);
-        $categories = $this->user->categories()->orderBy('name')->get();
+        $categories = $this->categories;
+        $article_amount = $this->article_amount;
 
-        return view('frontend.article.list', compact('articles', 'selected_category', 'categories', 'user'));
+        return view('frontend.article.list', compact('articles', 'selected_category', 'categories', 'user', 'article_amount'));
     }
 }

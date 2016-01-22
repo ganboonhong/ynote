@@ -38,8 +38,15 @@
             <a href="{{route('article_edit', ['id' => $article->article_id])}}" class="list-group-item item_row">
                 {{$article->title}}
             </a>
-            <a href="{{route('article_destroy', ['id' => $article->article_id])}}" class="btn btn-danger btn-sm list_delete_btn">
+            <a href="{{route('article_destroy', ['id' => $article->article_id])}}" class="btn btn-danger btn-sm list_delete_btn" title="Delete">
                 <span class="glyphicon glyphicon-remove"></span>
+            </a>
+            <a href="{{route('article_detail', [$article->article_id, $article->category_id, $user->user_id])}}"
+               class="btn btn-success btn-sm preview-btn"
+               title="Preview"
+               target="_blank"
+                    >
+                <span class="glyphicon glyphicon-eye-open"></span>
             </a>
             <br />
             {{--<a href="#" class="list-group-item active">Second item</a>--}}

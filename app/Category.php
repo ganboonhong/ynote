@@ -15,4 +15,14 @@ class Category extends Model
         'sort',
         'user_id'
     ];
+
+    /**
+     * A category has many articles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
 }
