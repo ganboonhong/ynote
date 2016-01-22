@@ -11,10 +11,7 @@
 |
 */
 
-//Route::get('/', 'Auth\AuthController@getLogin');
-Route::get('/', function(){
-    return view('test');
-});
+Route::get('/', 'Auth\AuthController@getLogin');
 
 Route::get('article/{id}', 'ArticleController@show');
 
