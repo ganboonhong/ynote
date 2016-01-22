@@ -110,18 +110,24 @@ class ArticleController extends Controller implements AdminListInterface
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  int  $category_id
+     * @param   int $user_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $category_id, $user_id)
     {
+        $user = User::find($user_id);
+
         $article = $this->user->articles()
             ->where('visible', 'Y')
             ->where('admin_function_type_id', $this->blog->admin_function_type_id)
             ->orderBy('sort', 'desc')
             ->findOrFail($id);
-        $categories = $this->user->categories()->get();
 
-        return view('frontend.article.detail', compact('article', 'categories'));
+        $selected_category = Category::findOrFail($category_id);
+        $categories = $this->user->categories()->orderBy('name')->get();
+
+        return view('frontend.article.detail', compact('article', 'categories', 'selected_category', 'user'));
     }
 
     /**

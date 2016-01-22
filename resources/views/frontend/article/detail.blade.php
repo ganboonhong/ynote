@@ -7,7 +7,8 @@
     <style>
         .content{
             background-color: #ffffff;
-            margin: 50px;
+            margin: 0 50px 50px 400px;
+            overflow: hidden;
         }
         .category-container{
             margin: 60px 50px 50px 10px ;
@@ -39,18 +40,24 @@
         }
         @media screen and (max-width: 768px) and (min-width: 0px) {
             .content{
-                margin: 200px 50px 50px 10px ;
+                margin: 0 50px 50px 10px;
             }
             .category-container{
                 margin: 10px 50px 50px 10px ;
             }
         }
+        @media screen and (max-width: 992px) and (min-width: 768px){
+            .content{
+                margin: 0 50px 50px 30%;
+            }
+        }
+
     </style>
 @stop
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-sm-10 col-xs-12 content">
+        <div class="col-md-7 col-sm-7 col-xs-12 content">
             <h1>{{$article->title}}</h1>
             {!! $article->content !!}
             <p class="reference">
@@ -59,17 +66,6 @@
                     <a class="article-link" href="{{$article->reference}}" target="_blank">{{$article->reference}}</a>
                 @endif
             </p>
-        </div>
-
-        <div class="col-md-2  col-sm-2  col-xs-12 category-container">
-            <ul class="category-ul">
-                <li style="font-size: 20px;">Categories</li>
-                @foreach($categories as $category)
-                    <a href="{{route('item_list_with_category', ['id'=> $category->category_id])}}" class="category-link" style="text-decoration: none">
-                        <li>{{$category->name}}</li>
-                    </a>
-                @endforeach
-            </ul>
         </div>
     </div>
 @stop

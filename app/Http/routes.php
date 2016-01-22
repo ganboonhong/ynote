@@ -40,10 +40,12 @@ Route::get('{user_id}/article-category/{id}',[
 
 Route::get('{user_id}/article', 'ArticleController@itemList')->where('user_id', '[0-9]+');
 
-Route::get('article/{id}', [
+Route::get('article/{id}/{category_id}/{user_id}', [
     'uses'  => 'ArticleController@show',
     'as'    => 'article_detail'
-])->where('id', '[0-9]+');
+])->where('id', '[0-9]+')
+->where('category_id', '[0-9]+')
+->where('user_id', '[0-9]+');
 
 
 // -----------------------  Registration    ----------------------------------
