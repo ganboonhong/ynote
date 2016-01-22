@@ -15,14 +15,14 @@ class FunctionTypeSeeder extends Seeder
             'name' => 'Blog',
             'name_en' => 'Blog',
             'code' => 'blog',
-            'user_id' => '1'
+            'user_id' => '2'
         ]);
 
         DB::table('admin_function_types')->insert([
             'name' => 'Diary',
             'name_en' => 'Diary',
             'code' => 'diary',
-            'user_id' => '1'
+            'user_id' => '2'
         ]);
     }
 }
