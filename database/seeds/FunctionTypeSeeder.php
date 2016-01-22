@@ -11,7 +11,7 @@ class FunctionTypeSeeder extends Seeder
      */
     public function run()
     {
-        /*DB::table('admin_function_types')->insert([
+        DB::table('admin_function_types')->insert([
             'name' => 'Blog',
             'name_en' => 'Blog',
             'code' => 'blog',
@@ -23,6 +23,6 @@ class FunctionTypeSeeder extends Seeder
             'name_en' => 'Diary',
             'code' => 'diary',
             'user_id' => '1'
-        ]);*/
+        ]);
     }
 }
