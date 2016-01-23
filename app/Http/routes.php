@@ -11,10 +11,10 @@
 |
 */
 
-//Route::get('/', 'Auth\AuthController@getLogin');
-Route::get('/', function(){
+Route::get('/', 'Auth\AuthController@getLogin');
+/*Route::get('/', function(){
     return view('test');
-});
+});*/
 
 Route::get('article/{id}', 'ArticleController@show');
 
