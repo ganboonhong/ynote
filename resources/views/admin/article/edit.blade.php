@@ -75,9 +75,6 @@
             </div>
 
             <table style="width:30%">
-                <tr>
-                    <td>Visible:</td>
-                </tr>
 
                 {{--<tr>
                     <td>Chinese Version:</td>
