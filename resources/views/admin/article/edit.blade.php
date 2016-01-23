@@ -1,5 +1,4 @@
 @extends('admin.templates.create')
-{{dd($article)}}
 
     @section('title')
         Edit article
