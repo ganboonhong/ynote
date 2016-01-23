@@ -135,12 +135,20 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $user = User::find($user_id);
 
-        $article = $this->user->articles()
+        $article = $user->articles()
             ->where('visible', 'Y')
             ->where('admin_function_type_id', $this->blog->admin_function_type_id)
             ->orderBy('sort', 'desc')
             ->findOrFail($id);
 
+        $this->categories = $user->categories()->orderBy('name')->get();
+
+        foreach( $this->categories as $category){
+            $this->article_amount[$category->category_id] = $category->articles()->count();
+            $this->total += $category->articles()->count();
+        }
+
+        $this->article_amount['total'] = $this->total;
         $selected_category = Category::findOrFail($category_id);
         $categories = $this->categories;
         $article_amount = $this->article_amount;

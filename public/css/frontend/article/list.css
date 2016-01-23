@@ -28,6 +28,9 @@
     .list-item-container{
         margin-top: 10%;
     }
+    .item{
+        text-align: center;
+    }
     .item img{
         height: 250px;
     }
