@@ -22,8 +22,23 @@
             </form>--}}
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/user/edit/{{Auth::user()->user_id}}"><span class="glyphicon glyphicon-user"></span> {{Auth::user()->email}}</a></li>
-                <li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <li>
+                    <a href="/admin/user/edit/{{Auth::user()->user_id}}">
+                        @if(\Illuminate\Support\Facades\Auth::user()->cloudinary_api_response != "")
+                            <img
+                                    src="{{json_decode(\Illuminate\Support\Facades\Auth::user()->cloudinary_api_response)->url}}"
+                                    style="width: 25px; height: 25px;">
+                        @else
+                            <span class="glyphicon glyphicon-user"></span>
+                        @endif
+                        {{Auth::user()->email}}
+                    </a>
+                </li>
+                <li>
+                    <a href="/auth/logout">
+                        <span class="glyphicon glyphicon-log-out"></span>Logout
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
