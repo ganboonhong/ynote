@@ -27,7 +27,7 @@
                         @if(\Illuminate\Support\Facades\Auth::user()->cloudinary_api_response != "")
                             <img
                                     src="{{json_decode(\Illuminate\Support\Facades\Auth::user()->cloudinary_api_response)->url}}"
-                                    style="width: 25px; height: 25px;">
+                                    style="width: 15px; height: 25px; margin-right: 10px;">
                         @else
                             <span class="glyphicon glyphicon-user"></span>
                         @endif
