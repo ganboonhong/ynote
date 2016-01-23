@@ -147,9 +147,11 @@ class ArticleController extends Controller implements AdminListInterface
             $this->article_amount[$category->category_id] = $category->articles()->count();
             $this->total += $category->articles()->count();
         }
+        $this->article_amount['total'] = $this->total;
 
         $selected_category = Category::findOrFail($category_id);
         $categories = $this->categories;
+
         $article_amount = $this->article_amount;
 
         return view('frontend.article.detail', compact('article', 'categories', 'selected_category', 'user', 'article_amount'));
@@ -244,6 +246,7 @@ class ArticleController extends Controller implements AdminListInterface
             $this->article_amount[$category->category_id] = $category->articles()->count();
             $this->total += $category->articles()->count();
         }
+        $this->article_amount['total'] = $this->total;
 
         $categories = $this->categories;
         $article_amount = $this->article_amount;
@@ -267,6 +270,7 @@ class ArticleController extends Controller implements AdminListInterface
             $this->article_amount[$category->category_id] = $category->articles()->count();
             $this->total += $category->articles()->count();
         }
+        $this->article_amount['total'] = $this->total;
 
         $selected_category = Category::findOrFail($id);
         $categories =  $user->categories()->orderBy('name')->get();
