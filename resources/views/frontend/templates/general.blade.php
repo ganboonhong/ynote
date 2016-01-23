@@ -6,16 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <meta property="og:site_name" content="Scotch">
-    <meta property="og:url" content="https://scotch.io">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Scotch Web Development">
-    <meta property="og:description" content="Scotch is a web development blog discussing all things programming, development, web, and life.">
-    <meta property="og:image" content="https://scotch.io/wp-content/themes/scotch/img/scotch-home.jpg">
-    <meta property="fb:app_id" content="1389892087910588">
-    <meta property="fb:admins" content="579622216,709634581">
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {!! HTML::style('css/frontend/general.css') !!}
 
@@ -127,7 +117,7 @@
     })
 
 
-    var url = 'http://www.google.com/?=98';
+    var url = window.location.href;
 
     var options = {
 
