@@ -157,8 +157,6 @@ class ArticleController extends Controller implements AdminListInterface
         $categories = $this->user->categories()->get();
         $function_types = AdminFunctionType::all();
 
-        dd($article);
-
         return view('admin.article.edit', compact('article', 'categories', 'function_types'));
     }
 
