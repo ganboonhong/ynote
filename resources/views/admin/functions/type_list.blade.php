@@ -39,7 +39,7 @@
 
                 <a href="{{route('function_type_edit', ['id' => $function_type->admin_function_type_id])}}"
                    class="list-group-item item_row">
-                    {{$function_type->name_en}}
+                    {{$function_type->name}}
                 </a>
                 <a href="{{route('function_type_destroy', ['id' => $function_type->admin_function_type_id])}}"
                    class="btn btn-danger btn-sm list_delete_btn">

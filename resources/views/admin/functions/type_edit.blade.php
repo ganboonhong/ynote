@@ -18,11 +18,6 @@
         </div>
 
         <div class="form-group">
-            <label for="name_en">Function Type Name(English):</label>
-            <input type="text" name="name_en" class="form-control" id="name_en" value="{{$function_type->name_en}}">
-        </div>
-
-        <div class="form-group">
             <label for="code">Code:</label>
             <input type="text" name="code" class="form-control" id="code" value="{{$function_type->code}}">
         </div>
