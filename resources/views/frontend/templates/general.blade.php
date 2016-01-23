@@ -127,7 +127,7 @@
     })
 
 
-    var url = window.location.href;
+    var url = 'http://www.google.com/?=98';
 
     var options = {
 
