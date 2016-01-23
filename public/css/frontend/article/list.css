@@ -4,6 +4,8 @@
 .item{
     margin-bottom: 5%;
     overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
 }
 .title{
     margin-top: 3%;
@@ -12,7 +14,7 @@
 }
 .list-pics{
     height: 207px;
-    max-width: 345px;
+    max-width: 330px;
     overflow: hidden;
     border-radius: 7%;
 }
