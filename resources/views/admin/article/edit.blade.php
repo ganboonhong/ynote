@@ -75,7 +75,37 @@
             </div>
 
             <table style="width:30%">
+                <tr>
+                    <td>Visible:</td>
+                </tr>
 
+                {{--<tr>
+                    <td>Chinese Version:</td>
+                    <td>
+                        <label for="version_cht_yes">Yes</label>
+                        <input name="version_cht" id="version_cht_yes" type="radio" value="Y"
+                               @if($article->version_cht == 'Y') checked @endif>
+                    </td>
+                    <td>
+                        <label for="version_cht_no">No</label>
+                        <input name="version_cht" id="version_cht_no" type="radio" value="N"
+                               @if($article->version_cht == 'N') checked @endif>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>English Version:</td>
+                    <td>
+                        <label for="version_en_yes">Yes</label>
+                        <input name="version_en" id="version_en_yes" type="radio" value="Y"
+                               @if($article->version_en == 'Y') checked @endif>
+                    </td>
+                    <td>
+                        <label for="version_en_no">No</label>
+                        <input name="version_en" id="version_en_no" type="radio" value="N"
+                               @if($article->version_en == 'N') checked @endif>
+                    </td>
+                </tr>--}}
 
             </table>
 
