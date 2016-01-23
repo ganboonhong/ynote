@@ -7,14 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta property="og:site_name" content="Scotch">
-    <meta property="og:url" content="https://scotch.io">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Scotch Web Development">
-    <meta property="og:description" content="Scotch is a web development blog discussing all things programming, development, web, and life.">
-    <meta property="og:image" content="https://scotch.io/wp-content/themes/scotch/img/scotch-home.jpg">
-    <meta property="fb:app_id" content="1389892087910588">
-    <meta property="fb:admins" content="579622216,709634581">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="text/html" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link href="http://i.cdn.turner.com/cnn/.e/img/3.0/global/misc/apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/>
+    <title>CNN - Breaking News, U.S., World, Weather, Entertainment & Video News</title>
+    <meta content="intl_homepage" name="section">
+    <meta content="2014-02-24T14:45:54Z" property="og:pubdate">
+    <meta content="2014-02-24T14:45:54Z" name="pubdate">
+    <meta content="2016-01-23T03:37:33Z" name="lastmod">
+    <meta content="http://www.cnn.com" property="og:url">
+    <meta content="CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News" property="og:title">
+    <meta content="Find the latest breaking news and information on the top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN provides special reports, video, audio, photo galleries, and interactive guides." property="og:description">
+    <meta content="Find the latest breaking news and information on the top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN provides special reports, video, audio, photo galleries, and interactive guides." name="description">
+    <meta content="breaking news, news online, U.S. news, world news, developing story, news video, CNN news, weather, business, money, politics, law, technology, entertainment, education, travel, health, special reports, autos, CNN TV" name="keywords">
+    <meta content="CNN" property="og:site_name">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="website" property="og:type">
+    <meta property="vr:canonical" content="http://edition.cnn.com">
+    <meta content="80401312489" property="fb:app_id">
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {!! HTML::style('css/frontend/general.css') !!}
