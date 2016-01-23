@@ -6,7 +6,7 @@
 
 @section('content')
 
-        <div class="col-md-10 col-sm-12 col-xs-12 list-wrapper">
+        <div class="col-md-9 col-sm-12 col-xs-12 list-wrapper">
             <div class="list-item-container">
                 @foreach($articles as $article)
                     <div class="col-md-4 col-sm-5 col-xs-6 item">
