@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\Console\Tests\Input\ArgvInputTest;
 
 use Validator;
@@ -37,6 +38,7 @@ class ArticleController extends Controller implements AdminListInterface
     private $article_index_url;
     private $article_amount;
     private $total;
+    private $routeParameters;
 
     /**
      * Using service container in constructor to instantiate a class
@@ -45,6 +47,9 @@ class ArticleController extends Controller implements AdminListInterface
      */
     public function __construct(Article $article)
     {
+        $this->routeParamters = Route::current()->parameters();
+        Log::info($this->routeParamters['user_id']);
+
         $this->article = $article;
         $this->user = Auth::user();
         $this->blog = AdminFunctionType::where('code', 'blog')->select('admin_function_type_id')->first();
