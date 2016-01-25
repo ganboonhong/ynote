@@ -120,12 +120,7 @@
     var url = window.location.href;
 
     var options = {
-
-        twitter: {
-            text: 'Check out this awesome jQuery Social Buttons Plugin! ',
-            via: 'Tutorialzine'
-        },
-
+        twitter: true,
         facebook : true,
         googlePlus : true
     };
