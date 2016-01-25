@@ -38,7 +38,7 @@ class ArticleController extends Controller implements AdminListInterface
     private $article_index_url;
     private $article_amount;
     private $total;
-    private $routeParameters;
+    private $route_parameter;
 
     /**
      * Using service container in constructor to instantiate a class
@@ -47,25 +47,27 @@ class ArticleController extends Controller implements AdminListInterface
      */
     public function __construct(Article $article)
     {
-        $this->routeParamters = Route::current()->parameters();
-        Log::info($this->routeParamters['user_id']);
-
         $this->article = $article;
-        $this->user = Auth::user();
         $this->blog = AdminFunctionType::where('code', 'blog')->select('admin_function_type_id')->first();
         $this->destinationPath = 'uploads';
+
         if( Auth::user() != ""){
-
-            $this->categories = $this->user->categories()->orderBy('name')->get();
-            $this->article_index_url = 'admin/article';
-
-            foreach( $this->categories as $category){
-                $this->article_amount[$category->category_id] = $category->articles()->count();
-                $this->total += $category->articles()->count();
-            }
-
-            $this->article_amount['total'] = $this->total;
+            $this->user = Auth::user();
+        }else{
+            $this->route_parameter = Route::current()->parameters();
+            $this->user = User::findOrFail($this->route_parameter['user_id']);
         }
+
+        $this->categories = $this->user->categories()->orderBy('name')->get();
+        $this->article_index_url = 'admin/article';
+
+        foreach( $this->categories as $category){
+            $this->article_amount[$category->category_id] = $category->articles()->count();
+            $this->total += $category->articles()->count();
+        }
+
+        $this->article_amount['total'] = $this->total;
+
     }
 
     /**
@@ -146,20 +148,16 @@ class ArticleController extends Controller implements AdminListInterface
             ->orderBy('sort', 'desc')
             ->findOrFail($id);
 
-        $this->categories = $user->categories()->orderBy('name')->get();
-
-        foreach( $this->categories as $category){
-            $this->article_amount[$category->category_id] = $category->articles()->count();
-            $this->total += $category->articles()->count();
-        }
-        $this->article_amount['total'] = $this->total;
-
         $selected_category = Category::findOrFail($category_id);
         $categories = $this->categories;
-
         $article_amount = $this->article_amount;
 
-        return view('frontend.article.detail', compact('article', 'categories', 'selected_category', 'user', 'article_amount'));
+        return view('frontend.article.detail', compact(
+            'article',
+            'categories',
+            'selected_category',
+            'user',
+            'article_amount'));
     }
 
     /**
@@ -173,7 +171,6 @@ class ArticleController extends Controller implements AdminListInterface
         $article = $this->article->find($id);
         $categories = $this->user->categories()->get();
         $function_types = AdminFunctionType::all();
-
 
         return view('admin.article.edit', compact('article', 'categories', 'function_types'));
     }
@@ -210,7 +207,7 @@ class ArticleController extends Controller implements AdminListInterface
 
         $input['user_id'] = Auth::user()->user_id;
         $this->article->where('article_id', $id)->update($input);
-        
+
         return Redirect::to($this->article_index_url);
     }
 
@@ -245,14 +242,6 @@ class ArticleController extends Controller implements AdminListInterface
             ->orderBy('sort', 'desc')
             ->get();
 
-        $this->categories = $user->categories()->orderBy('name')->get();
-
-        foreach( $this->categories as $category){
-            $this->article_amount[$category->category_id] = $category->articles()->count();
-            $this->total += $category->articles()->count();
-        }
-        $this->article_amount['total'] = $this->total;
-
         $categories = $this->categories;
         $article_amount = $this->article_amount;
 
@@ -268,14 +257,6 @@ class ArticleController extends Controller implements AdminListInterface
             ->where('category_id', $id)
             ->orderBy('sort', 'desc')
             ->get();
-
-        $this->categories = $user->categories()->orderBy('name')->get();
-
-        foreach( $this->categories as $category){
-            $this->article_amount[$category->category_id] = $category->articles()->count();
-            $this->total += $category->articles()->count();
-        }
-        $this->article_amount['total'] = $this->total;
 
         $selected_category = Category::findOrFail($id);
         $categories =  $user->categories()->orderBy('name')->get();
