@@ -10,7 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+View::addExtension('html', 'php');
+Route::get('/api/list', "ApiController@getList");
 Route::get('/', 'Auth\AuthController@getLogin');
 /*Route::get('/', function(){
     return view('test');

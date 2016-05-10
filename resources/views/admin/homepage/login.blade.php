@@ -8,9 +8,12 @@
     true    => https
     false   => http
     --}}
-    {!! HTML::style('css/app.css', array(), true) !!}
+    <!-- {!! HTML::style('css/app.css', array(), true) !!} -->
+    <style src="css/app.css"></style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    {!! HTML::script('js/_general_js.js', array(), true) !!}
+    <!-- {!! HTML::script('js/_general_js.js', array(), true) !!} -->
+    <script src="../js/_general_js.js"></script>
 
 
     <style>
