@@ -75,12 +75,12 @@ class ArticleController extends Controller implements AdminListInterface
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $articles = $this->user->articles()->orderBy('sort', 'desc')->get();
         $user = $this->user;
-
-        // return response()->json($articles);
+        
+        if($request->ajax()) return response()->json($articles);
 
         return view('admin.article.list', compact('articles', 'user'));
     }

@@ -30,9 +30,13 @@ class CategoryController extends Controller implements AdminListInterface
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = $this->user->categories()->get();
+
+        // \Debugbar::info(json_encode($categories));
+
+        if($request->ajax()) return response()->json($categories);
 
         return view('admin.category.list', compact('categories'));
     }

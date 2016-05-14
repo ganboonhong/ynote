@@ -1,10 +1,9 @@
 import $ from "jQuery";
+import {Link} from 'react-router';
 
 var React = require('react');
 
-var Star = require("./Star");
-
-var Hello = React.createClass({
+var BlogPage = React.createClass({
 
     getInitialState() {
         return {
@@ -13,25 +12,20 @@ var Hello = React.createClass({
     },
     componentDidMount: function() {
        var obj = this;
-       var test = '';
-        this.reqHandle = $.getJSON("http://y-note.local/admin/article/", function (data) {
-            console.log(data);
+        $.getJSON("admin/category/", function (data) {
           obj.setState({list: data});
         });
     },
 
 
     render() {
-        console.warn("我在 home!");
         return (
             <div>
-                哈囉!
-                <Star />
-                <a href="/#/about">link to about</a>
+                <Link to="/about">link to about</Link>
                 {this.state.list.map(function(msg, i) {
                     return (
                         <div key={i}>
-                            {msg.title} <br/>
+                            {msg.name} <br/>
                             {msg.updated_at} <hr/>
                         </div>
                     );
@@ -42,4 +36,4 @@ var Hello = React.createClass({
 
 });
 
-module.exports = Hello;
+module.exports = BlogPage;

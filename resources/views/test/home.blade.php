@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>React HMR example</title>
+    <title>Articles</title>
   </head>
   <body>
     <div id="container"></div>
