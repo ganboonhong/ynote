@@ -23,8 +23,20 @@ var BlogPage = React.createClass({
         return (
             <div>
                 哈囉!
+
+                    <div class="">
+                    <div class="col-md-3 col-sm-2 col-xs-12 author">
+                        <div class="category-wrapper">
+                            <BlogNavBar />
+                            <span class="socialShare"></span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
                 <Star />
-                <BlogNavBar />
                 <BlogContainer />
 
                 <Link to="/about">link to about</Link>
