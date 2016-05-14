@@ -18,7 +18,7 @@ class ApiController extends Controller
             ],
             [
                 "name" => "Jacken",
-                "content" => "I love Management."
+                "content" => "I love Managementxx."
             ],
         ];
 

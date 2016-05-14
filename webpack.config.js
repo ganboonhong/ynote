@@ -3,13 +3,11 @@ var path = require('path');
 
 module.exports = {
     entry: [
-        "./resources/assets/javascripts/app.js",
-        "webpack-dev-server/client?http://localhost:8080",
-        "webpack/hot/dev-server"
+        "./resources/assets/javascripts/app.js"
     ],
     output: {
         path: __dirname,
-        filename: "bundle.js",
+        filename: "./public/js/bundle.js",
     },
     module: {
         loaders: [

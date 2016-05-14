@@ -80,6 +80,8 @@ class ArticleController extends Controller implements AdminListInterface
         $articles = $this->user->articles()->orderBy('sort', 'desc')->get();
         $user = $this->user;
 
+        // return response()->json($articles);
+
         return view('admin.article.list', compact('articles', 'user'));
     }
 

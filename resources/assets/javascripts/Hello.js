@@ -14,7 +14,8 @@ var Hello = React.createClass({
     componentDidMount: function() {
        var obj = this;
        var test = '';
-        this.reqHandle = $.getJSON("localhost:8000/api/list", function (data) {
+        this.reqHandle = $.getJSON("http://y-note.local/admin/article/", function (data) {
+            console.log(data);
           obj.setState({list: data});
         });
     },
@@ -30,8 +31,8 @@ var Hello = React.createClass({
                 {this.state.list.map(function(msg, i) {
                     return (
                         <div key={i}>
-                            {msg.name} <br/>
-                            {msg.content} <hr/>
+                            {msg.title} <br/>
+                            {msg.updated_at} <hr/>
                         </div>
                     );
                 })}
