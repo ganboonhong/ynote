@@ -4,9 +4,9 @@ var BlogNavBarItem = React.createClass({
         render() {
             var message = this.props.message;
             return (
-                <a>
+                <a >
                     <li className="category">
-                            <span className="">
+                            <span>
                                 {message.name}
                             </span>
                     </li>

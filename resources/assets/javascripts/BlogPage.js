@@ -7,34 +7,17 @@ var BlogContainer = require('./BlogContainer');
 var Star          = require("./Star");
 
 var BlogPage = React.createClass({
-
-    getInitialState() {
-        return {
-            list: []
-        };
-    },
-    componentDidMount: function() {
-       var obj = this;
-        $.getJSON("admin/article/", function (data) {
-          obj.setState({list: data});
-        });
-    },
     render() {
         return (
             <div>
-                哈囉!
-
-                    <div class="">
-                    <div class="col-md-3 col-sm-2 col-xs-12 author">
-                        <div class="category-wrapper">
+                <div>
+                    <div className="col-md-3 col-sm-2 col-xs-12 author">
+                        <div className="category-wrapper">
                             <BlogNavBar />
-                            <span class="socialShare"></span>
-
+                            <span className="socialShare"></span>
                         </div>
                     </div>
-
                 </div>
-
 
                 <Star />
                 <BlogContainer />

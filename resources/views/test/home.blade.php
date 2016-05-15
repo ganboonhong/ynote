@@ -51,3 +51,22 @@
     <script src="../js/bundle.js"></script>
   </body>
 </html>
+
+<script>
+    $(function(){
+        focus_on_first_input();
+
+        $( document ).tooltip();
+    })
+
+
+    var url = window.location.href;
+
+    var options = {
+        twitter: true,
+        facebook : true,
+        googlePlus : true
+    };
+
+    $('.socialShare').shareButtons(url, options);
+</script>
