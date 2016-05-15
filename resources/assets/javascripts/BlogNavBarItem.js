@@ -4,7 +4,7 @@ var BlogNavBarItem = React.createClass({
         render() {
             var message = this.props.message;
             return (
-                <a >
+                <a href={'/' + message.user_id + '/article-category/' + message.category_id}>
                     <li className="category">
                             <span>
                                 {message.name}

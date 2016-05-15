@@ -233,7 +233,7 @@ class ArticleController extends Controller implements AdminListInterface
         return Redirect::to($this->article_index_url);
     }
 
-    public function itemList($user_id)
+    public function itemList(Request $request, $user_id)
     {
         $user = User::find($user_id);
 
@@ -246,6 +246,16 @@ class ArticleController extends Controller implements AdminListInterface
 
         $categories = $this->categories;
         $article_amount = $this->article_amount;
+
+        // \Debugbar::info($request);
+        $category_arg       = array('categories'     => $categories->toArray());
+        $user_arg           = array('user'           => $user->toArray());
+        $article_amount_arg = array('article_amount' => $article_amount);
+        $categories_return  = array_merge($category_arg, $user_arg, $article_amount_arg);
+
+        if($request->input('isNavBar')) return response()->json($categories_return);
+
+        if($request->input('isBlogContent')) return response()->json($articles);
 
         return view('frontend.article.list', compact('articles', 'categories', 'user', 'article_amount'));
     }

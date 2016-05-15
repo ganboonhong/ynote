@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63ac810c41dc33e0f17b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3d76d8abed9b5b8562f9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32689,20 +32689,7 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'div',
-	                    { className: 'col-md-3 col-sm-2 col-xs-12 author' },
-	                    React.createElement(
-	                        'div',
-	                        { className: 'category-wrapper' },
-	                        React.createElement(BlogNavBar, null),
-	                        React.createElement('span', { className: 'socialShare' })
-	                    )
-	                )
-	            ),
+	            React.createElement(BlogNavBar, null),
 	            React.createElement(Star, null),
 	            React.createElement(BlogContainer, null),
 	            React.createElement(
@@ -32711,13 +32698,9 @@
 	                'link to about'
 	            ),
 	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/blog_nav_bar' },
-	                    'nav bar'
-	                )
+	                _reactRouter.Link,
+	                { to: '/blog_nav_bar' },
+	                'nav bar'
 	            )
 	        );
 	    }
@@ -42630,6 +42613,8 @@
 
 	var React = __webpack_require__(4);
 	var BlogNavBarItem = __webpack_require__(373);
+	var article_amount;
+	var total;
 
 	function getBlogNavBarItem(message) {
 	    return React.createElement(BlogNavBarItem, {
@@ -42642,21 +42627,45 @@
 	    displayName: 'BlogPage',
 	    getInitialState: function getInitialState() {
 	        return {
-	            list: []
+	            list: [],
+	            user: []
 	        };
 	    },
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        _jQuery2.default.getJSON("admin/category/", function (data) {
-	            obj.setState({ list: data });
+	        _jQuery2.default.getJSON("2/article/", { isNavBar: true }, function (data) {
+	            article_amount = data.article_amount;
+	            obj.setState({ list: data.categories });
+	            obj.setState({ user: data.user });
 	        });
 	    },
 	    render: function render() {
 	        var blogNavBarItem = this.state.list.map(getBlogNavBarItem);
+	        var user = this.state.user;
+	        var pic_url = '';
+	        if (article_amount) {
+	            total = article_amount.total;
+	        }
+
+	        if (user.cloudinary_api_response) {
+	            var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
+	            pic_url = cloudinary_api_response.secure_url;
+	        }
+
 	        return React.createElement(
 	            'div',
 	            { className: 'col-md-3 col-sm-2 col-xs-12 author' },
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement('img', { src: pic_url, id: 'profile-pic' })
+	            ),
+	            React.createElement(
+	                'p',
+	                { id: 'author-description' },
+	                user.description
+	            ),
 	            React.createElement(
 	                _reactRouter.Link,
 	                { to: '/about' },
@@ -42664,12 +42673,28 @@
 	            ),
 	            React.createElement(
 	                'div',
-	                null,
+	                { className: 'category-wrapper' },
 	                React.createElement(
 	                    'ul',
 	                    { style: { paddingLeft: 0 } },
+	                    React.createElement(
+	                        'a',
+	                        null,
+	                        React.createElement(
+	                            'li',
+	                            { className: 'category' },
+	                            React.createElement(
+	                                'span',
+	                                null,
+	                                'All(',
+	                                total,
+	                                ')'
+	                            )
+	                        )
+	                    ),
 	                    blogNavBarItem
-	                )
+	                ),
+	                React.createElement('span', { className: 'socialShare' })
 	            )
 	        );
 	    }
@@ -42682,7 +42707,7 @@
 /* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
 	var _index = __webpack_require__(3);
 
@@ -42707,14 +42732,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBarItem.js",
+	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBarItem.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBarItem.js",
+	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBarItem.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -42728,19 +42753,19 @@
 
 	var React = __webpack_require__(4);
 
-	var BlogNavBarItem = _wrapComponent("_component")(React.createClass({
-	    displayName: "BlogNavBarItem",
+	var BlogNavBarItem = _wrapComponent('_component')(React.createClass({
+	    displayName: 'BlogNavBarItem',
 	    render: function render() {
 	        var message = this.props.message;
 	        return React.createElement(
-	            "a",
-	            null,
+	            'a',
+	            { href: '/' + message.user_id + '/article-category/' + message.category_id },
 	            React.createElement(
-	                "li",
-	                { className: "category" },
+	                'li',
+	                { className: 'category' },
 	                React.createElement(
-	                    "span",
-	                    { className: "" },
+	                    'span',
+	                    null,
 	                    message.name
 	                )
 	            )
@@ -42817,11 +42842,10 @@
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        _jQuery2.default.getJSON("admin/article/", function (data) {
+	        _jQuery2.default.getJSON("2/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
 	        });
 	    },
-
 	    render: function render() {
 	        return React.createElement(
 	            'div',

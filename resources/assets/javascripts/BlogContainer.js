@@ -12,12 +12,16 @@ var BlogContainer = React.createClass({
     },
     componentDidMount: function() {
        var obj = this;
-        $.getJSON("admin/article/", function (data) {
-          obj.setState({list: data});
-        });
+        $.getJSON(
+            "2/article/", 
+
+            {isBlogContent: true},
+
+            function (data) {
+                obj.setState({list: data});
+            }
+        );
     },
-
-
     render() {
         return (
             <div>
