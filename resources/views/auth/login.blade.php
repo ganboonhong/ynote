@@ -4,7 +4,7 @@
     {!! csrf_field() !!}
 
     <div>
-        Email
+        Emailxx
         <input type="email" name="email" value="{{ old('email') }}">
     </div>
 

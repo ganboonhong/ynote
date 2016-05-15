@@ -9,3 +9,4 @@ public/uploads
 .idea/workspace.xml
 todo.txt
 bundle.js
+/storage/debugbar
