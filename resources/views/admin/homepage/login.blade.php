@@ -258,7 +258,7 @@
         </div>
     </div>
     <div class="posted-by">
-        Designed By(frontend_article_react branch): <a href="http://www.jquery2dotnet.com" target="_blank">Bhaumik Patel</a>
+        Designed By(master): <a href="http://www.jquery2dotnet.com" target="_blank">Bhaumik Patel</a>
         <span class="photo-credit"></span>Photo Credit: <a href="https://unsplash.com/" target="_blank">Matteo Paganelli</a>
     </div>
 </div>
