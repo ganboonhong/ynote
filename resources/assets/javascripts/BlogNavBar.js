@@ -30,7 +30,7 @@ var BlogPage = React.createClass({
         var blogNavBarItem = this.state.list.map(getBlogNavBarItem);
         return (
             <div className="col-md-3 col-sm-2 col-xs-12 author">
-                <Link to="/about">link to aboutxxtestagain</Link>                    
+                <Link to="/about">link to about</Link>                    
                     <div>
                         <ul style={{paddingLeft: 0}}>
                                 {blogNavBarItem}
