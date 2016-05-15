@@ -246,15 +246,20 @@ class ArticleController extends Controller implements AdminListInterface
 
         $categories = $this->categories;
         $article_amount = $this->article_amount;
+        $category_arg = $categories->toArray();
 
-        // \Debugbar::info($request);
-        $category_arg       = array('categories'     => $categories->toArray());
-        $user_arg           = array('user'           => $user->toArray());
+        foreach ( $category_arg as $key => $value) {
+            $category_arg[$key]['total'] = $article_amount[$value['category_id']];
+        }
+
+        // \Debugbar::info($article_amount);
+        $category_arg       = array('categories'     => $category_arg);
+        $user_arg           = array('user'           => $user);
         $article_amount_arg = array('article_amount' => $article_amount);
         $categories_return  = array_merge($category_arg, $user_arg, $article_amount_arg);
 
         if($request->input('isNavBar')) return response()->json($categories_return);
-
+        Log::info($articles->toArray());
         if($request->input('isBlogContent')) return response()->json($articles);
 
         return view('frontend.article.list', compact('articles', 'categories', 'user', 'article_amount'));

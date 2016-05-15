@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
     entry: [
-        "./resources/assets/javascripts/app.js"
+        "./resources/assets/js/app.js"
     ],
     output: {
         path: __dirname,

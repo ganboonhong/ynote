@@ -1,11 +1,10 @@
 import { render } from "react-dom";
-// import { Router, Route, IndexRoute} from "react-router";
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import React from "react";
-import TestApp from "./TestApp";
-import BlogPage from "./BlogPage";
-import About from "./About";
-import BlogNavBar from "./BlogNavBar";
+import TestApp from "./components/TestApp";
+import BlogPage from "./components/BlogPage";
+import About from "./components/About";
+import BlogNavBar from "./components/BlogNavBar";
 
 const containerEl = document.getElementById("container");
 

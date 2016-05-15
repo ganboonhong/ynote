@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3d76d8abed9b5b8562f9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "290a0ee0ed3d5f8ce104"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -635,14 +635,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/boonhong/ynote/resources/assets/javascripts/app.js",
+	  filename: "/Users/boonhong/ynote/resources/assets/js/app.js",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/boonhong/ynote/resources/assets/javascripts/app.js",
+	  filename: "/Users/boonhong/ynote/resources/assets/js/app.js",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -653,8 +653,6 @@
 	    return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
-	// import { Router, Route, IndexRoute} from "react-router";
-
 
 	var containerEl = document.getElementById("container");
 
@@ -32545,14 +32543,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/boonhong/ynote/resources/assets/javascripts/TestApp.js",
+	  filename: "/Users/boonhong/ynote/resources/assets/js/components/TestApp.js",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/boonhong/ynote/resources/assets/javascripts/TestApp.js",
+	  filename: "/Users/boonhong/ynote/resources/assets/js/components/TestApp.js",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -32659,14 +32657,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogPage.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogPage.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogPage.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogPage.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -32681,7 +32679,6 @@
 	var React = __webpack_require__(4);
 	var BlogNavBar = __webpack_require__(372);
 	var BlogContainer = __webpack_require__(374);
-	var Star = __webpack_require__(375);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -32690,7 +32687,6 @@
 	            'div',
 	            null,
 	            React.createElement(BlogNavBar, null),
-	            React.createElement(Star, null),
 	            React.createElement(BlogContainer, null),
 	            React.createElement(
 	                _reactRouter.Link,
@@ -42592,14 +42588,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBar.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogNavBar.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBar.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogNavBar.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -42616,10 +42612,10 @@
 	var article_amount;
 	var total;
 
-	function getBlogNavBarItem(message) {
+	function getBlogNavBarItem(data) {
 	    return React.createElement(BlogNavBarItem, {
-	        message: message,
-	        key: message.category_id
+	        data: data,
+	        key: data.category_id
 	    });
 	}
 
@@ -42686,9 +42682,9 @@
 	                            React.createElement(
 	                                'span',
 	                                null,
-	                                'All(',
+	                                'All ( ',
 	                                total,
-	                                ')'
+	                                ' )'
 	                            )
 	                        )
 	                    ),
@@ -42732,14 +42728,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBarItem.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogNavBarItem.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogNavBarItem.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogNavBarItem.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -42756,17 +42752,20 @@
 	var BlogNavBarItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogNavBarItem',
 	    render: function render() {
-	        var message = this.props.message;
+	        var data = this.props.data;
 	        return React.createElement(
 	            'a',
-	            { href: '/' + message.user_id + '/article-category/' + message.category_id },
+	            { href: '/' + data.user_id + '/article-category/' + data.category_id },
 	            React.createElement(
 	                'li',
 	                { className: 'category' },
 	                React.createElement(
 	                    'span',
 	                    null,
-	                    message.name
+	                    data.name,
+	                    ' ( ',
+	                    data.total,
+	                    ' )'
 	                )
 	            )
 	        );
@@ -42811,14 +42810,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogContainer.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogContainer.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/javascripts/BlogContainer.js',
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/BlogContainer.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -42831,6 +42830,14 @@
 	}
 
 	var React = __webpack_require__(4);
+	var Blog = __webpack_require__(375);
+
+	function getBlog(data) {
+	    return React.createElement(Blog, {
+	        data: data,
+	        key: data.article_id
+	    });
+	}
 
 	var BlogContainer = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogContainer',
@@ -42843,25 +42850,16 @@
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
 	        _jQuery2.default.getJSON("2/article/", { isBlogContent: true }, function (data) {
+	            console.log(data);
 	            obj.setState({ list: data });
 	        });
 	    },
 	    render: function render() {
+	        var blog = this.state.list.map(getBlog);
 	        return React.createElement(
 	            'div',
-	            null,
-	            this.state.list.map(function (msg, i) {
-	                return React.createElement(
-	                    'div',
-	                    { key: i },
-	                    msg.title,
-	                    ' ',
-	                    React.createElement('br', null),
-	                    msg.updated_at,
-	                    ' ',
-	                    React.createElement('hr', null)
-	                );
-	            })
+	            { className: 'col-md-9 col-sm-12 col-xs-12 list-wrapper' },
+	            blog
 	        );
 	    }
 	}));
@@ -42898,14 +42896,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/javascripts/Star.js",
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Blog.js",
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/javascripts/Star.js",
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Blog.js",
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -42918,19 +42916,44 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Star = _wrapComponent("_component")(React.createClass({
-	    displayName: "Star",
 
+	var Blog = _wrapComponent("_component")(React.createClass({
+	    displayName: "Blog",
 	    render: function render() {
+	        var data = this.props.data;
+	        var pic_url;
+
+	        if (data.cloudinary_api_response) {
+	            var cloudinary_api_response = JSON.parse(data.cloudinary_api_response);
+	            pic_url = cloudinary_api_response.secure_url;
+	        }
+
 	        return React.createElement(
 	            "div",
-	            null,
-	            "*********"
+	            { className: "list-item-container" },
+	            React.createElement(
+	                "div",
+	                { className: "col-md-4 col-sm-5 col-xs-12 item" },
+	                React.createElement(
+	                    "a",
+	                    null,
+	                    React.createElement("img", { src: pic_url, className: "list-pics" })
+	                ),
+	                React.createElement(
+	                    "a",
+	                    null,
+	                    React.createElement(
+	                        "p",
+	                        { className: "title" },
+	                        data.title
+	                    )
+	                )
+	            )
 	        );
 	    }
 	}));
 
-	module.exports = Star;
+	module.exports = Blog;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
@@ -42964,14 +42987,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/javascripts/About.js",
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/About.js",
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/javascripts/About.js",
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/About.js",
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]

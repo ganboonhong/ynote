@@ -6,11 +6,11 @@ var BlogNavBarItem = require('./BlogNavBarItem');
 var article_amount;
 var total;
 
-function getBlogNavBarItem(message){
+function getBlogNavBarItem(data){
     return(
         <BlogNavBarItem
-            message={message}
-            key={message.category_id}
+            data={data}
+            key={data.category_id}
         />
     )
 }
@@ -68,9 +68,9 @@ var BlogPage = React.createClass({
                         <ul style={{paddingLeft: 0}}>
                                 <a>
                                     <li className="category">
-                                            <span>
-                                                All ( {total} )
-                                            </span>
+                                        <span>
+                                            All ( {total} )
+                                        </span>
                                     </li>
                                 </a>
                                 {blogNavBarItem}

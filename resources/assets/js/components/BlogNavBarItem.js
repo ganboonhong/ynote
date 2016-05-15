@@ -2,13 +2,13 @@ var React = require('react');
 
 var BlogNavBarItem = React.createClass({
         render() {
-            var message = this.props.message;
+            var data = this.props.data;
             return (
-                <a href={'/' + message.user_id + '/article-category/' + message.category_id}>
+                <a href={'/' + data.user_id + '/article-category/' + data.category_id}>
                     <li className="category">
-                            <span>
-                                {message.name}
-                            </span>
+                        <span>
+                            {data.name} ( {data.total} )
+                        </span>
                     </li>
                 </a>
             );
