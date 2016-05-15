@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "645629a53a79dcba8405"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8a77cb5bb9e65a4bfdaa"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -42660,7 +42660,7 @@
 	            React.createElement(
 	                _reactRouter.Link,
 	                { to: '/about' },
-	                'link to about'
+	                'link to aboutxx'
 	            ),
 	            React.createElement(
 	                'div',
