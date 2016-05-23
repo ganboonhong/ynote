@@ -2,17 +2,15 @@ import $ from "jQuery";
 import {Link} from 'react-router';
 
 var React         = require('react');
-var BlogNavBar    = require('./BlogNavBar');
+var Nav    = require('./Nav');
 var BlogContainer = require('./BlogContainer');
 
 var BlogPage = React.createClass({
     render() {
         return (
             <div>
-                <BlogNavBar />
+                <Nav />
                 <BlogContainer />
-                <Link to="/about">link to about</Link>
-                <Link to="/blog_nav_bar">nav bar</Link>
             </div>
         );
     }

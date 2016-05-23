@@ -1,6 +1,6 @@
 var React = require('react');
 
-var BlogNavBarItem = React.createClass({
+var NavItem = React.createClass({
         render() {
             var data = this.props.data;
             return (
@@ -15,4 +15,4 @@ var BlogNavBarItem = React.createClass({
         }
     });
 
-module.exports = BlogNavBarItem;
+module.exports = NavItem;

@@ -21,14 +21,16 @@ var BlogContainer = React.createClass({
         };
     },
     componentDidMount: function() {
-       var obj = this;
+        var obj       = this;
+        var pathArray = window.location.pathname.split('/');
+        var id        = pathArray[2];
+        
         $.getJSON(
-            "2/article/", 
+            "/"+id+"/article/", 
 
             {isBlogContent: true},
 
             function (data) {
-                console.log(data);
                 obj.setState({list: data});
             }
         );

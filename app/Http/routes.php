@@ -17,7 +17,7 @@ Route::get('/', 'Auth\AuthController@getLogin');
     return view('test');
 });*/
 
-Route::get('/blog/', 'BlogController@index');
+Route::get('/blog/2', 'BlogController@index');
 
 Route::get('article/{id}', 'ArticleController@show');
 

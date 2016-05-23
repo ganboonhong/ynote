@@ -5,7 +5,7 @@ var About = React.createClass({
         return (
             <div>
                 About me
-                <Link to="/blog">Blog</Link>
+                <Link to="/blog/2">Blog</Link>
             </div>
         );
     }
