@@ -1,15 +1,11 @@
-import { render } from "react-dom";
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 var React       = require("react");
+var ReactDOM    = require("react-dom");
 var TestApp     = require("./components/TestApp");
 var BlogPage    = require("./components/BlogPage");
 var About       = require("./components/About");
 var Nav         = require("./components/Nav");
 var WebAPIUtils = require("./utils/WebAPIUtils");
-
-const containerEl = document.getElementById("container");
-var pathArray     = window.location.pathname.split('/');
-var id            = pathArray[2];
 
 WebAPIUtils.init();
 
@@ -25,7 +21,8 @@ var App = React.createClass({
 
 });
 
-render(
+ReactDOM.render(
+
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={BlogPage} />
@@ -34,5 +31,7 @@ render(
         <Route path="/blog_nav_bar" component={Nav} />
     </Route>
   </Router>,
-  containerEl
+
+  document.getElementById("container")
+  
 );

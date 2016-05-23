@@ -1,8 +1,5 @@
-import $ from "jQuery";
-import {Link} from 'react-router';
-
 var React         = require('react');
-var Nav    = require('./Nav');
+var Nav           = require('./Nav');
 var BlogContainer = require('./BlogContainer');
 
 var BlogPage = React.createClass({

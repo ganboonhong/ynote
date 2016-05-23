@@ -1,17 +1,22 @@
 var React = require('react');
+var NavActionCreators = require('../actions/NavActionCreators');
 
 var NavItem = React.createClass({
         render() {
             var data = this.props.data;
             return (
-                <a href={'/' + data.user_id + '/article-category/' + data.category_id}>
-                    <li className="category">
+                <a>
+                    <li className="category" onClick={this._onClick} >
                         <span>
                             {data.name} ( {data.total} )
                         </span>
                     </li>
                 </a>
             );
+        },
+
+        _onClick(){
+            NavActionCreators.clickCategory(this.props.data.category_id);
         }
     });
 

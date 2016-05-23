@@ -1,17 +1,17 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 module.exports = {
-    clickNavItem: function(categoryID){
+    clickCategory: function(categoryID){
         AppDispatcher.dispatch({
-            type: 'category',
+            type: 'clickCategory',
             categoryID: categoryID
         });
     },
     receiveAll: function(categories){
-        console.log("NavActionCreators");
         AppDispatcher.dispatch({
             type: 'init_category',
             categories: categories
         });
-    }
+    },
+
 };

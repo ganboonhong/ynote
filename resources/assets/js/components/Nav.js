@@ -1,9 +1,10 @@
 import $ from "jQuery";
 import {Link} from 'react-router';
 
-var React = require('react');
-var NavItem = require('./NavItem');
-var NavStore = require('../stores/NavStore');
+var React            = require('react');
+var NavItem          = require('./NavItem');
+var NavStore         = require('../stores/NavStore');
+var NavActionCreator = require('../actions/NavActionCreators');
 var article_amount;
 var total;
 
@@ -12,33 +13,31 @@ function getNavItem(data){
         <NavItem
             data={data}
             key={data.category_id}
+            handleClick={BlogPage._onClick}
         />
     )
 }
 
 function getStateFromStores(){
-    console.log('getStateFromStores');
-    console.log(NavStore.getNavs());
-        // return {
-        //     list: NavStore.getNavs(),
-        //     user: NavStore.getUser()
-        // }
-    }
+
+}
 
 var BlogPage = React.createClass({
 
     getInitialState() {
-        console.log('getInitialState');
         return {
             list:  []   ,
             user:  [],
         };
     },
     componentDidMount: function() {
-       var obj = this;
+        var obj       = this;
+        var pathArray = window.location.pathname.split('/');
+        var id        = pathArray[2];
+
         $.getJSON(
 
-            "/2/article/",
+            "/" + id + "/article/",
 
             { isNavBar: true },
 
@@ -52,6 +51,7 @@ var BlogPage = React.createClass({
         NavStore.addChangeListener(this._onChange);
 
     },
+
     render() {
         var blogNavBarItem = this.state.list.map(getNavItem);
         var user = this.state.user;
@@ -97,7 +97,7 @@ var BlogPage = React.createClass({
 
     _onChange() {
         console.log("Nav _onChange");
-    }
+    },
 
 });
 
