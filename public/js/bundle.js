@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63a256cab4987222c242"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ef41280dc30e603689f5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -640,9 +640,9 @@
 	var ReactDOM = __webpack_require__(234);
 	var TestApp = __webpack_require__(369);
 	var BlogPage = __webpack_require__(370);
-	var About = __webpack_require__(383);
+	var About = __webpack_require__(385);
 	var Nav = __webpack_require__(371);
-	var WebAPIUtils = __webpack_require__(384);
+	var WebAPIUtils = __webpack_require__(386);
 
 	WebAPIUtils.init();
 
@@ -32662,7 +32662,7 @@
 
 	var React = __webpack_require__(4);
 	var Nav = __webpack_require__(371);
-	var BlogContainer = __webpack_require__(381);
+	var BlogContainer = __webpack_require__(382);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -32736,19 +32736,21 @@
 	var React = __webpack_require__(4);
 	var NavItem = __webpack_require__(373);
 	var NavStore = __webpack_require__(379);
-	var NavActionCreator = __webpack_require__(374);
+	var NavActionCreator = __webpack_require__(381);
 	var article_amount;
 	var total;
 
 	function getNavItem(data) {
 	    return React.createElement(NavItem, {
 	        data: data,
-	        key: data.category_id,
-	        handleClick: BlogPage._onClick
+	        key: data.category_id
 	    });
 	}
 
-	function getStateFromStores() {}
+	function getStateFromStores() {
+	    // var test = [NavStore.getCurrentCategory()];
+	    // return {list: test};
+	}
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -32774,6 +32776,7 @@
 	    },
 
 	    render: function render() {
+
 	        var blogNavBarItem = this.state.list.map(getNavItem);
 	        var user = this.state.user;
 	        var pic_url = '';
@@ -32833,6 +32836,7 @@
 	    },
 	    _onChange: function _onChange() {
 	        console.log("Nav _onChange");
+	        this.setState(getStateFromStores());
 	    }
 	}));
 
@@ -42736,7 +42740,7 @@
 	}
 
 	var React = __webpack_require__(4);
-	var NavActionCreators = __webpack_require__(374);
+	var BlogActionCreators = __webpack_require__(374);
 
 	var NavItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'NavItem',
@@ -42760,7 +42764,7 @@
 	        );
 	    },
 	    _onClick: function _onClick() {
-	        NavActionCreators.clickCategory(this.props.data.category_id);
+	        BlogActionCreators.clickCategory(this.props.data.category_id);
 	    }
 	}));
 
@@ -42776,19 +42780,17 @@
 	var AppDispatcher = __webpack_require__(375);
 
 	module.exports = {
+	    receiveAll: function receiveAll() {
+	        AppDispatcher.dispatch({
+	            type: 'init_blog'
+	        });
+	    },
 	    clickCategory: function clickCategory(categoryID) {
 	        AppDispatcher.dispatch({
 	            type: 'clickCategory',
 	            categoryID: categoryID
 	        });
-	    },
-	    receiveAll: function receiveAll(categories) {
-	        AppDispatcher.dispatch({
-	            type: 'init_category',
-	            categories: categories
-	        });
 	    }
-
 	};
 
 /***/ },
@@ -43142,6 +43144,7 @@
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var _categories = [];
+	var current_category;
 	var _user;
 
 	var NavStore = assign({}, EventEmitter.prototype, {
@@ -43167,12 +43170,8 @@
 	        this.on(CHANGE_EVENT, callback);
 	    },
 
-	    getNavs: function getNavs() {
-	        return _categories;
-	    },
-
-	    getUser: function getUser() {
-	        return _user;
+	    getCurrentCategory: function getCurrentCategory() {
+	        return current_category;
 	    }
 
 	});
@@ -43182,15 +43181,14 @@
 
 	        case 'init_category':
 	            NavStore.init();
-	            NavStore.emitChange();
-	            break;
-
-	        case 'clickCategory':
-	            // console.log('clickCategory');
-	            // console.log(action.categoryID);
-	            console.log(_categories[action.categoryID]);
 	            // NavStore.emitChange();
 	            break;
+
+	        // case 'clickCategory':
+	        // current_category = _categories[action.categoryID];
+	        // NavStore.emitChange();
+	        // break;
+
 	        default:
 	        // do nothing
 	    }
@@ -43506,6 +43504,29 @@
 /* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(375);
+
+	module.exports = {
+	    clickCategory: function clickCategory(categoryID) {
+	        AppDispatcher.dispatch({
+	            type: 'clickCategory',
+	            categoryID: categoryID
+	        });
+	    },
+	    receiveAll: function receiveAll() {
+	        AppDispatcher.dispatch({
+	            type: 'init_category'
+	        });
+	    }
+
+	};
+
+/***/ },
+/* 382 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
 	var _index = __webpack_require__(3);
@@ -43557,7 +43578,8 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Blog = __webpack_require__(382);
+	var Blog = __webpack_require__(383);
+	var BlogStore = __webpack_require__(384);
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -43582,7 +43604,10 @@
 	        _jQuery2.default.getJSON("/" + id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
 	        });
+
+	        BlogStore.addChangeListener(this._onChange);
 	    },
+
 	    render: function render() {
 	        var blog = this.state.list.map(getBlog);
 	        return React.createElement(
@@ -43590,6 +43615,9 @@
 	            { className: 'col-md-9 col-sm-12 col-xs-12 list-wrapper' },
 	            blog
 	        );
+	    },
+	    _onChange: function _onChange() {
+	        console.log('BlogContainer::_onChange');
 	    }
 	}));
 
@@ -43597,7 +43625,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 382 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -43686,7 +43714,73 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 383 */
+/* 384 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(375);
+	var EventEmitter = __webpack_require__(380).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+	var _blogs = [];
+	var _current_blog;
+
+	var BlogStore = assign({}, EventEmitter.prototype, {
+	    init: function init(data) {
+
+	        var pathArray = window.location.pathname.split('/');
+	        var id = pathArray[2];
+
+	        $.getJSON("/" + id + "/article/", { isBlogContent: true }, function (data) {
+	            // _blogs = data;
+	            for (var key in data) {
+	                var obj = data[key];
+	                _blogs[obj.category_id] = obj;
+	            }
+	        });
+	    },
+
+	    emitChange: function emitChange() {
+	        this.emit(CHANGE_EVENT);
+	    },
+
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(CHANGE_EVENT, callback);
+	    },
+
+	    getCurrentBlog: function getCurrentBlog() {
+	        return _current_blog;
+	    }
+
+	});
+
+	BlogStore.dispatchToken = AppDispatcher.register(function (action) {
+	    switch (action.type) {
+
+	        case 'init_blog':
+	            BlogStore.init();
+	            break;
+
+	        case 'clickCategory':
+	            _current_blog = _blogs[action.categoryID];
+	            console.log(_blogs);
+	            // console.log(_blogs);
+	            // console.log(action.categoryID);
+	            console.log(_current_blog);
+
+	            BlogStore.emitChange();
+	            break;
+
+	        default:
+	        // do nothing
+	    }
+	});
+
+	module.exports = BlogStore;
+
+/***/ },
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -43757,16 +43851,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 384 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var NavActionCreators = __webpack_require__(374);
+	var NavActionCreators = __webpack_require__(381);
+	var BlogActionCreators = __webpack_require__(374);
 
 	module.exports = {
 	    init: function init() {
 	        NavActionCreators.receiveAll();
+	        BlogActionCreators.receiveAll();
 	    }
 	};
 

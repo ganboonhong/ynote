@@ -13,13 +13,13 @@ function getNavItem(data){
         <NavItem
             data={data}
             key={data.category_id}
-            handleClick={BlogPage._onClick}
         />
     )
 }
 
 function getStateFromStores(){
-
+    // var test = [NavStore.getCurrentCategory()];
+    // return {list: test};
 }
 
 var BlogPage = React.createClass({
@@ -53,6 +53,7 @@ var BlogPage = React.createClass({
     },
 
     render() {
+
         var blogNavBarItem = this.state.list.map(getNavItem);
         var user = this.state.user;
         var pic_url = '';
@@ -97,6 +98,7 @@ var BlogPage = React.createClass({
 
     _onChange() {
         console.log("Nav _onChange");
+        this.setState(getStateFromStores());
     },
 
 });

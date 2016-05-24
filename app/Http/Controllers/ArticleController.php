@@ -259,13 +259,13 @@ class ArticleController extends Controller implements AdminListInterface
         $categories_return  = array_merge($category_arg, $user_arg, $article_amount_arg);
 
         if($request->input('isNavBar')) return response()->json($categories_return);
-        Log::info($articles->toArray());
+
         if($request->input('isBlogContent')) return response()->json($articles);
 
         return view('frontend.article.list', compact('articles', 'categories', 'user', 'article_amount'));
     }
 
-    public function itemListWithCategory($user_id, $id)
+    public function itemListWithCategory($user_id, $id, Request $request)
     {
         $user = User::find($user_id);
 
@@ -274,6 +274,12 @@ class ArticleController extends Controller implements AdminListInterface
             ->where('category_id', $id)
             ->orderBy('sort', 'desc')
             ->get();
+
+    
+            if($request->ajax()){
+                Log::info($articles);
+                return response()->json($articles);
+            }
 
         $selected_category = Category::findOrFail($id);
         $categories =  $user->categories()->orderBy('name')->get();

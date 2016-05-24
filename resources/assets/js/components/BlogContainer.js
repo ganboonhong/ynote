@@ -1,8 +1,9 @@
 import $ from "jQuery";
 import {Link} from 'react-router';
 
-var React = require('react');
-var Blog = require('./Blog');
+var React     = require('react');
+var Blog      = require('./Blog');
+var BlogStore = require('../stores/BlogStore');
 
 function getBlog(data){
     return(
@@ -24,7 +25,7 @@ var BlogContainer = React.createClass({
         var obj       = this;
         var pathArray = window.location.pathname.split('/');
         var id        = pathArray[2];
-        
+
         $.getJSON(
             "/"+id+"/article/", 
 
@@ -34,7 +35,10 @@ var BlogContainer = React.createClass({
                 obj.setState({list: data});
             }
         );
+        
+        BlogStore.addChangeListener(this._onChange);
     },
+
     render() {
         var blog = this.state.list.map(getBlog);        
             return (
@@ -42,6 +46,10 @@ var BlogContainer = React.createClass({
                     {blog}
                 </div>
             );       
+    },
+
+    _onChange(){
+        console.log('BlogContainer::_onChange');
     }
 
 });
