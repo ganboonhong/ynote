@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ef41280dc30e603689f5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8631350aff9b7b765d65"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32737,6 +32737,7 @@
 	var NavItem = __webpack_require__(373);
 	var NavStore = __webpack_require__(379);
 	var NavActionCreator = __webpack_require__(381);
+	var BlogActionCreators = __webpack_require__(374);
 	var article_amount;
 	var total;
 
@@ -32818,7 +32819,7 @@
 	                        null,
 	                        React.createElement(
 	                            'li',
-	                            { className: 'category' },
+	                            { className: 'category', onClick: this._onClick },
 	                            React.createElement(
 	                                'span',
 	                                null,
@@ -32833,6 +32834,9 @@
 	                React.createElement('span', { className: 'socialShare' })
 	            )
 	        );
+	    },
+	    _onClick: function _onClick() {
+	        BlogActionCreators.clickCategory('all');
 	    },
 	    _onChange: function _onChange() {
 	        console.log("Nav _onChange");
@@ -43588,6 +43592,10 @@
 	    });
 	}
 
+	function getStateFromStores() {
+	    return { list: BlogStore.getCurrentBlogs() };
+	}
+
 	var BlogContainer = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogContainer',
 	    getInitialState: function getInitialState() {
@@ -43617,7 +43625,7 @@
 	        );
 	    },
 	    _onChange: function _onChange() {
-	        console.log('BlogContainer::_onChange');
+	        this.setState(getStateFromStores());
 	    }
 	}));
 
@@ -43724,7 +43732,7 @@
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var _blogs = [];
-	var _current_blog;
+	var _current_blogs = [];
 
 	var BlogStore = assign({}, EventEmitter.prototype, {
 	    init: function init(data) {
@@ -43736,7 +43744,7 @@
 	            // _blogs = data;
 	            for (var key in data) {
 	                var obj = data[key];
-	                _blogs[obj.category_id] = obj;
+	                _blogs[obj.article_id] = obj;
 	            }
 	        });
 	    },
@@ -43749,8 +43757,8 @@
 	        this.on(CHANGE_EVENT, callback);
 	    },
 
-	    getCurrentBlog: function getCurrentBlog() {
-	        return _current_blog;
+	    getCurrentBlogs: function getCurrentBlogs() {
+	        return _current_blogs;
 	    }
 
 	});
@@ -43763,11 +43771,19 @@
 	            break;
 
 	        case 'clickCategory':
-	            _current_blog = _blogs[action.categoryID];
-	            console.log(_blogs);
-	            // console.log(_blogs);
-	            // console.log(action.categoryID);
-	            console.log(_current_blog);
+	            var category_id = action.categoryID;
+	            _current_blogs = []; // clear previous blogs
+
+	            if (category_id == 'all') {
+	                _current_blogs = _blogs;
+	            } else {
+	                for (var key in _blogs) {
+	                    var temp = _blogs[key];
+	                    if (category_id == temp.category_id) {
+	                        _current_blogs[key] = temp;
+	                    }
+	                }
+	            }
 
 	            BlogStore.emitChange();
 	            break;

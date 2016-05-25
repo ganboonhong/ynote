@@ -14,6 +14,10 @@ function getBlog(data){
     )
 }
 
+function getStateFromStores(){
+    return {list: BlogStore.getCurrentBlogs()};
+}
+
 var BlogContainer = React.createClass({
 
     getInitialState() {
@@ -49,7 +53,7 @@ var BlogContainer = React.createClass({
     },
 
     _onChange(){
-        console.log('BlogContainer::_onChange');
+        this.setState(getStateFromStores());
     }
 
 });

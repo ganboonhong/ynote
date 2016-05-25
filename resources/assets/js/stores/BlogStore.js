@@ -3,7 +3,7 @@ var EventEmitter  = require('events').EventEmitter;
 var assign        = require('object-assign');
 var CHANGE_EVENT  = 'change';
 var _blogs = [];
-var _current_blog;
+var _current_blogs = [];
 
 var BlogStore = assign({}, EventEmitter.prototype, {
     init: function(data){
@@ -21,7 +21,7 @@ var BlogStore = assign({}, EventEmitter.prototype, {
                 // _blogs = data;
                 for(var key in data){
                     var obj = data[key];
-                    _blogs[obj.category_id] = obj;
+                    _blogs[obj.article_id] = obj;
                 }
             }
         );
@@ -35,8 +35,8 @@ var BlogStore = assign({}, EventEmitter.prototype, {
         this.on(CHANGE_EVENT, callback);
     },
 
-    getCurrentBlog: function(){
-        return _current_blog;
+    getCurrentBlogs: function(){
+        return _current_blogs;
     }
 
 });
@@ -49,11 +49,19 @@ BlogStore.dispatchToken = AppDispatcher.register(function(action){
         break;
 
         case 'clickCategory':
-        _current_blog = _blogs[action.categoryID];
-        console.log(_blogs);
-        // console.log(_blogs);
-        // console.log(action.categoryID);
-        console.log(_current_blog);
+        var category_id = action.categoryID;
+        _current_blogs  = []; // clear previous blogs
+
+        if( category_id == 'all'){
+            _current_blogs = _blogs;
+        }else{
+            for(var key in _blogs){
+                var temp = _blogs[key];
+                if( category_id == temp.category_id ){
+                    _current_blogs[key] = temp;
+                }
+            }
+        }
 
         BlogStore.emitChange();
         break;

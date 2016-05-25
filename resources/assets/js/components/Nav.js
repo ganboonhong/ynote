@@ -1,10 +1,11 @@
 import $ from "jQuery";
 import {Link} from 'react-router';
 
-var React            = require('react');
-var NavItem          = require('./NavItem');
-var NavStore         = require('../stores/NavStore');
-var NavActionCreator = require('../actions/NavActionCreators');
+var React              = require('react');
+var NavItem            = require('./NavItem');
+var NavStore           = require('../stores/NavStore');
+var NavActionCreator   = require('../actions/NavActionCreators');
+var BlogActionCreators = require('../actions/BlogActionCreators');
 var article_amount;
 var total;
 
@@ -81,7 +82,7 @@ var BlogPage = React.createClass({
                             <div  className="category-wrapper">
                                 <ul style={{paddingLeft: 0}}>
                                         <a>
-                                            <li className="category">
+                                            <li className="category" onClick={this._onClick}>
                                                 <span>
                                                     All ( {total} )
                                                 </span>
@@ -94,6 +95,10 @@ var BlogPage = React.createClass({
                             </div>
                     </div>
                 );
+    },
+
+    _onClick(){
+        BlogActionCreators.clickCategory('all');
     },
 
     _onChange() {

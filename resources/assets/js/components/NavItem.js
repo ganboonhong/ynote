@@ -1,4 +1,4 @@
-var React = require('react');
+var React              = require('react');
 var BlogActionCreators = require('../actions/BlogActionCreators');
 
 var NavItem = React.createClass({
