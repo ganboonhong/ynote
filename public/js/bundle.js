@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e9050c5e0e4da2983bda"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9e4cb6df42df3bcf092a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -640,9 +640,9 @@
 	var ReactDOM = __webpack_require__(234);
 	var TestApp = __webpack_require__(369);
 	var BlogPage = __webpack_require__(370);
-	var About = __webpack_require__(388);
+	var About = __webpack_require__(389);
 	var Nav = __webpack_require__(371);
-	var WebAPIUtils = __webpack_require__(389);
+	var WebAPIUtils = __webpack_require__(390);
 
 	WebAPIUtils.init();
 
@@ -43904,6 +43904,7 @@
 	var React = __webpack_require__(4);
 	var ContentStore = __webpack_require__(384);
 	var classNames = __webpack_require__(387);
+	var Paragraph = __webpack_require__(388);
 
 	function getStateFromStore() {
 	    return { contentObj: ContentStore.getContent() };
@@ -43921,13 +43922,14 @@
 	    },
 	    render: function render() {
 	        var coverClass = classNames({
-	            'cover': this.state.contentObj.content != ''
+	            'hide': this.state.contentObj.content == '',
+	            'cover': true
 	        });
 
 	        return React.createElement(
 	            'div',
 	            { className: coverClass },
-	            this.state.contentObj.content
+	            React.createElement(Paragraph, { data: this.state.contentObj.content })
 	        );
 	    },
 	    _onChange: function _onChange() {
@@ -44016,6 +44018,70 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _components = {
+	    _component: {}
+	};
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Paragraph.js",
+	    components: _components,
+	    locals: [module],
+	    imports: [_react3.default]
+	});
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Paragraph.js",
+	    components: _components,
+	    locals: [],
+	    imports: [_react3.default, _index2.default]
+	});
+
+	function _wrapComponent(id) {
+	    return function (Component) {
+	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    };
+	}
+
+	var React = __webpack_require__(4);
+
+	var Paragraph = _wrapComponent("_component")(React.createClass({
+	    displayName: "Paragraph",
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { className: "center" },
+	            React.createElement("p", { id: "paragraph", dangerouslySetInnerHTML: { __html: this.props.data } })
+	        );
+	    }
+	}));
+
+	module.exports = Paragraph;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ },
+/* 389 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+
+	var _index = __webpack_require__(3);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(40);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _react2 = __webpack_require__(4);
+
+	var _react3 = _interopRequireDefault(_react2);
+
+	var _index5 = __webpack_require__(41);
+
+	var _index6 = _interopRequireDefault(_index5);
+
 	var _reactRouter = __webpack_require__(173);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44066,7 +44132,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 389 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

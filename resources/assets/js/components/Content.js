@@ -1,6 +1,7 @@
 var React        = require('react');
 var ContentStore = require('../stores/ContentStore');
 var classNames   = require('classnames');
+var Paragraph    = require('./Paragraph');
 
 function getStateFromStore(){
     return {contentObj: ContentStore.getContent()};
@@ -20,12 +21,13 @@ var Content = React.createClass({
 
         render(){
             var coverClass = classNames({
-                'cover': (this.state.contentObj.content != ''),
+                'hide':  (this.state.contentObj.content == ''),
+                'cover': true,
             });
 
             return(
                 <div className={coverClass}>
-                    {this.state.contentObj.content}
+                    <Paragraph data={this.state.contentObj.content} />
                 </div>
             );
         },
