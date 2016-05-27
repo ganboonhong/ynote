@@ -6,10 +6,10 @@ module.exports = {
             type:'init_blog',
         });
     },
-    clickCategory: function(categoryID){
+    clickBlog: function(content){
         AppDispatcher.dispatch({
-            type: 'clickCategory',
-            categoryID: categoryID
+            type: 'clickBlog',
+            content: content
         });
     },
 }

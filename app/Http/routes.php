@@ -13,9 +13,9 @@
 View::addExtension('html', 'php');
 Route::get('/api/list', "ApiController@getList");
 Route::get('/', 'Auth\AuthController@getLogin');
-/*Route::get('/', function(){
-    return view('test');
-});*/
+// Route::get('/', function(){
+//     return view('test.home');
+// });
 
 Route::get('/blog/2', 'BlogController@index');
 

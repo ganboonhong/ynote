@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8631350aff9b7b765d65"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e9050c5e0e4da2983bda"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -640,9 +640,9 @@
 	var ReactDOM = __webpack_require__(234);
 	var TestApp = __webpack_require__(369);
 	var BlogPage = __webpack_require__(370);
-	var About = __webpack_require__(385);
+	var About = __webpack_require__(388);
 	var Nav = __webpack_require__(371);
-	var WebAPIUtils = __webpack_require__(386);
+	var WebAPIUtils = __webpack_require__(389);
 
 	WebAPIUtils.init();
 
@@ -32662,7 +32662,8 @@
 
 	var React = __webpack_require__(4);
 	var Nav = __webpack_require__(371);
-	var BlogContainer = __webpack_require__(382);
+	var BlogContainer = __webpack_require__(381);
+	var Content = __webpack_require__(386);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -32670,6 +32671,7 @@
 	        return React.createElement(
 	            'div',
 	            null,
+	            React.createElement(Content, null),
 	            React.createElement(Nav, null),
 	            React.createElement(BlogContainer, null)
 	        );
@@ -32736,8 +32738,8 @@
 	var React = __webpack_require__(4);
 	var NavItem = __webpack_require__(373);
 	var NavStore = __webpack_require__(379);
-	var NavActionCreator = __webpack_require__(381);
-	var BlogActionCreators = __webpack_require__(374);
+	var NavActionCreator = __webpack_require__(374);
+	var NavActionCreators = __webpack_require__(374);
 	var article_amount;
 	var total;
 
@@ -32836,10 +32838,9 @@
 	        );
 	    },
 	    _onClick: function _onClick() {
-	        BlogActionCreators.clickCategory('all');
+	        NavActionCreators.clickCategory('all');
 	    },
 	    _onChange: function _onChange() {
-	        console.log("Nav _onChange");
 	        this.setState(getStateFromStores());
 	    }
 	}));
@@ -42744,7 +42745,7 @@
 	}
 
 	var React = __webpack_require__(4);
-	var BlogActionCreators = __webpack_require__(374);
+	var NavActionCreators = __webpack_require__(374);
 
 	var NavItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'NavItem',
@@ -42768,7 +42769,7 @@
 	        );
 	    },
 	    _onClick: function _onClick() {
-	        BlogActionCreators.clickCategory(this.props.data.category_id);
+	        NavActionCreators.clickCategory(this.props.data.category_id);
 	    }
 	}));
 
@@ -42784,17 +42785,18 @@
 	var AppDispatcher = __webpack_require__(375);
 
 	module.exports = {
-	    receiveAll: function receiveAll() {
-	        AppDispatcher.dispatch({
-	            type: 'init_blog'
-	        });
-	    },
 	    clickCategory: function clickCategory(categoryID) {
 	        AppDispatcher.dispatch({
 	            type: 'clickCategory',
 	            categoryID: categoryID
 	        });
+	    },
+	    receiveAll: function receiveAll() {
+	        AppDispatcher.dispatch({
+	            type: 'init_category'
+	        });
 	    }
+
 	};
 
 /***/ },
@@ -43508,29 +43510,6 @@
 /* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var AppDispatcher = __webpack_require__(375);
-
-	module.exports = {
-	    clickCategory: function clickCategory(categoryID) {
-	        AppDispatcher.dispatch({
-	            type: 'clickCategory',
-	            categoryID: categoryID
-	        });
-	    },
-	    receiveAll: function receiveAll() {
-	        AppDispatcher.dispatch({
-	            type: 'init_category'
-	        });
-	    }
-
-	};
-
-/***/ },
-/* 382 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
 	var _index = __webpack_require__(3);
@@ -43582,8 +43561,8 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Blog = __webpack_require__(383);
-	var BlogStore = __webpack_require__(384);
+	var Blog = __webpack_require__(382);
+	var BlogStore = __webpack_require__(385);
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -43616,6 +43595,9 @@
 	        BlogStore.addChangeListener(this._onChange);
 	    },
 
+	    componentWillUnmount: function componentWillUnmount() {
+	        BlogStore.removeChangeListener(this._onChange);
+	    },
 	    render: function render() {
 	        var blog = this.state.list.map(getBlog);
 	        return React.createElement(
@@ -43633,10 +43615,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 383 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
 	var _index = __webpack_require__(3);
 
@@ -43661,14 +43643,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Blog.js",
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Blog.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Blog.js",
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Blog.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -43681,9 +43663,11 @@
 	}
 
 	var React = __webpack_require__(4);
+	var BlogActionCreators = __webpack_require__(383);
+	var ContentStore = __webpack_require__(384);
 
-	var Blog = _wrapComponent("_component")(React.createClass({
-	    displayName: "Blog",
+	var Blog = _wrapComponent('_component')(React.createClass({
+	    displayName: 'Blog',
 	    render: function render() {
 	        var data = this.props.data;
 	        var pic_url;
@@ -43694,27 +43678,31 @@
 	        }
 
 	        return React.createElement(
-	            "div",
-	            { className: "list-item-container" },
+	            'div',
+	            { className: 'list-item-container' },
 	            React.createElement(
-	                "div",
-	                { className: "col-md-4 col-sm-5 col-xs-12 item" },
+	                'div',
+	                { className: 'col-md-4 col-sm-5 col-xs-12 item' },
 	                React.createElement(
-	                    "a",
-	                    null,
-	                    React.createElement("img", { src: pic_url, className: "list-pics" })
+	                    'a',
+	                    { onClick: this._onClick },
+	                    React.createElement('img', { src: pic_url, className: 'list-pics' })
 	                ),
 	                React.createElement(
-	                    "a",
+	                    'a',
 	                    null,
 	                    React.createElement(
-	                        "p",
-	                        { className: "title" },
+	                        'p',
+	                        { className: 'title' },
 	                        data.title
 	                    )
 	                )
 	            )
 	        );
+	    },
+	    _onClick: function _onClick() {
+	        console.log('Blog::_onClick');
+	        BlogActionCreators.clickBlog(this.props.data.content);
 	    }
 	}));
 
@@ -43722,7 +43710,78 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
+/* 383 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(375);
+
+	module.exports = {
+	    receiveAll: function receiveAll() {
+	        AppDispatcher.dispatch({
+	            type: 'init_blog'
+	        });
+	    },
+	    clickBlog: function clickBlog(content) {
+	        AppDispatcher.dispatch({
+	            type: 'clickBlog',
+	            content: content
+	        });
+	    }
+	};
+
+/***/ },
 /* 384 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(375);
+	var EventEmitter = __webpack_require__(380).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+	var _content = {};
+
+	var ContentStore = assign({}, EventEmitter.prototype, {
+	    init: function init(data) {},
+
+	    emitChange: function emitChange() {
+	        this.emit(CHANGE_EVENT);
+	    },
+
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(CHANGE_EVENT, callback);
+	    },
+
+	    getContent: function getContent() {
+	        return _content;
+	    }
+
+	});
+
+	ContentStore.dispatchToken = AppDispatcher.register(function (action) {
+	    switch (action.type) {
+
+	        case 'init_blog':
+	            ContentStore.init();
+	            break;
+
+	        case 'clickBlog':
+	            _content.content = action.content;
+
+	            ContentStore.emitChange();
+	            break;
+
+	        default:
+	        // do nothing
+	    }
+	});
+
+	module.exports = ContentStore;
+
+/***/ },
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43741,7 +43800,6 @@
 	        var id = pathArray[2];
 
 	        $.getJSON("/" + id + "/article/", { isBlogContent: true }, function (data) {
-	            // _blogs = data;
 	            for (var key in data) {
 	                var obj = data[key];
 	                _blogs[obj.article_id] = obj;
@@ -43796,7 +43854,148 @@
 	module.exports = BlogStore;
 
 /***/ },
-/* 385 */
+/* 386 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
+
+	var _index = __webpack_require__(3);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(40);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _react2 = __webpack_require__(4);
+
+	var _react3 = _interopRequireDefault(_react2);
+
+	var _index5 = __webpack_require__(41);
+
+	var _index6 = _interopRequireDefault(_index5);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _components = {
+	    _component: {}
+	};
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Content.js',
+	    components: _components,
+	    locals: [module],
+	    imports: [_react3.default]
+	});
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Content.js',
+	    components: _components,
+	    locals: [],
+	    imports: [_react3.default, _index2.default]
+	});
+
+	function _wrapComponent(id) {
+	    return function (Component) {
+	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    };
+	}
+
+	var React = __webpack_require__(4);
+	var ContentStore = __webpack_require__(384);
+	var classNames = __webpack_require__(387);
+
+	function getStateFromStore() {
+	    return { contentObj: ContentStore.getContent() };
+	}
+
+	var Content = _wrapComponent('_component')(React.createClass({
+	    displayName: 'Content',
+	    getInitialState: function getInitialState() {
+	        return {
+	            contentObj: { content: '' }
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        ContentStore.addChangeListener(this._onChange);
+	    },
+	    render: function render() {
+	        var coverClass = classNames({
+	            'cover': this.state.contentObj.content != ''
+	        });
+
+	        return React.createElement(
+	            'div',
+	            { className: coverClass },
+	            this.state.contentObj.content
+	        );
+	    },
+	    _onChange: function _onChange() {
+	        console.log("Content::_onChange");
+	        console.log(ContentStore.getContent());
+	        this.setState(getStateFromStore());
+	    }
+	}));
+
+	module.exports = Content;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -43867,13 +44066,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 386 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var NavActionCreators = __webpack_require__(381);
-	var BlogActionCreators = __webpack_require__(374);
+	var NavActionCreators = __webpack_require__(374);
+	var BlogActionCreators = __webpack_require__(383);
 
 	module.exports = {
 	    init: function init() {

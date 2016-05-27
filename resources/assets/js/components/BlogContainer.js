@@ -43,6 +43,10 @@ var BlogContainer = React.createClass({
         BlogStore.addChangeListener(this._onChange);
     },
 
+    componentWillUnmount() {
+        BlogStore.removeChangeListener(this._onChange);  
+    },
+
     render() {
         var blog = this.state.list.map(getBlog);        
             return (

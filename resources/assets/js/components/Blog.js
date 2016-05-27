@@ -1,6 +1,9 @@
-var React = require('react');
+var React              = require('react');
+var BlogActionCreators = require('../actions/BlogActionCreators');
+var ContentStore       = require('../stores/ContentStore');
 
 var Blog = React.createClass({
+
         render() {
             var data = this.props.data;
             var pic_url;
@@ -14,7 +17,7 @@ var Blog = React.createClass({
                 <div className="list-item-container">
                     
                         <div className="col-md-4 col-sm-5 col-xs-12 item">
-                            <a>
+                            <a onClick={this._onClick}>
                                 <img src={pic_url} className="list-pics" />
                             </a>
                             <a>
@@ -24,7 +27,13 @@ var Blog = React.createClass({
                     
                 </div>
             );
-        }
+        },
+
+        _onClick(){
+            console.log('Blog::_onClick');
+            BlogActionCreators.clickBlog(this.props.data.content);
+        },
+
     });
 
 module.exports = Blog;

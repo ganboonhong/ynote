@@ -18,7 +18,6 @@ var BlogStore = assign({}, EventEmitter.prototype, {
             { isBlogContent: true },
 
             function (data) {
-                // _blogs = data;
                 for(var key in data){
                     var obj = data[key];
                     _blogs[obj.article_id] = obj;

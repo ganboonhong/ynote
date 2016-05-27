@@ -5,7 +5,7 @@ var React              = require('react');
 var NavItem            = require('./NavItem');
 var NavStore           = require('../stores/NavStore');
 var NavActionCreator   = require('../actions/NavActionCreators');
-var BlogActionCreators = require('../actions/BlogActionCreators');
+var NavActionCreators = require('../actions/NavActionCreators');
 var article_amount;
 var total;
 
@@ -98,11 +98,10 @@ var BlogPage = React.createClass({
     },
 
     _onClick(){
-        BlogActionCreators.clickCategory('all');
+        NavActionCreators.clickCategory('all');
     },
 
     _onChange() {
-        console.log("Nav _onChange");
         this.setState(getStateFromStores());
     },
 

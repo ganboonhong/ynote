@@ -1,5 +1,5 @@
 var React              = require('react');
-var BlogActionCreators = require('../actions/BlogActionCreators');
+var NavActionCreators = require('../actions/NavActionCreators');
 
 var NavItem = React.createClass({
         render() {
@@ -16,7 +16,7 @@ var NavItem = React.createClass({
         },
 
         _onClick(){
-            BlogActionCreators.clickCategory(this.props.data.category_id);
+            NavActionCreators.clickCategory(this.props.data.category_id);
         }
     });
 
