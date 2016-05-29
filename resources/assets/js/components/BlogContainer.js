@@ -1,9 +1,11 @@
 import $ from "jQuery";
 import {Link} from 'react-router';
 
-var React     = require('react');
-var Blog      = require('./Blog');
-var BlogStore = require('../stores/BlogStore');
+var React        = require('react');
+var Blog         = require('./Blog');
+var BlogStore    = require('../stores/BlogStore');
+var ContentStore = require('../stores/ContentStore');
+var ClassNames   = require('classnames');
 
 function getBlog(data){
     return(
@@ -22,7 +24,8 @@ var BlogContainer = React.createClass({
 
     getInitialState() {
         return {
-            list: []
+            list: [],
+            prevent_scroll: false,
         };
     },
     componentDidMount: function() {
@@ -41,6 +44,7 @@ var BlogContainer = React.createClass({
         );
         
         BlogStore.addChangeListener(this._onChange);
+        ContentStore.addChangeListener(this._onChangeModal);
     },
 
     componentWillUnmount() {
@@ -49,8 +53,12 @@ var BlogContainer = React.createClass({
 
     render() {
         var blog = this.state.list.map(getBlog);        
+        var prevent_scroll = ClassNames({
+            'prevent-scroll': this.state.prevent_scroll,
+            'col-md-9 col-sm-12 col-xs-12 list-wrapper': true,
+        });
             return (
-                <div className="col-md-9 col-sm-12 col-xs-12 list-wrapper">
+                <div className={prevent_scroll}>
                     {blog}
                 </div>
             );       
@@ -58,6 +66,10 @@ var BlogContainer = React.createClass({
 
     _onChange(){
         this.setState(getStateFromStores());
+    },
+
+    _onChangeModal(){
+        this.setState({prevent_scroll: ContentStore.getBModal()});
     }
 
 });

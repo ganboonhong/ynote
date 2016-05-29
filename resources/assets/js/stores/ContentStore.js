@@ -2,7 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter  = require('events').EventEmitter;
 var assign        = require('object-assign');
 var CHANGE_EVENT  = 'change';
-var _content      = {};
+var contentObj      = {};
 
 var ContentStore = assign({}, EventEmitter.prototype, {
     init: function(data){
@@ -18,9 +18,9 @@ var ContentStore = assign({}, EventEmitter.prototype, {
     },
 
     getContent: function(){
-        return _content;
-    }
-
+        return contentObj;
+    },
+    
 });
 
 ContentStore.dispatchToken = AppDispatcher.register(function(action){
@@ -31,9 +31,8 @@ ContentStore.dispatchToken = AppDispatcher.register(function(action){
         break;
 
         case 'clickBlog':
-        _content.content = action.content;
-
-        ContentStore.emitChange();
+            contentObj.content = action.content;
+            ContentStore.emitChange();
         break;
 
         default:

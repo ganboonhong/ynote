@@ -30,7 +30,6 @@ var Blog = React.createClass({
         },
 
         _onClick(){
-            console.log('Blog::_onClick');
             BlogActionCreators.clickBlog(this.props.data.content);
         },
 

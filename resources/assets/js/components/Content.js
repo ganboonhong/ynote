@@ -1,8 +1,9 @@
-var React        = require('react');
-var ContentStore = require('../stores/ContentStore');
-var classNames   = require('classnames');
-var Paragraph    = require('./Paragraph');
-var Modal        = require('react-modal');
+var React                 = require('react');
+var ContentStore          = require('../stores/ContentStore');
+var classNames            = require('classnames');
+var Paragraph             = require('./Paragraph');
+var Modal                 = require('react-modal');
+var ContentActionCreators = require('../actions/ContentActionCreators');
 
 // const customStyles = {
 //   content : {
@@ -34,7 +35,12 @@ var Content = React.createClass({
         },
 
         openModal: function() {
-            this.setState({modalIsOpen: true});
+            this.setState({
+                modalIsOpen: true,
+                originalBodyOverflow: document.body.style.overflow
+            });
+
+            document.body.style.overflow = 'hidden';
         },
 
         afterOpenModal: function() {
@@ -43,6 +49,7 @@ var Content = React.createClass({
 
         closeModal: function() {
             this.setState({modalIsOpen: false});
+            document.body.style.overflow = this.state.originalBodyOverflow;
         },
 
         render(){
@@ -53,6 +60,7 @@ var Content = React.createClass({
             Modal.defaultStyles.content.left            = '7%';
             Modal.defaultStyles.content.right           = '7%';
             Modal.defaultStyles.overlay.backgroundColor = "rgba(0, 0, 0, 0.75)"
+
             /*
              * read out default css value
              */
@@ -60,7 +68,7 @@ var Content = React.createClass({
             // console.log(Modal.defaultStyles.overlay);
 
             return(
-                <div onClick={this._onClick}>
+                <div>
                     <Modal
                       isOpen={this.state.modalIsOpen}
                       onAfterOpen={this.afterOpenModal}

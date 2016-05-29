@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "20080b114fae8f111f8d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4e820a305d4752b55ae9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -640,9 +640,9 @@
 	var ReactDOM = __webpack_require__(234);
 	var TestApp = __webpack_require__(369);
 	var BlogPage = __webpack_require__(370);
-	var About = __webpack_require__(409);
+	var About = __webpack_require__(410);
 	var Nav = __webpack_require__(371);
-	var WebAPIUtils = __webpack_require__(410);
+	var WebAPIUtils = __webpack_require__(411);
 
 	WebAPIUtils.init();
 
@@ -32663,7 +32663,7 @@
 	var React = __webpack_require__(4);
 	var Nav = __webpack_require__(371);
 	var BlogContainer = __webpack_require__(381);
-	var Content = __webpack_require__(386);
+	var Content = __webpack_require__(387);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -43563,6 +43563,8 @@
 	var React = __webpack_require__(4);
 	var Blog = __webpack_require__(382);
 	var BlogStore = __webpack_require__(385);
+	var ContentStore = __webpack_require__(384);
+	var ClassNames = __webpack_require__(386);
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -43579,7 +43581,8 @@
 	    displayName: 'BlogContainer',
 	    getInitialState: function getInitialState() {
 	        return {
-	            list: []
+	            list: [],
+	            prevent_scroll: false
 	        };
 	    },
 
@@ -43593,6 +43596,7 @@
 	        });
 
 	        BlogStore.addChangeListener(this._onChange);
+	        ContentStore.addChangeListener(this._onChangeModal);
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
@@ -43600,14 +43604,21 @@
 	    },
 	    render: function render() {
 	        var blog = this.state.list.map(getBlog);
+	        var prevent_scroll = ClassNames({
+	            'prevent-scroll': this.state.prevent_scroll,
+	            'col-md-9 col-sm-12 col-xs-12 list-wrapper': true
+	        });
 	        return React.createElement(
 	            'div',
-	            { className: 'col-md-9 col-sm-12 col-xs-12 list-wrapper' },
+	            { className: prevent_scroll },
 	            blog
 	        );
 	    },
 	    _onChange: function _onChange() {
 	        this.setState(getStateFromStores());
+	    },
+	    _onChangeModal: function _onChangeModal() {
+	        this.setState({ prevent_scroll: ContentStore.getBModal() });
 	    }
 	}));
 
@@ -43701,7 +43712,6 @@
 	        );
 	    },
 	    _onClick: function _onClick() {
-	        console.log('Blog::_onClick');
 	        BlogActionCreators.clickBlog(this.props.data.content);
 	    }
 	}));
@@ -43741,7 +43751,7 @@
 	var EventEmitter = __webpack_require__(380).EventEmitter;
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
-	var _content = {};
+	var contentObj = {};
 
 	var ContentStore = assign({}, EventEmitter.prototype, {
 	    init: function init(data) {},
@@ -43755,7 +43765,7 @@
 	    },
 
 	    getContent: function getContent() {
-	        return _content;
+	        return contentObj;
 	    }
 
 	});
@@ -43768,8 +43778,7 @@
 	            break;
 
 	        case 'clickBlog':
-	            _content.content = action.content;
-
+	            contentObj.content = action.content;
 	            ContentStore.emitChange();
 	            break;
 
@@ -43857,134 +43866,6 @@
 /* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
-
-	var _index = __webpack_require__(3);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(40);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(41);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	    _component: {}
-	};
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Content.js',
-	    components: _components,
-	    locals: [module],
-	    imports: [_react3.default]
-	});
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Content.js',
-	    components: _components,
-	    locals: [],
-	    imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	    return function (Component) {
-	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	    };
-	}
-
-	var React = __webpack_require__(4);
-	var ContentStore = __webpack_require__(384);
-	var classNames = __webpack_require__(387);
-	var Paragraph = __webpack_require__(388);
-	var Modal = __webpack_require__(389);
-
-	// const customStyles = {
-	//   content : {
-	//     top                   : '50%',
-	//     left                  : '50%',
-	//     right                 : 'auto',
-	//     bottom                : 'auto',
-	//     marginRight           : '-50%',
-	//     transform             : 'translate(-50%, -50%)',
-	//     width                 : '60%',
-	//   }
-	// };
-
-	function getStateFromStore() {
-	    return { contentObj: ContentStore.getContent() };
-	}
-
-	var Content = _wrapComponent('_component')(React.createClass({
-	    displayName: 'Content',
-	    getInitialState: function getInitialState() {
-	        return {
-	            contentObj: { content: '' },
-	            modalIsOpen: false
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        ContentStore.addChangeListener(this._onChange);
-	    },
-
-
-	    openModal: function openModal() {
-	        this.setState({ modalIsOpen: true });
-	    },
-
-	    afterOpenModal: function afterOpenModal() {},
-
-	    closeModal: function closeModal() {
-	        this.setState({ modalIsOpen: false });
-	    },
-
-	    render: function render() {
-
-	        // extend default css
-	        Modal.defaultStyles.content.top = '1%';
-	        Modal.defaultStyles.content.bottom = '1%';
-	        Modal.defaultStyles.content.left = '7%';
-	        Modal.defaultStyles.content.right = '7%';
-	        // console.log(Modal.defaultStyles.content);
-	        console.log(Modal.defaultStyles.overlay);
-	        Modal.defaultStyles.overlay.backgroundColor = "rgba(0, 0, 0, 0.75)";
-
-	        return React.createElement(
-	            'div',
-	            { onClick: this._onClick },
-	            React.createElement(
-	                Modal,
-	                {
-	                    isOpen: this.state.modalIsOpen,
-	                    onAfterOpen: this.afterOpenModal,
-	                    onRequestClose: this.closeModal
-	                    // style={customStyles}
-	                },
-	                React.createElement(Paragraph, { data: this.state.contentObj.content })
-	            )
-	        );
-	    },
-	    _onChange: function _onChange() {
-	        this.setState(getStateFromStore());
-	        this.openModal();
-	    }
-	}));
-
-	module.exports = Content;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
-
-/***/ },
-/* 387 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
@@ -44034,6 +43915,145 @@
 		}
 	}());
 
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
+
+	var _index = __webpack_require__(3);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(40);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _react2 = __webpack_require__(4);
+
+	var _react3 = _interopRequireDefault(_react2);
+
+	var _index5 = __webpack_require__(41);
+
+	var _index6 = _interopRequireDefault(_index5);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _components = {
+	    _component: {}
+	};
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Content.js',
+	    components: _components,
+	    locals: [module],
+	    imports: [_react3.default]
+	});
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Content.js',
+	    components: _components,
+	    locals: [],
+	    imports: [_react3.default, _index2.default]
+	});
+
+	function _wrapComponent(id) {
+	    return function (Component) {
+	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    };
+	}
+
+	var React = __webpack_require__(4);
+	var ContentStore = __webpack_require__(384);
+	var classNames = __webpack_require__(386);
+	var Paragraph = __webpack_require__(388);
+	var Modal = __webpack_require__(389);
+	var ContentActionCreators = __webpack_require__(409);
+
+	// const customStyles = {
+	//   content : {
+	//     top                   : '50%',
+	//     left                  : '50%',
+	//     right                 : 'auto',
+	//     bottom                : 'auto',
+	//     marginRight           : '-50%',
+	//     transform             : 'translate(-50%, -50%)',
+	//     width                 : '60%',
+	//   }
+	// };
+
+	function getStateFromStore() {
+	    return { contentObj: ContentStore.getContent() };
+	}
+
+	var Content = _wrapComponent('_component')(React.createClass({
+	    displayName: 'Content',
+	    getInitialState: function getInitialState() {
+	        return {
+	            contentObj: { content: '' },
+	            modalIsOpen: false
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        ContentStore.addChangeListener(this._onChange);
+	    },
+
+
+	    openModal: function openModal() {
+	        this.setState({
+	            modalIsOpen: true,
+	            originalBodyOverflow: document.body.style.overflow
+	        });
+
+	        document.body.style.overflow = 'hidden';
+	    },
+
+	    afterOpenModal: function afterOpenModal() {},
+
+	    closeModal: function closeModal() {
+	        this.setState({ modalIsOpen: false });
+	        document.body.style.overflow = this.state.originalBodyOverflow;
+	    },
+
+	    render: function render() {
+
+	        // extend default css
+	        Modal.defaultStyles.content.top = '1%';
+	        Modal.defaultStyles.content.bottom = '1%';
+	        Modal.defaultStyles.content.left = '7%';
+	        Modal.defaultStyles.content.right = '7%';
+	        Modal.defaultStyles.overlay.backgroundColor = "rgba(0, 0, 0, 0.75)";
+
+	        /*
+	         * read out default css value
+	         */
+	        // console.log(Modal.defaultStyles.content);
+	        // console.log(Modal.defaultStyles.overlay);
+
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                Modal,
+	                {
+	                    isOpen: this.state.modalIsOpen,
+	                    onAfterOpen: this.afterOpenModal,
+	                    onRequestClose: this.closeModal
+	                    // style={customStyles}
+	                },
+	                React.createElement(Paragraph, { data: this.state.contentObj.content })
+	            )
+	        );
+	    },
+	    _onChange: function _onChange() {
+	        this.setState(getStateFromStore());
+	        this.openModal();
+	    }
+	}));
+
+	module.exports = Content;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
 /* 388 */
@@ -46051,6 +46071,16 @@
 /* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(375);
+
+	module.exports = {};
+
+/***/ },
+/* 410 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
 	var _index = __webpack_require__(3);
@@ -46119,7 +46149,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 410 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
