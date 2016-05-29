@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4e820a305d4752b55ae9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bbde2958e590d1c7123c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -648,7 +648,6 @@
 
 	var App = _wrapComponent("_component")(React.createClass({
 	  displayName: "App",
-
 
 	  render: function render() {
 	    return React.createElement(
@@ -32766,10 +32765,9 @@
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var pathArray = window.location.pathname.split('/');
-	        var id = pathArray[2];
+	        var user_id = getParameterByName('user_id');
 
-	        _jQuery2.default.getJSON("/" + id + "/article/", { isNavBar: true }, function (data) {
+	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
 	            article_amount = data.article_amount;
 	            obj.setState({ list: data.categories });
 	            obj.setState({ user: data.user });
@@ -32779,7 +32777,6 @@
 	    },
 
 	    render: function render() {
-
 	        var blogNavBarItem = this.state.list.map(getNavItem);
 	        var user = this.state.user;
 	        var pic_url = '';
@@ -43156,10 +43153,9 @@
 	var NavStore = assign({}, EventEmitter.prototype, {
 	    init: function init(data) {
 
-	        var pathArray = window.location.pathname.split('/');
-	        var id = pathArray[2];
+	        var user_id = getParameterByName('user_id');
 
-	        $.getJSON("/" + id + "/article/", { isNavBar: true }, function (data) {
+	        $.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
 
 	            for (var key in data.categories) {
 	                var obj = data.categories[key];
@@ -43588,15 +43584,13 @@
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var pathArray = window.location.pathname.split('/');
-	        var id = pathArray[2];
+	        var user_id = getParameterByName('user_id');
 
-	        _jQuery2.default.getJSON("/" + id + "/article/", { isBlogContent: true }, function (data) {
+	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
 	        });
 
 	        BlogStore.addChangeListener(this._onChange);
-	        ContentStore.addChangeListener(this._onChangeModal);
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
@@ -43616,9 +43610,6 @@
 	    },
 	    _onChange: function _onChange() {
 	        this.setState(getStateFromStores());
-	    },
-	    _onChangeModal: function _onChangeModal() {
-	        this.setState({ prevent_scroll: ContentStore.getBModal() });
 	    }
 	}));
 
@@ -43805,10 +43796,9 @@
 	var BlogStore = assign({}, EventEmitter.prototype, {
 	    init: function init(data) {
 
-	        var pathArray = window.location.pathname.split('/');
-	        var id = pathArray[2];
+	        var user_id = getParameterByName('user_id');
 
-	        $.getJSON("/" + id + "/article/", { isBlogContent: true }, function (data) {
+	        $.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            for (var key in data) {
 	                var obj = data[key];
 	                _blogs[obj.article_id] = obj;

@@ -29,12 +29,11 @@ var BlogContainer = React.createClass({
         };
     },
     componentDidMount: function() {
-        var obj       = this;
-        var pathArray = window.location.pathname.split('/');
-        var id        = pathArray[2];
+        var obj     = this;
+        var user_id = getParameterByName('user_id');
 
         $.getJSON(
-            "/"+id+"/article/", 
+            "/" + user_id + "/article/", 
 
             {isBlogContent: true},
 
@@ -44,7 +43,6 @@ var BlogContainer = React.createClass({
         );
         
         BlogStore.addChangeListener(this._onChange);
-        ContentStore.addChangeListener(this._onChangeModal);
     },
 
     componentWillUnmount() {
@@ -67,10 +65,6 @@ var BlogContainer = React.createClass({
     _onChange(){
         this.setState(getStateFromStores());
     },
-
-    _onChangeModal(){
-        this.setState({prevent_scroll: ContentStore.getBModal()});
-    }
 
 });
 

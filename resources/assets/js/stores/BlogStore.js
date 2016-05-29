@@ -8,12 +8,11 @@ var _current_blogs = [];
 var BlogStore = assign({}, EventEmitter.prototype, {
     init: function(data){
 
-        var pathArray = window.location.pathname.split('/');
-        var id        = pathArray[2];
+        var user_id  = getParameterByName('user_id');
 
         $.getJSON(
 
-            "/" + id + "/article/",
+            "/" + user_id + "/article/",
 
             { isBlogContent: true },
 

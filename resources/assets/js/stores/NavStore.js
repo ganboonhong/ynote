@@ -9,12 +9,11 @@ var _user;
 var NavStore = assign({}, EventEmitter.prototype, {
     init: function(data){
 
-        var pathArray = window.location.pathname.split('/');
-        var id        = pathArray[2];
+        var user_id  = getParameterByName('user_id');
 
         $.getJSON(
 
-            "/" + id + "/article/",
+            "/" + user_id + "/article/",
 
             { isNavBar: true },
 

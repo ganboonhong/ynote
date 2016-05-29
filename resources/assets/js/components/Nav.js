@@ -32,13 +32,12 @@ var BlogPage = React.createClass({
         };
     },
     componentDidMount: function() {
-        var obj       = this;
-        var pathArray = window.location.pathname.split('/');
-        var id        = pathArray[2];
+        var obj = this;
+        var user_id  = getParameterByName('user_id');
 
         $.getJSON(
 
-            "/" + id + "/article/",
+            "/" + user_id + "/article/",
 
             { isNavBar: true },
 
@@ -54,7 +53,6 @@ var BlogPage = React.createClass({
     },
 
     render() {
-
         var blogNavBarItem = this.state.list.map(getNavItem);
         var user = this.state.user;
         var pic_url = '';

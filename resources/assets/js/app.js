@@ -10,7 +10,6 @@ var WebAPIUtils = require("./utils/WebAPIUtils");
 WebAPIUtils.init();
 
 var App = React.createClass({
-
     render: function() {
         return (
           <div>
