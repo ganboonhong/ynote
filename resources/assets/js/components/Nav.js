@@ -31,9 +31,12 @@ var BlogPage = React.createClass({
             user:  [],
         };
     },
+    componentWillMount() {
+        NavActionCreator.receiveAll(this.props.url_params);
+    },
     componentDidMount: function() {
         var obj = this;
-        var user_id  = getParameterByName('user_id');
+        var user_id = this.props.url_params.user_id;
 
         $.getJSON(
 
@@ -76,7 +79,12 @@ var BlogPage = React.createClass({
                             {user.description}
                         </p>
 
-                        <Link to="/about">link to about</Link>                    
+                        <Link to="/about">link to about
+                        {this.props.url_params.user_id}/
+                        {this.props.url_params.category_id}/
+                        {this.props.url_params.article_id}/
+                        {this.props.url_params.preview}/
+                        </Link>                    
                             <div  className="category-wrapper">
                                 <ul style={{paddingLeft: 0}}>
                                         <a>

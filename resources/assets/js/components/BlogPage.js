@@ -7,9 +7,9 @@ var BlogPage = React.createClass({
     render() {
         return (
             <div>
-                <Content/>
-                <Nav />
-                <BlogContainer />
+                <Content url_params={this.props.params}/>
+                <Nav url_params={this.props.params}/>
+                <BlogContainer url_params={this.props.params}/>
             </div>
         );
     }

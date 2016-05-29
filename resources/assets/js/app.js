@@ -5,6 +5,7 @@ var TestApp     = require("./components/TestApp");
 var BlogPage    = require("./components/BlogPage");
 var About       = require("./components/About");
 var Nav         = require("./components/Nav");
+
 var WebAPIUtils = require("./utils/WebAPIUtils");
 
 WebAPIUtils.init();
@@ -25,9 +26,10 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/about" component={About} />
     <Route path="/" component={App}>
-        <IndexRoute component={BlogPage}>
-        <Route path="/blog_nav_bar" component={Nav} />
+        <IndexRoute component={About}>
+
         </IndexRoute>
+        <Route path="/:user_id/:category_id/:article_id/:preview" component={BlogPage} />
     </Route>
   </Router>,
 

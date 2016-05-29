@@ -7,9 +7,9 @@ var current_category;
 var _user;
 
 var NavStore = assign({}, EventEmitter.prototype, {
-    init: function(data){
+    init: function(url_params){
 
-        var user_id  = getParameterByName('user_id');
+        var user_id  = url_params.user_id;
 
         $.getJSON(
 
@@ -45,7 +45,7 @@ NavStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.type){
 
         case 'init_category':
-        NavStore.init();
+        NavStore.init(action.url_params);
         // NavStore.emitChange();
         break;
 

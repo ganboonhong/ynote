@@ -1,11 +1,12 @@
 import $ from "jQuery";
 import {Link} from 'react-router';
 
-var React        = require('react');
-var Blog         = require('./Blog');
-var BlogStore    = require('../stores/BlogStore');
-var ContentStore = require('../stores/ContentStore');
-var ClassNames   = require('classnames');
+var React              = require('react');
+var Blog               = require('./Blog');
+var BlogStore          = require('../stores/BlogStore');
+var ContentStore       = require('../stores/ContentStore');
+var ClassNames         = require('classnames');
+var BlogActionCreators = require('../actions/BlogActionCreators')
 
 function getBlog(data){
     return(
@@ -25,12 +26,14 @@ var BlogContainer = React.createClass({
     getInitialState() {
         return {
             list: [],
-            prevent_scroll: false,
         };
+    },
+    componentWillMount() {
+        BlogActionCreators.receiveAll(this.props.url_params);
     },
     componentDidMount: function() {
         var obj     = this;
-        var user_id = getParameterByName('user_id');
+        var user_id = this.props.url_params.user_id;
 
         $.getJSON(
             "/" + user_id + "/article/", 
@@ -51,12 +54,11 @@ var BlogContainer = React.createClass({
 
     render() {
         var blog = this.state.list.map(getBlog);        
-        var prevent_scroll = ClassNames({
-            'prevent-scroll': this.state.prevent_scroll,
+        var myClass = ClassNames({
             'col-md-9 col-sm-12 col-xs-12 list-wrapper': true,
         });
             return (
-                <div className={prevent_scroll}>
+                <div className={myClass}>
                     {blog}
                 </div>
             );       

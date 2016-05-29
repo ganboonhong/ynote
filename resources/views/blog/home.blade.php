@@ -49,7 +49,7 @@
             }(document, 'script', 'facebook-jssdk'));
         </script>
     <div id="container"></div>
-    <script src="../js/bundle.js"></script>
+    <script src="../../../../js/bundle.js"></script>
   </body>
 </html>
 

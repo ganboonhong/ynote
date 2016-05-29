@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3f73ccee473fd44ec043"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e87fb8e22be6cf0f66e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -642,6 +642,7 @@
 	var BlogPage = __webpack_require__(370);
 	var About = __webpack_require__(410);
 	var Nav = __webpack_require__(371);
+
 	var WebAPIUtils = __webpack_require__(411);
 
 	WebAPIUtils.init();
@@ -664,11 +665,8 @@
 	  React.createElement(
 	    _reactRouter.Route,
 	    { path: "/", component: App },
-	    React.createElement(
-	      _reactRouter.IndexRoute,
-	      { component: BlogPage },
-	      React.createElement(_reactRouter.Route, { path: "/blog_nav_bar", component: Nav })
-	    )
+	    React.createElement(_reactRouter.IndexRoute, { component: About }),
+	    React.createElement(_reactRouter.Route, { path: "/:user_id/:category_id/:article_id/:preview", component: BlogPage })
 	  )
 	), document.getElementById("container"));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
@@ -32670,9 +32668,9 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(Content, null),
-	            React.createElement(Nav, null),
-	            React.createElement(BlogContainer, null)
+	            React.createElement(Content, { url_params: this.props.params }),
+	            React.createElement(Nav, { url_params: this.props.params }),
+	            React.createElement(BlogContainer, { url_params: this.props.params })
 	        );
 	    }
 	}));
@@ -32762,10 +32760,13 @@
 	            user: []
 	        };
 	    },
+	    componentWillMount: function componentWillMount() {
+	        NavActionCreator.receiveAll(this.props.url_params);
+	    },
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var user_id = getParameterByName('user_id');
+	        var user_id = this.props.url_params.user_id;
 
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
 	            article_amount = data.article_amount;
@@ -32805,7 +32806,15 @@
 	            React.createElement(
 	                _reactRouter.Link,
 	                { to: '/about' },
-	                'link to about'
+	                'link to about',
+	                this.props.url_params.user_id,
+	                '/',
+	                this.props.url_params.category_id,
+	                '/',
+	                this.props.url_params.article_id,
+	                '/',
+	                this.props.url_params.preview,
+	                '/'
 	            ),
 	            React.createElement(
 	                'div',
@@ -42782,15 +42791,18 @@
 	var AppDispatcher = __webpack_require__(375);
 
 	module.exports = {
+
 	    clickCategory: function clickCategory(categoryID) {
 	        AppDispatcher.dispatch({
 	            type: 'clickCategory',
 	            categoryID: categoryID
 	        });
 	    },
-	    receiveAll: function receiveAll() {
+
+	    receiveAll: function receiveAll(url_params) {
 	        AppDispatcher.dispatch({
-	            type: 'init_category'
+	            type: 'init_category',
+	            url_params: url_params
 	        });
 	    }
 
@@ -43151,9 +43163,9 @@
 	var _user;
 
 	var NavStore = assign({}, EventEmitter.prototype, {
-	    init: function init(data) {
+	    init: function init(url_params) {
 
-	        var user_id = getParameterByName('user_id');
+	        var user_id = url_params.user_id;
 
 	        $.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
 
@@ -43182,7 +43194,7 @@
 	    switch (action.type) {
 
 	        case 'init_category':
-	            NavStore.init();
+	            NavStore.init(action.url_params);
 	            // NavStore.emitChange();
 	            break;
 
@@ -43561,6 +43573,7 @@
 	var BlogStore = __webpack_require__(385);
 	var ContentStore = __webpack_require__(384);
 	var ClassNames = __webpack_require__(386);
+	var BlogActionCreators = __webpack_require__(383);
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -43577,14 +43590,16 @@
 	    displayName: 'BlogContainer',
 	    getInitialState: function getInitialState() {
 	        return {
-	            list: [],
-	            prevent_scroll: false
+	            list: []
 	        };
+	    },
+	    componentWillMount: function componentWillMount() {
+	        BlogActionCreators.receiveAll(this.props.url_params);
 	    },
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var user_id = getParameterByName('user_id');
+	        var user_id = this.props.url_params.user_id;
 
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
@@ -43598,13 +43613,12 @@
 	    },
 	    render: function render() {
 	        var blog = this.state.list.map(getBlog);
-	        var prevent_scroll = ClassNames({
-	            'prevent-scroll': this.state.prevent_scroll,
+	        var myClass = ClassNames({
 	            'col-md-9 col-sm-12 col-xs-12 list-wrapper': true
 	        });
 	        return React.createElement(
 	            'div',
-	            { className: prevent_scroll },
+	            { className: myClass },
 	            blog
 	        );
 	    },
@@ -43719,9 +43733,10 @@
 	var AppDispatcher = __webpack_require__(375);
 
 	module.exports = {
-	    receiveAll: function receiveAll() {
+	    receiveAll: function receiveAll(url_params) {
 	        AppDispatcher.dispatch({
-	            type: 'init_blog'
+	            type: 'init_blog',
+	            url_params: url_params
 	        });
 	    },
 	    clickBlog: function clickBlog(content) {
@@ -43794,9 +43809,9 @@
 	var _current_blogs = [];
 
 	var BlogStore = assign({}, EventEmitter.prototype, {
-	    init: function init(data) {
+	    init: function init(url_params) {
 
-	        var user_id = getParameterByName('user_id');
+	        var user_id = url_params.user_id;
 
 	        $.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            for (var key in data) {
@@ -43826,9 +43841,9 @@
 
 	BlogStore.dispatchToken = AppDispatcher.register(function (action) {
 	    switch (action.type) {
-
+	        //
 	        case 'init_blog':
-	            BlogStore.init();
+	            BlogStore.init(action.url_params);
 	            break;
 
 	        case 'clickCategory':
@@ -46129,11 +46144,11 @@
 	        return React.createElement(
 	            "div",
 	            null,
-	            "About me",
+	            "About mexx",
 	            React.createElement(
 	                _reactRouter.Link,
 	                { to: "/" },
-	                "Blog"
+	                this.props.params.aboutName
 	            )
 	        );
 	    }
@@ -46153,8 +46168,8 @@
 
 	module.exports = {
 	    init: function init() {
-	        NavActionCreators.receiveAll();
-	        BlogActionCreators.receiveAll();
+	        // NavActionCreators.receiveAll();
+	        // BlogActionCreators.receiveAll();
 	    }
 	};
 

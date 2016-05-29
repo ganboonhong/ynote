@@ -4,8 +4,8 @@ var About = React.createClass({
     render: function(){
         return (
             <div>
-                About me
-                <Link to="/">Blog</Link>
+                About mexx
+                <Link to="/">{this.props.params.aboutName}</Link>
             </div>
         );
     }
