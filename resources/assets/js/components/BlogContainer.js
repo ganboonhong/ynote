@@ -5,6 +5,7 @@ var React              = require('react');
 var Blog               = require('./Blog');
 var BlogStore          = require('../stores/BlogStore');
 var ContentStore       = require('../stores/ContentStore');
+var BlogPageStore      = require('../stores/BlogPageStore');
 var ClassNames         = require('classnames');
 var BlogActionCreators = require('../actions/BlogActionCreators')
 
@@ -28,12 +29,15 @@ var BlogContainer = React.createClass({
             list: [],
         };
     },
+
     componentWillMount() {
-        BlogActionCreators.receiveAll(this.props.url_params);
+        BlogActionCreators.init_blog();
     },
+
     componentDidMount: function() {
-        var obj     = this;
-        var user_id = this.props.url_params.user_id;
+        var obj        = this;
+        var url_params = BlogPageStore.getUrlParams();
+        var user_id    = url_params.user_id;
 
         $.getJSON(
             "/" + user_id + "/article/", 

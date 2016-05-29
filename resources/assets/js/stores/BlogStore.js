@@ -4,11 +4,12 @@ var assign         = require('object-assign');
 var CHANGE_EVENT   = 'change';
 var _blogs         = [];
 var _current_blogs = [];
+var BlogPageStore  = require('../stores/BlogPageStore');
 
 var BlogStore = assign({}, EventEmitter.prototype, {
-    init: function(url_params){
-
-        var user_id = url_params.user_id;
+    init: function(){
+        var url_params = BlogPageStore.getUrlParams();
+        var user_id    = url_params.user_id;
 
         $.getJSON(
 
@@ -45,9 +46,9 @@ var BlogStore = assign({}, EventEmitter.prototype, {
 
 BlogStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.type){
-// 
+
         case 'init_blog':
-            BlogStore.init(action.url_params);
+            BlogStore.init();
         break;
 
         case 'clickCategory':

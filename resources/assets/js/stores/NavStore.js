@@ -5,11 +5,13 @@ var CHANGE_EVENT  = 'change';
 var _categories   = [];
 var current_category;
 var _user;
+var BlogPageStore = require('../stores/BlogPageStore');
 
 var NavStore = assign({}, EventEmitter.prototype, {
-    init: function(url_params){
+    init: function(){
 
-        var user_id  = url_params.user_id;
+        var url_params = BlogPageStore.getUrlParams();
+        var user_id    = url_params.user_id;
 
         $.getJSON(
 
@@ -45,14 +47,8 @@ NavStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.type){
 
         case 'init_category':
-        NavStore.init(action.url_params);
-        // NavStore.emitChange();
+        NavStore.init();
         break;
-
-        // case 'clickCategory':
-        // current_category = _categories[action.categoryID];
-        // NavStore.emitChange();
-        // break;
 
         default:
             // do nothing

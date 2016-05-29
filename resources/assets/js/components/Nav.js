@@ -1,10 +1,11 @@
 import $ from "jQuery";
 import {Link} from 'react-router';
 
-var React              = require('react');
-var NavItem            = require('./NavItem');
-var NavStore           = require('../stores/NavStore');
-var NavActionCreator   = require('../actions/NavActionCreators');
+var React             = require('react');
+var NavItem           = require('./NavItem');
+var NavStore          = require('../stores/NavStore');
+var BlogPageStore     = require('../stores/BlogPageStore');
+var NavActionCreator  = require('../actions/NavActionCreators');
 var NavActionCreators = require('../actions/NavActionCreators');
 var article_amount;
 var total;
@@ -35,8 +36,9 @@ var BlogPage = React.createClass({
         NavActionCreator.receiveAll(this.props.url_params);
     },
     componentDidMount: function() {
-        var obj = this;
-        var user_id = this.props.url_params.user_id;
+        var obj        = this;
+        var url_params = BlogPageStore.getUrlParams();
+        var user_id    = url_params.user_id;
 
         $.getJSON(
 
@@ -57,8 +59,10 @@ var BlogPage = React.createClass({
 
     render() {
         var blogNavBarItem = this.state.list.map(getNavItem);
-        var user = this.state.user;
-        var pic_url = '';
+        var user           = this.state.user;
+        var pic_url        = '';
+        var _url_params    = BlogPageStore.getUrlParams();
+
         if(article_amount) {
             total = article_amount.total;
         }
@@ -80,10 +84,10 @@ var BlogPage = React.createClass({
                         </p>
 
                         <Link to="/about">link to about
-                        {this.props.url_params.user_id}/
-                        {this.props.url_params.category_id}/
-                        {this.props.url_params.article_id}/
-                        {this.props.url_params.preview}/
+                        {_url_params.user_id}/
+                        {_url_params.category_id}/
+                        {_url_params.article_id}/
+                        {_url_params.preview}/
                         </Link>                    
                             <div  className="category-wrapper">
                                 <ul style={{paddingLeft: 0}}>

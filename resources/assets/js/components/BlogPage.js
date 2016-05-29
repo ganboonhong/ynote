@@ -2,14 +2,18 @@ var React         = require('react');
 var Nav           = require('./Nav');
 var BlogContainer = require('./BlogContainer');
 var Content       = require('./Content');
+var BlogPageStore = require('../stores/BlogPageStore');
 
 var BlogPage = React.createClass({
+    componentWillMount() {
+        BlogPageStore.setUrlParams(this.props.params);
+    },
     render() {
         return (
             <div>
-                <Content url_params={this.props.params}/>
-                <Nav url_params={this.props.params}/>
-                <BlogContainer url_params={this.props.params}/>
+                <Content/>
+                <Nav/>
+                <BlogContainer/>
             </div>
         );
     }

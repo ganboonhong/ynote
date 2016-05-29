@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e87fb8e22be6cf0f66e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4ebe62bc18f4e7ce96ab"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -638,10 +638,8 @@
 
 	var React = __webpack_require__(4);
 	var ReactDOM = __webpack_require__(234);
-	var TestApp = __webpack_require__(369);
 	var BlogPage = __webpack_require__(370);
 	var About = __webpack_require__(410);
-	var Nav = __webpack_require__(371);
 
 	var WebAPIUtils = __webpack_require__(411);
 
@@ -32488,128 +32486,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 369 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _index = __webpack_require__(3);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(40);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(41);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _components = {
-	  TestApp: {
-	    displayName: "TestApp"
-	  }
-	};
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/boonhong/ynote/resources/assets/js/components/TestApp.js",
-	  components: _components,
-	  locals: [module],
-	  imports: [_react3.default]
-	});
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/boonhong/ynote/resources/assets/js/components/TestApp.js",
-	  components: _components,
-	  locals: [],
-	  imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	  return function (Component) {
-	    return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	  };
-	}
-
-	var TestApp = _wrapComponent("TestApp")(function (_Component) {
-	  _inherits(TestApp, _Component);
-
-	  function TestApp(props) {
-	    _classCallCheck(this, TestApp);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TestApp).call(this, props));
-
-	    _this.state = { counter: 0 };
-	    return _this;
-	  }
-
-	  _createClass(TestApp, [{
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      this.interval = setInterval(this.increment.bind(this), 1000);
-	    }
-	  }, {
-	    key: "increment",
-	    value: function increment() {
-	      this.setState(function (_ref) {
-	        var counter = _ref.counter;
-
-	        return { counter: counter + 1 };
-	      });
-	    }
-	  }, {
-	    key: "componentWillUnmount",
-	    value: function componentWillUnmount() {
-	      clearInterval(this.interval);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var counter = this.state.counter;
-
-
-	      return _react3.default.createElement(
-	        "header",
-	        null,
-	        _react3.default.createElement(
-	          "div",
-	          null,
-	          "Webpack is doing its thing with React and ES2015"
-	        ),
-	        _react3.default.createElement(
-	          "div",
-	          null,
-	          counter
-	        )
-	      );
-	    }
-	  }]);
-
-	  return TestApp;
-	}(_react2.Component));
-
-	exports.default = TestApp;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
-
-/***/ },
+/* 369 */,
 /* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32661,16 +32538,20 @@
 	var Nav = __webpack_require__(371);
 	var BlogContainer = __webpack_require__(381);
 	var Content = __webpack_require__(387);
+	var BlogPageStore = __webpack_require__(414);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
+	    componentWillMount: function componentWillMount() {
+	        BlogPageStore.setUrlParams(this.props.params);
+	    },
 	    render: function render() {
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(Content, { url_params: this.props.params }),
-	            React.createElement(Nav, { url_params: this.props.params }),
-	            React.createElement(BlogContainer, { url_params: this.props.params })
+	            React.createElement(Content, null),
+	            React.createElement(Nav, null),
+	            React.createElement(BlogContainer, null)
 	        );
 	    }
 	}));
@@ -32735,6 +32616,7 @@
 	var React = __webpack_require__(4);
 	var NavItem = __webpack_require__(373);
 	var NavStore = __webpack_require__(379);
+	var BlogPageStore = __webpack_require__(414);
 	var NavActionCreator = __webpack_require__(374);
 	var NavActionCreators = __webpack_require__(374);
 	var article_amount;
@@ -32766,7 +32648,8 @@
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var user_id = this.props.url_params.user_id;
+	        var url_params = BlogPageStore.getUrlParams();
+	        var user_id = url_params.user_id;
 
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
 	            article_amount = data.article_amount;
@@ -32781,6 +32664,8 @@
 	        var blogNavBarItem = this.state.list.map(getNavItem);
 	        var user = this.state.user;
 	        var pic_url = '';
+	        var _url_params = BlogPageStore.getUrlParams();
+
 	        if (article_amount) {
 	            total = article_amount.total;
 	        }
@@ -32807,13 +32692,13 @@
 	                _reactRouter.Link,
 	                { to: '/about' },
 	                'link to about',
-	                this.props.url_params.user_id,
+	                _url_params.user_id,
 	                '/',
-	                this.props.url_params.category_id,
+	                _url_params.category_id,
 	                '/',
-	                this.props.url_params.article_id,
+	                _url_params.article_id,
 	                '/',
-	                this.props.url_params.preview,
+	                _url_params.preview,
 	                '/'
 	            ),
 	            React.createElement(
@@ -43161,10 +43046,12 @@
 	var _categories = [];
 	var current_category;
 	var _user;
+	var BlogPageStore = __webpack_require__(414);
 
 	var NavStore = assign({}, EventEmitter.prototype, {
-	    init: function init(url_params) {
+	    init: function init() {
 
+	        var url_params = BlogPageStore.getUrlParams();
 	        var user_id = url_params.user_id;
 
 	        $.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
@@ -43194,14 +43081,8 @@
 	    switch (action.type) {
 
 	        case 'init_category':
-	            NavStore.init(action.url_params);
-	            // NavStore.emitChange();
+	            NavStore.init();
 	            break;
-
-	        // case 'clickCategory':
-	        // current_category = _categories[action.categoryID];
-	        // NavStore.emitChange();
-	        // break;
 
 	        default:
 	        // do nothing
@@ -43572,6 +43453,7 @@
 	var Blog = __webpack_require__(382);
 	var BlogStore = __webpack_require__(385);
 	var ContentStore = __webpack_require__(384);
+	var BlogPageStore = __webpack_require__(414);
 	var ClassNames = __webpack_require__(386);
 	var BlogActionCreators = __webpack_require__(383);
 
@@ -43594,12 +43476,14 @@
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
-	        BlogActionCreators.receiveAll(this.props.url_params);
+	        BlogActionCreators.init_blog();
 	    },
+
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var user_id = this.props.url_params.user_id;
+	        var url_params = BlogPageStore.getUrlParams();
+	        var user_id = url_params.user_id;
 
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
@@ -43733,12 +43617,13 @@
 	var AppDispatcher = __webpack_require__(375);
 
 	module.exports = {
-	    receiveAll: function receiveAll(url_params) {
+
+	    init_blog: function init_blog() {
 	        AppDispatcher.dispatch({
-	            type: 'init_blog',
-	            url_params: url_params
+	            type: 'init_blog'
 	        });
 	    },
+
 	    clickBlog: function clickBlog(content) {
 	        AppDispatcher.dispatch({
 	            type: 'clickBlog',
@@ -43760,7 +43645,6 @@
 	var contentObj = {};
 
 	var ContentStore = assign({}, EventEmitter.prototype, {
-	    init: function init(data) {},
 
 	    emitChange: function emitChange() {
 	        this.emit(CHANGE_EVENT);
@@ -43778,10 +43662,6 @@
 
 	ContentStore.dispatchToken = AppDispatcher.register(function (action) {
 	    switch (action.type) {
-
-	        case 'init_blog':
-	            ContentStore.init();
-	            break;
 
 	        case 'clickBlog':
 	            contentObj.content = action.content;
@@ -43807,10 +43687,11 @@
 	var CHANGE_EVENT = 'change';
 	var _blogs = [];
 	var _current_blogs = [];
+	var BlogPageStore = __webpack_require__(414);
 
 	var BlogStore = assign({}, EventEmitter.prototype, {
-	    init: function init(url_params) {
-
+	    init: function init() {
+	        var url_params = BlogPageStore.getUrlParams();
 	        var user_id = url_params.user_id;
 
 	        $.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
@@ -43841,9 +43722,9 @@
 
 	BlogStore.dispatchToken = AppDispatcher.register(function (action) {
 	    switch (action.type) {
-	        //
+
 	        case 'init_blog':
-	            BlogStore.init(action.url_params);
+	            BlogStore.init();
 	            break;
 
 	        case 'clickCategory':
@@ -46167,11 +46048,52 @@
 	var BlogActionCreators = __webpack_require__(383);
 
 	module.exports = {
-	    init: function init() {
-	        // NavActionCreators.receiveAll();
-	        // BlogActionCreators.receiveAll();
-	    }
+	    init: function init() {}
 	};
+
+/***/ },
+/* 412 */,
+/* 413 */,
+/* 414 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(375);
+	var EventEmitter = __webpack_require__(380).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+	var _url_params = _url_params;
+
+	var BlogPageStore = assign({}, EventEmitter.prototype, {
+
+	    emitChange: function emitChange() {
+	        this.emit(CHANGE_EVENT);
+	    },
+
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(CHANGE_EVENT, callback);
+	    },
+
+	    setUrlParams: function setUrlParams(url_params) {
+	        _url_params = url_params;
+	    },
+
+	    getUrlParams: function getUrlParams() {
+	        return _url_params;
+	    }
+
+	});
+
+	BlogPageStore.dispatchToken = AppDispatcher.register(function (action) {
+	    switch (action.type) {
+
+	        default:
+	        // do nothing
+	    }
+	});
+
+	module.exports = BlogPageStore;
 
 /***/ }
 /******/ ]);

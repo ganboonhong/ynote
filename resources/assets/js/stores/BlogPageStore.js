@@ -2,9 +2,9 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter  = require('events').EventEmitter;
 var assign        = require('object-assign');
 var CHANGE_EVENT  = 'change';
-var contentObj      = {};
+var _url_params   = _url_params;
 
-var ContentStore = assign({}, EventEmitter.prototype, {
+var BlogPageStore = assign({}, EventEmitter.prototype, {
 
     emitChange: function(){
         this.emit(CHANGE_EVENT);
@@ -14,23 +14,22 @@ var ContentStore = assign({}, EventEmitter.prototype, {
         this.on(CHANGE_EVENT, callback);
     },
 
-    getContent: function(){
-        return contentObj;
+    setUrlParams: function(url_params){
+        _url_params = url_params;
     },
+
+    getUrlParams: function(){
+        return _url_params;
+    }
     
 });
 
-ContentStore.dispatchToken = AppDispatcher.register(function(action){
+BlogPageStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.type){
-
-        case 'clickBlog':
-            contentObj.content = action.content;
-            ContentStore.emitChange();
-        break;
 
         default:
             // do nothing
     }
 });
 
-module.exports = ContentStore;
+module.exports = BlogPageStore;

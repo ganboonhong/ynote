@@ -1,10 +1,8 @@
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory } from 'react-router'
 var React       = require("react");
 var ReactDOM    = require("react-dom");
-var TestApp     = require("./components/TestApp");
 var BlogPage    = require("./components/BlogPage");
 var About       = require("./components/About");
-var Nav         = require("./components/Nav");
 
 var WebAPIUtils = require("./utils/WebAPIUtils");
 
