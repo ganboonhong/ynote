@@ -1,4 +1,4 @@
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory } from 'react-router'
 var React       = require("react");
 var ReactDOM    = require("react-dom");
 var TestApp     = require("./components/TestApp");
@@ -10,7 +10,7 @@ var WebAPIUtils = require("./utils/WebAPIUtils");
 WebAPIUtils.init();
 
 var App = React.createClass({
-    render: function() {
+    render() {
         return (
           <div>
             {this.props.children}
@@ -22,12 +22,12 @@ var App = React.createClass({
 
 ReactDOM.render(
 
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
+    <Route path="/about" component={About} />
     <Route path="/" component={App}>
-        <IndexRoute component={BlogPage} />
-        <Route path="/about" component={About} />
-        <Route path="/blog/2" component={BlogPage} />
+        <IndexRoute component={BlogPage}>
         <Route path="/blog_nav_bar" component={Nav} />
+        </IndexRoute>
     </Route>
   </Router>,
 

@@ -33,6 +33,10 @@ var BlogStore = assign({}, EventEmitter.prototype, {
         this.on(CHANGE_EVENT, callback);
     },
 
+     removeChangeListener: function(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
+    },
+
     getCurrentBlogs: function(){
         return _current_blogs;
     }

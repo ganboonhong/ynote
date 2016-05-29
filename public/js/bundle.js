@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bbde2958e590d1c7123c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3f73ccee473fd44ec043"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -648,7 +648,6 @@
 
 	var App = _wrapComponent("_component")(React.createClass({
 	  displayName: "App",
-
 	  render: function render() {
 	    return React.createElement(
 	      "div",
@@ -656,19 +655,20 @@
 	      this.props.children
 	    );
 	  }
-
 	}));
 
 	ReactDOM.render(React.createElement(
 	  _reactRouter.Router,
-	  { history: _reactRouter.browserHistory },
+	  { history: _reactRouter.hashHistory },
+	  React.createElement(_reactRouter.Route, { path: "/about", component: About }),
 	  React.createElement(
 	    _reactRouter.Route,
 	    { path: "/", component: App },
-	    React.createElement(_reactRouter.IndexRoute, { component: BlogPage }),
-	    React.createElement(_reactRouter.Route, { path: "/about", component: About }),
-	    React.createElement(_reactRouter.Route, { path: "/blog/2", component: BlogPage }),
-	    React.createElement(_reactRouter.Route, { path: "/blog_nav_bar", component: Nav })
+	    React.createElement(
+	      _reactRouter.IndexRoute,
+	      { component: BlogPage },
+	      React.createElement(_reactRouter.Route, { path: "/blog_nav_bar", component: Nav })
+	    )
 	  )
 	), document.getElementById("container"));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
@@ -43814,6 +43814,10 @@
 	        this.on(CHANGE_EVENT, callback);
 	    },
 
+	    removeChangeListener: function removeChangeListener(callback) {
+	        this.removeListener(CHANGE_EVENT, callback);
+	    },
+
 	    getCurrentBlogs: function getCurrentBlogs() {
 	        return _current_blogs;
 	    }
@@ -46128,7 +46132,7 @@
 	            "About me",
 	            React.createElement(
 	                _reactRouter.Link,
-	                { to: "/blog/2" },
+	                { to: "/" },
 	                "Blog"
 	            )
 	        );

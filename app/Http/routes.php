@@ -17,7 +17,9 @@ Route::get('/', 'Auth\AuthController@getLogin');
 //     return view('test.home');
 // });
 
-Route::get('/blog/2', 'BlogController@index');
+Route::get('/blog/', 'BlogController@index');
+
+
 
 Route::get('article/{id}', 'ArticleController@show');
 
