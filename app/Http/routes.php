@@ -17,7 +17,11 @@ Route::get('/', 'Auth\AuthController@getLogin');
 //     return view('test.home');
 // });
 
-Route::get('/', 'BlogController@index');
+Route::get('/blog/{section}',
+    [
+        'as' => 'blog_show',
+        'uses' => 'BlogController@index'
+    ])->where(['section' => '.*']);
 
 Route::get('article/{id}', 'ArticleController@show');
 

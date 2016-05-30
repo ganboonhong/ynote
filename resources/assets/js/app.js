@@ -1,4 +1,4 @@
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 var React       = require("react");
 var ReactDOM    = require("react-dom");
 var BlogPage    = require("./components/BlogPage");
@@ -21,13 +21,13 @@ var App = React.createClass({
 
 ReactDOM.render(
 
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/about" component={About} />
     <Route path="/" component={App}>
         <IndexRoute component={About}>
 
         </IndexRoute>
-        <Route path="/:user_id/:category_id/:article_id/:preview" component={BlogPage} />
+        <Route path="/blog/:user_id/:category_id/:article_id/:preview" component={BlogPage} />
     </Route>
   </Router>,
 

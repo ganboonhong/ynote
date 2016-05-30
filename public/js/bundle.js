@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4ebe62bc18f4e7ce96ab"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1fe32ce8f339e9ce950e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -638,7 +638,7 @@
 
 	var React = __webpack_require__(4);
 	var ReactDOM = __webpack_require__(234);
-	var BlogPage = __webpack_require__(370);
+	var BlogPage = __webpack_require__(369);
 	var About = __webpack_require__(410);
 
 	var WebAPIUtils = __webpack_require__(411);
@@ -658,13 +658,13 @@
 
 	ReactDOM.render(React.createElement(
 	  _reactRouter.Router,
-	  { history: _reactRouter.hashHistory },
+	  { history: _reactRouter.browserHistory },
 	  React.createElement(_reactRouter.Route, { path: "/about", component: About }),
 	  React.createElement(
 	    _reactRouter.Route,
 	    { path: "/", component: App },
 	    React.createElement(_reactRouter.IndexRoute, { component: About }),
-	    React.createElement(_reactRouter.Route, { path: "/:user_id/:category_id/:article_id/:preview", component: BlogPage })
+	    React.createElement(_reactRouter.Route, { path: "/blog/:user_id/:category_id/:article_id/:preview", component: BlogPage })
 	  )
 	), document.getElementById("container"));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
@@ -32486,8 +32486,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 369 */,
-/* 370 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -32535,10 +32534,10 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Nav = __webpack_require__(371);
+	var Nav = __webpack_require__(370);
 	var BlogContainer = __webpack_require__(381);
 	var Content = __webpack_require__(387);
-	var BlogPageStore = __webpack_require__(414);
+	var BlogPageStore = __webpack_require__(380);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -32560,7 +32559,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 371 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -32581,7 +32580,7 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
-	var _jQuery = __webpack_require__(372);
+	var _jQuery = __webpack_require__(371);
 
 	var _jQuery2 = _interopRequireDefault(_jQuery);
 
@@ -32614,11 +32613,11 @@
 	}
 
 	var React = __webpack_require__(4);
-	var NavItem = __webpack_require__(373);
-	var NavStore = __webpack_require__(379);
-	var BlogPageStore = __webpack_require__(414);
-	var NavActionCreator = __webpack_require__(374);
-	var NavActionCreators = __webpack_require__(374);
+	var NavItem = __webpack_require__(372);
+	var NavStore = __webpack_require__(378);
+	var BlogPageStore = __webpack_require__(380);
+	var NavActionCreator = __webpack_require__(373);
+	var NavActionCreators = __webpack_require__(373);
 	var article_amount;
 	var total;
 
@@ -32740,7 +32739,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 372 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -42588,7 +42587,7 @@
 
 
 /***/ },
-/* 373 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -42636,7 +42635,7 @@
 	}
 
 	var React = __webpack_require__(4);
-	var NavActionCreators = __webpack_require__(374);
+	var NavActionCreators = __webpack_require__(373);
 
 	var NavItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'NavItem',
@@ -42668,12 +42667,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 374 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(375);
+	var AppDispatcher = __webpack_require__(374);
 
 	module.exports = {
 
@@ -42694,16 +42693,16 @@
 	};
 
 /***/ },
-/* 375 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Dispatcher = __webpack_require__(376).Dispatcher;
+	var Dispatcher = __webpack_require__(375).Dispatcher;
 
 	module.exports = new Dispatcher();
 
 
 /***/ },
-/* 376 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -42715,11 +42714,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(377)
+	module.exports.Dispatcher = __webpack_require__(376)
 
 
 /***/ },
-/* 377 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -42736,7 +42735,7 @@
 
 	"use strict";
 
-	var invariant = __webpack_require__(378);
+	var invariant = __webpack_require__(377);
 
 	var _lastID = 1;
 	var _prefix = 'ID_';
@@ -42975,7 +42974,7 @@
 
 
 /***/ },
-/* 378 */
+/* 377 */
 /***/ function(module, exports) {
 
 	/**
@@ -43034,19 +43033,19 @@
 
 
 /***/ },
-/* 379 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(375);
-	var EventEmitter = __webpack_require__(380).EventEmitter;
+	var AppDispatcher = __webpack_require__(374);
+	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var _categories = [];
 	var current_category;
 	var _user;
-	var BlogPageStore = __webpack_require__(414);
+	var BlogPageStore = __webpack_require__(380);
 
 	var NavStore = assign({}, EventEmitter.prototype, {
 	    init: function init() {
@@ -43092,7 +43091,7 @@
 	module.exports = NavStore;
 
 /***/ },
-/* 380 */
+/* 379 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -43396,6 +43395,48 @@
 
 
 /***/ },
+/* 380 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(374);
+	var EventEmitter = __webpack_require__(379).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+	var _url_params = _url_params;
+
+	var BlogPageStore = assign({}, EventEmitter.prototype, {
+
+	    emitChange: function emitChange() {
+	        this.emit(CHANGE_EVENT);
+	    },
+
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(CHANGE_EVENT, callback);
+	    },
+
+	    setUrlParams: function setUrlParams(url_params) {
+	        _url_params = url_params;
+	    },
+
+	    getUrlParams: function getUrlParams() {
+	        return _url_params;
+	    }
+
+	});
+
+	BlogPageStore.dispatchToken = AppDispatcher.register(function (action) {
+	    switch (action.type) {
+
+	        default:
+	        // do nothing
+	    }
+	});
+
+	module.exports = BlogPageStore;
+
+/***/ },
 /* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -43417,7 +43458,7 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
-	var _jQuery = __webpack_require__(372);
+	var _jQuery = __webpack_require__(371);
 
 	var _jQuery2 = _interopRequireDefault(_jQuery);
 
@@ -43453,7 +43494,7 @@
 	var Blog = __webpack_require__(382);
 	var BlogStore = __webpack_require__(385);
 	var ContentStore = __webpack_require__(384);
-	var BlogPageStore = __webpack_require__(414);
+	var BlogPageStore = __webpack_require__(380);
 	var ClassNames = __webpack_require__(386);
 	var BlogActionCreators = __webpack_require__(383);
 
@@ -43614,7 +43655,7 @@
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(375);
+	var AppDispatcher = __webpack_require__(374);
 
 	module.exports = {
 
@@ -43638,8 +43679,8 @@
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(375);
-	var EventEmitter = __webpack_require__(380).EventEmitter;
+	var AppDispatcher = __webpack_require__(374);
+	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var contentObj = {};
@@ -43681,13 +43722,13 @@
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(375);
-	var EventEmitter = __webpack_require__(380).EventEmitter;
+	var AppDispatcher = __webpack_require__(374);
+	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var _blogs = [];
 	var _current_blogs = [];
-	var BlogPageStore = __webpack_require__(414);
+	var BlogPageStore = __webpack_require__(380);
 
 	var BlogStore = assign({}, EventEmitter.prototype, {
 	    init: function init() {
@@ -45963,7 +46004,7 @@
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(375);
+	var AppDispatcher = __webpack_require__(374);
 
 	module.exports = {};
 
@@ -46044,56 +46085,12 @@
 
 	'use strict';
 
-	var NavActionCreators = __webpack_require__(374);
+	var NavActionCreators = __webpack_require__(373);
 	var BlogActionCreators = __webpack_require__(383);
 
 	module.exports = {
 	    init: function init() {}
 	};
-
-/***/ },
-/* 412 */,
-/* 413 */,
-/* 414 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var AppDispatcher = __webpack_require__(375);
-	var EventEmitter = __webpack_require__(380).EventEmitter;
-	var assign = __webpack_require__(7);
-	var CHANGE_EVENT = 'change';
-	var _url_params = _url_params;
-
-	var BlogPageStore = assign({}, EventEmitter.prototype, {
-
-	    emitChange: function emitChange() {
-	        this.emit(CHANGE_EVENT);
-	    },
-
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(CHANGE_EVENT, callback);
-	    },
-
-	    setUrlParams: function setUrlParams(url_params) {
-	        _url_params = url_params;
-	    },
-
-	    getUrlParams: function getUrlParams() {
-	        return _url_params;
-	    }
-
-	});
-
-	BlogPageStore.dispatchToken = AppDispatcher.register(function (action) {
-	    switch (action.type) {
-
-	        default:
-	        // do nothing
-	    }
-	});
-
-	module.exports = BlogPageStore;
 
 /***/ }
 /******/ ]);
