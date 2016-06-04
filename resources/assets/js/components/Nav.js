@@ -10,27 +10,17 @@ var NavActionCreators = require('../actions/NavActionCreators');
 var article_amount;
 var total;
 
-function getNavItem(data){
-
-    return(
-        <NavItem
-            data={data}
-            key={data.category_id}
-        />
-    )
+function getCurrentCategory(){
+    return NavStore.getCurrentCategory();
 }
 
-function getStateFromStores(){
-    // var test = [NavStore.getCurrentCategory()];
-    // return {list: test};
-}
-
-var BlogPage = React.createClass({
+var Nav = React.createClass({
 
     getInitialState() {
         return {
-            list:  []   ,
+            list:  [],
             user:  [],
+            current_category: 'all'
         };
     },
     componentWillMount() {
@@ -59,10 +49,28 @@ var BlogPage = React.createClass({
     },
 
     render() {
-        var blogNavBarItem = this.state.list.map(getNavItem);
-        var user           = this.state.user;
-        var pic_url        = '';
-        var _url_params    = BlogPageStore.getUrlParams();
+        var current_category = this.state.current_category;
+
+        var blogNavBarItem = this.state.list.map(function(data){
+
+            var category_class = (data.category_id == current_category) ? "category selected-category" : "category";
+            var text_class     = (data.category_id == current_category) ? "category-name-selected" : "";
+
+                return (
+                    <NavItem
+                        data={data}
+                        key={data.category_id}
+                        category_class={category_class}
+                        text_class={text_class}
+                    />
+                )
+        });
+
+        var user               = this.state.user;
+        var pic_url            = '';
+        var _url_params        = BlogPageStore.getUrlParams();
+        var all_category_class = (this.state.current_category == 'all') ? "category selected-category" : "category";
+        var all_text_class     = (this.state.current_category == 'all') ? "category-name-selected" : "";
 
         if(article_amount) {
             total = article_amount.total;
@@ -89,16 +97,17 @@ var BlogPage = React.createClass({
                         {_url_params.category_id}/
                         {_url_params.article_id}/
                         {_url_params.preview}/
-                        </Link>                    
+                        </Link>         
+                                   
                             <div  className="category-wrapper">
                                 <ul style={{paddingLeft: 0}}>
-                                        <a>
-                                            <li className="category" onClick={this._onClick}>
-                                                <span>
+
+                                            <li className={all_category_class} onClick={this._onClick}>
+                                                <span className={all_text_class}>
                                                     All ( {total} )
                                                 </span>
                                             </li>
-                                        </a>
+
                                         {blogNavBarItem}
                                 </ul>
 
@@ -113,9 +122,9 @@ var BlogPage = React.createClass({
     },
 
     _onChange() {
-        this.setState(getStateFromStores());
+        this.setState({current_category: getCurrentCategory()});
     },
 
 });
 
-module.exports = BlogPage;
+module.exports = Nav;

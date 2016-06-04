@@ -5,13 +5,11 @@ var NavItem = React.createClass({
         render() {
             var data = this.props.data;
             return (
-                <a>
-                    <li className="category" onClick={this._onClick} >
-                        <span>
+                    <li className={this.props.category_class} onClick={this._onClick} >
+                        <span className={this.props.text_class}>
                             {data.name} ( {data.total} )
                         </span>
                     </li>
-                </a>
             );
         },
 

@@ -3,7 +3,7 @@ var EventEmitter  = require('events').EventEmitter;
 var assign        = require('object-assign');
 var CHANGE_EVENT  = 'change';
 var _categories   = [];
-var current_category;
+var _current_category;
 var _user;
 var BlogPageStore = require('../stores/BlogPageStore');
 
@@ -38,7 +38,7 @@ var NavStore = assign({}, EventEmitter.prototype, {
     },
 
     getCurrentCategory: function(){
-        return current_category;
+        return _current_category;
     }
 
 });
@@ -48,6 +48,11 @@ NavStore.dispatchToken = AppDispatcher.register(function(action){
 
         case 'init_category':
         NavStore.init();
+        break;
+
+        case 'clickCategory':
+        _current_category = action.categoryID;
+        NavStore.emitChange();
         break;
 
         default:
