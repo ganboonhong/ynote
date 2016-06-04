@@ -41,7 +41,7 @@
             <a href="{{route('article_destroy', ['id' => $article->article_id])}}" class="btn btn-danger btn-sm list_delete_btn" title="Delete">
                 <span class="glyphicon glyphicon-remove"></span>
             </a>
-            <a href="{{route('article_detail', [$article->article_id, $article->category_id, $user->user_id])}}"
+            <a href="{{route('blog_show', [$user->user_id.'/'.$article->article_id.'/1'])}}"
                class="btn btn-success btn-sm preview-btn"
                title="Preview"
                target="_blank"

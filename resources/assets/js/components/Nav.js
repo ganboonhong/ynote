@@ -11,6 +11,7 @@ var article_amount;
 var total;
 
 function getNavItem(data){
+
     return(
         <NavItem
             data={data}

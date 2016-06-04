@@ -1,10 +1,11 @@
-var AppDispatcher  = require('../dispatcher/AppDispatcher');
-var EventEmitter   = require('events').EventEmitter;
-var assign         = require('object-assign');
-var CHANGE_EVENT   = 'change';
-var _blogs         = [];
-var _current_blogs = [];
-var BlogPageStore  = require('../stores/BlogPageStore');
+var AppDispatcher      = require('../dispatcher/AppDispatcher');
+var EventEmitter       = require('events').EventEmitter;
+var assign             = require('object-assign');
+var CHANGE_EVENT       = 'change';
+var BlogPageStore      = require('../stores/BlogPageStore');
+var BlogActionCreators = require('../actions/BlogActionCreators');
+var _blogs             = [];
+var _current_blogs     = [];
 
 var BlogStore = assign({}, EventEmitter.prototype, {
     init: function(){
@@ -22,6 +23,13 @@ var BlogStore = assign({}, EventEmitter.prototype, {
                     var obj = data[key];
                     _blogs[obj.article_id] = obj;
                 }
+
+                if(url_params.article_id && url_params.preview == 1 ){
+                    // pop up modal when loading page
+                    _current_blogs = _blogs[url_params.article_id];
+                    BlogActionCreators.clickBlog(_current_blogs.content);
+                }
+
             }
         );
     },

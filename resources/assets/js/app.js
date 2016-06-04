@@ -3,6 +3,7 @@ var React       = require("react");
 var ReactDOM    = require("react-dom");
 var BlogPage    = require("./components/BlogPage");
 var About       = require("./components/About");
+var NotFound       = require("./components/NotFound");
 
 var WebAPIUtils = require("./utils/WebAPIUtils");
 
@@ -24,10 +25,9 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/about" component={About} />
     <Route path="/" component={App}>
-        <IndexRoute component={About}>
-
-        </IndexRoute>
-        <Route path="/blog/:user_id/:category_id/:article_id/:preview" component={BlogPage} />
+        <IndexRoute component={About} />
+        <Route path="/blog/:user_id/:article_id/:preview" component={BlogPage} />
+        <Route path="*" component={NotFound} />
     </Route>
   </Router>,
 
