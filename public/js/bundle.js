@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b61589545ad612e7729f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e07df38e0241607735ca"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32583,8 +32583,6 @@
 	                navData = data;
 	            }
 	        });
-
-	        console.log(navData);
 
 	        return React.createElement(
 	            'div',

@@ -43,8 +43,6 @@ var BlogPage = React.createClass({
             }
         });
 
-        console.log(navData);
-
         return (
             <div>
                 <Content/>

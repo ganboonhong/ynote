@@ -7,7 +7,10 @@ var Nav = require('../Nav.js');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import { renderIntoDocument, findRenderedDOMComponentWithClass } from 'react-addons-test-utils';
+import { 
+    renderIntoDocument, 
+    findRenderedDOMComponentWithClass,
+    scryRenderedDOMComponentsWithClass as findByClass } from 'react-addons-test-utils';
 import { findDOMNode } from 'react-dom';
 
 const renderer = TestUtils.createRenderer();
@@ -28,7 +31,7 @@ describe('Nav Component', () => {
         let component = mount(Nav, testData);
         let node = findDOMNode(component);
         // let node = findRenderedDOMComponentWithClass(component, 'category'); // find node by class
-        expect(component).toEqual('foo ( 10 )')
+        expect(findByClass(component, 'category').length).toEqual(6)
     });
 
 });

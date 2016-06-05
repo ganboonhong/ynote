@@ -12,9 +12,9 @@ const testData = {  data: {name: 'foo', total: '10'},
                     text_class: 'category-name'
                     };
 
-function mount(Component, props) {
-    return renderIntoDocument(<Component { ...props } />);
-}
+// function mount(Component, props) {
+//     return renderIntoDocument(<Component { ...props } />);
+// }
 
 function shallow(Component, props) {
     renderer.render(<Component {...props} />);
@@ -33,7 +33,8 @@ describe('NavItem Component', () => {
     });
 
     it ('mount should render a simple component', () => {
-        let component = mount(NavItem, testData);
+        // let component = mount(NavItem, testData);
+        let component = renderIntoDocument(<NavItem {...testData}/> );
         let node = findDOMNode(component);
         // let node = findRenderedDOMComponentWithClass(component, 'category'); // find node by class
         expect(node.textContent).toEqual('foo ( 10 )')
