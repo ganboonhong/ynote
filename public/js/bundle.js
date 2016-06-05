@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e07df38e0241607735ca"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d2c1518124cfef7399b8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32509,7 +32509,7 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
-	var _jQuery = __webpack_require__(371);
+	var _jQuery = __webpack_require__(370);
 
 	var _jQuery2 = _interopRequireDefault(_jQuery);
 
@@ -32540,7 +32540,7 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Nav = __webpack_require__(370);
+	var Nav = __webpack_require__(371);
 	var BlogContainer = __webpack_require__(381);
 	var Content = __webpack_require__(387);
 	var BlogPageStore = __webpack_require__(380);
@@ -32599,184 +32599,6 @@
 
 /***/ },
 /* 370 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
-
-	var _index = __webpack_require__(3);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(40);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(41);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	var _jQuery = __webpack_require__(371);
-
-	var _jQuery2 = _interopRequireDefault(_jQuery);
-
-	var _reactRouter = __webpack_require__(173);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	    _component: {}
-	};
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Nav.js',
-	    components: _components,
-	    locals: [module],
-	    imports: [_react3.default]
-	});
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Nav.js',
-	    components: _components,
-	    locals: [],
-	    imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	    return function (Component) {
-	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	    };
-	}
-
-	var React = __webpack_require__(4);
-	var NavItem = __webpack_require__(372);
-	var NavStore = __webpack_require__(378);
-	var BlogPageStore = __webpack_require__(380);
-	var NavActionCreator = __webpack_require__(373);
-	var NavActionCreators = __webpack_require__(373);
-	var article_amount;
-	var total;
-
-	function getCurrentCategory() {
-	    return NavStore.getCurrentCategory();
-	}
-
-	var Nav = _wrapComponent('_component')(React.createClass({
-	    displayName: 'Nav',
-	    getInitialState: function getInitialState() {
-	        return {
-	            list: [],
-	            user: [],
-	            current_category: 'all'
-	        };
-	    },
-	    componentWillMount: function componentWillMount() {
-	        NavActionCreator.init_category();
-	    },
-
-
-	    componentDidMount: function componentDidMount() {
-	        var obj = this;
-	        // var url_params = this.props.url_params;
-	        // var user_id    = url_params.user_id;
-	        var data = this.props.navData;
-
-	        article_amount = data.article_amount;
-	        obj.setState({ list: data.categories });
-	        obj.setState({ user: data.user });
-
-	        NavStore.addChangeListener(this._onChange);
-	    },
-
-	    render: function render() {
-	        var current_category = this.state.current_category;
-
-	        var blogNavBarItem = this.state.list.map(function (data) {
-
-	            var category_class = data.category_id == current_category ? "category finger selected-category" : "finger category";
-	            var text_class = data.category_id == current_category ? "category-name-selected" : "category-name";
-
-	            return React.createElement(NavItem, {
-	                data: data,
-	                key: data.category_id,
-	                category_class: category_class,
-	                text_class: text_class
-	            });
-	        });
-
-	        var user = this.state.user;
-	        var pic_url = '';
-	        var _url_params = BlogPageStore.getUrlParams();
-	        var all_category_class_neccessary = "finger category";
-	        var all_category_class = this.state.current_category == 'all' ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
-	        var all_text_class = this.state.current_category == 'all' ? "category-name-selected" : "";
-
-	        if (article_amount) {
-	            total = article_amount.total;
-	        }
-
-	        if (user.cloudinary_api_response) {
-	            var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
-	            pic_url = cloudinary_api_response.secure_url;
-	        }
-
-	        return React.createElement(
-	            'div',
-	            { className: 'col-md-3 col-sm-2 col-xs-12 author' },
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement('img', { src: pic_url, id: 'profile-pic' })
-	            ),
-	            React.createElement(
-	                'p',
-	                { id: 'author-description' },
-	                user.description
-	            ),
-	            React.createElement(
-	                _reactRouter.Link,
-	                { to: '/about' },
-	                'link to about'
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'category-wrapper' },
-	                React.createElement(
-	                    'ul',
-	                    { style: { paddingLeft: 0 } },
-	                    React.createElement(
-	                        'li',
-	                        { className: all_category_class, onClick: this._onClick },
-	                        React.createElement(
-	                            'span',
-	                            { className: all_text_class },
-	                            'All ( ',
-	                            total,
-	                            ' )'
-	                        )
-	                    ),
-	                    blogNavBarItem
-	                ),
-	                React.createElement('span', { className: 'socialShare' })
-	            )
-	        );
-	    },
-	    _onClick: function _onClick() {
-	        NavActionCreators.clickCategory('all');
-	    },
-	    _onChange: function _onChange() {
-	        this.setState({ current_category: getCurrentCategory() });
-	    }
-	}));
-
-	module.exports = Nav;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
-
-/***/ },
-/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -43790,6 +43612,184 @@
 
 
 /***/ },
+/* 371 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
+
+	var _index = __webpack_require__(3);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(40);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _react2 = __webpack_require__(4);
+
+	var _react3 = _interopRequireDefault(_react2);
+
+	var _index5 = __webpack_require__(41);
+
+	var _index6 = _interopRequireDefault(_index5);
+
+	var _jQuery = __webpack_require__(370);
+
+	var _jQuery2 = _interopRequireDefault(_jQuery);
+
+	var _reactRouter = __webpack_require__(173);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _components = {
+	    _component: {}
+	};
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Nav.js',
+	    components: _components,
+	    locals: [module],
+	    imports: [_react3.default]
+	});
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Nav.js',
+	    components: _components,
+	    locals: [],
+	    imports: [_react3.default, _index2.default]
+	});
+
+	function _wrapComponent(id) {
+	    return function (Component) {
+	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    };
+	}
+
+	var React = __webpack_require__(4);
+	var NavItem = __webpack_require__(372);
+	var NavStore = __webpack_require__(378);
+	var BlogPageStore = __webpack_require__(380);
+	var NavActionCreator = __webpack_require__(373);
+	var NavActionCreators = __webpack_require__(373);
+	var article_amount;
+	var total;
+
+	function getCurrentCategory() {
+	    return NavStore.getCurrentCategory();
+	}
+
+	var Nav = _wrapComponent('_component')(React.createClass({
+	    displayName: 'Nav',
+	    getInitialState: function getInitialState() {
+	        return {
+	            list: [],
+	            user: [],
+	            current_category: 'all'
+	        };
+	    },
+	    componentWillMount: function componentWillMount() {
+	        NavActionCreator.init_category();
+	    },
+
+
+	    componentDidMount: function componentDidMount() {
+	        var obj = this;
+	        // var url_params = this.props.url_params;
+	        // var user_id    = url_params.user_id;
+	        var data = this.props.navData;
+
+	        article_amount = data.article_amount;
+	        obj.setState({ list: data.categories });
+	        obj.setState({ user: data.user });
+
+	        NavStore.addChangeListener(this._onChange);
+	    },
+
+	    render: function render() {
+	        var current_category = this.state.current_category;
+
+	        var blogNavBarItem = this.state.list.map(function (data) {
+
+	            var category_class = data.category_id == current_category ? "category finger selected-category" : "finger category";
+	            var text_class = data.category_id == current_category ? "category-name-selected" : "category-name";
+
+	            return React.createElement(NavItem, {
+	                data: data,
+	                key: data.category_id,
+	                category_class: category_class,
+	                text_class: text_class
+	            });
+	        });
+
+	        var user = this.state.user;
+	        var pic_url = '';
+	        var _url_params = BlogPageStore.getUrlParams();
+	        var all_category_class_neccessary = "finger category";
+	        var all_category_class = this.state.current_category == 'all' ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
+	        var all_text_class = this.state.current_category == 'all' ? "category-name-selected" : "";
+
+	        if (article_amount) {
+	            total = article_amount.total;
+	        }
+
+	        if (user.cloudinary_api_response) {
+	            var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
+	            pic_url = cloudinary_api_response.secure_url;
+	        }
+
+	        return React.createElement(
+	            'div',
+	            { className: 'col-md-3 col-sm-2 col-xs-12 author' },
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement('img', { src: pic_url, id: 'profile-pic' })
+	            ),
+	            React.createElement(
+	                'p',
+	                { id: 'author-description' },
+	                user.description
+	            ),
+	            React.createElement(
+	                _reactRouter.Link,
+	                { to: '/about' },
+	                'link to about'
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'category-wrapper' },
+	                React.createElement(
+	                    'ul',
+	                    { style: { paddingLeft: 0 } },
+	                    React.createElement(
+	                        'li',
+	                        { className: all_category_class, onClick: this._onClick },
+	                        React.createElement(
+	                            'span',
+	                            { className: all_text_class },
+	                            'All ( ',
+	                            total,
+	                            ' )'
+	                        )
+	                    ),
+	                    blogNavBarItem
+	                ),
+	                React.createElement('span', { className: 'socialShare' })
+	            )
+	        );
+	    },
+	    _onClick: function _onClick() {
+	        NavActionCreators.clickCategory('all');
+	    },
+	    _onChange: function _onChange() {
+	        this.setState({ current_category: getCurrentCategory() });
+	    }
+	}));
+
+	module.exports = Nav;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ },
 /* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -44663,7 +44663,7 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
-	var _jQuery = __webpack_require__(371);
+	var _jQuery = __webpack_require__(370);
 
 	var _jQuery2 = _interopRequireDefault(_jQuery);
 
