@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7f5051823b8f02addb7c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b61589545ad612e7729f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32509,6 +32509,10 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
+	var _jQuery = __webpack_require__(371);
+
+	var _jQuery2 = _interopRequireDefault(_jQuery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _components = {
@@ -32547,11 +32551,46 @@
 	        BlogPageStore.setUrlParams(this.props.params);
 	    },
 	    render: function render() {
+	        var url_params = BlogPageStore.getUrlParams();
+
+	        // $.extend({
+	        //     getValues: function(){
+	        //         var navData = null;
+	        //         $.getJSON(
+
+	        //             "/" + url_params.user_id + "/article/",
+
+	        //             { isNavBar: true },
+
+	        //             function (data) {
+	        //                 navData = data;
+	        //                 console.log(navData);
+	        //             }
+	        //         );
+
+	        //         return navData;
+	        //     }
+	        // })
+
+	        var navData;
+
+	        _jQuery2.default.ajax({
+	            async: false,
+	            url: "/" + url_params.user_id + "/article/",
+	            data: { isNavBar: true },
+	            dataType: 'json',
+	            success: function success(data) {
+	                navData = data;
+	            }
+	        });
+
+	        console.log(navData);
+
 	        return React.createElement(
 	            'div',
 	            null,
 	            React.createElement(Content, null),
-	            React.createElement(Nav, null),
+	            React.createElement(Nav, { navData: navData }),
 	            React.createElement(BlogContainer, null)
 	        );
 	    }
@@ -32637,19 +32676,19 @@
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
-	        NavActionCreator.receiveAll(this.props.url_params);
+	        NavActionCreator.init_category();
 	    },
+
 
 	    componentDidMount: function componentDidMount() {
 	        var obj = this;
-	        var url_params = BlogPageStore.getUrlParams();
-	        var user_id = url_params.user_id;
+	        // var url_params = this.props.url_params;
+	        // var user_id    = url_params.user_id;
+	        var data = this.props.navData;
 
-	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
-	            article_amount = data.article_amount;
-	            obj.setState({ list: data.categories });
-	            obj.setState({ user: data.user });
-	        });
+	        article_amount = data.article_amount;
+	        obj.setState({ list: data.categories });
+	        obj.setState({ user: data.user });
 
 	        NavStore.addChangeListener(this._onChange);
 	    },
@@ -32659,8 +32698,8 @@
 
 	        var blogNavBarItem = this.state.list.map(function (data) {
 
-	            var category_class = data.category_id == current_category ? "category selected-category" : "category";
-	            var text_class = data.category_id == current_category ? "category-name-selected" : "";
+	            var category_class = data.category_id == current_category ? "category finger selected-category" : "finger category";
+	            var text_class = data.category_id == current_category ? "category-name-selected" : "category-name";
 
 	            return React.createElement(NavItem, {
 	                data: data,
@@ -32673,7 +32712,8 @@
 	        var user = this.state.user;
 	        var pic_url = '';
 	        var _url_params = BlogPageStore.getUrlParams();
-	        var all_category_class = this.state.current_category == 'all' ? "category selected-category" : "category";
+	        var all_category_class_neccessary = "finger category";
+	        var all_category_class = this.state.current_category == 'all' ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
 	        var all_text_class = this.state.current_category == 'all' ? "category-name-selected" : "";
 
 	        if (article_amount) {
@@ -32701,15 +32741,7 @@
 	            React.createElement(
 	                _reactRouter.Link,
 	                { to: '/about' },
-	                'link to about',
-	                _url_params.user_id,
-	                '/',
-	                _url_params.category_id,
-	                '/',
-	                _url_params.article_id,
-	                '/',
-	                _url_params.preview,
-	                '/'
+	                'link to about'
 	            ),
 	            React.createElement(
 	                'div',
@@ -43852,7 +43884,7 @@
 	        });
 	    },
 
-	    receiveAll: function receiveAll(url_params) {
+	    init_category: function init_category(url_params) {
 	        AppDispatcher.dispatch({
 	            type: 'init_category',
 	            url_params: url_params
@@ -43865,10 +43897,11 @@
 /* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	var Dispatcher = __webpack_require__(375).Dispatcher;
 
 	module.exports = new Dispatcher();
-
 
 /***/ },
 /* 375 */
@@ -44800,12 +44833,12 @@
 	                { className: 'col-md-4 col-sm-5 col-xs-12 item' },
 	                React.createElement(
 	                    'a',
-	                    { onClick: this._onClick },
+	                    { onClick: this._onClick, className: 'finger' },
 	                    React.createElement('img', { src: pic_url, className: 'list-pics' })
 	                ),
 	                React.createElement(
 	                    'a',
-	                    null,
+	                    { className: 'finger' },
 	                    React.createElement(
 	                        'p',
 	                        { className: 'title' },

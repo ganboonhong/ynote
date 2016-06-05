@@ -58,6 +58,8 @@ body{
 }
 .category:hover{
     background: #bcb39d;
+    color: white;
+    font-weight: bold;
 }
 .selected-category{
     background: #bcb39d;

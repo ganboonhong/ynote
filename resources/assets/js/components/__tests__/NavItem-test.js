@@ -7,7 +7,10 @@ import { renderIntoDocument, findRenderedDOMComponentWithClass } from 'react-add
 import { findDOMNode } from 'react-dom';
 
 const renderer = TestUtils.createRenderer();
-const testData = {data: {name: 'foo', total: '10'}};
+const testData = {  data: {name: 'foo', total: '10'}, 
+                    category_class: 'finger category',
+                    text_class: 'category-name'
+                    };
 
 function mount(Component, props) {
     return renderIntoDocument(<Component { ...props } />);
@@ -28,14 +31,24 @@ describe('NavItem Component', () => {
         expect(result.props.children.type).toBe('span');
 
     });
-});
 
-
-describe('the simplest way to test a react component', () => {
     it ('mount should render a simple component', () => {
         let component = mount(NavItem, testData);
         let node = findDOMNode(component);
         // let node = findRenderedDOMComponentWithClass(component, 'category'); // find node by class
         expect(node.textContent).toEqual('foo ( 10 )')
     });
+
+    // it ('should simulate a click', () => {
+    //     let component = mount(NavItem, testData);
+    //     let node      = findDOMNode(component);
+
+    //     TestUtils.Simulate.click(node);
+
+    //     expect(node.className).toBe(0)
+
+    // });
+
 });
+
+

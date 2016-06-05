@@ -9,7 +9,7 @@ module.exports = {
         });
     },
     
-    receiveAll: function(url_params){
+    init_category: function(url_params){
         AppDispatcher.dispatch({
             type: 'init_category',
             url_params: url_params

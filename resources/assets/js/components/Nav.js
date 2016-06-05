@@ -23,26 +23,21 @@ var Nav = React.createClass({
             current_category: 'all'
         };
     },
+
     componentWillMount() {
-        NavActionCreator.receiveAll(this.props.url_params);
+        NavActionCreator.init_category();
     },
+
     componentDidMount: function() {
         var obj        = this;
-        var url_params = BlogPageStore.getUrlParams();
-        var user_id    = url_params.user_id;
+        // var url_params = this.props.url_params;
+        // var user_id    = url_params.user_id;
+        var data = this.props.navData;
 
-        $.getJSON(
 
-            "/" + user_id + "/article/",
-
-            { isNavBar: true },
-
-            function (data) {
-                article_amount = data.article_amount;
-                obj.setState({list:  data.categories});
-                obj.setState({user:  data.user})
-            }
-        );
+        article_amount = data.article_amount;
+        obj.setState({list:  data.categories});
+        obj.setState({user:  data.user})
 
         NavStore.addChangeListener(this._onChange);
 
@@ -53,8 +48,8 @@ var Nav = React.createClass({
 
         var blogNavBarItem = this.state.list.map(function(data){
 
-            var category_class = (data.category_id == current_category) ? "category selected-category" : "category";
-            var text_class     = (data.category_id == current_category) ? "category-name-selected" : "";
+            var category_class = (data.category_id == current_category) ? "category finger selected-category" : "finger category";
+            var text_class     = (data.category_id == current_category) ? "category-name-selected" : "category-name";
 
                 return (
                     <NavItem
@@ -69,7 +64,8 @@ var Nav = React.createClass({
         var user               = this.state.user;
         var pic_url            = '';
         var _url_params        = BlogPageStore.getUrlParams();
-        var all_category_class = (this.state.current_category == 'all') ? "category selected-category" : "category";
+        var all_category_class_neccessary = "finger category";
+        var all_category_class = (this.state.current_category == 'all') ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
         var all_text_class     = (this.state.current_category == 'all') ? "category-name-selected" : "";
 
         if(article_amount) {
@@ -92,23 +88,18 @@ var Nav = React.createClass({
                             {user.description}
                         </p>
 
-                        <Link to="/about">link to about
-                        {_url_params.user_id}/
-                        {_url_params.category_id}/
-                        {_url_params.article_id}/
-                        {_url_params.preview}/
-                        </Link>         
+                        <Link to="/about">link to about</Link>         
                                    
                             <div  className="category-wrapper">
                                 <ul style={{paddingLeft: 0}}>
 
-                                            <li className={all_category_class} onClick={this._onClick}>
-                                                <span className={all_text_class}>
-                                                    All ( {total} )
-                                                </span>
-                                            </li>
+                                    <li className={all_category_class} onClick={this._onClick}>
+                                        <span className={all_text_class}>
+                                            All ( {total} )
+                                        </span>
+                                    </li>
 
-                                        {blogNavBarItem}
+                                    {blogNavBarItem}
                                 </ul>
 
                                 <span className="socialShare"></span>

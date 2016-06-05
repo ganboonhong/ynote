@@ -47,12 +47,12 @@ NavStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.type){
 
         case 'init_category':
-        NavStore.init();
+            NavStore.init();
         break;
 
         case 'clickCategory':
-        _current_category = action.categoryID;
-        NavStore.emitChange();
+            _current_category = action.categoryID;
+            NavStore.emitChange();
         break;
 
         default:

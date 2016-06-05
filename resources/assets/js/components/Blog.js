@@ -17,10 +17,10 @@ var Blog = React.createClass({
                 <div className="list-item-container">
                     
                         <div className="col-md-4 col-sm-5 col-xs-12 item">
-                            <a onClick={this._onClick}>
+                            <a onClick={this._onClick} className="finger">
                                 <img src={pic_url} className="list-pics" />
                             </a>
-                            <a>
+                            <a className="finger">
                                 <p className="title">{data.title}</p>
                             </a>
                         </div>
