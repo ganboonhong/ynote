@@ -1,3 +1,11 @@
+## Project Component Structure
+- BlogPage
+    - Content
+    - Nav
+        - NavItem
+    - BlogContainer
+        - Blog
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
