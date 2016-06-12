@@ -1,18 +1,11 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter  = require('events').EventEmitter;
 var assign        = require('object-assign');
+var BaseStore     = require('../stores/BaseStore');
 var CHANGE_EVENT  = 'change';
 var _url_params   = _url_params;
 
-var BlogPageStore = assign({}, EventEmitter.prototype, {
-
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
-    },
+var BlogPageStore = assign({}, BaseStore, {
 
     setUrlParams: function(url_params){
         _url_params = url_params;

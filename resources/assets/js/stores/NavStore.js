@@ -6,8 +6,9 @@ var _categories   = [];
 var _current_category;
 var _user;
 var BlogPageStore = require('../stores/BlogPageStore');
+var BaseStore     = require('../stores/BaseStore');
 
-var NavStore = assign({}, EventEmitter.prototype, {
+var NavStore = assign({}, BaseStore, {
     init: function(){
 
         var url_params = BlogPageStore.getUrlParams();
@@ -27,14 +28,6 @@ var NavStore = assign({}, EventEmitter.prototype, {
                 }
             }
         );
-    },
-
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
     },
 
     getCurrentCategory: function(){

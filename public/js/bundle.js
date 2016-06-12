@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d2c1518124cfef7399b8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8792fe041ef71b2e77f5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44246,8 +44246,9 @@
 	var _current_category;
 	var _user;
 	var BlogPageStore = __webpack_require__(380);
+	var BaseStore = __webpack_require__(415);
 
-	var NavStore = assign({}, EventEmitter.prototype, {
+	var NavStore = assign({}, BaseStore, {
 	    init: function init() {
 
 	        var url_params = BlogPageStore.getUrlParams();
@@ -44260,14 +44261,6 @@
 	                _categories[obj.category_id] = obj;
 	            }
 	        });
-	    },
-
-	    emitChange: function emitChange() {
-	        this.emit(CHANGE_EVENT);
-	    },
-
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(CHANGE_EVENT, callback);
 	    },
 
 	    getCurrentCategory: function getCurrentCategory() {
@@ -44608,18 +44601,11 @@
 	var AppDispatcher = __webpack_require__(374);
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
+	var BaseStore = __webpack_require__(415);
 	var CHANGE_EVENT = 'change';
 	var _url_params = _url_params;
 
-	var BlogPageStore = assign({}, EventEmitter.prototype, {
-
-	    emitChange: function emitChange() {
-	        this.emit(CHANGE_EVENT);
-	    },
-
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(CHANGE_EVENT, callback);
-	    },
+	var BlogPageStore = assign({}, BaseStore, {
 
 	    setUrlParams: function setUrlParams(url_params) {
 	        _url_params = url_params;
@@ -44887,18 +44873,11 @@
 	var AppDispatcher = __webpack_require__(374);
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
+	var BaseStore = __webpack_require__(415);
 	var CHANGE_EVENT = 'change';
 	var contentObj = {};
 
-	var ContentStore = assign({}, EventEmitter.prototype, {
-
-	    emitChange: function emitChange() {
-	        this.emit(CHANGE_EVENT);
-	    },
-
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(CHANGE_EVENT, callback);
-	    },
+	var ContentStore = assign({}, BaseStore, {
 
 	    getContent: function getContent() {
 	        return contentObj;
@@ -44933,10 +44912,12 @@
 	var CHANGE_EVENT = 'change';
 	var BlogPageStore = __webpack_require__(380);
 	var BlogActionCreators = __webpack_require__(383);
+	var BaseStore = __webpack_require__(415);
 	var _blogs = [];
 	var _current_blogs = [];
 
-	var BlogStore = assign({}, EventEmitter.prototype, {
+	var BlogStore = assign({}, BaseStore, {
+
 	    init: function init() {
 	        var url_params = BlogPageStore.getUrlParams();
 	        var user_id = url_params.user_id;
@@ -44953,18 +44934,6 @@
 	                BlogActionCreators.clickBlog(_current_blogs.content);
 	            }
 	        });
-	    },
-
-	    emitChange: function emitChange() {
-	        this.emit(CHANGE_EVENT);
-	    },
-
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(CHANGE_EVENT, callback);
-	    },
-
-	    removeChangeListener: function removeChangeListener(callback) {
-	        this.removeListener(CHANGE_EVENT, callback);
 	    },
 
 	    getCurrentBlogs: function getCurrentBlogs() {
@@ -45202,7 +45171,7 @@
 /* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
 	var _index = __webpack_require__(3);
 
@@ -45227,14 +45196,14 @@
 	};
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Paragraph.js",
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Paragraph.js',
 	    components: _components,
 	    locals: [module],
 	    imports: [_react3.default]
 	});
 
 	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/Paragraph.js",
+	    filename: '/Users/boonhong/ynote/resources/assets/js/components/Paragraph.js',
 	    components: _components,
 	    locals: [],
 	    imports: [_react3.default, _index2.default]
@@ -45248,16 +45217,25 @@
 
 	var React = __webpack_require__(4);
 
-	var Paragraph = _wrapComponent("_component")(React.createClass({
-	    displayName: "Paragraph",
+	var Paragraph = _wrapComponent('_component')(React.createClass({
+	    displayName: 'Paragraph',
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            data: 'No Article Found.'
+	        };
+	    },
+
 	    render: function render() {
 	        return React.createElement(
-	            "div",
-	            { className: "center" },
-	            React.createElement("p", { dangerouslySetInnerHTML: { __html: this.props.data } })
+	            'div',
+	            { className: 'center' },
+	            React.createElement('p', { dangerouslySetInnerHTML: { __html: this.props.data } })
 	        );
 	    }
 	}));
+
+	Paragraph.propTypes = { data: React.PropTypes.string };
 
 	module.exports = Paragraph;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
@@ -47370,6 +47348,36 @@
 	        return arg * 2;
 	    }
 	};
+
+/***/ },
+/* 413 */,
+/* 414 */,
+/* 415 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var EventEmitter = __webpack_require__(379).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+
+	var BaseStore = assign({}, EventEmitter.prototype, {
+
+	    emitChange: function emitChange() {
+	        this.emit(CHANGE_EVENT);
+	    },
+
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(CHANGE_EVENT, callback);
+	    },
+
+	    removeChangeListener: function removeChangeListener(callback) {
+	        this.removeListener(CHANGE_EVENT, callback);
+	    }
+
+	});
+
+	module.exports = BaseStore;
 
 /***/ }
 /******/ ]);

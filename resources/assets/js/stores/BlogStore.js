@@ -4,10 +4,13 @@ var assign             = require('object-assign');
 var CHANGE_EVENT       = 'change';
 var BlogPageStore      = require('../stores/BlogPageStore');
 var BlogActionCreators = require('../actions/BlogActionCreators');
+var BaseStore          = require('../stores/BaseStore');
 var _blogs             = [];
 var _current_blogs     = [];
 
-var BlogStore = assign({}, EventEmitter.prototype, {
+
+var BlogStore = assign({}, BaseStore, {
+
     init: function(){
         var url_params = BlogPageStore.getUrlParams();
         var user_id    = url_params.user_id;
@@ -32,18 +35,6 @@ var BlogStore = assign({}, EventEmitter.prototype, {
 
             }
         );
-    },
-
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
-    },
-
-     removeChangeListener: function(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
     },
 
     getCurrentBlogs: function(){

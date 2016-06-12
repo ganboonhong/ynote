@@ -1,6 +1,12 @@
 var React = require('react');
 
 var Paragraph = React.createClass({
+        getDefaultProps: function(){
+            return {
+                data: 'No Article Found.'
+            };
+        },
+
         render() {
             return (
                 <div className="center">
@@ -9,5 +15,7 @@ var Paragraph = React.createClass({
             );
         }
     });
+
+Paragraph.propTypes = {data: React.PropTypes.string};
 
 module.exports = Paragraph;
