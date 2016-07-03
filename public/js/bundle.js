@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8792fe041ef71b2e77f5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9c5b2daa6d2f6b2fc7e1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -639,10 +639,10 @@
 	var React = __webpack_require__(4);
 	var ReactDOM = __webpack_require__(234);
 	var BlogPage = __webpack_require__(369);
-	var About = __webpack_require__(410);
-	var NotFound = __webpack_require__(411);
+	var About = __webpack_require__(411);
+	var NotFound = __webpack_require__(412);
 
-	var WebAPIUtils = __webpack_require__(412);
+	var WebAPIUtils = __webpack_require__(413);
 
 	WebAPIUtils.init();
 
@@ -32541,8 +32541,8 @@
 
 	var React = __webpack_require__(4);
 	var Nav = __webpack_require__(371);
-	var BlogContainer = __webpack_require__(381);
-	var Content = __webpack_require__(387);
+	var BlogContainer = __webpack_require__(382);
+	var Content = __webpack_require__(388);
 	var BlogPageStore = __webpack_require__(380);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
@@ -44246,7 +44246,7 @@
 	var _current_category;
 	var _user;
 	var BlogPageStore = __webpack_require__(380);
-	var BaseStore = __webpack_require__(415);
+	var BaseStore = __webpack_require__(381);
 
 	var NavStore = assign({}, BaseStore, {
 	    init: function init() {
@@ -44601,7 +44601,7 @@
 	var AppDispatcher = __webpack_require__(374);
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
-	var BaseStore = __webpack_require__(415);
+	var BaseStore = __webpack_require__(381);
 	var CHANGE_EVENT = 'change';
 	var _url_params = _url_params;
 
@@ -44629,6 +44629,34 @@
 
 /***/ },
 /* 381 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var EventEmitter = __webpack_require__(379).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+
+	var BaseStore = assign({}, EventEmitter.prototype, {
+
+	    emitChange: function emitChange() {
+	        this.emit(CHANGE_EVENT);
+	    },
+
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(CHANGE_EVENT, callback);
+	    },
+
+	    removeChangeListener: function removeChangeListener(callback) {
+	        this.removeListener(CHANGE_EVENT, callback);
+	    }
+
+	});
+
+	module.exports = BaseStore;
+
+/***/ },
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -44682,12 +44710,12 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Blog = __webpack_require__(382);
-	var BlogStore = __webpack_require__(385);
-	var ContentStore = __webpack_require__(384);
+	var Blog = __webpack_require__(383);
+	var BlogStore = __webpack_require__(386);
+	var ContentStore = __webpack_require__(385);
 	var BlogPageStore = __webpack_require__(380);
-	var ClassNames = __webpack_require__(386);
-	var BlogActionCreators = __webpack_require__(383);
+	var ClassNames = __webpack_require__(387);
+	var BlogActionCreators = __webpack_require__(384);
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -44747,7 +44775,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 382 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -44795,8 +44823,8 @@
 	}
 
 	var React = __webpack_require__(4);
-	var BlogActionCreators = __webpack_require__(383);
-	var ContentStore = __webpack_require__(384);
+	var BlogActionCreators = __webpack_require__(384);
+	var ContentStore = __webpack_require__(385);
 
 	var Blog = _wrapComponent('_component')(React.createClass({
 	    displayName: 'Blog',
@@ -44841,7 +44869,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 383 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44865,7 +44893,7 @@
 	};
 
 /***/ },
-/* 384 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44873,7 +44901,7 @@
 	var AppDispatcher = __webpack_require__(374);
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
-	var BaseStore = __webpack_require__(415);
+	var BaseStore = __webpack_require__(381);
 	var CHANGE_EVENT = 'change';
 	var contentObj = {};
 
@@ -44901,7 +44929,7 @@
 	module.exports = ContentStore;
 
 /***/ },
-/* 385 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44911,8 +44939,8 @@
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var BlogPageStore = __webpack_require__(380);
-	var BlogActionCreators = __webpack_require__(383);
-	var BaseStore = __webpack_require__(415);
+	var BlogActionCreators = __webpack_require__(384);
+	var BaseStore = __webpack_require__(381);
 	var _blogs = [];
 	var _current_blogs = [];
 
@@ -44975,7 +45003,7 @@
 	module.exports = BlogStore;
 
 /***/ },
-/* 386 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -45029,7 +45057,7 @@
 
 
 /***/ },
-/* 387 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -45077,11 +45105,11 @@
 	}
 
 	var React = __webpack_require__(4);
-	var ContentStore = __webpack_require__(384);
-	var classNames = __webpack_require__(386);
-	var Paragraph = __webpack_require__(388);
-	var Modal = __webpack_require__(389);
-	var ContentActionCreators = __webpack_require__(409);
+	var ContentStore = __webpack_require__(385);
+	var classNames = __webpack_require__(387);
+	var Paragraph = __webpack_require__(389);
+	var Modal = __webpack_require__(390);
+	var ContentActionCreators = __webpack_require__(410);
 
 	// const customStyles = {
 	//   content : {
@@ -45168,7 +45196,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 388 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -45241,25 +45269,25 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 389 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(390);
+	module.exports = __webpack_require__(391);
 
 
 
 /***/ },
-/* 390 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(4);
 	var ReactDOM = __webpack_require__(234);
-	var ExecutionEnvironment = __webpack_require__(391);
-	var ModalPortal = React.createFactory(__webpack_require__(392));
-	var ariaAppHider = __webpack_require__(407);
-	var elementClass = __webpack_require__(408);
+	var ExecutionEnvironment = __webpack_require__(392);
+	var ModalPortal = React.createFactory(__webpack_require__(393));
+	var ariaAppHider = __webpack_require__(408);
+	var elementClass = __webpack_require__(409);
 	var renderSubtreeIntoContainer = __webpack_require__(234).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(396);
+	var Assign = __webpack_require__(397);
 
 	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -45367,7 +45395,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 391 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -45412,14 +45440,14 @@
 
 
 /***/ },
-/* 392 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(4);
 	var div = React.DOM.div;
-	var focusManager = __webpack_require__(393);
-	var scopeTab = __webpack_require__(395);
-	var Assign = __webpack_require__(396);
+	var focusManager = __webpack_require__(394);
+	var scopeTab = __webpack_require__(396);
+	var Assign = __webpack_require__(397);
 
 	// so that our CSS is statically analyzable
 	var CLASS_NAMES = {
@@ -45604,10 +45632,10 @@
 
 
 /***/ },
-/* 393 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(394);
+	var findTabbable = __webpack_require__(395);
 	var modalElement = null;
 	var focusLaterElement = null;
 	var needToFocus = false;
@@ -45678,7 +45706,7 @@
 
 
 /***/ },
-/* 394 */
+/* 395 */
 /***/ function(module, exports) {
 
 	/*!
@@ -45734,10 +45762,10 @@
 
 
 /***/ },
-/* 395 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(394);
+	var findTabbable = __webpack_require__(395);
 
 	module.exports = function(node, event) {
 	  var tabbable = findTabbable(node);
@@ -45759,7 +45787,7 @@
 
 
 /***/ },
-/* 396 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -45770,9 +45798,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseAssign = __webpack_require__(397),
-	    createAssigner = __webpack_require__(403),
-	    keys = __webpack_require__(399);
+	var baseAssign = __webpack_require__(398),
+	    createAssigner = __webpack_require__(404),
+	    keys = __webpack_require__(400);
 
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -45845,7 +45873,7 @@
 
 
 /***/ },
-/* 397 */
+/* 398 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -45856,8 +45884,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseCopy = __webpack_require__(398),
-	    keys = __webpack_require__(399);
+	var baseCopy = __webpack_require__(399),
+	    keys = __webpack_require__(400);
 
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -45878,7 +45906,7 @@
 
 
 /***/ },
-/* 398 */
+/* 399 */
 /***/ function(module, exports) {
 
 	/**
@@ -45916,7 +45944,7 @@
 
 
 /***/ },
-/* 399 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -45927,9 +45955,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(400),
-	    isArguments = __webpack_require__(401),
-	    isArray = __webpack_require__(402);
+	var getNative = __webpack_require__(401),
+	    isArguments = __webpack_require__(402),
+	    isArray = __webpack_require__(403);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -46158,7 +46186,7 @@
 
 
 /***/ },
-/* 400 */
+/* 401 */
 /***/ function(module, exports) {
 
 	/**
@@ -46301,7 +46329,7 @@
 
 
 /***/ },
-/* 401 */
+/* 402 */
 /***/ function(module, exports) {
 
 	/**
@@ -46550,7 +46578,7 @@
 
 
 /***/ },
-/* 402 */
+/* 403 */
 /***/ function(module, exports) {
 
 	/**
@@ -46736,7 +46764,7 @@
 
 
 /***/ },
-/* 403 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -46747,9 +46775,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var bindCallback = __webpack_require__(404),
-	    isIterateeCall = __webpack_require__(405),
-	    restParam = __webpack_require__(406);
+	var bindCallback = __webpack_require__(405),
+	    isIterateeCall = __webpack_require__(406),
+	    restParam = __webpack_require__(407);
 
 	/**
 	 * Creates a function that assigns properties of source object(s) to a given
@@ -46794,7 +46822,7 @@
 
 
 /***/ },
-/* 404 */
+/* 405 */
 /***/ function(module, exports) {
 
 	/**
@@ -46865,7 +46893,7 @@
 
 
 /***/ },
-/* 405 */
+/* 406 */
 /***/ function(module, exports) {
 
 	/**
@@ -47003,7 +47031,7 @@
 
 
 /***/ },
-/* 406 */
+/* 407 */
 /***/ function(module, exports) {
 
 	/**
@@ -47076,7 +47104,7 @@
 
 
 /***/ },
-/* 407 */
+/* 408 */
 /***/ function(module, exports) {
 
 	var _element = typeof document !== 'undefined' ? document.body : null;
@@ -47124,7 +47152,7 @@
 
 
 /***/ },
-/* 408 */
+/* 409 */
 /***/ function(module, exports) {
 
 	module.exports = function(opts) {
@@ -47189,7 +47217,7 @@
 
 
 /***/ },
-/* 409 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47199,7 +47227,7 @@
 	module.exports = {};
 
 /***/ },
-/* 410 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -47270,7 +47298,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 411 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -47335,49 +47363,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 412 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var NavActionCreators = __webpack_require__(373);
-	var BlogActionCreators = __webpack_require__(383);
+	var BlogActionCreators = __webpack_require__(384);
 
 	module.exports = {
 	    init: function init(arg) {
 	        return arg * 2;
 	    }
 	};
-
-/***/ },
-/* 413 */,
-/* 414 */,
-/* 415 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var EventEmitter = __webpack_require__(379).EventEmitter;
-	var assign = __webpack_require__(7);
-	var CHANGE_EVENT = 'change';
-
-	var BaseStore = assign({}, EventEmitter.prototype, {
-
-	    emitChange: function emitChange() {
-	        this.emit(CHANGE_EVENT);
-	    },
-
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(CHANGE_EVENT, callback);
-	    },
-
-	    removeChangeListener: function removeChangeListener(callback) {
-	        this.removeListener(CHANGE_EVENT, callback);
-	    }
-
-	});
-
-	module.exports = BaseStore;
 
 /***/ }
 /******/ ]);
