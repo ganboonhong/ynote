@@ -72,9 +72,15 @@ body{
 
 .center {
     margin: auto;
-    width: 80%;
-    border: 3px solid #73AD21;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 99%;
     padding: 10px;
+    background: whitesmoke;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .hide{

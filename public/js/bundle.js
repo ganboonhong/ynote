@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9c5b2daa6d2f6b2fc7e1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c987cd511c1334270de5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -45108,20 +45108,26 @@
 	var ContentStore = __webpack_require__(385);
 	var classNames = __webpack_require__(387);
 	var Paragraph = __webpack_require__(389);
-	var Modal = __webpack_require__(390);
+	// var Modal                 = require('react-modal');
 	var ContentActionCreators = __webpack_require__(410);
+	//ScaleModal DropModal OutlineModal FadeModal FlyModal WaveModal
+	//demo:   http://madscript.com/boron/
+	//github: https://github.com/yuanyan/boron
+	var Modal = __webpack_require__(432);
+	var modalStyle = {
+	    width: '90%',
+	    height: '100%',
+	    position: 'fixed',
+	    marginTop: '20px'
+	};
 
-	// const customStyles = {
-	//   content : {
-	//     top                   : '50%',
-	//     left                  : '50%',
-	//     right                 : 'auto',
-	//     bottom                : 'auto',
-	//     marginRight           : '-50%',
-	//     transform             : 'translate(-50%, -50%)',
-	//     width                 : '60%',
-	//   }
-	// };
+	var contentStyle = {
+	    overflow: 'auto',
+	    height: window.innerHeight - 50,
+	    borderTopLeftRadius: '15px',
+	    borderBottomLeftRadius: '15px',
+	    marginBottom: '200px'
+	};
 
 	function getStateFromStore() {
 	    return { contentObj: ContentStore.getContent() };
@@ -45140,36 +45146,19 @@
 	    },
 
 
-	    openModal: function openModal() {
-	        this.setState({
-	            modalIsOpen: true,
-	            originalBodyOverflow: document.body.style.overflow
-	        });
-
+	    showModal: function showModal() {
+	        console.log(window.innerHeight);
+	        this.refs.modal.show();
 	        document.body.style.overflow = 'hidden';
 	    },
 
-	    afterOpenModal: function afterOpenModal() {},
-
-	    closeModal: function closeModal() {
-	        this.setState({ modalIsOpen: false });
-	        document.body.style.overflow = this.state.originalBodyOverflow;
+	    hideModal: function hideModal() {
+	        console.log('closed');
+	        this.refs.modal.hide();
+	        document.body.style.overflow = 'visible';
 	    },
 
 	    render: function render() {
-
-	        // extend default css
-	        Modal.defaultStyles.content.top = '1%';
-	        Modal.defaultStyles.content.bottom = '1%';
-	        Modal.defaultStyles.content.left = '7%';
-	        Modal.defaultStyles.content.right = '7%';
-	        Modal.defaultStyles.overlay.backgroundColor = "rgba(0, 0, 0, 0.75)";
-
-	        /*
-	         * read out default css value
-	         */
-	        // console.log(Modal.defaultStyles.content);
-	        // console.log(Modal.defaultStyles.overlay);
 
 	        return React.createElement(
 	            'div',
@@ -45177,10 +45166,10 @@
 	            React.createElement(
 	                Modal,
 	                {
-	                    isOpen: this.state.modalIsOpen,
-	                    onAfterOpen: this.afterOpenModal,
-	                    onRequestClose: this.closeModal
-	                    // style={customStyles}
+	                    ref: 'modal',
+	                    modalStyle: modalStyle,
+	                    contentStyle: contentStyle,
+	                    onHide: this.hideModal
 	                },
 	                React.createElement(Paragraph, { data: this.state.contentObj.content })
 	            )
@@ -45188,7 +45177,7 @@
 	    },
 	    _onChange: function _onChange() {
 	        this.setState(getStateFromStore());
-	        this.openModal();
+	        this.showModal();
 	    }
 	}));
 
@@ -45269,1954 +45258,26 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 390 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(391);
-
-
-
-/***/ },
-/* 391 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(4);
-	var ReactDOM = __webpack_require__(234);
-	var ExecutionEnvironment = __webpack_require__(392);
-	var ModalPortal = React.createFactory(__webpack_require__(393));
-	var ariaAppHider = __webpack_require__(408);
-	var elementClass = __webpack_require__(409);
-	var renderSubtreeIntoContainer = __webpack_require__(234).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(397);
-
-	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
-	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
-
-	var Modal = React.createClass({
-
-	  displayName: 'Modal',
-	  statics: {
-	    setAppElement: function(element) {
-	        AppElement = ariaAppHider.setElement(element);
-	    },
-	    injectCSS: function() {
-	      "production" !== process.env.NODE_ENV
-	        && console.warn('React-Modal: injectCSS has been deprecated ' +
-	                        'and no longer has any effect. It will be removed in a later version');
-	    }
-	  },
-
-	  propTypes: {
-	    isOpen: React.PropTypes.bool.isRequired,
-	    style: React.PropTypes.shape({
-	      content: React.PropTypes.object,
-	      overlay: React.PropTypes.object
-	    }),
-	    appElement: React.PropTypes.instanceOf(SafeHTMLElement),
-	    onAfterOpen: React.PropTypes.func,
-	    onRequestClose: React.PropTypes.func,
-	    closeTimeoutMS: React.PropTypes.number,
-	    ariaHideApp: React.PropTypes.bool,
-	    shouldCloseOnOverlayClick: React.PropTypes.bool
-	  },
-
-	  getDefaultProps: function () {
-	    return {
-	      isOpen: false,
-	      ariaHideApp: true,
-	      closeTimeoutMS: 0,
-	      shouldCloseOnOverlayClick: true
-	    };
-	  },
-
-	  componentDidMount: function() {
-	    this.node = document.createElement('div');
-	    this.node.className = 'ReactModalPortal';
-	    document.body.appendChild(this.node);
-	    this.renderPortal(this.props);
-	  },
-
-	  componentWillReceiveProps: function(newProps) {
-	    this.renderPortal(newProps);
-	  },
-
-	  componentWillUnmount: function() {
-	    ReactDOM.unmountComponentAtNode(this.node);
-	    document.body.removeChild(this.node);
-	    elementClass(document.body).remove('ReactModal__Body--open');
-	  },
-
-	  renderPortal: function(props) {
-	    if (props.isOpen) {
-	      elementClass(document.body).add('ReactModal__Body--open');
-	    } else {
-	      elementClass(document.body).remove('ReactModal__Body--open');
-	    }
-
-	    if (props.ariaHideApp) {
-	      ariaAppHider.toggle(props.isOpen, props.appElement);
-	    }
-
-	    this.portal = renderSubtreeIntoContainer(this, ModalPortal(Assign({}, props, {defaultStyles: Modal.defaultStyles})), this.node);
-	  },
-
-	  render: function () {
-	    return React.DOM.noscript();
-	  }
-	});
-
-	Modal.defaultStyles = {
-	  overlay: {
-	    position        : 'fixed',
-	    top             : 0,
-	    left            : 0,
-	    right           : 0,
-	    bottom          : 0,
-	    backgroundColor : 'rgba(255, 255, 255, 0.75)'
-	  },
-	  content: {
-	    position                : 'absolute',
-	    top                     : '40px',
-	    left                    : '40px',
-	    right                   : '40px',
-	    bottom                  : '40px',
-	    border                  : '1px solid #ccc',
-	    background              : '#fff',
-	    overflow                : 'auto',
-	    WebkitOverflowScrolling : 'touch',
-	    borderRadius            : '4px',
-	    outline                 : 'none',
-	    padding                 : '20px'
-	  }
-	}
-
-	module.exports = Modal
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ },
-/* 392 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
-	  Based on code that is Copyright 2013-2015, Facebook, Inc.
-	  All rights reserved.
-	*/
-
-	(function () {
-		'use strict';
-
-		var canUseDOM = !!(
-			typeof window !== 'undefined' &&
-			window.document &&
-			window.document.createElement
-		);
-
-		var ExecutionEnvironment = {
-
-			canUseDOM: canUseDOM,
-
-			canUseWorkers: typeof Worker !== 'undefined',
-
-			canUseEventListeners:
-				canUseDOM && !!(window.addEventListener || window.attachEvent),
-
-			canUseViewport: canUseDOM && !!window.screen
-
-		};
-
-		if (true) {
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return ExecutionEnvironment;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else if (typeof module !== 'undefined' && module.exports) {
-			module.exports = ExecutionEnvironment;
-		} else {
-			window.ExecutionEnvironment = ExecutionEnvironment;
-		}
-
-	}());
-
-
-/***/ },
-/* 393 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(4);
-	var div = React.DOM.div;
-	var focusManager = __webpack_require__(394);
-	var scopeTab = __webpack_require__(396);
-	var Assign = __webpack_require__(397);
-
-	// so that our CSS is statically analyzable
-	var CLASS_NAMES = {
-	  overlay: {
-	    base: 'ReactModal__Overlay',
-	    afterOpen: 'ReactModal__Overlay--after-open',
-	    beforeClose: 'ReactModal__Overlay--before-close'
-	  },
-	  content: {
-	    base: 'ReactModal__Content',
-	    afterOpen: 'ReactModal__Content--after-open',
-	    beforeClose: 'ReactModal__Content--before-close'
-	  }
-	};
-
-	var ModalPortal = module.exports = React.createClass({
-
-	  displayName: 'ModalPortal',
-
-	  getDefaultProps: function() {
-	    return {
-	      style: {
-	        overlay: {},
-	        content: {}
-	      }
-	    };
-	  },
-
-	  getInitialState: function() {
-	    return {
-	      afterOpen: false,
-	      beforeClose: false
-	    };
-	  },
-
-	  componentDidMount: function() {
-	    // Focus needs to be set when mounting and already open
-	    if (this.props.isOpen) {
-	      this.setFocusAfterRender(true);
-	      this.open();
-	    }
-	  },
-
-	  componentWillUnmount: function() {
-	    clearTimeout(this.closeTimer);
-	  },
-
-	  componentWillReceiveProps: function(newProps) {
-	    // Focus only needs to be set once when the modal is being opened
-	    if (!this.props.isOpen && newProps.isOpen) {
-	      this.setFocusAfterRender(true);
-	      this.open();
-	    } else if (this.props.isOpen && !newProps.isOpen) {
-	      this.close();
-	    }
-	  },
-
-	  componentDidUpdate: function () {
-	    if (this.focusAfterRender) {
-	      this.focusContent();
-	      this.setFocusAfterRender(false);
-	    }
-	  },
-
-	  setFocusAfterRender: function (focus) {
-	    this.focusAfterRender = focus;
-	  },
-
-	  open: function() {
-	    focusManager.setupScopedFocus(this.node);
-	    focusManager.markForFocusLater();
-	    this.setState({isOpen: true}, function() {
-	      this.setState({afterOpen: true});
-
-	      if (this.props.isOpen && this.props.onAfterOpen) {
-	        this.props.onAfterOpen();
-	      }
-	    }.bind(this));
-	  },
-
-	  close: function() {
-	    if (!this.ownerHandlesClose())
-	      return;
-	    if (this.props.closeTimeoutMS > 0)
-	      this.closeWithTimeout();
-	    else
-	      this.closeWithoutTimeout();
-	  },
-
-	  focusContent: function() {
-	    this.refs.content.focus();
-	  },
-
-	  closeWithTimeout: function() {
-	    this.setState({beforeClose: true}, function() {
-	      this.closeTimer = setTimeout(this.closeWithoutTimeout, this.props.closeTimeoutMS);
-	    }.bind(this));
-	  },
-
-	  closeWithoutTimeout: function() {
-	    this.setState({
-	      afterOpen: false,
-	      beforeClose: false
-	    }, this.afterClose);
-	  },
-
-	  afterClose: function() {
-	    focusManager.returnFocus();
-	    focusManager.teardownScopedFocus();
-	  },
-
-	  handleKeyDown: function(event) {
-	    if (event.keyCode == 9 /*tab*/) scopeTab(this.refs.content, event);
-	    if (event.keyCode == 27 /*esc*/) {
-	      event.preventDefault();
-	      this.requestClose(event);
-	    }
-	  },
-
-	  handleOverlayClick: function(event) {
-	    var node = event.target
-
-	    while (node) {
-	      if (node === this.refs.content) return
-	      node = node.parentNode
-	    }
-
-	    if (this.props.shouldCloseOnOverlayClick) {
-	      if (this.ownerHandlesClose())
-	        this.requestClose(event);
-	      else
-	        this.focusContent();
-	    }
-	  },
-
-	  requestClose: function(event) {
-	    if (this.ownerHandlesClose())
-	      this.props.onRequestClose(event);
-	  },
-
-	  ownerHandlesClose: function() {
-	    return this.props.onRequestClose;
-	  },
-
-	  shouldBeClosed: function() {
-	    return !this.props.isOpen && !this.state.beforeClose;
-	  },
-
-	  buildClassName: function(which, additional) {
-	    var className = CLASS_NAMES[which].base;
-	    if (this.state.afterOpen)
-	      className += ' '+CLASS_NAMES[which].afterOpen;
-	    if (this.state.beforeClose)
-	      className += ' '+CLASS_NAMES[which].beforeClose;
-	    return additional ? className + ' ' + additional : className;
-	  },
-
-	  render: function() {
-	    var contentStyles = (this.props.className) ? {} : this.props.defaultStyles.content;
-	    var overlayStyles = (this.props.overlayClassName) ? {} : this.props.defaultStyles.overlay;
-
-	    return this.shouldBeClosed() ? div() : (
-	      div({
-	        ref: "overlay",
-	        className: this.buildClassName('overlay', this.props.overlayClassName),
-	        style: Assign({}, overlayStyles, this.props.style.overlay || {}),
-	        onClick: this.handleOverlayClick
-	      },
-	        div({
-	          ref: "content",
-	          style: Assign({}, contentStyles, this.props.style.content || {}),
-	          className: this.buildClassName('content', this.props.className),
-	          tabIndex: "-1",
-	          onKeyDown: this.handleKeyDown
-	        },
-	          this.props.children
-	        )
-	      )
-	    );
-	  }
-	});
-
-
-/***/ },
-/* 394 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var findTabbable = __webpack_require__(395);
-	var modalElement = null;
-	var focusLaterElement = null;
-	var needToFocus = false;
-
-	function handleBlur(event) {
-	  needToFocus = true;
-	}
-
-	function handleFocus(event) {
-	  if (needToFocus) {
-	    needToFocus = false;
-	    if (!modalElement) {
-	      return;
-	    }
-	    // need to see how jQuery shims document.on('focusin') so we don't need the
-	    // setTimeout, firefox doesn't support focusin, if it did, we could focus
-	    // the element outside of a setTimeout. Side-effect of this implementation 
-	    // is that the document.body gets focus, and then we focus our element right 
-	    // after, seems fine.
-	    setTimeout(function() {
-	      if (modalElement.contains(document.activeElement))
-	        return;
-	      var el = (findTabbable(modalElement)[0] || modalElement);
-	      el.focus();
-	    }, 0);
-	  }
-	}
-
-	exports.markForFocusLater = function() {
-	  focusLaterElement = document.activeElement;
-	};
-
-	exports.returnFocus = function() {
-	  try {
-	    focusLaterElement.focus();
-	  }
-	  catch (e) {
-	    console.warn('You tried to return focus to '+focusLaterElement+' but it is not in the DOM anymore');
-	  }
-	  focusLaterElement = null;
-	};
-
-	exports.setupScopedFocus = function(element) {
-	  modalElement = element;
-
-	  if (window.addEventListener) {
-	    window.addEventListener('blur', handleBlur, false);
-	    document.addEventListener('focus', handleFocus, true);
-	  } else {
-	    window.attachEvent('onBlur', handleBlur);
-	    document.attachEvent('onFocus', handleFocus);
-	  }
-	};
-
-	exports.teardownScopedFocus = function() {
-	  modalElement = null;
-
-	  if (window.addEventListener) {
-	    window.removeEventListener('blur', handleBlur);
-	    document.removeEventListener('focus', handleFocus);
-	  } else {
-	    window.detachEvent('onBlur', handleBlur);
-	    document.detachEvent('onFocus', handleFocus);
-	  }
-	};
-
-
-
-
-/***/ },
-/* 395 */
-/***/ function(module, exports) {
-
-	/*!
-	 * Adapted from jQuery UI core
-	 *
-	 * http://jqueryui.com
-	 *
-	 * Copyright 2014 jQuery Foundation and other contributors
-	 * Released under the MIT license.
-	 * http://jquery.org/license
-	 *
-	 * http://api.jqueryui.com/category/ui-core/
-	 */
-
-	function focusable(element, isTabIndexNotNaN) {
-	  var nodeName = element.nodeName.toLowerCase();
-	  return (/input|select|textarea|button|object/.test(nodeName) ?
-	    !element.disabled :
-	    "a" === nodeName ?
-	      element.href || isTabIndexNotNaN :
-	      isTabIndexNotNaN) && visible(element);
-	}
-
-	function hidden(el) {
-	  return (el.offsetWidth <= 0 && el.offsetHeight <= 0) ||
-	    el.style.display === 'none';
-	}
-
-	function visible(element) {
-	  while (element) {
-	    if (element === document.body) break;
-	    if (hidden(element)) return false;
-	    element = element.parentNode;
-	  }
-	  return true;
-	}
-
-	function tabbable(element) {
-	  var tabIndex = element.getAttribute('tabindex');
-	  if (tabIndex === null) tabIndex = undefined;
-	  var isTabIndexNaN = isNaN(tabIndex);
-	  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
-	}
-
-	function findTabbableDescendants(element) {
-	  return [].slice.call(element.querySelectorAll('*'), 0).filter(function(el) {
-	    return tabbable(el);
-	  });
-	}
-
-	module.exports = findTabbableDescendants;
-
-
-
-/***/ },
-/* 396 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var findTabbable = __webpack_require__(395);
-
-	module.exports = function(node, event) {
-	  var tabbable = findTabbable(node);
-	  if (!tabbable.length) {
-	      event.preventDefault();
-	      return;
-	  }
-	  var finalTabbable = tabbable[event.shiftKey ? 0 : tabbable.length - 1];
-	  var leavingFinalTabbable = (
-	    finalTabbable === document.activeElement ||
-	    // handle immediate shift+tab after opening with mouse
-	    node === document.activeElement
-	  );
-	  if (!leavingFinalTabbable) return;
-	  event.preventDefault();
-	  var target = tabbable[event.shiftKey ? tabbable.length - 1 : 0];
-	  target.focus();
-	};
-
-
-/***/ },
-/* 397 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.2.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var baseAssign = __webpack_require__(398),
-	    createAssigner = __webpack_require__(404),
-	    keys = __webpack_require__(400);
-
-	/**
-	 * A specialized version of `_.assign` for customizing assigned values without
-	 * support for argument juggling, multiple sources, and `this` binding `customizer`
-	 * functions.
-	 *
-	 * @private
-	 * @param {Object} object The destination object.
-	 * @param {Object} source The source object.
-	 * @param {Function} customizer The function to customize assigned values.
-	 * @returns {Object} Returns `object`.
-	 */
-	function assignWith(object, source, customizer) {
-	  var index = -1,
-	      props = keys(source),
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index],
-	        value = object[key],
-	        result = customizer(value, source[key], key, object, source);
-
-	    if ((result === result ? (result !== value) : (value === value)) ||
-	        (value === undefined && !(key in object))) {
-	      object[key] = result;
-	    }
-	  }
-	  return object;
-	}
-
-	/**
-	 * Assigns own enumerable properties of source object(s) to the destination
-	 * object. Subsequent sources overwrite property assignments of previous sources.
-	 * If `customizer` is provided it is invoked to produce the assigned values.
-	 * The `customizer` is bound to `thisArg` and invoked with five arguments:
-	 * (objectValue, sourceValue, key, object, source).
-	 *
-	 * **Note:** This method mutates `object` and is based on
-	 * [`Object.assign`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign).
-	 *
-	 * @static
-	 * @memberOf _
-	 * @alias extend
-	 * @category Object
-	 * @param {Object} object The destination object.
-	 * @param {...Object} [sources] The source objects.
-	 * @param {Function} [customizer] The function to customize assigned values.
-	 * @param {*} [thisArg] The `this` binding of `customizer`.
-	 * @returns {Object} Returns `object`.
-	 * @example
-	 *
-	 * _.assign({ 'user': 'barney' }, { 'age': 40 }, { 'user': 'fred' });
-	 * // => { 'user': 'fred', 'age': 40 }
-	 *
-	 * // using a customizer callback
-	 * var defaults = _.partialRight(_.assign, function(value, other) {
-	 *   return _.isUndefined(value) ? other : value;
-	 * });
-	 *
-	 * defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
-	 * // => { 'user': 'barney', 'age': 36 }
-	 */
-	var assign = createAssigner(function(object, source, customizer) {
-	  return customizer
-	    ? assignWith(object, source, customizer)
-	    : baseAssign(object, source);
-	});
-
-	module.exports = assign;
-
-
-/***/ },
-/* 398 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.2.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var baseCopy = __webpack_require__(399),
-	    keys = __webpack_require__(400);
-
-	/**
-	 * The base implementation of `_.assign` without support for argument juggling,
-	 * multiple sources, and `customizer` functions.
-	 *
-	 * @private
-	 * @param {Object} object The destination object.
-	 * @param {Object} source The source object.
-	 * @returns {Object} Returns `object`.
-	 */
-	function baseAssign(object, source) {
-	  return source == null
-	    ? object
-	    : baseCopy(source, keys(source), object);
-	}
-
-	module.exports = baseAssign;
-
-
-/***/ },
-/* 399 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/**
-	 * Copies properties of `source` to `object`.
-	 *
-	 * @private
-	 * @param {Object} source The object to copy properties from.
-	 * @param {Array} props The property names to copy.
-	 * @param {Object} [object={}] The object to copy properties to.
-	 * @returns {Object} Returns `object`.
-	 */
-	function baseCopy(source, props, object) {
-	  object || (object = {});
-
-	  var index = -1,
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index];
-	    object[key] = source[key];
-	  }
-	  return object;
-	}
-
-	module.exports = baseCopy;
-
-
-/***/ },
-/* 400 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.1.2 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var getNative = __webpack_require__(401),
-	    isArguments = __webpack_require__(402),
-	    isArray = __webpack_require__(403);
-
-	/** Used to detect unsigned integer values. */
-	var reIsUint = /^\d+$/;
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeKeys = getNative(Object, 'keys');
-
-	/**
-	 * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
-	 * of an array-like value.
-	 */
-	var MAX_SAFE_INTEGER = 9007199254740991;
-
-	/**
-	 * The base implementation of `_.property` without support for deep paths.
-	 *
-	 * @private
-	 * @param {string} key The key of the property to get.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseProperty(key) {
-	  return function(object) {
-	    return object == null ? undefined : object[key];
-	  };
-	}
-
-	/**
-	 * Gets the "length" property value of `object`.
-	 *
-	 * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
-	 * that affects Safari on at least iOS 8.1-8.3 ARM64.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @returns {*} Returns the "length" value.
-	 */
-	var getLength = baseProperty('length');
-
-	/**
-	 * Checks if `value` is array-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
-	 */
-	function isArrayLike(value) {
-	  return value != null && isLength(getLength(value));
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	  return value > -1 && value % 1 == 0 && value < length;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * A fallback implementation of `Object.keys` which creates an array of the
-	 * own enumerable property names of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @returns {Array} Returns the array of property names.
-	 */
-	function shimKeys(object) {
-	  var props = keysIn(object),
-	      propsLength = props.length,
-	      length = propsLength && object.length;
-
-	  var allowIndexes = !!length && isLength(length) &&
-	    (isArray(object) || isArguments(object));
-
-	  var index = -1,
-	      result = [];
-
-	  while (++index < propsLength) {
-	    var key = props[index];
-	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	/**
-	 * Creates an array of the own enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects. See the
-	 * [ES spec](http://ecma-international.org/ecma-262/6.0/#sec-object.keys)
-	 * for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to query.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keys(new Foo);
-	 * // => ['a', 'b'] (iteration order is not guaranteed)
-	 *
-	 * _.keys('hi');
-	 * // => ['0', '1']
-	 */
-	var keys = !nativeKeys ? shimKeys : function(object) {
-	  var Ctor = object == null ? undefined : object.constructor;
-	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	      (typeof object != 'function' && isArrayLike(object))) {
-	    return shimKeys(object);
-	  }
-	  return isObject(object) ? nativeKeys(object) : [];
-	};
-
-	/**
-	 * Creates an array of the own and inherited enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to query.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keysIn(new Foo);
-	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-	 */
-	function keysIn(object) {
-	  if (object == null) {
-	    return [];
-	  }
-	  if (!isObject(object)) {
-	    object = Object(object);
-	  }
-	  var length = object.length;
-	  length = (length && isLength(length) &&
-	    (isArray(object) || isArguments(object)) && length) || 0;
-
-	  var Ctor = object.constructor,
-	      index = -1,
-	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-	      result = Array(length),
-	      skipIndexes = length > 0;
-
-	  while (++index < length) {
-	    result[index] = (index + '');
-	  }
-	  for (var key in object) {
-	    if (!(skipIndexes && isIndex(key, length)) &&
-	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	module.exports = keys;
-
-
-/***/ },
-/* 401 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.9.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reIsNative = RegExp('^' +
-	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
-	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/**
-	 * Gets the native function at `key` of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @param {string} key The key of the method to get.
-	 * @returns {*} Returns the function if it's native, else `undefined`.
-	 */
-	function getNative(object, key) {
-	  var value = object == null ? undefined : object[key];
-	  return isNative(value) ? value : undefined;
-	}
-
-	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in older versions of Chrome and Safari which return 'function' for regexes
-	  // and Safari 8 equivalents which return 'object' for typed array constructors.
-	  return isObject(value) && objToString.call(value) == funcTag;
-	}
-
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (isFunction(value)) {
-	    return reIsNative.test(fnToString.call(value));
-	  }
-	  return isObjectLike(value) && reIsHostCtor.test(value);
-	}
-
-	module.exports = getNative;
-
-
-/***/ },
-/* 402 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.0.8 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modularize exports="npm" -o ./`
-	 * Copyright 2012-2016 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** Used as references for various `Number` constants. */
-	var MAX_SAFE_INTEGER = 9007199254740991;
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]',
-	    funcTag = '[object Function]',
-	    genTag = '[object GeneratorFunction]';
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
-
-	/** Built-in value references. */
-	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-	/**
-	 * The base implementation of `_.property` without support for deep paths.
-	 *
-	 * @private
-	 * @param {string} key The key of the property to get.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseProperty(key) {
-	  return function(object) {
-	    return object == null ? undefined : object[key];
-	  };
-	}
-
-	/**
-	 * Gets the "length" property value of `object`.
-	 *
-	 * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
-	 * that affects Safari on at least iOS 8.1-8.3 ARM64.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @returns {*} Returns the "length" value.
-	 */
-	var getLength = baseProperty('length');
-
-	/**
-	 * Checks if `value` is likely an `arguments` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isArguments(function() { return arguments; }());
-	 * // => true
-	 *
-	 * _.isArguments([1, 2, 3]);
-	 * // => false
-	 */
-	function isArguments(value) {
-	  // Safari 8.1 incorrectly makes `arguments.callee` enumerable in strict mode.
-	  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
-	    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
-	}
-
-	/**
-	 * Checks if `value` is array-like. A value is considered array-like if it's
-	 * not a function and has a `value.length` that's an integer greater than or
-	 * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
-	 * @example
-	 *
-	 * _.isArrayLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isArrayLike(document.body.children);
-	 * // => true
-	 *
-	 * _.isArrayLike('abc');
-	 * // => true
-	 *
-	 * _.isArrayLike(_.noop);
-	 * // => false
-	 */
-	function isArrayLike(value) {
-	  return value != null && isLength(getLength(value)) && !isFunction(value);
-	}
-
-	/**
-	 * This method is like `_.isArrayLike` except that it also checks if `value`
-	 * is an object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an array-like object, else `false`.
-	 * @example
-	 *
-	 * _.isArrayLikeObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isArrayLikeObject(document.body.children);
-	 * // => true
-	 *
-	 * _.isArrayLikeObject('abc');
-	 * // => false
-	 *
-	 * _.isArrayLikeObject(_.noop);
-	 * // => false
-	 */
-	function isArrayLikeObject(value) {
-	  return isObjectLike(value) && isArrayLike(value);
-	}
-
-	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in Safari 8 which returns 'object' for typed array and weak map constructors,
-	  // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
-	  var tag = isObject(value) ? objectToString.call(value) : '';
-	  return tag == funcTag || tag == genTag;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is loosely based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 * @example
-	 *
-	 * _.isLength(3);
-	 * // => true
-	 *
-	 * _.isLength(Number.MIN_VALUE);
-	 * // => false
-	 *
-	 * _.isLength(Infinity);
-	 * // => false
-	 *
-	 * _.isLength('3');
-	 * // => false
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' &&
-	    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(_.noop);
-	 * // => true
-	 *
-	 * _.isObject(null);
-	 * // => false
-	 */
-	function isObject(value) {
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-
-	module.exports = isArguments;
-
-
-/***/ },
-/* 403 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.0.4 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var arrayTag = '[object Array]',
-	    funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reIsNative = RegExp('^' +
-	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
-	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeIsArray = getNative(Array, 'isArray');
-
-	/**
-	 * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
-	 * of an array-like value.
-	 */
-	var MAX_SAFE_INTEGER = 9007199254740991;
-
-	/**
-	 * Gets the native function at `key` of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @param {string} key The key of the method to get.
-	 * @returns {*} Returns the function if it's native, else `undefined`.
-	 */
-	function getNative(object, key) {
-	  var value = object == null ? undefined : object[key];
-	  return isNative(value) ? value : undefined;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `Array` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isArray([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isArray(function() { return arguments; }());
-	 * // => false
-	 */
-	var isArray = nativeIsArray || function(value) {
-	  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
-	};
-
-	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in older versions of Chrome and Safari which return 'function' for regexes
-	  // and Safari 8 equivalents which return 'object' for typed array constructors.
-	  return isObject(value) && objToString.call(value) == funcTag;
-	}
-
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (isFunction(value)) {
-	    return reIsNative.test(fnToString.call(value));
-	  }
-	  return isObjectLike(value) && reIsHostCtor.test(value);
-	}
-
-	module.exports = isArray;
-
-
-/***/ },
-/* 404 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.1.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var bindCallback = __webpack_require__(405),
-	    isIterateeCall = __webpack_require__(406),
-	    restParam = __webpack_require__(407);
-
-	/**
-	 * Creates a function that assigns properties of source object(s) to a given
-	 * destination object.
-	 *
-	 * **Note:** This function is used to create `_.assign`, `_.defaults`, and `_.merge`.
-	 *
-	 * @private
-	 * @param {Function} assigner The function to assign values.
-	 * @returns {Function} Returns the new assigner function.
-	 */
-	function createAssigner(assigner) {
-	  return restParam(function(object, sources) {
-	    var index = -1,
-	        length = object == null ? 0 : sources.length,
-	        customizer = length > 2 ? sources[length - 2] : undefined,
-	        guard = length > 2 ? sources[2] : undefined,
-	        thisArg = length > 1 ? sources[length - 1] : undefined;
-
-	    if (typeof customizer == 'function') {
-	      customizer = bindCallback(customizer, thisArg, 5);
-	      length -= 2;
-	    } else {
-	      customizer = typeof thisArg == 'function' ? thisArg : undefined;
-	      length -= (customizer ? 1 : 0);
-	    }
-	    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-	      customizer = length < 3 ? undefined : customizer;
-	      length = 1;
-	    }
-	    while (++index < length) {
-	      var source = sources[index];
-	      if (source) {
-	        assigner(object, source, customizer);
-	      }
-	    }
-	    return object;
-	  });
-	}
-
-	module.exports = createAssigner;
-
-
-/***/ },
-/* 405 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/**
-	 * A specialized version of `baseCallback` which only supports `this` binding
-	 * and specifying the number of arguments to provide to `func`.
-	 *
-	 * @private
-	 * @param {Function} func The function to bind.
-	 * @param {*} thisArg The `this` binding of `func`.
-	 * @param {number} [argCount] The number of arguments to provide to `func`.
-	 * @returns {Function} Returns the callback.
-	 */
-	function bindCallback(func, thisArg, argCount) {
-	  if (typeof func != 'function') {
-	    return identity;
-	  }
-	  if (thisArg === undefined) {
-	    return func;
-	  }
-	  switch (argCount) {
-	    case 1: return function(value) {
-	      return func.call(thisArg, value);
-	    };
-	    case 3: return function(value, index, collection) {
-	      return func.call(thisArg, value, index, collection);
-	    };
-	    case 4: return function(accumulator, value, index, collection) {
-	      return func.call(thisArg, accumulator, value, index, collection);
-	    };
-	    case 5: return function(value, other, key, object, source) {
-	      return func.call(thisArg, value, other, key, object, source);
-	    };
-	  }
-	  return function() {
-	    return func.apply(thisArg, arguments);
-	  };
-	}
-
-	/**
-	 * This method returns the first argument provided to it.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Utility
-	 * @param {*} value Any value.
-	 * @returns {*} Returns `value`.
-	 * @example
-	 *
-	 * var object = { 'user': 'fred' };
-	 *
-	 * _.identity(object) === object;
-	 * // => true
-	 */
-	function identity(value) {
-	  return value;
-	}
-
-	module.exports = bindCallback;
-
-
-/***/ },
-/* 406 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.0.9 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** Used to detect unsigned integer values. */
-	var reIsUint = /^\d+$/;
-
-	/**
-	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * of an array-like value.
-	 */
-	var MAX_SAFE_INTEGER = 9007199254740991;
-
-	/**
-	 * The base implementation of `_.property` without support for deep paths.
-	 *
-	 * @private
-	 * @param {string} key The key of the property to get.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseProperty(key) {
-	  return function(object) {
-	    return object == null ? undefined : object[key];
-	  };
-	}
-
-	/**
-	 * Gets the "length" property value of `object`.
-	 *
-	 * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
-	 * that affects Safari on at least iOS 8.1-8.3 ARM64.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @returns {*} Returns the "length" value.
-	 */
-	var getLength = baseProperty('length');
-
-	/**
-	 * Checks if `value` is array-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
-	 */
-	function isArrayLike(value) {
-	  return value != null && isLength(getLength(value));
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	  return value > -1 && value % 1 == 0 && value < length;
-	}
-
-	/**
-	 * Checks if the provided arguments are from an iteratee call.
-	 *
-	 * @private
-	 * @param {*} value The potential iteratee value argument.
-	 * @param {*} index The potential iteratee index or key argument.
-	 * @param {*} object The potential iteratee object argument.
-	 * @returns {boolean} Returns `true` if the arguments are from an iteratee call, else `false`.
-	 */
-	function isIterateeCall(value, index, object) {
-	  if (!isObject(object)) {
-	    return false;
-	  }
-	  var type = typeof index;
-	  if (type == 'number'
-	      ? (isArrayLike(object) && isIndex(index, object.length))
-	      : (type == 'string' && index in object)) {
-	    var other = object[index];
-	    return value === value ? (value === other) : (other !== other);
-	  }
-	  return false;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	module.exports = isIterateeCall;
-
-
-/***/ },
-/* 407 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 3.6.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** Used as the `TypeError` message for "Functions" methods. */
-	var FUNC_ERROR_TEXT = 'Expected a function';
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeMax = Math.max;
-
-	/**
-	 * Creates a function that invokes `func` with the `this` binding of the
-	 * created function and arguments from `start` and beyond provided as an array.
-	 *
-	 * **Note:** This method is based on the [rest parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters).
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Function
-	 * @param {Function} func The function to apply a rest parameter to.
-	 * @param {number} [start=func.length-1] The start position of the rest parameter.
-	 * @returns {Function} Returns the new function.
-	 * @example
-	 *
-	 * var say = _.restParam(function(what, names) {
-	 *   return what + ' ' + _.initial(names).join(', ') +
-	 *     (_.size(names) > 1 ? ', & ' : '') + _.last(names);
-	 * });
-	 *
-	 * say('hello', 'fred', 'barney', 'pebbles');
-	 * // => 'hello fred, barney, & pebbles'
-	 */
-	function restParam(func, start) {
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  start = nativeMax(start === undefined ? (func.length - 1) : (+start || 0), 0);
-	  return function() {
-	    var args = arguments,
-	        index = -1,
-	        length = nativeMax(args.length - start, 0),
-	        rest = Array(length);
-
-	    while (++index < length) {
-	      rest[index] = args[start + index];
-	    }
-	    switch (start) {
-	      case 0: return func.call(this, rest);
-	      case 1: return func.call(this, args[0], rest);
-	      case 2: return func.call(this, args[0], args[1], rest);
-	    }
-	    var otherArgs = Array(start + 1);
-	    index = -1;
-	    while (++index < start) {
-	      otherArgs[index] = args[index];
-	    }
-	    otherArgs[start] = rest;
-	    return func.apply(this, otherArgs);
-	  };
-	}
-
-	module.exports = restParam;
-
-
-/***/ },
-/* 408 */
-/***/ function(module, exports) {
-
-	var _element = typeof document !== 'undefined' ? document.body : null;
-
-	function setElement(element) {
-	  if (typeof element === 'string') {
-	    var el = document.querySelectorAll(element);
-	    element = 'length' in el ? el[0] : el;
-	  }
-	  _element = element || _element;
-	  return _element;
-	}
-
-	function hide(appElement) {
-	  validateElement(appElement);
-	  (appElement || _element).setAttribute('aria-hidden', 'true');
-	}
-
-	function show(appElement) {
-	  validateElement(appElement);
-	  (appElement || _element).removeAttribute('aria-hidden');
-	}
-
-	function toggle(shouldHide, appElement) {
-	  if (shouldHide)
-	    hide(appElement);
-	  else
-	    show(appElement);
-	}
-
-	function validateElement(appElement) {
-	  if (!appElement && !_element)
-	    throw new Error('react-modal: You must set an element with `Modal.setAppElement(el)` to make this accessible');
-	}
-
-	function resetForTesting() {
-	  _element = document.body;
-	}
-
-	exports.toggle = toggle;
-	exports.setElement = setElement;
-	exports.show = show;
-	exports.hide = hide;
-	exports.resetForTesting = resetForTesting;
-
-
-/***/ },
-/* 409 */
-/***/ function(module, exports) {
-
-	module.exports = function(opts) {
-	  return new ElementClass(opts)
-	}
-
-	function indexOf(arr, prop) {
-	  if (arr.indexOf) return arr.indexOf(prop)
-	  for (var i = 0, len = arr.length; i < len; i++)
-	    if (arr[i] === prop) return i
-	  return -1
-	}
-
-	function ElementClass(opts) {
-	  if (!(this instanceof ElementClass)) return new ElementClass(opts)
-	  var self = this
-	  if (!opts) opts = {}
-
-	  // similar doing instanceof HTMLElement but works in IE8
-	  if (opts.nodeType) opts = {el: opts}
-
-	  this.opts = opts
-	  this.el = opts.el || document.body
-	  if (typeof this.el !== 'object') this.el = document.querySelector(this.el)
-	}
-
-	ElementClass.prototype.add = function(className) {
-	  var el = this.el
-	  if (!el) return
-	  if (el.className === "") return el.className = className
-	  var classes = el.className.split(' ')
-	  if (indexOf(classes, className) > -1) return classes
-	  classes.push(className)
-	  el.className = classes.join(' ')
-	  return classes
-	}
-
-	ElementClass.prototype.remove = function(className) {
-	  var el = this.el
-	  if (!el) return
-	  if (el.className === "") return
-	  var classes = el.className.split(' ')
-	  var idx = indexOf(classes, className)
-	  if (idx > -1) classes.splice(idx, 1)
-	  el.className = classes.join(' ')
-	  return classes
-	}
-
-	ElementClass.prototype.has = function(className) {
-	  var el = this.el
-	  if (!el) return
-	  var classes = el.className.split(' ')
-	  return indexOf(classes, className) > -1
-	}
-
-	ElementClass.prototype.toggle = function(className) {
-	  var el = this.el
-	  if (!el) return
-	  if (this.has(className)) this.remove(className)
-	  else this.add(className)
-	}
-
-
-/***/ },
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
 /* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -47376,6 +45437,717 @@
 	        return arg * 2;
 	    }
 	};
+
+/***/ },
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(4);
+	var transitionEvents = __webpack_require__(423);
+	var appendVendorPrefix = __webpack_require__(424);
+
+	module.exports = function(animation){
+
+	    return React.createClass({
+	        propTypes: {
+	            className: React.PropTypes.string,
+	            // Close the modal when esc is pressed? Defaults to true.
+	            keyboard: React.PropTypes.bool,
+	            onShow: React.PropTypes.func,
+	            onHide: React.PropTypes.func,
+	            animation: React.PropTypes.object,
+	            backdrop: React.PropTypes.bool,
+	            closeOnClick: React.PropTypes.bool,
+	            modalStyle: React.PropTypes.object,
+	            backdropStyle: React.PropTypes.object,
+	            contentStyle: React.PropTypes.object,
+	        },
+
+	        getDefaultProps: function() {
+	            return {
+	                className: "",
+	                onShow: function(){},
+	                onHide: function(){},
+	                animation: animation,
+	                keyboard: true,
+	                backdrop: true,
+	                closeOnClick: true,
+	                modalStyle: {},
+	                backdropStyle: {},
+	                contentStyle: {},
+	            };
+	        },
+
+	        getInitialState: function(){
+	            return {
+	                willHidden: false,
+	                hidden: true
+	            }
+	        },
+
+	        hasHidden: function(){
+	            return this.state.hidden;
+	        },
+
+	        addTransitionListener: function(node, handle){
+	            if (node) {
+	              var endListener = function(e) {
+	                  if (e && e.target !== node) {
+	                      return;
+	                  }
+	                  transitionEvents.removeEndEventListener(node, endListener);
+	                  handle();
+	              };
+	              transitionEvents.addEndEventListener(node, endListener);
+	            }
+	        },
+
+	        handleBackdropClick: function() {
+	            if (this.props.closeOnClick) {
+	                this.hide();
+	            }
+	        },
+
+	        render: function() {
+
+	            var hidden = this.hasHidden();
+	            if (hidden) return null;
+
+	            var willHidden = this.state.willHidden;
+	            var animation = this.props.animation;
+	            var modalStyle = animation.getModalStyle(willHidden);
+	            var backdropStyle = animation.getBackdropStyle(willHidden);
+	            var contentStyle = animation.getContentStyle(willHidden);
+	            var ref = animation.getRef(willHidden);
+	            var sharp = animation.getSharp && animation.getSharp(willHidden);
+
+	            // Apply custom style properties
+	            if (this.props.modalStyle) {
+	                var prefixedModalStyle = appendVendorPrefix(this.props.modalStyle);
+	                for (var style in prefixedModalStyle) {
+	                    modalStyle[style] = prefixedModalStyle[style];
+	                }
+	            }
+
+	            if (this.props.backdropStyle) {
+	              var prefixedBackdropStyle = appendVendorPrefix(this.props.backdropStyle);
+	                for (var style in prefixedBackdropStyle) {
+	                    backdropStyle[style] = prefixedBackdropStyle[style];
+	                }
+	            }
+
+	            if (this.props.contentStyle) {
+	              var prefixedContentStyle = appendVendorPrefix(this.props.contentStyle);
+	                for (var style in prefixedContentStyle) {
+	                    contentStyle[style] = prefixedContentStyle[style];
+	                }
+	            }
+
+	            var backdrop = this.props.backdrop? React.createElement("div", {style: backdropStyle, onClick: this.props.closeOnClick? this.handleBackdropClick: null}): undefined;
+
+	            if(willHidden) {
+	                var node = this.refs[ref];
+	                this.addTransitionListener(node, this.leave);
+	            }
+
+	            return (React.createElement("span", null, 
+	                React.createElement("div", {ref: "modal", style: modalStyle, className: this.props.className}, 
+	                    sharp, 
+	                    React.createElement("div", {ref: "content", tabIndex: "-1", style: contentStyle}, 
+	                        this.props.children
+	                    )
+	                ), 
+	                backdrop
+	             ))
+	            ;
+	        },
+
+	        leave: function(){
+	            this.setState({
+	                hidden: true
+	            });
+	            this.props.onHide();
+	        },
+
+	        enter: function(){
+	            this.props.onShow();
+	        },
+
+	        show: function(){
+	            if (!this.hasHidden()) return;
+
+	            this.setState({
+	                willHidden: false,
+	                hidden: false
+	            });
+
+	            setTimeout(function(){
+	              var ref = this.props.animation.getRef();
+	              var node = this.refs[ref];
+	              this.addTransitionListener(node, this.enter);
+	            }.bind(this), 0);
+	        },
+
+	        hide: function(){
+	            if (this.hasHidden()) return;
+
+	            this.setState({
+	                willHidden: true
+	            });
+	        },
+
+	        toggle: function(){
+	            if (this.hasHidden())
+	                this.show();
+	            else
+	                this.hide();
+	        },
+
+	        listenKeyboard: function(event) {
+	            if (this.props.keyboard &&
+	                    (event.key === "Escape" ||
+	                     event.keyCode === 27)) {
+	                this.hide();
+	            }
+	        },
+
+	        componentDidMount: function(){
+	            window.addEventListener("keydown", this.listenKeyboard, true);
+	        },
+
+	        componentWillUnmount: function() {
+	            window.removeEventListener("keydown", this.listenKeyboard, true);
+	        }
+	    });
+	}
+
+
+/***/ },
+/* 423 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/**
+	 * EVENT_NAME_MAP is used to determine which event fired when a
+	 * transition/animation ends, based on the style property used to
+	 * define that event.
+	 */
+	var EVENT_NAME_MAP = {
+	  transitionend: {
+	    'transition': 'transitionend',
+	    'WebkitTransition': 'webkitTransitionEnd',
+	    'MozTransition': 'mozTransitionEnd',
+	    'OTransition': 'oTransitionEnd',
+	    'msTransition': 'MSTransitionEnd'
+	  },
+
+	  animationend: {
+	    'animation': 'animationend',
+	    'WebkitAnimation': 'webkitAnimationEnd',
+	    'MozAnimation': 'mozAnimationEnd',
+	    'OAnimation': 'oAnimationEnd',
+	    'msAnimation': 'MSAnimationEnd'
+	  }
+	};
+
+	var endEvents = [];
+
+	function detectEvents() {
+	  var testEl = document.createElement('div');
+	  var style = testEl.style;
+
+	  // On some platforms, in particular some releases of Android 4.x,
+	  // the un-prefixed "animation" and "transition" properties are defined on the
+	  // style object but the events that fire will still be prefixed, so we need
+	  // to check if the un-prefixed events are useable, and if not remove them
+	  // from the map
+	  if (!('AnimationEvent' in window)) {
+	    delete EVENT_NAME_MAP.animationend.animation;
+	  }
+
+	  if (!('TransitionEvent' in window)) {
+	    delete EVENT_NAME_MAP.transitionend.transition;
+	  }
+
+	  for (var baseEventName in EVENT_NAME_MAP) {
+	    var baseEvents = EVENT_NAME_MAP[baseEventName];
+	    for (var styleName in baseEvents) {
+	      if (styleName in style) {
+	        endEvents.push(baseEvents[styleName]);
+	        break;
+	      }
+	    }
+	  }
+	}
+
+	if (typeof window !== 'undefined') {
+	  detectEvents();
+	}
+
+
+	// We use the raw {add|remove}EventListener() call because EventListener
+	// does not know how to remove event listeners and we really should
+	// clean up. Also, these events are not triggered in older browsers
+	// so we should be A-OK here.
+
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+
+	module.exports = {
+	  addEndEventListener: function(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      // If CSS transitions are not supported, trigger an "end animation"
+	      // event immediately.
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function(endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+
+	  removeEndEventListener: function(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function(endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+
+
+/***/ },
+/* 424 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getVendorPropertyName = __webpack_require__(425);
+
+	module.exports = function(target, sources) {
+	  var to = Object(target);
+	  var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+	    var nextSource = arguments[nextIndex];
+	    if (nextSource == null) {
+	      continue;
+	    }
+
+	    var from = Object(nextSource);
+
+	    for (var key in from) {
+	      if (hasOwnProperty.call(from, key)) {
+	        to[key] = from[key];
+	      }
+	    }
+	  }
+
+	  var prefixed = {};
+	  for (var key in to) {
+	    prefixed[getVendorPropertyName(key)] = to[key]
+	  }
+
+	  return prefixed
+	}
+
+
+/***/ },
+/* 425 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var builtinStyle = __webpack_require__(426);
+	var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
+	var domVendorPrefix;
+
+	// Helper function to get the proper vendor property name. (transition => WebkitTransition)
+	module.exports = function(prop, isSupportTest) {
+
+	  var vendorProp;
+	  if (prop in builtinStyle) return prop;
+
+	  var UpperProp = prop.charAt(0).toUpperCase() + prop.substr(1);
+
+	  if (domVendorPrefix) {
+
+	    vendorProp = domVendorPrefix + UpperProp;
+	    if (vendorProp in builtinStyle) {
+	      return vendorProp;
+	    }
+	  } else {
+
+	    for (var i = 0; i < prefixes.length; ++i) {
+	      vendorProp = prefixes[i] + UpperProp;
+	      if (vendorProp in builtinStyle) {
+	        domVendorPrefix = prefixes[i];
+	        return vendorProp;
+	      }
+	    }
+	  }
+
+	  // if support test, not fallback to origin prop name
+	  if (!isSupportTest) {
+	    return prop;
+	  }
+
+	}
+
+
+/***/ },
+/* 426 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = document.createElement('div').style;
+
+
+/***/ },
+/* 427 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var insertRule = __webpack_require__(428);
+	var vendorPrefix = __webpack_require__(429)();
+	var index = 0;
+
+	module.exports = function(keyframes) {
+	  // random name
+	  var name = 'anim_' + (++index) + (+new Date);
+	  var css = "@" + vendorPrefix + "keyframes " + name + " {";
+
+	  for (var key in keyframes) {
+	    css += key + " {";
+
+	    for (var property in keyframes[key]) {
+	      var part = ":" + keyframes[key][property] + ";";
+	      // We do vendor prefix for every property
+	      css += vendorPrefix + property + part;
+	      css += property + part;
+	    }
+
+	    css += "}";
+	  }
+
+	  css += "}";
+
+	  insertRule(css);
+
+	  return name
+	}
+
+
+/***/ },
+/* 428 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var extraSheet;
+
+	module.exports = function(css) {
+
+	  if (!extraSheet) {
+	    // First time, create an extra stylesheet for adding rules
+	    extraSheet = document.createElement('style');
+	    document.getElementsByTagName('head')[0].appendChild(extraSheet);
+	    // Keep reference to actual StyleSheet object (`styleSheet` for IE < 9)
+	    extraSheet = extraSheet.sheet || extraSheet.styleSheet;
+	  }
+
+	  var index = (extraSheet.cssRules || extraSheet.rules).length;
+	  extraSheet.insertRule(css, index);
+
+	  return extraSheet;
+	}
+
+
+/***/ },
+/* 429 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var cssVendorPrefix;
+
+	module.exports = function() {
+
+	  if (cssVendorPrefix) return cssVendorPrefix;
+
+	  var styles = window.getComputedStyle(document.documentElement, '');
+	  var pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1];
+
+	  return cssVendorPrefix = '-' + pre + '-';
+	}
+
+
+/***/ },
+/* 430 */,
+/* 431 */,
+/* 432 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var modalFactory = __webpack_require__(422);
+	var insertKeyframesRule = __webpack_require__(427);
+	var appendVendorPrefix = __webpack_require__(424);
+
+	var animation = {
+	    show: {
+	        animationDuration: '1s',
+	        animationTimingFunction: 'linear'
+	    },
+	    hide: {
+	        animationDuration: '0.3s',
+	        animationTimingFunction: 'ease-out'
+	    },
+	    showContentAnimation: insertKeyframesRule({
+	        '0%': {
+	            opacity: 0,
+	            transform: 'matrix3d(0.7, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '2.083333%': {
+	            transform: 'matrix3d(0.75266, 0, 0, 0, 0, 0.76342, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '4.166667%': {
+	            transform: 'matrix3d(0.81071, 0, 0, 0, 0, 0.84545, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '6.25%': {
+	            transform: 'matrix3d(0.86808, 0, 0, 0, 0, 0.9286, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '8.333333%': {
+	            transform: 'matrix3d(0.92038, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '10.416667%': {
+	            transform: 'matrix3d(0.96482, 0, 0, 0, 0, 1.05202, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '12.5%': {
+	            transform: 'matrix3d(1, 0, 0, 0, 0, 1.08204, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '14.583333%': {
+	            transform: 'matrix3d(1.02563, 0, 0, 0, 0, 1.09149, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '16.666667%': {
+	            transform: 'matrix3d(1.04227, 0, 0, 0, 0, 1.08453, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '18.75%': {
+	            transform: 'matrix3d(1.05102, 0, 0, 0, 0, 1.06666, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '20.833333%': {
+	            transform: 'matrix3d(1.05334, 0, 0, 0, 0, 1.04355, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '22.916667%': {
+	            transform: 'matrix3d(1.05078, 0, 0, 0, 0, 1.02012, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '25%': {
+	            transform: 'matrix3d(1.04487, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '27.083333%': {
+	            transform: 'matrix3d(1.03699, 0, 0, 0, 0, 0.98534, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '29.166667%': {
+	            transform: 'matrix3d(1.02831, 0, 0, 0, 0, 0.97688, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '31.25%': {
+	            transform: 'matrix3d(1.01973, 0, 0, 0, 0, 0.97422, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '33.333333%': {
+	            transform: 'matrix3d(1.01191, 0, 0, 0, 0, 0.97618, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '35.416667%': {
+	            transform: 'matrix3d(1.00526, 0, 0, 0, 0, 0.98122, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '37.5%': {
+	            transform: 'matrix3d(1, 0, 0, 0, 0, 0.98773, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '39.583333%': {
+	            transform: 'matrix3d(0.99617, 0, 0, 0, 0, 0.99433, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '41.666667%': {
+	            transform: 'matrix3d(0.99368, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '43.75%': {
+	            transform: 'matrix3d(0.99237, 0, 0, 0, 0, 1.00413, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '45.833333%': {
+	            transform: 'matrix3d(0.99202, 0, 0, 0, 0, 1.00651, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '47.916667%': {
+	            transform: 'matrix3d(0.99241, 0, 0, 0, 0, 1.00726, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '50%': {
+	            opacity: 1,
+	            transform: 'matrix3d(0.99329, 0, 0, 0, 0, 1.00671, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '52.083333%': {
+	            transform: 'matrix3d(0.99447, 0, 0, 0, 0, 1.00529, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '54.166667%': {
+	            transform: 'matrix3d(0.99577, 0, 0, 0, 0, 1.00346, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '56.25%': {
+	            transform: 'matrix3d(0.99705, 0, 0, 0, 0, 1.0016, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '58.333333%': {
+	            transform: 'matrix3d(0.99822, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '60.416667%': {
+	            transform: 'matrix3d(0.99921, 0, 0, 0, 0, 0.99884, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '62.5%': {
+	            transform: 'matrix3d(1, 0, 0, 0, 0, 0.99816, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '64.583333%': {
+	            transform: 'matrix3d(1.00057, 0, 0, 0, 0, 0.99795, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '66.666667%': {
+	            transform: 'matrix3d(1.00095, 0, 0, 0, 0, 0.99811, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '68.75%': {
+	            transform: 'matrix3d(1.00114, 0, 0, 0, 0, 0.99851, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '70.833333%': {
+	            transform: 'matrix3d(1.00119, 0, 0, 0, 0, 0.99903, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '72.916667%': {
+	            transform: 'matrix3d(1.00114, 0, 0, 0, 0, 0.99955, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '75%': {
+	            transform: 'matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '77.083333%': {
+	            transform: 'matrix3d(1.00083, 0, 0, 0, 0, 1.00033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '79.166667%': {
+	            transform: 'matrix3d(1.00063, 0, 0, 0, 0, 1.00052, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '81.25%': {
+	            transform: 'matrix3d(1.00044, 0, 0, 0, 0, 1.00058, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '83.333333%': {
+	            transform: 'matrix3d(1.00027, 0, 0, 0, 0, 1.00053, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '85.416667%': {
+	            transform: 'matrix3d(1.00012, 0, 0, 0, 0, 1.00042, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '87.5%': {
+	            transform: 'matrix3d(1, 0, 0, 0, 0, 1.00027, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '89.583333%': {
+	            transform: 'matrix3d(0.99991, 0, 0, 0, 0, 1.00013, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '91.666667%': {
+	            transform: 'matrix3d(0.99986, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '93.75%': {
+	            transform: 'matrix3d(0.99983, 0, 0, 0, 0, 0.99991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '95.833333%': {
+	            transform: 'matrix3d(0.99982, 0, 0, 0, 0, 0.99985, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '97.916667%': {
+	            transform: 'matrix3d(0.99983, 0, 0, 0, 0, 0.99984, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        },
+	        '100%': {
+	            opacity: 1,
+	            transform: 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+	        }
+	    }),
+
+	    hideContentAnimation: insertKeyframesRule({
+	        '0%': {
+	            opacity: 1
+	        },
+	        '100%': {
+	            opacity: 0,
+	            transform: 'scale3d(0.8, 0.8, 1)'
+	        },
+	    }),
+
+	    showBackdropAnimation: insertKeyframesRule({
+	        '0%': {
+	            opacity: 0
+	        },
+	        '100%': {
+	            opacity: 0.9
+	        },
+	    }),
+
+	    hideBackdropAnimation: insertKeyframesRule({
+	        '0%': {
+	            opacity: 0.9
+	        },
+	        '100%': {
+	            opacity: 0
+	        }
+	    })
+	};
+
+	var showAnimation = animation.show;
+	var hideAnimation = animation.hide;
+	var showContentAnimation = animation.showContentAnimation;
+	var hideContentAnimation = animation.hideContentAnimation;
+	var showBackdropAnimation = animation.showBackdropAnimation;
+	var hideBackdropAnimation = animation.hideBackdropAnimation;
+
+	module.exports = modalFactory({
+	    getRef: function(willHidden) {
+	        return 'content';
+	    },
+	    getModalStyle: function(willHidden) {
+	        return appendVendorPrefix({
+	            zIndex: 1050,
+	            position: "fixed",
+	            width: "500px",
+	            transform: "translate3d(-50%, -50%, 0)",
+	            top: "50%",
+	            left: "50%"
+	        })
+	    },
+	    getBackdropStyle: function(willHidden) {
+	        return appendVendorPrefix({
+	            position: "fixed",
+	            top: 0,
+	            right: 0,
+	            bottom: 0,
+	            left: 0,
+	            zIndex: 1040,
+	            backgroundColor: "#373A47",
+	            animationFillMode: 'forwards',
+	            animationDuration: '0.3s',
+	            animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,
+	            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+	        });
+	    },
+	    getContentStyle: function(willHidden) {
+	        return appendVendorPrefix({
+	            margin: 0,
+	            backgroundColor: "white",
+	            animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
+	            animationFillMode: 'forwards',
+	            animationName: willHidden ? hideContentAnimation : showContentAnimation,
+	            animationTimingFunction: (willHidden ? hideAnimation : showAnimation).animationTimingFunction
+	        })
+	    }
+	});
+
 
 /***/ }
 /******/ ]);
