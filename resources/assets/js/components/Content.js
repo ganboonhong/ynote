@@ -41,14 +41,12 @@ var Content = React.createClass({
         },
 
         showModal: function() {
-            console.log(window.innerHeight);
             this.refs.modal.show();
             document.body.style.overflow = 'hidden';
             
         },
 
         hideModal: function() {
-            console.log('closed');
             this.refs.modal.hide();
             document.body.style.overflow = 'visible';
         },

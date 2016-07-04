@@ -24,6 +24,31 @@ function getStateFromStores(){
 
 var BlogContainer = React.createClass({
 
+    _loadMoreItems(){
+        var obj        = this;
+        var url_params = BlogPageStore.getUrlParams();
+        var user_id    = url_params.user_id;
+
+        $.getJSON(
+            "/" + user_id + "/article/", 
+
+            {isBlogContent: true},
+
+            function (data) {
+
+                for(var key in data){
+                    data[key]['article_id'] = parseFloat(data[key]['article_id']) + 1;
+                }
+
+                var current_data = obj.state.list;
+                var result = current_data.concat(data);
+
+                console.log(obj.state.list);
+                obj.setState({list: result});
+            }
+        );
+    },
+
     getInitialState() {
         return {
             list: [],
@@ -48,6 +73,7 @@ var BlogContainer = React.createClass({
                 obj.setState({list: data});
             }
         );
+        this._loadMoreItems();
         
         BlogStore.addChangeListener(this._onChange);
     },

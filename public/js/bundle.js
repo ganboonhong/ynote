@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c987cd511c1334270de5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7c6cd20bef8852797bf3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44730,6 +44730,24 @@
 
 	var BlogContainer = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogContainer',
+	    _loadMoreItems: function _loadMoreItems() {
+	        var obj = this;
+	        var url_params = BlogPageStore.getUrlParams();
+	        var user_id = url_params.user_id;
+
+	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
+
+	            for (var key in data) {
+	                data[key]['article_id'] = parseFloat(data[key]['article_id']) + 1;
+	            }
+
+	            var current_data = obj.state.list;
+	            var result = current_data.concat(data);
+
+	            console.log(obj.state.list);
+	            obj.setState({ list: result });
+	        });
+	    },
 	    getInitialState: function getInitialState() {
 	        return {
 	            list: []
@@ -44748,6 +44766,7 @@
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
 	        });
+	        this._loadMoreItems();
 
 	        BlogStore.addChangeListener(this._onChange);
 	    },
@@ -45147,13 +45166,11 @@
 
 
 	    showModal: function showModal() {
-	        console.log(window.innerHeight);
 	        this.refs.modal.show();
 	        document.body.style.overflow = 'hidden';
 	    },
 
 	    hideModal: function hideModal() {
-	        console.log('closed');
 	        this.refs.modal.hide();
 	        document.body.style.overflow = 'visible';
 	    },

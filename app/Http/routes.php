@@ -78,7 +78,7 @@ Route::get('{user_id}/article-category/{id}',[
 
     });
 
-
+// ajax get content obj
 Route::get('{user_id}/article', 'ArticleController@itemList')->where('user_id', '[0-9]+');
 
 Route::get('article/{id}/{category_id}/{user_id}', [
