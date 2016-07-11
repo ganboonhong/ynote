@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7c6cd20bef8852797bf3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e0c7bfba76be45e9280c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -639,10 +639,10 @@
 	var React = __webpack_require__(4);
 	var ReactDOM = __webpack_require__(234);
 	var BlogPage = __webpack_require__(369);
-	var About = __webpack_require__(411);
-	var NotFound = __webpack_require__(412);
+	var About = __webpack_require__(401);
+	var NotFound = __webpack_require__(402);
 
-	var WebAPIUtils = __webpack_require__(413);
+	var WebAPIUtils = __webpack_require__(403);
 
 	WebAPIUtils.init();
 
@@ -32542,7 +32542,7 @@
 	var React = __webpack_require__(4);
 	var Nav = __webpack_require__(371);
 	var BlogContainer = __webpack_require__(382);
-	var Content = __webpack_require__(388);
+	var Content = __webpack_require__(389);
 	var BlogPageStore = __webpack_require__(380);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
@@ -44716,6 +44716,7 @@
 	var BlogPageStore = __webpack_require__(380);
 	var ClassNames = __webpack_require__(387);
 	var BlogActionCreators = __webpack_require__(384);
+	var Waypoint = __webpack_require__(388);
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -44728,6 +44729,13 @@
 	    return { list: BlogStore.getCurrentBlogs() };
 	}
 
+	/**
+	 * Returns a random number between min (inclusive) and max (exclusive)
+	 */
+	function getRandomArbitrary(min, max) {
+	    return Math.random() * (max - min) + min;
+	}
+
 	var BlogContainer = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogContainer',
 	    _loadMoreItems: function _loadMoreItems() {
@@ -44738,13 +44746,12 @@
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 
 	            for (var key in data) {
-	                data[key]['article_id'] = parseFloat(data[key]['article_id']) + 1;
+	                data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
 	            }
 
 	            var current_data = obj.state.list;
 	            var result = current_data.concat(data);
 
-	            console.log(obj.state.list);
 	            obj.setState({ list: result });
 	        });
 	    },
@@ -44766,7 +44773,6 @@
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
 	        });
-	        this._loadMoreItems();
 
 	        BlogStore.addChangeListener(this._onChange);
 	    },
@@ -44774,15 +44780,43 @@
 	    componentWillUnmount: function componentWillUnmount() {
 	        BlogStore.removeChangeListener(this._onChange);
 	    },
+	    _renderItems: function _renderItems() {
+	        return this.state.list.map(getBlog);
+	    },
+	    _onLeaveHandler: function _onLeaveHandler() {
+	        console.log('on leave');
+	    },
+	    _renderWaypoint: function _renderWaypoint() {
+	        var target = (0, _jQuery2.default)('.classss');
+	        var topOffset = (0, _jQuery2.default)(document).height() * .2; // how far the scrollbar left the top
+
+	        if (!this.state.isLoading) {
+	            return React.createElement(Waypoint, {
+	                onEnter: this._loadMoreItems,
+	                onLeave: this._onLeaveHandler,
+	                debug: false,
+	                topOffset: topOffset + 'px'
+	            });
+	        }
+	    },
 	    render: function render() {
-	        var blog = this.state.list.map(getBlog);
 	        var myClass = ClassNames({
 	            'col-md-9 col-sm-12 col-xs-12 list-wrapper': true
 	        });
+
 	        return React.createElement(
 	            'div',
-	            { className: myClass },
-	            blog
+	            null,
+	            React.createElement(
+	                'div',
+	                { className: myClass },
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    this._renderItems()
+	                )
+	            ),
+	            this._renderWaypoint()
 	        );
 	    },
 	    _onChange: function _onChange() {
@@ -45079,6 +45113,409 @@
 /* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	//Load jQuery library using plain JavaScript
+	(function(){
+	  var newscript = document.createElement('script');
+	     newscript.type = 'text/javascript';
+	     newscript.async = true;
+	     newscript.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js';
+	  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(newscript);
+	})();
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(234);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var $document = $(document);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var POSITIONS = {
+	  above: 'above',
+	  inside: 'inside',
+	  below: 'below',
+	  invisible: 'invisible'
+	};
+
+	var propTypes = {
+	  debug: _react.PropTypes.bool,
+	  onEnter: _react.PropTypes.func,
+	  onLeave: _react.PropTypes.func,
+	  onPositionChange: _react.PropTypes.func,
+	  fireOnRapidScroll: _react.PropTypes.bool,
+	  scrollableAncestor: _react.PropTypes.any,
+	  throttleHandler: _react.PropTypes.func,
+	  // `topOffset` can either be a number, in which case its a distance from the
+	  // top of the container in pixels, or a string value. Valid string values are
+	  // of the form "20px", which is parsed as pixels, or "20%", which is parsed
+	  // as a percentage of the height of the containing element.
+	  // For instance, if you pass "-20%", and the containing element is 100px tall,
+	  // then the waypoint will be triggered when it has been scrolled 20px beyond
+	  // the top of the containing element.
+	  topOffset: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
+	  // `bottomOffset` is like `topOffset`, but for the bottom of the container.
+	  bottomOffset: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number])
+	};
+
+	var defaultProps = {
+	  topOffset: '0px',
+	  bottomOffset: '0px',
+	  onEnter: function onEnter() {},
+	  onLeave: function onLeave() {},
+	  onPositionChange: function onPositionChange() {},
+
+	  fireOnRapidScroll: true,
+	  throttleHandler: function throttleHandler(handler) {
+	    return handler;
+	  }
+	};
+
+	function debugLog() {
+	  console.log(arguments); // eslint-disable-line no-console
+	}
+
+	/**
+	 * Calls a function when you scroll to the element.
+	 */
+
+	var Waypoint = (function (_React$Component) {
+	  _inherits(Waypoint, _React$Component);
+
+	  function Waypoint() {
+	    _classCallCheck(this, Waypoint);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Waypoint).apply(this, arguments));
+	  }
+
+	  _createClass(Waypoint, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      if (this.props.scrollableParent) {
+	        // eslint-disable-line react/prop-types
+	        throw new Error('The `scrollableParent` prop has changed name ' + 'to `scrollableAncestor`.');
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!Waypoint.getWindow()) {
+	        return;
+	      }
+	      this._handleScroll = this.props.throttleHandler(this._handleScroll.bind(this));
+	      this.scrollableAncestor = this._findScrollableAncestor();
+	      if (this.props.debug) {
+	        debugLog('scrollableAncestor', this.scrollableAncestor);
+	      }
+	      this.scrollableAncestor.addEventListener('scroll', this._handleScroll);
+	      window.addEventListener('resize', this._handleScroll);
+	      this._handleScroll(null);
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (!Waypoint.getWindow()) {
+	        return;
+	      }
+
+	      // The element may have moved.
+	      this._handleScroll(null);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (!Waypoint.getWindow()) {
+	        return;
+	      }
+
+	      if (this.scrollableAncestor) {
+	        // At the time of unmounting, the scrollable ancestor might no longer
+	        // exist. Guarding against this prevents the following error:
+	        //
+	        //   Cannot read property 'removeEventListener' of undefined
+	        this.scrollableAncestor.removeEventListener('scroll', this._handleScroll);
+	      }
+	      window.removeEventListener('resize', this._handleScroll);
+	    }
+
+	    /**
+	     * Traverses up the DOM to find an ancestor container which has an overflow
+	     * style that allows for scrolling.
+	     *
+	     * @return {Object} the closest ancestor element with an overflow style that
+	     *   allows for scrolling. If none is found, the `window` object is returned
+	     *   as a fallback.
+	     */
+
+	  }, {
+	    key: '_findScrollableAncestor',
+	    value: function _findScrollableAncestor() {
+	      if (this.props.scrollableAncestor) {
+	        return this.props.scrollableAncestor;
+	      }
+
+	      var node = _reactDom2.default.findDOMNode(this);
+
+	      while (node.parentNode) {
+	        node = node.parentNode;
+
+	        if (node === document) {
+	          // This particular node does not have a computed style.
+	          continue;
+	        }
+
+	        if (node === document.documentElement) {
+	          // This particular node does not have a scroll bar, it uses the window.
+	          continue;
+	        }
+
+	        var style = window.getComputedStyle(node);
+	        var overflowY = style.getPropertyValue('overflow-y') || style.getPropertyValue('overflow');
+
+	        if (overflowY === 'auto' || overflowY === 'scroll') {
+	          return node;
+	        }
+	      }
+
+	      // A scrollable ancestor element was not found, which means that we need to
+	      // do stuff on window.
+	      return window;
+	    }
+
+	    /**
+	     * @param {Object} event the native scroll event coming from the scrollable
+	     *   ancestor, or resize event coming from the window. Will be undefined if
+	     *   called by a React lifecyle method
+	     */
+
+	  }, {
+	    key: '_handleScroll',
+	    value: function _handleScroll(event) {
+
+	      var currentPosition = this._currentPosition();
+	      var previousPosition = this._previousPosition || null;
+	      if (this.props.debug) {
+	        debugLog('currentPosition', currentPosition);
+	        debugLog('previousPosition', previousPosition);
+	      }
+
+	      // Save previous position as early as possible to prevent cycles
+	      this._previousPosition = currentPosition;
+	      if (previousPosition === currentPosition && $document.height() !== $document.scrollTop() + window.innerHeight) {
+	        // No change since last trigger
+	        return;
+	      }
+
+	      var callbackArg = {
+	        currentPosition: currentPosition,
+	        previousPosition: previousPosition,
+	        event: event
+	      };
+	      this.props.onPositionChange.call(this, callbackArg);
+
+	      if (currentPosition === POSITIONS.inside) {
+	        this.props.onEnter.call(this, callbackArg);
+	      } else if (previousPosition === POSITIONS.inside) {
+	        this.props.onLeave.call(this, callbackArg);
+	      }
+
+	      var isRapidScrollDown = previousPosition === POSITIONS.below && currentPosition === POSITIONS.above;
+	      var isRapidScrollUp = previousPosition === POSITIONS.above && currentPosition === POSITIONS.below;
+
+	      if (this.props.fireOnRapidScroll && (isRapidScrollDown || isRapidScrollUp)) {
+	        // If the scroll event isn't fired often enough to occur while the
+	        // waypoint was visible, we trigger both callbacks anyway.
+	        this.props.onEnter.call(this, {
+	          currentPosition: POSITIONS.inside,
+	          previousPosition: previousPosition,
+	          event: event
+	        });
+	        this.props.onLeave.call(this, {
+	          currentPosition: currentPosition,
+	          previousPosition: POSITIONS.inside,
+	          event: event
+	        });
+	      }
+	    }
+
+	    /**
+	     * @param {string|number} offset
+	     * @param {number} contextHeight
+	     * @return {number} A number representing `offset` converted into pixels.
+	     */
+
+	  }, {
+	    key: '_computeOffsetPixels',
+	    value: function _computeOffsetPixels(offset, contextHeight) {
+	      var pixelOffset = this._parseOffsetAsPixels(offset);
+	      if (typeof pixelOffset === 'number') {
+	        return pixelOffset;
+	      }
+
+	      var percentOffset = this._parseOffsetAsPercentage(offset);
+	      if (typeof percentOffset === 'number') {
+	        return percentOffset * contextHeight;
+	      }
+	    }
+
+	    /**
+	     * Attempts to parse the offset provided as a prop as a pixel value. If
+	     * parsing fails, then `undefined` is returned. Three examples of values that
+	     * will be successfully parsed are:
+	     * `20`
+	     * "20px"
+	     * "20"
+	     *
+	     * @param {string|number} str A string of the form "{number}" or "{number}px",
+	     *   or just a number.
+	     * @return {number|undefined} The numeric version of `str`. Undefined if `str`
+	     *   was neither a number nor string ending in "px".
+	     */
+
+	  }, {
+	    key: '_parseOffsetAsPixels',
+	    value: function _parseOffsetAsPixels(str) {
+	      if (!isNaN(parseFloat(str)) && isFinite(str)) {
+	        return parseFloat(str);
+	      } else if (str.slice(-2) === 'px') {
+	        return parseFloat(str.slice(0, -2));
+	      }
+	    }
+
+	    /**
+	     * Attempts to parse the offset provided as a prop as a percentage. For
+	     * instance, if the component has been provided with the string "20%" as
+	     * a value of one of the offset props. If the value matches, then it returns
+	     * a numeric version of the prop. For instance, "20%" would become `0.2`.
+	     * If `str` isn't a percentage, then `undefined` will be returned.
+	     *
+	     * @param {string} str The value of an offset prop to be converted to a
+	     *   number.
+	     * @return {number|undefined} The numeric version of `str`. Undefined if `str`
+	     *   was not a percentage.
+	     */
+
+	  }, {
+	    key: '_parseOffsetAsPercentage',
+	    value: function _parseOffsetAsPercentage(str) {
+	      if (str.slice(-1) === '%') {
+	        return parseFloat(str.slice(0, -1)) / 100;
+	      }
+	    }
+
+	    /**
+	     * @return {string} The current position of the waypoint in relation to the
+	     *   visible portion of the scrollable parent. One of `POSITIONS.above`,
+	     *   `POSITIONS.below`, or `POSITIONS.inside`.
+	     */
+
+	  }, {
+	    key: '_currentPosition',
+	    value: function _currentPosition() {
+	      var waypointTop = _reactDom2.default.findDOMNode(this).getBoundingClientRect().top;
+	      
+	      var contextHeight = undefined;
+	      var contextScrollTop = undefined;
+	      if (this.scrollableAncestor === window) {
+	        contextHeight = window.innerHeight;
+	        contextScrollTop = 0;
+	      } else {
+	        contextHeight = this.scrollableAncestor.offsetHeight;
+	        contextScrollTop = _reactDom2.default.findDOMNode(this.scrollableAncestor).getBoundingClientRect().top;
+	      }
+	      if (this.props.debug) {
+	        debugLog('waypoint top', waypointTop);
+	        debugLog('scrollableAncestor height', contextHeight);
+	        debugLog('scrollableAncestor scrollTop', contextScrollTop);
+	      }
+
+	      var _props = this.props;
+	      var bottomOffset = _props.bottomOffset;
+	      var topOffset = _props.topOffset;
+
+	      var topOffsetPx = this._computeOffsetPixels(topOffset, contextHeight);
+	      var bottomOffsetPx = this._computeOffsetPixels(bottomOffset, contextHeight);
+	      var contextBottom = contextScrollTop + contextHeight;
+
+	      if (contextHeight === 0) {
+	        return Waypoint.invisible;
+	      }
+
+	      // if (contextScrollTop <= waypointTop - topOffsetPx && waypointTop + bottomOffsetPx <= contextBottom) {
+	      if (contextScrollTop >= waypointTop + topOffsetPx) {
+	        return Waypoint.inside;
+	      }
+
+	      // when the scroll bar reach bottom of document
+	      if ($document.height() == $document.scrollTop() + window.innerHeight) {
+	        return Waypoint.inside;
+	      }
+
+	      if (contextBottom < waypointTop + bottomOffsetPx) {
+	        return Waypoint.below;
+	      }
+
+	      if (waypointTop - topOffsetPx < contextScrollTop) {
+	        return Waypoint.above;
+	      }
+
+	      return Waypoint.invisible;
+	    }
+
+	    /**
+	     * @return {Object}
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      // We need an element that we can locate in the DOM to determine where it is
+	      // rendered relative to the top of its context.
+	      return _react2.default.createElement('span', { style: { fontSize: 0 } });
+	    }
+	  }]);
+
+	  return Waypoint;
+	})(_react2.default.Component);
+
+	exports.default = Waypoint;
+
+	Waypoint.propTypes = propTypes;
+	Waypoint.above = POSITIONS.above;
+	Waypoint.below = POSITIONS.below;
+	Waypoint.inside = POSITIONS.inside;
+	Waypoint.invisible = POSITIONS.invisible;
+	Waypoint.getWindow = function () {
+	  if (typeof window !== 'undefined') {
+	    return window;
+	  }
+	};
+	Waypoint.defaultProps = defaultProps;
+	Waypoint.displayName = 'Waypoint';
+	module.exports = exports['default'];
+
+
+/***/ },
+/* 389 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
 	var _index = __webpack_require__(3);
@@ -45126,13 +45563,13 @@
 	var React = __webpack_require__(4);
 	var ContentStore = __webpack_require__(385);
 	var classNames = __webpack_require__(387);
-	var Paragraph = __webpack_require__(389);
+	var Paragraph = __webpack_require__(390);
 	// var Modal                 = require('react-modal');
-	var ContentActionCreators = __webpack_require__(410);
+	var ContentActionCreators = __webpack_require__(391);
 	//ScaleModal DropModal OutlineModal FadeModal FlyModal WaveModal
 	//demo:   http://madscript.com/boron/
 	//github: https://github.com/yuanyan/boron
-	var Modal = __webpack_require__(432);
+	var Modal = __webpack_require__(392);
 	var modalStyle = {
 	    width: '90%',
 	    height: '100%',
@@ -45202,7 +45639,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 389 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -45275,27 +45712,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */,
-/* 394 */,
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */,
-/* 402 */,
-/* 403 */,
-/* 404 */,
-/* 405 */,
-/* 406 */,
-/* 407 */,
-/* 408 */,
-/* 409 */,
-/* 410 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45305,626 +45722,12 @@
 	module.exports = {};
 
 /***/ },
-/* 411 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _index = __webpack_require__(3);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(40);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(41);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	var _reactRouter = __webpack_require__(173);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	    _component: {}
-	};
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/About.js",
-	    components: _components,
-	    locals: [module],
-	    imports: [_react3.default]
-	});
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/About.js",
-	    components: _components,
-	    locals: [],
-	    imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	    return function (Component) {
-	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	    };
-	}
-
-	var React = __webpack_require__(4);
-	var About = _wrapComponent("_component")(React.createClass({
-	    displayName: "About",
-
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            "About mexx",
-	            React.createElement(
-	                _reactRouter.Link,
-	                { to: "/" },
-	                this.props.params.aboutName
-	            )
-	        );
-	    }
-	}));
-
-	module.exports = About;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
-
-/***/ },
-/* 412 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _index = __webpack_require__(3);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(40);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(41);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	    _component: {}
-	};
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/NotFound.js",
-	    components: _components,
-	    locals: [module],
-	    imports: [_react3.default]
-	});
-
-	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	    filename: "/Users/boonhong/ynote/resources/assets/js/components/NotFound.js",
-	    components: _components,
-	    locals: [],
-	    imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	    return function (Component) {
-	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	    };
-	}
-
-	var React = __webpack_require__(4);
-
-	var NotFound = _wrapComponent("_component")(React.createClass({
-	    displayName: "NotFound",
-
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            "Opps, something goes wrong."
-	        );
-	    }
-	}));
-
-	module.exports = NotFound;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
-
-/***/ },
-/* 413 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var NavActionCreators = __webpack_require__(373);
-	var BlogActionCreators = __webpack_require__(384);
-
-	module.exports = {
-	    init: function init(arg) {
-	        return arg * 2;
-	    }
-	};
-
-/***/ },
-/* 414 */,
-/* 415 */,
-/* 416 */,
-/* 417 */,
-/* 418 */,
-/* 419 */,
-/* 420 */,
-/* 421 */,
-/* 422 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(4);
-	var transitionEvents = __webpack_require__(423);
-	var appendVendorPrefix = __webpack_require__(424);
-
-	module.exports = function(animation){
-
-	    return React.createClass({
-	        propTypes: {
-	            className: React.PropTypes.string,
-	            // Close the modal when esc is pressed? Defaults to true.
-	            keyboard: React.PropTypes.bool,
-	            onShow: React.PropTypes.func,
-	            onHide: React.PropTypes.func,
-	            animation: React.PropTypes.object,
-	            backdrop: React.PropTypes.bool,
-	            closeOnClick: React.PropTypes.bool,
-	            modalStyle: React.PropTypes.object,
-	            backdropStyle: React.PropTypes.object,
-	            contentStyle: React.PropTypes.object,
-	        },
-
-	        getDefaultProps: function() {
-	            return {
-	                className: "",
-	                onShow: function(){},
-	                onHide: function(){},
-	                animation: animation,
-	                keyboard: true,
-	                backdrop: true,
-	                closeOnClick: true,
-	                modalStyle: {},
-	                backdropStyle: {},
-	                contentStyle: {},
-	            };
-	        },
-
-	        getInitialState: function(){
-	            return {
-	                willHidden: false,
-	                hidden: true
-	            }
-	        },
-
-	        hasHidden: function(){
-	            return this.state.hidden;
-	        },
-
-	        addTransitionListener: function(node, handle){
-	            if (node) {
-	              var endListener = function(e) {
-	                  if (e && e.target !== node) {
-	                      return;
-	                  }
-	                  transitionEvents.removeEndEventListener(node, endListener);
-	                  handle();
-	              };
-	              transitionEvents.addEndEventListener(node, endListener);
-	            }
-	        },
-
-	        handleBackdropClick: function() {
-	            if (this.props.closeOnClick) {
-	                this.hide();
-	            }
-	        },
-
-	        render: function() {
-
-	            var hidden = this.hasHidden();
-	            if (hidden) return null;
-
-	            var willHidden = this.state.willHidden;
-	            var animation = this.props.animation;
-	            var modalStyle = animation.getModalStyle(willHidden);
-	            var backdropStyle = animation.getBackdropStyle(willHidden);
-	            var contentStyle = animation.getContentStyle(willHidden);
-	            var ref = animation.getRef(willHidden);
-	            var sharp = animation.getSharp && animation.getSharp(willHidden);
-
-	            // Apply custom style properties
-	            if (this.props.modalStyle) {
-	                var prefixedModalStyle = appendVendorPrefix(this.props.modalStyle);
-	                for (var style in prefixedModalStyle) {
-	                    modalStyle[style] = prefixedModalStyle[style];
-	                }
-	            }
-
-	            if (this.props.backdropStyle) {
-	              var prefixedBackdropStyle = appendVendorPrefix(this.props.backdropStyle);
-	                for (var style in prefixedBackdropStyle) {
-	                    backdropStyle[style] = prefixedBackdropStyle[style];
-	                }
-	            }
-
-	            if (this.props.contentStyle) {
-	              var prefixedContentStyle = appendVendorPrefix(this.props.contentStyle);
-	                for (var style in prefixedContentStyle) {
-	                    contentStyle[style] = prefixedContentStyle[style];
-	                }
-	            }
-
-	            var backdrop = this.props.backdrop? React.createElement("div", {style: backdropStyle, onClick: this.props.closeOnClick? this.handleBackdropClick: null}): undefined;
-
-	            if(willHidden) {
-	                var node = this.refs[ref];
-	                this.addTransitionListener(node, this.leave);
-	            }
-
-	            return (React.createElement("span", null, 
-	                React.createElement("div", {ref: "modal", style: modalStyle, className: this.props.className}, 
-	                    sharp, 
-	                    React.createElement("div", {ref: "content", tabIndex: "-1", style: contentStyle}, 
-	                        this.props.children
-	                    )
-	                ), 
-	                backdrop
-	             ))
-	            ;
-	        },
-
-	        leave: function(){
-	            this.setState({
-	                hidden: true
-	            });
-	            this.props.onHide();
-	        },
-
-	        enter: function(){
-	            this.props.onShow();
-	        },
-
-	        show: function(){
-	            if (!this.hasHidden()) return;
-
-	            this.setState({
-	                willHidden: false,
-	                hidden: false
-	            });
-
-	            setTimeout(function(){
-	              var ref = this.props.animation.getRef();
-	              var node = this.refs[ref];
-	              this.addTransitionListener(node, this.enter);
-	            }.bind(this), 0);
-	        },
-
-	        hide: function(){
-	            if (this.hasHidden()) return;
-
-	            this.setState({
-	                willHidden: true
-	            });
-	        },
-
-	        toggle: function(){
-	            if (this.hasHidden())
-	                this.show();
-	            else
-	                this.hide();
-	        },
-
-	        listenKeyboard: function(event) {
-	            if (this.props.keyboard &&
-	                    (event.key === "Escape" ||
-	                     event.keyCode === 27)) {
-	                this.hide();
-	            }
-	        },
-
-	        componentDidMount: function(){
-	            window.addEventListener("keydown", this.listenKeyboard, true);
-	        },
-
-	        componentWillUnmount: function() {
-	            window.removeEventListener("keydown", this.listenKeyboard, true);
-	        }
-	    });
-	}
-
-
-/***/ },
-/* 423 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	/**
-	 * EVENT_NAME_MAP is used to determine which event fired when a
-	 * transition/animation ends, based on the style property used to
-	 * define that event.
-	 */
-	var EVENT_NAME_MAP = {
-	  transitionend: {
-	    'transition': 'transitionend',
-	    'WebkitTransition': 'webkitTransitionEnd',
-	    'MozTransition': 'mozTransitionEnd',
-	    'OTransition': 'oTransitionEnd',
-	    'msTransition': 'MSTransitionEnd'
-	  },
-
-	  animationend: {
-	    'animation': 'animationend',
-	    'WebkitAnimation': 'webkitAnimationEnd',
-	    'MozAnimation': 'mozAnimationEnd',
-	    'OAnimation': 'oAnimationEnd',
-	    'msAnimation': 'MSAnimationEnd'
-	  }
-	};
-
-	var endEvents = [];
-
-	function detectEvents() {
-	  var testEl = document.createElement('div');
-	  var style = testEl.style;
-
-	  // On some platforms, in particular some releases of Android 4.x,
-	  // the un-prefixed "animation" and "transition" properties are defined on the
-	  // style object but the events that fire will still be prefixed, so we need
-	  // to check if the un-prefixed events are useable, and if not remove them
-	  // from the map
-	  if (!('AnimationEvent' in window)) {
-	    delete EVENT_NAME_MAP.animationend.animation;
-	  }
-
-	  if (!('TransitionEvent' in window)) {
-	    delete EVENT_NAME_MAP.transitionend.transition;
-	  }
-
-	  for (var baseEventName in EVENT_NAME_MAP) {
-	    var baseEvents = EVENT_NAME_MAP[baseEventName];
-	    for (var styleName in baseEvents) {
-	      if (styleName in style) {
-	        endEvents.push(baseEvents[styleName]);
-	        break;
-	      }
-	    }
-	  }
-	}
-
-	if (typeof window !== 'undefined') {
-	  detectEvents();
-	}
-
-
-	// We use the raw {add|remove}EventListener() call because EventListener
-	// does not know how to remove event listeners and we really should
-	// clean up. Also, these events are not triggered in older browsers
-	// so we should be A-OK here.
-
-	function addEventListener(node, eventName, eventListener) {
-	  node.addEventListener(eventName, eventListener, false);
-	}
-
-	function removeEventListener(node, eventName, eventListener) {
-	  node.removeEventListener(eventName, eventListener, false);
-	}
-
-	module.exports = {
-	  addEndEventListener: function(node, eventListener) {
-	    if (endEvents.length === 0) {
-	      // If CSS transitions are not supported, trigger an "end animation"
-	      // event immediately.
-	      window.setTimeout(eventListener, 0);
-	      return;
-	    }
-	    endEvents.forEach(function(endEvent) {
-	      addEventListener(node, endEvent, eventListener);
-	    });
-	  },
-
-	  removeEndEventListener: function(node, eventListener) {
-	    if (endEvents.length === 0) {
-	      return;
-	    }
-	    endEvents.forEach(function(endEvent) {
-	      removeEventListener(node, endEvent, eventListener);
-	    });
-	  }
-	};
-
-
-/***/ },
-/* 424 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getVendorPropertyName = __webpack_require__(425);
-
-	module.exports = function(target, sources) {
-	  var to = Object(target);
-	  var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-	  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-	    var nextSource = arguments[nextIndex];
-	    if (nextSource == null) {
-	      continue;
-	    }
-
-	    var from = Object(nextSource);
-
-	    for (var key in from) {
-	      if (hasOwnProperty.call(from, key)) {
-	        to[key] = from[key];
-	      }
-	    }
-	  }
-
-	  var prefixed = {};
-	  for (var key in to) {
-	    prefixed[getVendorPropertyName(key)] = to[key]
-	  }
-
-	  return prefixed
-	}
-
-
-/***/ },
-/* 425 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var builtinStyle = __webpack_require__(426);
-	var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
-	var domVendorPrefix;
-
-	// Helper function to get the proper vendor property name. (transition => WebkitTransition)
-	module.exports = function(prop, isSupportTest) {
-
-	  var vendorProp;
-	  if (prop in builtinStyle) return prop;
-
-	  var UpperProp = prop.charAt(0).toUpperCase() + prop.substr(1);
-
-	  if (domVendorPrefix) {
-
-	    vendorProp = domVendorPrefix + UpperProp;
-	    if (vendorProp in builtinStyle) {
-	      return vendorProp;
-	    }
-	  } else {
-
-	    for (var i = 0; i < prefixes.length; ++i) {
-	      vendorProp = prefixes[i] + UpperProp;
-	      if (vendorProp in builtinStyle) {
-	        domVendorPrefix = prefixes[i];
-	        return vendorProp;
-	      }
-	    }
-	  }
-
-	  // if support test, not fallback to origin prop name
-	  if (!isSupportTest) {
-	    return prop;
-	  }
-
-	}
-
-
-/***/ },
-/* 426 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = document.createElement('div').style;
-
-
-/***/ },
-/* 427 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var insertRule = __webpack_require__(428);
-	var vendorPrefix = __webpack_require__(429)();
-	var index = 0;
-
-	module.exports = function(keyframes) {
-	  // random name
-	  var name = 'anim_' + (++index) + (+new Date);
-	  var css = "@" + vendorPrefix + "keyframes " + name + " {";
-
-	  for (var key in keyframes) {
-	    css += key + " {";
-
-	    for (var property in keyframes[key]) {
-	      var part = ":" + keyframes[key][property] + ";";
-	      // We do vendor prefix for every property
-	      css += vendorPrefix + property + part;
-	      css += property + part;
-	    }
-
-	    css += "}";
-	  }
-
-	  css += "}";
-
-	  insertRule(css);
-
-	  return name
-	}
-
-
-/***/ },
-/* 428 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var extraSheet;
-
-	module.exports = function(css) {
-
-	  if (!extraSheet) {
-	    // First time, create an extra stylesheet for adding rules
-	    extraSheet = document.createElement('style');
-	    document.getElementsByTagName('head')[0].appendChild(extraSheet);
-	    // Keep reference to actual StyleSheet object (`styleSheet` for IE < 9)
-	    extraSheet = extraSheet.sheet || extraSheet.styleSheet;
-	  }
-
-	  var index = (extraSheet.cssRules || extraSheet.rules).length;
-	  extraSheet.insertRule(css, index);
-
-	  return extraSheet;
-	}
-
-
-/***/ },
-/* 429 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var cssVendorPrefix;
-
-	module.exports = function() {
-
-	  if (cssVendorPrefix) return cssVendorPrefix;
-
-	  var styles = window.getComputedStyle(document.documentElement, '');
-	  var pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1];
-
-	  return cssVendorPrefix = '-' + pre + '-';
-	}
-
-
-/***/ },
-/* 430 */,
-/* 431 */,
-/* 432 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var modalFactory = __webpack_require__(422);
-	var insertKeyframesRule = __webpack_require__(427);
-	var appendVendorPrefix = __webpack_require__(424);
+	var modalFactory = __webpack_require__(393);
+	var insertKeyframesRule = __webpack_require__(398);
+	var appendVendorPrefix = __webpack_require__(395);
 
 	var animation = {
 	    show: {
@@ -46165,6 +45968,610 @@
 	    }
 	});
 
+
+/***/ },
+/* 393 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(4);
+	var transitionEvents = __webpack_require__(394);
+	var appendVendorPrefix = __webpack_require__(395);
+
+	module.exports = function(animation){
+
+	    return React.createClass({
+	        propTypes: {
+	            className: React.PropTypes.string,
+	            // Close the modal when esc is pressed? Defaults to true.
+	            keyboard: React.PropTypes.bool,
+	            onShow: React.PropTypes.func,
+	            onHide: React.PropTypes.func,
+	            animation: React.PropTypes.object,
+	            backdrop: React.PropTypes.bool,
+	            closeOnClick: React.PropTypes.bool,
+	            modalStyle: React.PropTypes.object,
+	            backdropStyle: React.PropTypes.object,
+	            contentStyle: React.PropTypes.object,
+	        },
+
+	        getDefaultProps: function() {
+	            return {
+	                className: "",
+	                onShow: function(){},
+	                onHide: function(){},
+	                animation: animation,
+	                keyboard: true,
+	                backdrop: true,
+	                closeOnClick: true,
+	                modalStyle: {},
+	                backdropStyle: {},
+	                contentStyle: {},
+	            };
+	        },
+
+	        getInitialState: function(){
+	            return {
+	                willHidden: false,
+	                hidden: true
+	            }
+	        },
+
+	        hasHidden: function(){
+	            return this.state.hidden;
+	        },
+
+	        addTransitionListener: function(node, handle){
+	            if (node) {
+	              var endListener = function(e) {
+	                  if (e && e.target !== node) {
+	                      return;
+	                  }
+	                  transitionEvents.removeEndEventListener(node, endListener);
+	                  handle();
+	              };
+	              transitionEvents.addEndEventListener(node, endListener);
+	            }
+	        },
+
+	        handleBackdropClick: function() {
+	            if (this.props.closeOnClick) {
+	                this.hide();
+	            }
+	        },
+
+	        render: function() {
+
+	            var hidden = this.hasHidden();
+	            if (hidden) return null;
+
+	            var willHidden = this.state.willHidden;
+	            var animation = this.props.animation;
+	            var modalStyle = animation.getModalStyle(willHidden);
+	            var backdropStyle = animation.getBackdropStyle(willHidden);
+	            var contentStyle = animation.getContentStyle(willHidden);
+	            var ref = animation.getRef(willHidden);
+	            var sharp = animation.getSharp && animation.getSharp(willHidden);
+
+	            // Apply custom style properties
+	            if (this.props.modalStyle) {
+	                var prefixedModalStyle = appendVendorPrefix(this.props.modalStyle);
+	                for (var style in prefixedModalStyle) {
+	                    modalStyle[style] = prefixedModalStyle[style];
+	                }
+	            }
+
+	            if (this.props.backdropStyle) {
+	              var prefixedBackdropStyle = appendVendorPrefix(this.props.backdropStyle);
+	                for (var style in prefixedBackdropStyle) {
+	                    backdropStyle[style] = prefixedBackdropStyle[style];
+	                }
+	            }
+
+	            if (this.props.contentStyle) {
+	              var prefixedContentStyle = appendVendorPrefix(this.props.contentStyle);
+	                for (var style in prefixedContentStyle) {
+	                    contentStyle[style] = prefixedContentStyle[style];
+	                }
+	            }
+
+	            var backdrop = this.props.backdrop? React.createElement("div", {style: backdropStyle, onClick: this.props.closeOnClick? this.handleBackdropClick: null}): undefined;
+
+	            if(willHidden) {
+	                var node = this.refs[ref];
+	                this.addTransitionListener(node, this.leave);
+	            }
+
+	            return (React.createElement("span", null, 
+	                React.createElement("div", {ref: "modal", style: modalStyle, className: this.props.className}, 
+	                    sharp, 
+	                    React.createElement("div", {ref: "content", tabIndex: "-1", style: contentStyle}, 
+	                        this.props.children
+	                    )
+	                ), 
+	                backdrop
+	             ))
+	            ;
+	        },
+
+	        leave: function(){
+	            this.setState({
+	                hidden: true
+	            });
+	            this.props.onHide();
+	        },
+
+	        enter: function(){
+	            this.props.onShow();
+	        },
+
+	        show: function(){
+	            if (!this.hasHidden()) return;
+
+	            this.setState({
+	                willHidden: false,
+	                hidden: false
+	            });
+
+	            setTimeout(function(){
+	              var ref = this.props.animation.getRef();
+	              var node = this.refs[ref];
+	              this.addTransitionListener(node, this.enter);
+	            }.bind(this), 0);
+	        },
+
+	        hide: function(){
+	            if (this.hasHidden()) return;
+
+	            this.setState({
+	                willHidden: true
+	            });
+	        },
+
+	        toggle: function(){
+	            if (this.hasHidden())
+	                this.show();
+	            else
+	                this.hide();
+	        },
+
+	        listenKeyboard: function(event) {
+	            if (this.props.keyboard &&
+	                    (event.key === "Escape" ||
+	                     event.keyCode === 27)) {
+	                this.hide();
+	            }
+	        },
+
+	        componentDidMount: function(){
+	            window.addEventListener("keydown", this.listenKeyboard, true);
+	        },
+
+	        componentWillUnmount: function() {
+	            window.removeEventListener("keydown", this.listenKeyboard, true);
+	        }
+	    });
+	}
+
+
+/***/ },
+/* 394 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/**
+	 * EVENT_NAME_MAP is used to determine which event fired when a
+	 * transition/animation ends, based on the style property used to
+	 * define that event.
+	 */
+	var EVENT_NAME_MAP = {
+	  transitionend: {
+	    'transition': 'transitionend',
+	    'WebkitTransition': 'webkitTransitionEnd',
+	    'MozTransition': 'mozTransitionEnd',
+	    'OTransition': 'oTransitionEnd',
+	    'msTransition': 'MSTransitionEnd'
+	  },
+
+	  animationend: {
+	    'animation': 'animationend',
+	    'WebkitAnimation': 'webkitAnimationEnd',
+	    'MozAnimation': 'mozAnimationEnd',
+	    'OAnimation': 'oAnimationEnd',
+	    'msAnimation': 'MSAnimationEnd'
+	  }
+	};
+
+	var endEvents = [];
+
+	function detectEvents() {
+	  var testEl = document.createElement('div');
+	  var style = testEl.style;
+
+	  // On some platforms, in particular some releases of Android 4.x,
+	  // the un-prefixed "animation" and "transition" properties are defined on the
+	  // style object but the events that fire will still be prefixed, so we need
+	  // to check if the un-prefixed events are useable, and if not remove them
+	  // from the map
+	  if (!('AnimationEvent' in window)) {
+	    delete EVENT_NAME_MAP.animationend.animation;
+	  }
+
+	  if (!('TransitionEvent' in window)) {
+	    delete EVENT_NAME_MAP.transitionend.transition;
+	  }
+
+	  for (var baseEventName in EVENT_NAME_MAP) {
+	    var baseEvents = EVENT_NAME_MAP[baseEventName];
+	    for (var styleName in baseEvents) {
+	      if (styleName in style) {
+	        endEvents.push(baseEvents[styleName]);
+	        break;
+	      }
+	    }
+	  }
+	}
+
+	if (typeof window !== 'undefined') {
+	  detectEvents();
+	}
+
+
+	// We use the raw {add|remove}EventListener() call because EventListener
+	// does not know how to remove event listeners and we really should
+	// clean up. Also, these events are not triggered in older browsers
+	// so we should be A-OK here.
+
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+
+	module.exports = {
+	  addEndEventListener: function(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      // If CSS transitions are not supported, trigger an "end animation"
+	      // event immediately.
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function(endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+
+	  removeEndEventListener: function(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function(endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+
+
+/***/ },
+/* 395 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getVendorPropertyName = __webpack_require__(396);
+
+	module.exports = function(target, sources) {
+	  var to = Object(target);
+	  var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+	    var nextSource = arguments[nextIndex];
+	    if (nextSource == null) {
+	      continue;
+	    }
+
+	    var from = Object(nextSource);
+
+	    for (var key in from) {
+	      if (hasOwnProperty.call(from, key)) {
+	        to[key] = from[key];
+	      }
+	    }
+	  }
+
+	  var prefixed = {};
+	  for (var key in to) {
+	    prefixed[getVendorPropertyName(key)] = to[key]
+	  }
+
+	  return prefixed
+	}
+
+
+/***/ },
+/* 396 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var builtinStyle = __webpack_require__(397);
+	var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
+	var domVendorPrefix;
+
+	// Helper function to get the proper vendor property name. (transition => WebkitTransition)
+	module.exports = function(prop, isSupportTest) {
+
+	  var vendorProp;
+	  if (prop in builtinStyle) return prop;
+
+	  var UpperProp = prop.charAt(0).toUpperCase() + prop.substr(1);
+
+	  if (domVendorPrefix) {
+
+	    vendorProp = domVendorPrefix + UpperProp;
+	    if (vendorProp in builtinStyle) {
+	      return vendorProp;
+	    }
+	  } else {
+
+	    for (var i = 0; i < prefixes.length; ++i) {
+	      vendorProp = prefixes[i] + UpperProp;
+	      if (vendorProp in builtinStyle) {
+	        domVendorPrefix = prefixes[i];
+	        return vendorProp;
+	      }
+	    }
+	  }
+
+	  // if support test, not fallback to origin prop name
+	  if (!isSupportTest) {
+	    return prop;
+	  }
+
+	}
+
+
+/***/ },
+/* 397 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = document.createElement('div').style;
+
+
+/***/ },
+/* 398 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var insertRule = __webpack_require__(399);
+	var vendorPrefix = __webpack_require__(400)();
+	var index = 0;
+
+	module.exports = function(keyframes) {
+	  // random name
+	  var name = 'anim_' + (++index) + (+new Date);
+	  var css = "@" + vendorPrefix + "keyframes " + name + " {";
+
+	  for (var key in keyframes) {
+	    css += key + " {";
+
+	    for (var property in keyframes[key]) {
+	      var part = ":" + keyframes[key][property] + ";";
+	      // We do vendor prefix for every property
+	      css += vendorPrefix + property + part;
+	      css += property + part;
+	    }
+
+	    css += "}";
+	  }
+
+	  css += "}";
+
+	  insertRule(css);
+
+	  return name
+	}
+
+
+/***/ },
+/* 399 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var extraSheet;
+
+	module.exports = function(css) {
+
+	  if (!extraSheet) {
+	    // First time, create an extra stylesheet for adding rules
+	    extraSheet = document.createElement('style');
+	    document.getElementsByTagName('head')[0].appendChild(extraSheet);
+	    // Keep reference to actual StyleSheet object (`styleSheet` for IE < 9)
+	    extraSheet = extraSheet.sheet || extraSheet.styleSheet;
+	  }
+
+	  var index = (extraSheet.cssRules || extraSheet.rules).length;
+	  extraSheet.insertRule(css, index);
+
+	  return extraSheet;
+	}
+
+
+/***/ },
+/* 400 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var cssVendorPrefix;
+
+	module.exports = function() {
+
+	  if (cssVendorPrefix) return cssVendorPrefix;
+
+	  var styles = window.getComputedStyle(document.documentElement, '');
+	  var pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1];
+
+	  return cssVendorPrefix = '-' + pre + '-';
+	}
+
+
+/***/ },
+/* 401 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+
+	var _index = __webpack_require__(3);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(40);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _react2 = __webpack_require__(4);
+
+	var _react3 = _interopRequireDefault(_react2);
+
+	var _index5 = __webpack_require__(41);
+
+	var _index6 = _interopRequireDefault(_index5);
+
+	var _reactRouter = __webpack_require__(173);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _components = {
+	    _component: {}
+	};
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/About.js",
+	    components: _components,
+	    locals: [module],
+	    imports: [_react3.default]
+	});
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/About.js",
+	    components: _components,
+	    locals: [],
+	    imports: [_react3.default, _index2.default]
+	});
+
+	function _wrapComponent(id) {
+	    return function (Component) {
+	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    };
+	}
+
+	var React = __webpack_require__(4);
+	var About = _wrapComponent("_component")(React.createClass({
+	    displayName: "About",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            "About mexx",
+	            React.createElement(
+	                _reactRouter.Link,
+	                { to: "/" },
+	                this.props.params.aboutName
+	            )
+	        );
+	    }
+	}));
+
+	module.exports = About;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ },
+/* 402 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+
+	var _index = __webpack_require__(3);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(40);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _react2 = __webpack_require__(4);
+
+	var _react3 = _interopRequireDefault(_react2);
+
+	var _index5 = __webpack_require__(41);
+
+	var _index6 = _interopRequireDefault(_index5);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _components = {
+	    _component: {}
+	};
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/NotFound.js",
+	    components: _components,
+	    locals: [module],
+	    imports: [_react3.default]
+	});
+
+	var _UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	    filename: "/Users/boonhong/ynote/resources/assets/js/components/NotFound.js",
+	    components: _components,
+	    locals: [],
+	    imports: [_react3.default, _index2.default]
+	});
+
+	function _wrapComponent(id) {
+	    return function (Component) {
+	        return _UsersBoonhongYnoteNode_modulesReactTransformHmrLibIndexJs2(_UsersBoonhongYnoteNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    };
+	}
+
+	var React = __webpack_require__(4);
+
+	var NotFound = _wrapComponent("_component")(React.createClass({
+	    displayName: "NotFound",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            "Opps, something goes wrong."
+	        );
+	    }
+	}));
+
+	module.exports = NotFound;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ },
+/* 403 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var NavActionCreators = __webpack_require__(373);
+	var BlogActionCreators = __webpack_require__(384);
+
+	module.exports = {
+	    init: function init(arg) {
+	        return arg * 2;
+	    }
+	};
 
 /***/ }
 /******/ ]);

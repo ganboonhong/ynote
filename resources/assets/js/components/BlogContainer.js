@@ -8,6 +8,7 @@ var ContentStore       = require('../stores/ContentStore');
 var BlogPageStore      = require('../stores/BlogPageStore');
 var ClassNames         = require('classnames');
 var BlogActionCreators = require('../actions/BlogActionCreators')
+var Waypoint           = require('react-waypoint');
 
 function getBlog(data){
     return(
@@ -20,6 +21,13 @@ function getBlog(data){
 
 function getStateFromStores(){
     return {list: BlogStore.getCurrentBlogs()};
+}
+
+/**
+ * Returns a random number between min (inclusive) and max (exclusive)
+ */
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 var BlogContainer = React.createClass({
@@ -37,13 +45,12 @@ var BlogContainer = React.createClass({
             function (data) {
 
                 for(var key in data){
-                    data[key]['article_id'] = parseFloat(data[key]['article_id']) + 1;
+                    data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
                 }
 
                 var current_data = obj.state.list;
                 var result = current_data.concat(data);
 
-                console.log(obj.state.list);
                 obj.setState({list: result});
             }
         );
@@ -73,7 +80,6 @@ var BlogContainer = React.createClass({
                 obj.setState({list: data});
             }
         );
-        this._loadMoreItems();
         
         BlogStore.addChangeListener(this._onChange);
     },
@@ -82,16 +88,47 @@ var BlogContainer = React.createClass({
         BlogStore.removeChangeListener(this._onChange);  
     },
 
-    render() {
-        var blog = this.state.list.map(getBlog);        
+    _renderItems(){
+        return this.state.list.map(getBlog);
+    },
+
+    _onLeaveHandler(){
+        console.log('on leave');
+    },
+
+    _renderWaypoint(){
+        var target    = $('.classss');
+        var topOffset = $(document).height()*.2;    // how far the scrollbar left the top
+
+        if(!this.state.isLoading){
+            return (
+                <Waypoint
+                    onEnter={this._loadMoreItems}
+                    onLeave={this._onLeaveHandler}
+                    debug={false}
+                    topOffset={topOffset+'px'}
+                />
+            )
+        }
+    },
+
+    render() { 
         var myClass = ClassNames({
             'col-md-9 col-sm-12 col-xs-12 list-wrapper': true,
         });
-            return (
-                <div className={myClass}>
-                    {blog}
+
+        return (
+
+            <div>
+                <div className={myClass} >
+                  <div>
+                    {this._renderItems()}
+                  </div>
                 </div>
-            );       
+                {this._renderWaypoint()}
+            </div>
+
+        );       
     },
 
     _onChange(){
