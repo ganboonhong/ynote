@@ -18,7 +18,7 @@ body{
     position : fixed;
     z-index: 9999;
     /*background-image : url('http://loadinggif.com/images/image-selection/3.gif');*/
-    background-image : url('/image/clock.gif');
+    background-image : url('/image/box.gif');
     opacity : 1;
     background-repeat : no-repeat;
     background-position : center;
