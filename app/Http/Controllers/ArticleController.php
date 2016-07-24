@@ -237,11 +237,25 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $user = User::find($user_id);
 
+        $rowsToSkip = ($request->input('rowsToSkip')) ? $request->input('rowsToSkip') : 0;
+        $rowsToRetrive = ($request->input('rowsToRetrive')) ? $request->input('rowsToRetrive') : 10;
+
+        $conditions = array(
+                            'version_cht'            => 'Y',
+                            'admin_function_type_id' => $this->blog->admin_function_type_id
+                        );
+
+        // \Debugbar::info($request->input('category_id'));
+        
+        if($request->input('category_id') && $request->input('category_id') != 'all'){
+            $conditions['category_id'] = $request->input('category_id');
+        }
+
         $articles = $user->articles()
-            ->where('visible', 'Y')
-            ->where('version_cht', 'Y')
-            ->where('admin_function_type_id', $this->blog->admin_function_type_id)
-            ->orderBy('sort', 'desc')
+            ->where($conditions)
+            ->orderBy('article_id')
+            ->skip($rowsToSkip)
+            ->take($rowsToRetrive)
             ->get();
 
         $categories = $this->categories;
@@ -252,7 +266,6 @@ class ArticleController extends Controller implements AdminListInterface
             $category_arg[$key]['total'] = $article_amount[$value['category_id']];
         }
 
-        // \Debugbar::info($article_amount);
         $category_arg       = array('categories'     => $category_arg);
         $user_arg           = array('user'           => $user);
         $article_amount_arg = array('article_amount' => $article_amount);

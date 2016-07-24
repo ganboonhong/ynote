@@ -7,6 +7,8 @@ var BlogActionCreators = require('../actions/BlogActionCreators');
 var BaseStore          = require('../stores/BaseStore');
 var _blogs             = [];
 var _current_blogs     = [];
+var rowsToRetrive      = 9;
+var _current_category  = 'all';
 
 
 var BlogStore = assign({}, BaseStore, {
@@ -19,7 +21,9 @@ var BlogStore = assign({}, BaseStore, {
 
             "/" + user_id + "/article/",
 
-            { isBlogContent: true },
+            { 
+                isBlogContent: true 
+            },
 
             function (data) {
                 for(var key in data){
@@ -37,9 +41,38 @@ var BlogStore = assign({}, BaseStore, {
         );
     },
 
+    getCurrentCategory: function(){
+        return _current_category;
+    },
+
     getCurrentBlogs: function(){
         return _current_blogs;
-    }
+    },
+
+    updateDate: function(category_id){
+        var url_params = BlogPageStore.getUrlParams();
+        var user_id    = url_params.user_id;
+
+        $.ajax({
+            async: false,
+            url:   "/" + user_id + "/article/",
+            data:  { 
+                isBlogContent: true,
+                rowsToRetrive: rowsToRetrive,
+                category_id:   category_id,
+            },
+            dataType: 'json',
+
+            success: function(data){
+                _blogs = [];
+                for(var key in data){
+                    var obj = data[key];
+                    _blogs[obj.article_id] = obj;
+                }
+            }
+        });
+
+    },
 
 });
 
@@ -51,12 +84,15 @@ BlogStore.dispatchToken = AppDispatcher.register(function(action){
         break;
 
         case 'clickCategory':
-        var category_id = action.categoryID;
-        _current_blogs  = []; // clear previous blogs
+        var category_id   = action.categoryID;
+        _current_blogs    = []; // clear previous blogs
+        _current_category = category_id;
 
         if( category_id == 'all'){
+            BlogStore.updateDate();
             _current_blogs = _blogs;
         }else{
+            BlogStore.updateDate(category_id);
             for(var key in _blogs){
                 var temp = _blogs[key];
                 if( category_id == temp.category_id ){

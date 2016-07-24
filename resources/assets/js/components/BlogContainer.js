@@ -9,6 +9,8 @@ var BlogPageStore      = require('../stores/BlogPageStore');
 var ClassNames         = require('classnames');
 var BlogActionCreators = require('../actions/BlogActionCreators')
 var Waypoint           = require('react-waypoint');
+var rowsToRetrive      = 9;
+var retrivingData      = false; // prevent retriving same record twice at the same time
 
 function getBlog(data){
     return(
@@ -24,6 +26,7 @@ function getStateFromStores(){
 }
 
 /**
+ * Prevent duplicated key
  * Returns a random number between min (inclusive) and max (exclusive)
  */
 function getRandomArbitrary(min, max) {
@@ -33,27 +36,42 @@ function getRandomArbitrary(min, max) {
 var BlogContainer = React.createClass({
 
     _loadMoreItems(){
-        var obj        = this;
-        var url_params = BlogPageStore.getUrlParams();
-        var user_id    = url_params.user_id;
 
-        $.getJSON(
-            "/" + user_id + "/article/", 
+        var obj               = this;
+        var url_params        = BlogPageStore.getUrlParams();
+        var user_id           = url_params.user_id;
+        var _current_category = BlogStore.getCurrentCategory();
 
-            {isBlogContent: true},
+        var rowsToSkip = Object.keys(obj.state.list).length;
 
-            function (data) {
+        if (!retrivingData) {
+            retrivingData = true;
+            $.getJSON(
 
-                for(var key in data){
-                    data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
+                "/" + user_id + "/article/", 
+
+                {   
+                    isBlogContent: true,
+                    rowsToSkip:    rowsToSkip,
+                    rowsToRetrive: rowsToRetrive,
+                    category_id:   _current_category,
+                },
+
+                function (data) {
+
+                    for(var key in data){
+                        data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
+                    }
+
+                    var current_data = obj.state.list;
+                    var result = current_data.concat(data);
+
+                    obj.setState({list: result});
+                    rowsToSkip  = rowsToSkip + rowsToRetrive;
+                    retrivingData = false;
                 }
-
-                var current_data = obj.state.list;
-                var result = current_data.concat(data);
-
-                obj.setState({list: result});
-            }
-        );
+            );
+        }
     },
 
     getInitialState() {
@@ -93,7 +111,7 @@ var BlogContainer = React.createClass({
     },
 
     _onLeaveHandler(){
-        console.log('on leave');
+        // console.log('on leave');
     },
 
     _renderWaypoint(){

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e0c7bfba76be45e9280c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "86e47295dad50bb6a8a7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44717,6 +44717,8 @@
 	var ClassNames = __webpack_require__(387);
 	var BlogActionCreators = __webpack_require__(384);
 	var Waypoint = __webpack_require__(388);
+	var rowsToRetrive = 9;
+	var retrivingData = false; // prevent retriving same record twice at the same time
 
 	function getBlog(data) {
 	    return React.createElement(Blog, {
@@ -44730,6 +44732,7 @@
 	}
 
 	/**
+	 * Prevent duplicated key
 	 * Returns a random number between min (inclusive) and max (exclusive)
 	 */
 	function getRandomArbitrary(min, max) {
@@ -44739,21 +44742,35 @@
 	var BlogContainer = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogContainer',
 	    _loadMoreItems: function _loadMoreItems() {
+
 	        var obj = this;
 	        var url_params = BlogPageStore.getUrlParams();
 	        var user_id = url_params.user_id;
+	        var _current_category = BlogStore.getCurrentCategory();
 
-	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
+	        var rowsToSkip = Object.keys(obj.state.list).length;
 
-	            for (var key in data) {
-	                data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
-	            }
+	        if (!retrivingData) {
+	            retrivingData = true;
+	            _jQuery2.default.getJSON("/" + user_id + "/article/", {
+	                isBlogContent: true,
+	                rowsToSkip: rowsToSkip,
+	                rowsToRetrive: rowsToRetrive,
+	                category_id: _current_category
+	            }, function (data) {
 
-	            var current_data = obj.state.list;
-	            var result = current_data.concat(data);
+	                for (var key in data) {
+	                    data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
+	                }
 
-	            obj.setState({ list: result });
-	        });
+	                var current_data = obj.state.list;
+	                var result = current_data.concat(data);
+
+	                obj.setState({ list: result });
+	                rowsToSkip = rowsToSkip + rowsToRetrive;
+	                retrivingData = false;
+	            });
+	        }
 	    },
 	    getInitialState: function getInitialState() {
 	        return {
@@ -44784,7 +44801,7 @@
 	        return this.state.list.map(getBlog);
 	    },
 	    _onLeaveHandler: function _onLeaveHandler() {
-	        console.log('on leave');
+	        // console.log('on leave');
 	    },
 	    _renderWaypoint: function _renderWaypoint() {
 	        var target = (0, _jQuery2.default)('.classss');
@@ -44996,6 +45013,8 @@
 	var BaseStore = __webpack_require__(381);
 	var _blogs = [];
 	var _current_blogs = [];
+	var rowsToRetrive = 9;
+	var _current_category = 'all';
 
 	var BlogStore = assign({}, BaseStore, {
 
@@ -45003,7 +45022,9 @@
 	        var url_params = BlogPageStore.getUrlParams();
 	        var user_id = url_params.user_id;
 
-	        $.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
+	        $.getJSON("/" + user_id + "/article/", {
+	            isBlogContent: true
+	        }, function (data) {
 	            for (var key in data) {
 	                var obj = data[key];
 	                _blogs[obj.article_id] = obj;
@@ -45017,8 +45038,36 @@
 	        });
 	    },
 
+	    getCurrentCategory: function getCurrentCategory() {
+	        return _current_category;
+	    },
+
 	    getCurrentBlogs: function getCurrentBlogs() {
 	        return _current_blogs;
+	    },
+
+	    updateDate: function updateDate(category_id) {
+	        var url_params = BlogPageStore.getUrlParams();
+	        var user_id = url_params.user_id;
+
+	        $.ajax({
+	            async: false,
+	            url: "/" + user_id + "/article/",
+	            data: {
+	                isBlogContent: true,
+	                rowsToRetrive: rowsToRetrive,
+	                category_id: category_id
+	            },
+	            dataType: 'json',
+
+	            success: function success(data) {
+	                _blogs = [];
+	                for (var key in data) {
+	                    var obj = data[key];
+	                    _blogs[obj.article_id] = obj;
+	                }
+	            }
+	        });
 	    }
 
 	});
@@ -45033,10 +45082,13 @@
 	        case 'clickCategory':
 	            var category_id = action.categoryID;
 	            _current_blogs = []; // clear previous blogs
+	            _current_category = category_id;
 
 	            if (category_id == 'all') {
+	                BlogStore.updateDate();
 	                _current_blogs = _blogs;
 	            } else {
+	                BlogStore.updateDate(category_id);
 	                for (var key in _blogs) {
 	                    var temp = _blogs[key];
 	                    if (category_id == temp.category_id) {
