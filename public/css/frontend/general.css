@@ -1,5 +1,31 @@
 body{
-    background-color: #f1f1f1;
+    background-color: #000; 
+}
+
+.mask{
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: #000; 
+    opacity: 0.4;
+    overflow-y: hidden;
+}
+
+.loading{
+    display : none;
+    position : fixed;
+    z-index: 9999;
+    /*background-image : url('http://loadinggif.com/images/image-selection/3.gif');*/
+    background-image : url('/image/clock.gif');
+    opacity : 1;
+    background-repeat : no-repeat;
+    background-position : center;
+    left : 0;
+    bottom : 0;
+    right : 0;
+    top : 0;
 }
 
 /*author_side_bar-start*/

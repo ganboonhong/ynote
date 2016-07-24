@@ -1,3 +1,4 @@
+import $ from "jQuery";
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter  = require('events').EventEmitter;
 var assign        = require('object-assign');
@@ -13,6 +14,17 @@ var BlogPageStore = assign({}, BaseStore, {
 
     getUrlParams: function(){
         return _url_params;
+    },
+
+    startLoading: function(){
+        $('body').addClass('mask');
+        console.log('startLoading');
+        $('.loading').show();
+    },
+
+    completeLoading: function(){
+        $('body').removeClass('mask');
+        $('.loading').hide();
     }
     
 });

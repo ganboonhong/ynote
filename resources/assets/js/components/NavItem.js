@@ -1,5 +1,6 @@
-var React              = require('react');
+var React             = require('react');
 var NavActionCreators = require('../actions/NavActionCreators');
+var BlogPageStore     = require('../stores/BlogPageStore');
 
 var NavItem = React.createClass({
         render() {

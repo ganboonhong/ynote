@@ -41,8 +41,7 @@ var BlogContainer = React.createClass({
         var url_params        = BlogPageStore.getUrlParams();
         var user_id           = url_params.user_id;
         var _current_category = BlogStore.getCurrentCategory();
-
-        var rowsToSkip = Object.keys(obj.state.list).length;
+        var rowsToSkip        = Object.keys(obj.state.list).length;
 
         if (!retrivingData) {
             retrivingData = true;
@@ -60,7 +59,7 @@ var BlogContainer = React.createClass({
                 function (data) {
 
                     for(var key in data){
-                        data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999);
+                        data[key]['article_id'] = parseFloat(data[key]['article_id']) + getRandomArbitrary(1000, 999999999);
                     }
 
                     var current_data = obj.state.list;

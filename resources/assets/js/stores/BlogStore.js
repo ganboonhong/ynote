@@ -49,9 +49,10 @@ var BlogStore = assign({}, BaseStore, {
         return _current_blogs;
     },
 
-    updateDate: function(category_id){
+    updateCurrentBlogs: function(category_id){
         var url_params = BlogPageStore.getUrlParams();
         var user_id    = url_params.user_id;
+        BlogPageStore.startLoading();
 
         $.ajax({
             async: false,
@@ -62,13 +63,15 @@ var BlogStore = assign({}, BaseStore, {
                 category_id:   category_id,
             },
             dataType: 'json',
-
             success: function(data){
+
                 _blogs = [];
                 for(var key in data){
                     var obj = data[key];
                     _blogs[obj.article_id] = obj;
                 }
+
+                BlogPageStore.completeLoading();
             }
         });
 
@@ -80,29 +83,23 @@ BlogStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.type){
 
         case 'init_blog':
+
             BlogStore.init();
-        break;
+            break;
 
         case 'clickCategory':
-        var category_id   = action.categoryID;
-        _current_blogs    = []; // clear previous blogs
-        _current_category = category_id;
 
-        if( category_id == 'all'){
-            BlogStore.updateDate();
-            _current_blogs = _blogs;
-        }else{
-            BlogStore.updateDate(category_id);
-            for(var key in _blogs){
-                var temp = _blogs[key];
-                if( category_id == temp.category_id ){
-                    _current_blogs[key] = temp;
-                }
+            var category_id   = action.categoryID;
+            _current_category = category_id;
+
+            if( category_id == 'all'){
+                BlogStore.updateCurrentBlogs();
+            }else{
+                BlogStore.updateCurrentBlogs(category_id);
             }
-        }
 
-        BlogStore.emitChange();
-        break;
+            BlogStore.emitChange();
+            break;
 
         default:
             // do nothing

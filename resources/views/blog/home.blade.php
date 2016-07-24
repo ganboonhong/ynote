@@ -48,7 +48,10 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-    <div id="container"></div>
+
+        <div id="container"></div>
+        <div class="loading"></div>
+
     <script src="../../../../js/bundle.js"></script>
   </body>
 </html>
