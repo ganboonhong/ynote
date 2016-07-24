@@ -71,10 +71,11 @@ var BlogStore = assign({}, BaseStore, {
                     _blogs[obj.article_id] = obj;
                 }
 
+                BlogPageStore.completeLoading();
                 
-                setTimeout(function(){
-                    BlogPageStore.completeLoading();
-                }, 3000);
+                // setTimeout(function(){
+                //     BlogPageStore.completeLoading();
+                // }, 3000);
             }
         });
 
