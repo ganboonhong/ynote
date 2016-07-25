@@ -9,7 +9,7 @@
     false   => http
     --}}
     <!-- {!! HTML::style('css/app.css', array(), true) !!} -->
-    <style src="css/app.css"></style>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- {!! HTML::script('js/_general_js.js', array(), true) !!} -->
@@ -258,7 +258,7 @@
         </div>
     </div>
     <div class="posted-by">
-        Designed By(master): <a href="http://www.jquery2dotnet.com" target="_blank">Bhaumik Patel</a>
+        Designed By(branch): <a href="http://www.jquery2dotnet.com" target="_blank">Bhaumik Patel</a>
         <span class="photo-credit"></span>Photo Credit: <a href="https://unsplash.com/" target="_blank">Matteo Paganelli</a>
     </div>
 </div>

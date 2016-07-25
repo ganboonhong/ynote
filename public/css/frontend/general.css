@@ -1,5 +1,31 @@
 body{
-    background-color: #f1f1f1;
+    background-color: #000; 
+}
+
+.mask{
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: #000; 
+    opacity: 0.4;
+    overflow-y: hidden;
+}
+
+.loading{
+    display : none;
+    position : fixed;
+    z-index: 9999;
+    /*background-image : url('http://loadinggif.com/images/image-selection/3.gif');*/
+    background-image : url('/image/box.gif');
+    opacity : 1;
+    background-repeat : no-repeat;
+    background-position : center;
+    left : 0;
+    bottom : 0;
+    right : 0;
+    top : 0;
 }
 
 /*author_side_bar-start*/
@@ -58,6 +84,8 @@ body{
 }
 .category:hover{
     background: #bcb39d;
+    color: white;
+    font-weight: bold;
 }
 .selected-category{
     background: #bcb39d;
@@ -68,6 +96,23 @@ body{
 }
 /*author_side_bar-end*/
 
+.center {
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 99%;
+    padding: 10px;
+    background: whitesmoke;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.hide{
+    display: none;
+}
+
 /*media query should be located AFTER regular CSS*/
 @media screen and (max-width: 768px) and (min-width: 0px) {
     .navbar{
@@ -77,4 +122,12 @@ body{
         position: relative ;
         width: 100% ;
     }
+}
+
+@media screen and (max-width: 991px) and (min-width: 0px) {
+    
+    body{
+        max-width: 100%;
+        overflow-x: hidden;
+    }   
 }

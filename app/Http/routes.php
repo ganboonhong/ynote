@@ -13,11 +13,15 @@
 View::addExtension('html', 'php');
 Route::get('/api/list', "ApiController@getList");
 Route::get('/', 'Auth\AuthController@getLogin');
-/*Route::get('/', function(){
-    return view('test');
-});*/
+// Route::get('/', function(){
+//     return view('test.home');
+// });
 
-Route::get('/blog/', 'BlogController@index');
+Route::get('/blog/{section}',
+    [
+        'as' => 'blog_show',
+        'uses' => 'BlogController@index'
+    ])->where(['section' => '.*']);
 
 Route::get('article/{id}', 'ArticleController@show');
 
@@ -41,6 +45,40 @@ Route::get('{user_id}/article-category/{id}',[
 ->where('id', '[0-9]+');
 
 
+    Route::group(['prefix' => 'category'], function(){
+
+        Route::get  ('/', 'CategoryController@index');
+        Route::post ('/', 'CategoryController@store');
+
+        Route::get('create',
+                [   'uses'  => 'CategoryController@create',
+                    'as'    => 'category_create'
+                ]);
+
+        Route::get('destroy/{id}',
+            [   'uses'  => 'CategoryController@destroy',
+                'as'    => 'category_destroy'
+            ])->where('id', '[0-9]+');
+
+
+        Route::post('delete_multiple_items',
+            [   'uses'  => 'CategoryController@deleteMultipleItems',
+                'as'    => 'delete_multiple_items']);
+
+        Route::get('edit/{id}',
+            [   'uses'  => 'CategoryController@edit',
+                'as'    => 'category_edit'
+            ])->where('id', '[0-9]+');
+
+        Route::post('update/{id}',
+            [
+                'uses'  => 'CategoryController@update',
+                'as'    => 'category_update'
+            ])->where('id', '[0-9]+');
+
+    });
+
+// ajax get content obj
 Route::get('{user_id}/article', 'ArticleController@itemList')->where('user_id', '[0-9]+');
 
 Route::get('article/{id}/{category_id}/{user_id}', [

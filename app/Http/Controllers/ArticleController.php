@@ -233,24 +233,52 @@ class ArticleController extends Controller implements AdminListInterface
         return Redirect::to($this->article_index_url);
     }
 
-    public function itemList($user_id)
+    public function itemList(Request $request, $user_id)
     {
         $user = User::find($user_id);
 
+        $rowsToSkip = ($request->input('rowsToSkip')) ? $request->input('rowsToSkip') : 0;
+        $rowsToRetrive = ($request->input('rowsToRetrive')) ? $request->input('rowsToRetrive') : 10;
+
+        $conditions = array(
+                            'version_cht'            => 'Y',
+                            'admin_function_type_id' => $this->blog->admin_function_type_id
+                        );
+
+        // \Debugbar::info($request->input('category_id'));
+        
+        if($request->input('category_id') && $request->input('category_id') != 'all'){
+            $conditions['category_id'] = $request->input('category_id');
+        }
+
         $articles = $user->articles()
-            ->where('visible', 'Y')
-            ->where('version_cht', 'Y')
-            ->where('admin_function_type_id', $this->blog->admin_function_type_id)
-            ->orderBy('sort', 'desc')
+            ->where($conditions)
+            ->orderBy('article_id')
+            ->skip($rowsToSkip)
+            ->take($rowsToRetrive)
             ->get();
 
         $categories = $this->categories;
         $article_amount = $this->article_amount;
+        $category_arg = $categories->toArray();
+
+        foreach ( $category_arg as $key => $value) {
+            $category_arg[$key]['total'] = $article_amount[$value['category_id']];
+        }
+
+        $category_arg       = array('categories'     => $category_arg);
+        $user_arg           = array('user'           => $user);
+        $article_amount_arg = array('article_amount' => $article_amount);
+        $categories_return  = array_merge($category_arg, $user_arg, $article_amount_arg);
+
+        if($request->input('isNavBar')) return response()->json($categories_return);
+
+        if($request->input('isBlogContent')) return response()->json($articles);
 
         return view('frontend.article.list', compact('articles', 'categories', 'user', 'article_amount'));
     }
 
-    public function itemListWithCategory($user_id, $id)
+    public function itemListWithCategory($user_id, $id, Request $request)
     {
         $user = User::find($user_id);
 
@@ -259,6 +287,12 @@ class ArticleController extends Controller implements AdminListInterface
             ->where('category_id', $id)
             ->orderBy('sort', 'desc')
             ->get();
+
+    
+            if($request->ajax()){
+                Log::info($articles);
+                return response()->json($articles);
+            }
 
         $selected_category = Category::findOrFail($id);
         $categories =  $user->categories()->orderBy('name')->get();
