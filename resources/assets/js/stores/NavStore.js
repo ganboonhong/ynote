@@ -32,7 +32,7 @@ var NavStore = assign({}, BaseStore, {
 
     getCurrentCategory: function(){
         return _current_category;
-    }
+    },
 
 });
 
