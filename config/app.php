@@ -76,10 +76,8 @@ return [
     | to a random, 32 character string, otherwise these encrypted strings
     | will not be safe. Please do this before deploying an application!
     |
-    */
-
-
     // 'key' => env('APP_KEY', 'I9aW9FFVbbOL0q10VOuz8rHX6i0Hsqly'), // dev-ynote
+    */
 
     'key' => env('APP_KEY', 'cdML07N4DhEjWrVskr3WNxaLhJG8A52M'),
 
