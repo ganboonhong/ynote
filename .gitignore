@@ -8,4 +8,5 @@ public/uploads
 .idea/workspace.xml
 todo.txt
 /storage/debugbar
-*.hot-update.*/
+*.hot-update.js
+*.hot-update.json
