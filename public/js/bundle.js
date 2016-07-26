@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "39ddd378c913c52c08e1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "16f2ca2896f6232c7bcc"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -45085,7 +45085,7 @@
 	                    _blogs[obj.article_id] = obj;
 	                }
 
-	                BlogPageStore.completeLoading();
+	                // BlogPageStore.completeLoading();
 
 	                // setTimeout(function(){
 	                //     BlogPageStore.completeLoading();

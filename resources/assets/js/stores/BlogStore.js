@@ -71,7 +71,7 @@ var BlogStore = assign({}, BaseStore, {
                     _blogs[obj.article_id] = obj;
                 }
 
-                BlogPageStore.completeLoading();
+                // BlogPageStore.completeLoading();
                 
                 // setTimeout(function(){
                 //     BlogPageStore.completeLoading();
