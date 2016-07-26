@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a4d4196d9cbf205aa47d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "01feee3995b8f7cdc522"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44624,13 +44624,18 @@
 
 	    startLoading: function startLoading() {
 	        (0, _jQuery2.default)('body').addClass('mask');
-	        console.log('startLoading');
 	        (0, _jQuery2.default)('.loading').show();
 	    },
 
 	    completeLoading: function completeLoading() {
-	        (0, _jQuery2.default)('body').removeClass('mask');
-	        (0, _jQuery2.default)('.loading').hide();
+	        var loadingInterval = setInterval(function () {
+	            if ((0, _jQuery2.default)('.list-item-container').length > 0) {
+
+	                (0, _jQuery2.default)('body').removeClass('mask');
+	                (0, _jQuery2.default)('.loading').hide();
+	                clearInterval(loadingInterval);
+	            }
+	        }, 500);
 	    }
 
 	});
@@ -44735,7 +44740,7 @@
 	var ClassNames = __webpack_require__(387);
 	var BlogActionCreators = __webpack_require__(384);
 	var Waypoint = __webpack_require__(388);
-	var rowsToRetrive = 9;
+	var rowsToRetrive = 7;
 	var retrivingData = false; // prevent retriving same record twice at the same time
 
 	function getBlog(data) {
@@ -44804,15 +44809,22 @@
 	        var url_params = BlogPageStore.getUrlParams();
 	        var user_id = url_params.user_id;
 
+	        BlogPageStore.startLoading();
+
 	        _jQuery2.default.getJSON("/" + user_id + "/article/", { isBlogContent: true }, function (data) {
 	            obj.setState({ list: data });
 	        });
+
+	        BlogPageStore.completeLoading();
 
 	        BlogStore.addChangeListener(this._onChange);
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
 	        BlogStore.removeChangeListener(this._onChange);
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	        // console.log('componentDidUpdate');
 	    },
 	    _renderItems: function _renderItems() {
 	        return this.state.list.map(getBlog);

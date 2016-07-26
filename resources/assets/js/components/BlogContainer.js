@@ -9,7 +9,7 @@ var BlogPageStore      = require('../stores/BlogPageStore');
 var ClassNames         = require('classnames');
 var BlogActionCreators = require('../actions/BlogActionCreators')
 var Waypoint           = require('react-waypoint');
-var rowsToRetrive      = 9;
+var rowsToRetrive      = 7;
 var retrivingData      = false; // prevent retriving same record twice at the same time
 
 function getBlog(data){
@@ -88,6 +88,8 @@ var BlogContainer = React.createClass({
         var url_params = BlogPageStore.getUrlParams();
         var user_id    = url_params.user_id;
 
+        BlogPageStore.startLoading();
+
         $.getJSON(
             "/" + user_id + "/article/", 
 
@@ -97,12 +99,18 @@ var BlogContainer = React.createClass({
                 obj.setState({list: data});
             }
         );
+
+        BlogPageStore.completeLoading();
         
         BlogStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
         BlogStore.removeChangeListener(this._onChange);  
+    },
+
+    componentDidUpdate(){
+        // console.log('componentDidUpdate');
     },
 
     _renderItems(){

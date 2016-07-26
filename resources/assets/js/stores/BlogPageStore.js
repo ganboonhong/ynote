@@ -18,13 +18,18 @@ var BlogPageStore = assign({}, BaseStore, {
 
     startLoading: function(){
         $('body').addClass('mask');
-        console.log('startLoading');
         $('.loading').show();
     },
 
     completeLoading: function(){
-        $('body').removeClass('mask');
-        $('.loading').hide();
+        var loadingInterval = setInterval(function(){
+                                    if($('.list-item-container').length > 0){
+                                        
+                                        $('body').removeClass('mask');
+                                        $('.loading').hide();
+                                        clearInterval(loadingInterval);
+                                    }
+                                }, 500);
     }
     
 });
