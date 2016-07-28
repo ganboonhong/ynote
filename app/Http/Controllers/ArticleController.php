@@ -122,6 +122,8 @@ class ArticleController extends Controller implements AdminListInterface
             );
         }
 
+        dd($cloudinary_api_response);exit;
+
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
         $input['list_pic'] = $fileName;
