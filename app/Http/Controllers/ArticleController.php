@@ -108,7 +108,7 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $fileName = "";
 
-        dd($request->list_pic);exit;
+        dd(Input::file('list_pic'));exit;
 
         if($request->list_pic != ""){
             $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
