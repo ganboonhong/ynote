@@ -108,6 +108,8 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $fileName = "";
 
+        dd($request->list_pic);exit;
+
         if($request->list_pic != ""){
             $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
             $rawFileName    = rand(11111,99999);
@@ -121,8 +123,6 @@ class ArticleController extends Controller implements AdminListInterface
                 array_merge($default_upload_options, array("public_id" => $rawFileName))
             );
         }
-
-        dd($cloudinary_api_response);exit;
 
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
