@@ -138,7 +138,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
-        Askaoru\LaravelCloudinary\CloudinaryServiceProvider::class,
+        // Askaoru\LaravelCloudinary\CloudinaryServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -200,7 +200,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
-        'Cloudinary'=> Askaoru\LaravelCloudinary\Facades\Cloudinary::class,
+        // 'Cloudinary'=> Askaoru\LaravelCloudinary\Facades\Cloudinary::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
