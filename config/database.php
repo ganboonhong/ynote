@@ -1,7 +1,7 @@
 <?php
 $localhostIP = array("127.0.0.1", "::1");
 
-if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
+// if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
     // $url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
     // $host       = $url["host"];
     // $username   = $url["user"];
@@ -11,13 +11,13 @@ if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
     $username   = 'root';
     $password   = 'Boonhong2015!';
     $database   = 'ynote';
-}else{
-    $url        = "";
-    $host       = "";
-    $username   = "";
-    $password   = "";
-    $database   = "";
-}
+// }else{
+//     $url        = "";
+//     $host       = "";
+//     $username   = "";
+//     $password   = "";
+//     $database   = "";
+// }
 
 return [
 
