@@ -108,10 +108,6 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $fileName = "";
 
-        $foo = imagecreatefromstring(Input::file('list_pic'));
-
-        dd($foo);exit;
-
         if($request->list_pic != ""){
             $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
             $rawFileName    = rand(11111,99999);
