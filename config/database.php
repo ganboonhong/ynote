@@ -2,11 +2,15 @@
 $localhostIP = array("127.0.0.1", "::1");
 
 if(!in_array($_SERVER['REMOTE_ADDR'], $localhostIP)){
-    $url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $host       = $url["host"];
-    $username   = $url["user"];
-    $password   = $url["pass"];
-    $database   = substr($url["path"], 1);
+    // $url        = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $host       = $url["host"];
+    // $username   = $url["user"];
+    // $password   = $url["pass"];
+    // $database   = substr($url["path"], 1);
+    $host       = 'localhost';
+    $username   = 'root';
+    $password   = 'Boonhong2015!';
+    $database   = 'ynote';
 }else{
     $url        = "";
     $host       = "";
