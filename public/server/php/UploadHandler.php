@@ -1045,7 +1045,7 @@ class UploadHandler
                 $failed_versions[] = $version ? $version : 'original';
             }
         }
-        echo count($failed_versions);exit;
+
         if (count($failed_versions)) {
             $file->error = $this->get_error_message('image_resize')
                     .' ('.implode($failed_versions, ', ').')';
