@@ -10,3 +10,4 @@ todo.txt
 /storage/debugbar
 *.hot-update.js
 *.hot-update.json
+public/server/php/files/*
