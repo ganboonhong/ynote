@@ -10,7 +10,53 @@
 
     @section('content')
 
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+
+                    <!-- The file upload form used as target for the file upload widget -->
+            <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+                <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                <noscript><input type="hidden" name="redirect" value="http://y-note.ddns.net/blog/2/2/0"></noscript>
+                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                <div class="fileupload-buttonbar">
+                    <div class="fileupload-buttons">
+                        <!-- The fileinput-button span is used to style the file input field as button -->
+                        <span class="fileinput-button">
+                            <span>Add File</span>
+                            <input type="file" name="files[]">
+                        </span>
+                        <!-- <button type="submit" class="start">Start upload</button>
+                        <button type="reset" class="cancel">Cancel upload</button>
+                        <button type="button" class="delete">Delete</button> 
+                        <input type="checkbox" class="toggle">-->
+                        <!-- The global file processing state -->
+                        <span class="fileupload-process"></span>
+                    </div>
+                    <!-- The global progress state -->
+                    <div class="fileupload-progress fade" style="display:none">
+                        <!-- The global progress bar -->
+                        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        <!-- The extended global progress state -->
+                        <div class="progress-extended">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- The table listing the files available for upload/download -->
+                <table role="presentation" style="margin-top: 10px;"><tbody class="files"></tbody></table>
+            </form>
+        </div> 
+
+            <div class="form-group existing_pic">
+                <div>
+                    @if($article->list_pic != "")
+                        <img src='/server/php/files/thumbnail/{{$article->list_pic}}' style="width: 100px;">
+                    @endif
+                </div>
+            </div>
+
         {!! Form::open(array('route' => array('article_update', $article->article_id), 'files'=>true)) !!}
+            <input type="hidden" name="list_pic" id="list_pic" value="{{$article->list_pic}}">
+
             <div class="form-group">
                 <label for="name">Title:</label>
                 <input type="text" name="title" class="form-control" id="title" value="{{$article->title}}">
@@ -20,17 +66,6 @@
                 <label for="name">Title (English):</label>
                 <input type="text" name="title_en" class="form-control" id="title_en" value="{{$article->title_en}}">
             </div>--}}
-
-            <div class="form-group">
-                <div>
-                    @if($article->list_pic != "")
-                        {{--<img src='/uploads/{{$article->list_pic}}' style="width: 100px;">--}}
-                        <img src='{{json_decode($article->cloudinary_api_response)->url}}' style="width: 100px;">
-                    @endif
-                </div>
-                <label for="image">Image:</label>
-                {!! Form::input('file', 'list_pic', $article->list_pic) !!}
-            </div>
 
             <div class="nice_editor form-group">
                 <label for="name">Content:</label>

@@ -1056,8 +1056,10 @@ class UploadHandler
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
             $index = null, $content_range = null) {
         $file = new \stdClass();
-        $file->name = $this->get_file_name($uploaded_file, $name, $size, $type, $error,
+
+        $file->name = $_REQUEST['timestamp'].$this->get_file_name($uploaded_file, $name, $size, $type, $error,
             $index, $content_range);
+
         $file->size = $this->fix_integer_overflow((int)$size);
         $file->type = $type;
         if ($this->validate($uploaded_file, $file, $error, $index)) {

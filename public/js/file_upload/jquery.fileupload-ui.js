@@ -54,7 +54,7 @@
             // By default, files added to the widget are uploaded as soon
             // as the user clicks on the start buttons. To enable automatic
             // uploads, set the following option to true:
-            autoUpload: false,
+            autoUpload: true,
             // The ID of the upload template:
             uploadTemplateId: 'template-upload',
             // The ID of the download template:
@@ -96,6 +96,13 @@
                 if (e.isDefaultPrevented()) {
                     return false;
                 }
+
+                $(".existing_pic").remove();
+
+                var timestamp = Date.now();
+                data.formData = {timestamp: timestamp};
+                $("#list_pic").val(timestamp+data.files[0].name);
+
                 var $this = $(this),
                     that = $this.data('blueimp-fileupload') ||
                         $this.data('fileupload'),
@@ -194,6 +201,8 @@
                         );
                     });
                 } else {
+                    // prevent loading old data in adding page
+                    return;
                     template = that._renderDownload(files)[
                         that.options.prependFiles ? 'prependTo' : 'appendTo'
                     ](that.options.filesContainer);

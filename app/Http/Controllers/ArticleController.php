@@ -108,24 +108,26 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $fileName = "";
 
-        if($request->list_pic != ""){
-            $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-            $rawFileName    = rand(11111,99999);
-            $fileName       = $rawFileName.'.'.$extension; // renameing image
-            Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
+        // if($request->list_pic != ""){
+        //     $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
+        //     $rawFileName    = rand(11111,99999);
+        //     $fileName       = $rawFileName.'.'.$extension; // renameing image
+        //     Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
 
-            // Cloudinary related
-            $default_upload_options = array("tags" => "basic_sample");
-            $cloudinary_api_response = \Cloudinary\Uploader::upload(
-                public_path().'/uploads/'.$fileName,
-                array_merge($default_upload_options, array("public_id" => $rawFileName))
-            );
-        }
+        //     // Cloudinary related
+        //     $default_upload_options = array("tags" => "basic_sample");
+        //     $cloudinary_api_response = \Cloudinary\Uploader::upload(
+        //         public_path().'/uploads/'.$fileName,
+        //         array_merge($default_upload_options, array("public_id" => $rawFileName))
+        //     );
+        // }
 
         $input = (array)$request->all();
         $input['user_id'] = Auth::user()->user_id;
-        $input['list_pic'] = $fileName;
-        $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+        // $input['list_pic'] = $fileName;
+        // $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+
+        
 
         $this->article->create($input);
 
@@ -189,23 +191,23 @@ class ArticleController extends Controller implements AdminListInterface
 
         $input = (array)$request->except('_token');
 
-        if(Input::file('list_pic') != ""){
-            $extension          = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-            $rawFileName        = rand(11111,99999);
-            $fileName           = $rawFileName.'.'.$extension; // renameing image
-            Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
+        // if(Input::file('list_pic') != ""){
+        //     $extension          = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
+        //     $rawFileName        = rand(11111,99999);
+        //     $fileName           = $rawFileName.'.'.$extension; // renameing image
+        //     Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
 
-            //Cloudinary related
-            $default_upload_options     = array("tags" => "basic_sample");
-            $cloudinary_api_response    = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
-                array_merge($default_upload_options, array("public_id" => $rawFileName)));
+        //     //Cloudinary related
+        //     $default_upload_options     = array("tags" => "basic_sample");
+        //     $cloudinary_api_response    = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
+        //         array_merge($default_upload_options, array("public_id" => $rawFileName)));
 
-            $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
-            $input['list_pic'] = $fileName;
-        }else{
-            unset($input['list_pic']);
-            unset($input['cloudinary_api_response']);
-        }
+        //     $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+        //     $input['list_pic'] = $fileName;
+        // }else{
+        //     unset($input['list_pic']);
+        //     unset($input['cloudinary_api_response']);
+        // }
 
         $input['user_id'] = Auth::user()->user_id;
         $this->article->where('article_id', $id)->update($input);
