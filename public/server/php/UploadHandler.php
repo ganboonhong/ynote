@@ -35,7 +35,7 @@ class UploadHandler
         'max_height' => 'Image exceeds maximum height',
         'min_height' => 'Image requires a minimum height',
         'abort' => 'File upload aborted',
-        'image_resize' => 'Failed to resize imagexx'
+        'image_resize' => 'Failed to resize image'
     );
 
     protected $image_objects = array();
@@ -1047,6 +1047,7 @@ class UploadHandler
         }
 
         if (count($failed_versions)) {
+            echo 'failed_versions';exit;
             $file->error = $this->get_error_message('image_resize')
                     .' ('.implode($failed_versions, ', ').')';
         }
