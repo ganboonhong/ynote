@@ -1033,7 +1033,6 @@ class UploadHandler
         $failed_versions = array();
         foreach ($this->options['image_versions'] as $version => $options) {
             if ($this->create_scaled_image($file->name, $version, $options)) {
-                echo 'create_scaled_image';exit;
                 if (!empty($version)) {
                     $file->{$version.'Url'} = $this->get_download_url(
                         $file->name,
@@ -1043,10 +1042,10 @@ class UploadHandler
                     $file->size = $this->get_file_size($file_path, true);
                 }
             } else {
-                echo 'create_scaled_image fail';exit;
                 $failed_versions[] = $version ? $version : 'original';
             }
         }
+        echo count($failed_versions);exit;
         if (count($failed_versions)) {
             $file->error = $this->get_error_message('image_resize')
                     .' ('.implode($failed_versions, ', ').')';
