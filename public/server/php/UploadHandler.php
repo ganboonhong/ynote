@@ -1046,6 +1046,12 @@ class UploadHandler
             }
         }
 
+        if (!extension_loaded('imagick')) {
+            echo 'imagick not installed';exit;
+        }else{
+            echo 'imagick has installed';exit;
+        }
+
         if (count($failed_versions)) {
             $file->error = $this->get_error_message('image_resize')
                     .' ('.implode($failed_versions, ', ').')';
