@@ -85,7 +85,7 @@
                 icons: {primary: 'ui-icon-trash'},
                 text: showIconText
             });
-            console.info(node);
+
             if (node.hasClass('fade')) {
                 node.hide();
             }

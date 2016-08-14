@@ -53,7 +53,7 @@
 
             <div class="form-group">
                 <label for="name">Title:</label>
-                <input type="text" name="title" class="form-control" id="title">
+                <input type="text" name="title" class="form-control" id="title" required>
             </div>
 
             {{--<div class="form-group">
@@ -153,7 +153,7 @@
 
             $(function(){
                 //$('textarea').tooltip('disable');
-                $('#function_form').validate({
+                $('#article_form').validate({
                     rules:{
                         name: "required"
                     }

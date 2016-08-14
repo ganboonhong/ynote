@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "01feee3995b8f7cdc522"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0046641a6ff9376f4f35"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32543,7 +32543,7 @@
 	var Nav = __webpack_require__(371);
 	var BlogContainer = __webpack_require__(382);
 	var Content = __webpack_require__(389);
-	var BlogPageStore = __webpack_require__(380);
+	var BlogPageStore = __webpack_require__(378);
 
 	var BlogPage = _wrapComponent('_component')(React.createClass({
 	    displayName: 'BlogPage',
@@ -43667,8 +43667,8 @@
 
 	var React = __webpack_require__(4);
 	var NavItem = __webpack_require__(372);
-	var NavStore = __webpack_require__(378);
-	var BlogPageStore = __webpack_require__(380);
+	var NavStore = __webpack_require__(381);
+	var BlogPageStore = __webpack_require__(378);
 	var NavActionCreator = __webpack_require__(373);
 	var NavActionCreators = __webpack_require__(373);
 	var article_amount;
@@ -43839,24 +43839,40 @@
 
 	var React = __webpack_require__(4);
 	var NavActionCreators = __webpack_require__(373);
-	var BlogPageStore = __webpack_require__(380);
+	var BlogPageStore = __webpack_require__(378);
 
 	var NavItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'NavItem',
 	    render: function render() {
 	        var data = this.props.data;
-	        return React.createElement(
-	            'li',
-	            { className: this.props.category_class, onClick: this._onClick },
-	            React.createElement(
-	                'span',
-	                { className: this.props.text_class },
-	                data.name,
-	                ' ( ',
-	                data.total,
-	                ' )'
-	            )
-	        );
+
+	        if (data.total) {
+	            return React.createElement(
+	                'li',
+	                { className: this.props.category_class, onClick: this._onClick },
+	                React.createElement(
+	                    'span',
+	                    { className: this.props.text_class },
+	                    data.name,
+	                    ' ( ',
+	                    data.total,
+	                    ' )'
+	                )
+	            );
+	        } else {
+	            return React.createElement(
+	                'li',
+	                { className: this.props.category_class },
+	                React.createElement(
+	                    'span',
+	                    { className: this.props.text_class },
+	                    data.name,
+	                    ' ( ',
+	                    data.total,
+	                    ' )'
+	                )
+	            );
+	        }
 	    },
 	    _onClick: function _onClick() {
 	        NavActionCreators.clickCategory(this.props.data.category_id);
@@ -44239,55 +44255,56 @@
 
 	'use strict';
 
+	var _jQuery = __webpack_require__(370);
+
+	var _jQuery2 = _interopRequireDefault(_jQuery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var AppDispatcher = __webpack_require__(374);
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
+	var BaseStore = __webpack_require__(380);
 	var CHANGE_EVENT = 'change';
-	var _categories = [];
-	var _current_category;
-	var _user;
-	var BlogPageStore = __webpack_require__(380);
-	var BaseStore = __webpack_require__(381);
+	var _url_params = _url_params;
 
-	var NavStore = assign({}, BaseStore, {
-	    init: function init() {
+	var BlogPageStore = assign({}, BaseStore, {
 
-	        var url_params = BlogPageStore.getUrlParams();
-	        var user_id = url_params.user_id;
-
-	        $.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
-
-	            for (var key in data.categories) {
-	                var obj = data.categories[key];
-	                _categories[obj.category_id] = obj;
-	            }
-	        });
+	    setUrlParams: function setUrlParams(url_params) {
+	        _url_params = url_params;
 	    },
 
-	    getCurrentCategory: function getCurrentCategory() {
-	        return _current_category;
+	    getUrlParams: function getUrlParams() {
+	        return _url_params;
+	    },
+
+	    startLoading: function startLoading() {
+	        (0, _jQuery2.default)('body').addClass('mask');
+	        (0, _jQuery2.default)('.loading').show();
+	    },
+
+	    completeLoading: function completeLoading() {
+	        var loadingInterval = setInterval(function () {
+	            if ((0, _jQuery2.default)('.list-item-container').length > 0) {
+
+	                (0, _jQuery2.default)('body').removeClass('mask');
+	                (0, _jQuery2.default)('.loading').hide();
+	                clearInterval(loadingInterval);
+	            }
+	        }, 500);
 	    }
 
 	});
 
-	NavStore.dispatchToken = AppDispatcher.register(function (action) {
+	BlogPageStore.dispatchToken = AppDispatcher.register(function (action) {
 	    switch (action.type) {
-
-	        case 'init_category':
-	            NavStore.init();
-	            break;
-
-	        case 'clickCategory':
-	            _current_category = action.categoryID;
-	            NavStore.emitChange();
-	            break;
 
 	        default:
 	        // do nothing
 	    }
 	});
 
-	module.exports = NavStore;
+	module.exports = BlogPageStore;
 
 /***/ },
 /* 379 */
@@ -44599,63 +44616,6 @@
 
 	'use strict';
 
-	var _jQuery = __webpack_require__(370);
-
-	var _jQuery2 = _interopRequireDefault(_jQuery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AppDispatcher = __webpack_require__(374);
-	var EventEmitter = __webpack_require__(379).EventEmitter;
-	var assign = __webpack_require__(7);
-	var BaseStore = __webpack_require__(381);
-	var CHANGE_EVENT = 'change';
-	var _url_params = _url_params;
-
-	var BlogPageStore = assign({}, BaseStore, {
-
-	    setUrlParams: function setUrlParams(url_params) {
-	        _url_params = url_params;
-	    },
-
-	    getUrlParams: function getUrlParams() {
-	        return _url_params;
-	    },
-
-	    startLoading: function startLoading() {
-	        (0, _jQuery2.default)('body').addClass('mask');
-	        (0, _jQuery2.default)('.loading').show();
-	    },
-
-	    completeLoading: function completeLoading() {
-	        var loadingInterval = setInterval(function () {
-	            if ((0, _jQuery2.default)('.list-item-container').length > 0) {
-
-	                (0, _jQuery2.default)('body').removeClass('mask');
-	                (0, _jQuery2.default)('.loading').hide();
-	                clearInterval(loadingInterval);
-	            }
-	        }, 500);
-	    }
-
-	});
-
-	BlogPageStore.dispatchToken = AppDispatcher.register(function (action) {
-	    switch (action.type) {
-
-	        default:
-	        // do nothing
-	    }
-	});
-
-	module.exports = BlogPageStore;
-
-/***/ },
-/* 381 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
@@ -44677,6 +44637,62 @@
 	});
 
 	module.exports = BaseStore;
+
+/***/ },
+/* 381 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var AppDispatcher = __webpack_require__(374);
+	var EventEmitter = __webpack_require__(379).EventEmitter;
+	var assign = __webpack_require__(7);
+	var CHANGE_EVENT = 'change';
+	var _categories = [];
+	var _current_category;
+	var _user;
+	var BlogPageStore = __webpack_require__(378);
+	var BaseStore = __webpack_require__(380);
+
+	var NavStore = assign({}, BaseStore, {
+	    init: function init() {
+
+	        var url_params = BlogPageStore.getUrlParams();
+	        var user_id = url_params.user_id;
+
+	        $.getJSON("/" + user_id + "/article/", { isNavBar: true }, function (data) {
+
+	            for (var key in data.categories) {
+	                var obj = data.categories[key];
+	                _categories[obj.category_id] = obj;
+	            }
+	        });
+	    },
+
+	    getCurrentCategory: function getCurrentCategory() {
+	        return _current_category;
+	    }
+
+	});
+
+	NavStore.dispatchToken = AppDispatcher.register(function (action) {
+	    switch (action.type) {
+
+	        case 'init_category':
+	            NavStore.init();
+	            break;
+
+	        case 'clickCategory':
+	            _current_category = action.categoryID;
+	            NavStore.emitChange();
+	            break;
+
+	        default:
+	        // do nothing
+	    }
+	});
+
+	module.exports = NavStore;
 
 /***/ },
 /* 382 */
@@ -44736,7 +44752,7 @@
 	var Blog = __webpack_require__(383);
 	var BlogStore = __webpack_require__(386);
 	var ContentStore = __webpack_require__(385);
-	var BlogPageStore = __webpack_require__(380);
+	var BlogPageStore = __webpack_require__(378);
 	var ClassNames = __webpack_require__(387);
 	var BlogActionCreators = __webpack_require__(384);
 	var Waypoint = __webpack_require__(388);
@@ -44929,12 +44945,12 @@
 	    displayName: 'Blog',
 	    render: function render() {
 	        var data = this.props.data;
-	        var pic_url;
+	        // var pic_url;
 
-	        if (data.cloudinary_api_response) {
-	            var cloudinary_api_response = JSON.parse(data.cloudinary_api_response);
-	            pic_url = cloudinary_api_response.secure_url;
-	        }
+	        // if(data.cloudinary_api_response){
+	        //     var cloudinary_api_response = JSON.parse(data.cloudinary_api_response);
+	        //     pic_url = cloudinary_api_response.secure_url;
+	        // }
 
 	        return React.createElement(
 	            'div',
@@ -44945,7 +44961,7 @@
 	                React.createElement(
 	                    'a',
 	                    { onClick: this._onClick, className: 'finger' },
-	                    React.createElement('img', { src: pic_url, className: 'list-pics' })
+	                    React.createElement('img', { src: '/server/php/files/' + data.list_pic, className: 'list-pics' })
 	                ),
 	                React.createElement(
 	                    'a',
@@ -45000,7 +45016,7 @@
 	var AppDispatcher = __webpack_require__(374);
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
-	var BaseStore = __webpack_require__(381);
+	var BaseStore = __webpack_require__(380);
 	var CHANGE_EVENT = 'change';
 	var contentObj = {};
 
@@ -45037,9 +45053,9 @@
 	var EventEmitter = __webpack_require__(379).EventEmitter;
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
-	var BlogPageStore = __webpack_require__(380);
+	var BlogPageStore = __webpack_require__(378);
 	var BlogActionCreators = __webpack_require__(384);
-	var BaseStore = __webpack_require__(381);
+	var BaseStore = __webpack_require__(380);
 	var _blogs = [];
 	var _current_blogs = [];
 	var rowsToRetrive = 9;

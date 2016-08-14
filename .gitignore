@@ -11,3 +11,4 @@ todo.txt
 *.hot-update.js
 *.hot-update.json
 public/server/php/files/*
+public/image/editor/*
