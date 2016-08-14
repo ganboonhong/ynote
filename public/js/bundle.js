@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "81339e64c671c79d9ba5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0e1d9165d575ac9a1053"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44945,6 +44945,7 @@
 	    displayName: 'Blog',
 	    render: function render() {
 	        var data = this.props.data;
+	        console.log('test');
 	        // var pic_url;
 
 	        // if(data.cloudinary_api_response){
