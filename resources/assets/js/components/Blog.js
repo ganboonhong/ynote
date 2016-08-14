@@ -6,7 +6,6 @@ var Blog = React.createClass({
 
         render() {
             var data = this.props.data;
-            console.log('test');
             // var pic_url;
 
             // if(data.cloudinary_api_response){
