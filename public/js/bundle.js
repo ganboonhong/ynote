@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bd4de1416795f8eb8779"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "322cf83f21d66acd05ad"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -43722,7 +43722,7 @@
 	        });
 
 	        var user = this.state.user;
-	        var pic_url = '';
+	        var pic_url = '/server/php/files/' + user.list_pic;
 	        var _url_params = BlogPageStore.getUrlParams();
 	        var all_category_class_neccessary = "finger category";
 	        var all_category_class = this.state.current_category == 'all' ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
@@ -43732,10 +43732,10 @@
 	            total = article_amount.total;
 	        }
 
-	        if (user.cloudinary_api_response) {
-	            var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
-	            pic_url = cloudinary_api_response.secure_url;
-	        }
+	        // if(user.cloudinary_api_response){
+	        //     var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
+	        //     pic_url = cloudinary_api_response.secure_url;
+	        // }
 
 	        return React.createElement(
 	            'div',

@@ -10,7 +10,17 @@
 
 @section('content')
 
+        <div class="form-group existing_pic">
+            <div>
+                @if($user->list_pic != "")
+                    <img src='/server/php/files/thumbnail/{{$user->list_pic}}' style="width: 100px;">
+                @endif
+            </div>
+        </div>
+
+
     {!! Form::open(array('route' => array('user_update', $user->user_id), 'id' => 'user_form', 'files' => true)) !!}
+    <input type="hidden" name="list_pic" id="list_pic" value="{{$user->list_pic}}">
 
     <div class="form-group">
         <label for="name">User Name</label>
@@ -30,7 +40,7 @@
                value="{{$user->description}}">
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="image">Image:</label>
         @if($user->pic != "")
             <div>
@@ -38,7 +48,7 @@
             </div>
         @endif
         {!! Form::file('pic') !!}
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label for="password">Password:</label>

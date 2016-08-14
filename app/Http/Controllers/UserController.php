@@ -59,24 +59,25 @@ class UserController extends Controller implements AdminListInterface
     {
         $input = (array)$request->all();
 
-        if($request->hasFile('pic')){
-            $pic            = $request->file('pic');
-            $rawFileName    = rand(111111, 999999);
-            $extension      = $pic->getClientOriginalExtension();
-            $fileName       = $rawFileName. '.' .$extension;
 
-            Input::file('pic')->move($this->destinationPath, $fileName);
+        // if($request->hasFile('pic')){
+        //     $pic            = $request->file('pic');
+        //     $rawFileName    = rand(111111, 999999);
+        //     $extension      = $pic->getClientOriginalExtension();
+        //     $fileName       = $rawFileName. '.' .$extension;
 
-            //Cloudinary related
-            $default_upload_options     = array("tags" => "basic_sample");
-            $cloudinary_api_response    = \Cloudinary\Uploader::upload(
-                public_path().'/'.$this->destinationPath.'/'.$fileName,
-                array_merge($default_upload_options, array("public_id" => $rawFileName))
-            );
+        //     Input::file('pic')->move($this->destinationPath, $fileName);
 
-            $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
-            $input['pic'] = $fileName;
-        }
+        //     //Cloudinary related
+        //     $default_upload_options     = array("tags" => "basic_sample");
+        //     $cloudinary_api_response    = \Cloudinary\Uploader::upload(
+        //         public_path().'/'.$this->destinationPath.'/'.$fileName,
+        //         array_merge($default_upload_options, array("public_id" => $rawFileName))
+        //     );
+
+        //     $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+        //     $input['pic'] = $fileName;
+        // }
 
         $user = User::create($input);
         $user->password = bcrypt($request->password);
@@ -134,28 +135,28 @@ class UserController extends Controller implements AdminListInterface
             unset($input['password']);
         }
 
-        if($request->hasFile('pic')){
-            $pic            = $request->file('pic');
-            $rawFileName    = rand(111111, 999999);
-            $extension      = $pic->getClientOriginalExtension();
-            $fileName       = $rawFileName. '.' .$extension;
+        // if($request->hasFile('pic')){
+        //     $pic            = $request->file('pic');
+        //     $rawFileName    = rand(111111, 999999);
+        //     $extension      = $pic->getClientOriginalExtension();
+        //     $fileName       = $rawFileName. '.' .$extension;
 
-            Input::file('pic')->move($this->destinationPath, $fileName);
+        //     Input::file('pic')->move($this->destinationPath, $fileName);
 
-            //Cloudinary related
-            $default_upload_options     = array("tags" => "basic_sample");
-            $cloudinary_api_response    = \Cloudinary\Uploader::upload(
-                public_path().'/'.$this->destinationPath.'/'.$fileName,
-                array_merge($default_upload_options, array("public_id" => $rawFileName))
-            );
+        //     //Cloudinary related
+        //     $default_upload_options     = array("tags" => "basic_sample");
+        //     $cloudinary_api_response    = \Cloudinary\Uploader::upload(
+        //         public_path().'/'.$this->destinationPath.'/'.$fileName,
+        //         array_merge($default_upload_options, array("public_id" => $rawFileName))
+        //     );
 
-            $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
-            $input['pic'] = $fileName;
+        //     $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
+        //     $input['pic'] = $fileName;
 
-        }else{
-            unset($input['cloudinary_api_response']);
-            unset($input['pic']);
-        }
+        // }else{
+        //     unset($input['cloudinary_api_response']);
+        //     unset($input['pic']);
+        // }
 
         $user->update($input);
 

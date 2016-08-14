@@ -62,7 +62,7 @@ var Nav = React.createClass({
         });
 
         var user               = this.state.user;
-        var pic_url            = '';
+        var pic_url            = '/server/php/files/'+user.list_pic;
         var _url_params        = BlogPageStore.getUrlParams();
         var all_category_class_neccessary = "finger category";
         var all_category_class = (this.state.current_category == 'all') ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
@@ -72,10 +72,10 @@ var Nav = React.createClass({
             total = article_amount.total;
         }
 
-        if(user.cloudinary_api_response){
-            var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
-            pic_url = cloudinary_api_response.secure_url;
-        }
+        // if(user.cloudinary_api_response){
+        //     var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
+        //     pic_url = cloudinary_api_response.secure_url;
+        // }
 
         return (
                     <div className="col-md-3 col-sm-2 col-xs-12 author">

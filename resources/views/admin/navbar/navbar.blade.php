@@ -24,9 +24,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="/admin/user/edit/{{Auth::user()->user_id}}">
-                        @if(\Illuminate\Support\Facades\Auth::user()->cloudinary_api_response != "")
+                        @if(\Illuminate\Support\Facades\Auth::user()->list_pic != "")
                             <img
-                                    src="{{json_decode(\Illuminate\Support\Facades\Auth::user()->cloudinary_api_response)->url}}"
+                                    src="/server/php/files/{{\Illuminate\Support\Facades\Auth::user()->list_pic}}"
                                     style="width: 15px; height: 25px; margin-right: 10px;">
                         @else
                             <span class="glyphicon glyphicon-user"></span>

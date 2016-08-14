@@ -12,6 +12,8 @@
 
     {!! Form::open(array('url' => 'admin/user', 'id' => 'user_form', 'files' => true)) !!}
 
+        <input type="hidden" name="list_pic" id="list_pic" value="">
+
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" class="form-control" id="name" >
@@ -27,10 +29,10 @@
             <input type="text" name="description" class="form-control" id="description">
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="image">Image:</label>
             {!! Form::file('pic') !!}
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label for="password">Password:</label>
@@ -80,12 +82,12 @@
                 }
             });
 
-            /*$('#user_form').submit(function(){
-             if($('[name="pic"]').val() == ""){
+            $('#user_form').submit(function(){
+             if($('[name="list_pic"]').val() == ""){
                 alert('Please upload an image');
                 return false;
              }
-             })*/
+             })
         })
 
     </script>
