@@ -20,7 +20,7 @@ var Blog = React.createClass({
                             <a onClick={this._onClick} className="finger">
                                 <img src={'/server/php/files/'+data.list_pic} className="list-pics" />
                             </a>
-                            <a className="finger">
+                            <a className="finger" onClick={this._onClick}>
                                 <p className="title">{data.title}</p>
                             </a>
                         </div>

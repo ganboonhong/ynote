@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c07e44a7635a7e3ab04c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bd4de1416795f8eb8779"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44965,7 +44965,7 @@
 	                ),
 	                React.createElement(
 	                    'a',
-	                    { className: 'finger' },
+	                    { className: 'finger', onClick: this._onClick },
 	                    React.createElement(
 	                        'p',
 	                        { className: 'title' },
