@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0046641a6ff9376f4f35"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "81339e64c671c79d9ba5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -45088,7 +45088,7 @@
 	    },
 
 	    getCurrentBlogs: function getCurrentBlogs() {
-	        return _current_blogs;
+	        return _blogs;
 	    },
 
 	    updateCurrentBlogs: function updateCurrentBlogs(category_id) {

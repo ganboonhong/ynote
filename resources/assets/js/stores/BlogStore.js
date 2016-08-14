@@ -46,7 +46,7 @@ var BlogStore = assign({}, BaseStore, {
     },
 
     getCurrentBlogs: function(){
-        return _current_blogs;
+        return _blogs;
     },
 
     updateCurrentBlogs: function(category_id){
