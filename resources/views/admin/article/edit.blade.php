@@ -52,7 +52,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="display:none">
                 <label for="sel1">Function Type：</label>
                 <select name="admin_function_type_id" class="form-control">
                     @foreach( $function_types as $function_type )
