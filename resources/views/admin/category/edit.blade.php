@@ -20,7 +20,12 @@
     {!! Form::close() !!}
 
 
+    <script src="/js/jquery_validation/jquery.validate.js"></script>
     <script>
+        $(document).ready(function(){
+             $("#jquery_image_upload").hide();
+        })
+        
         $('#category_form').validate({
             rules:{
                 name:"required"

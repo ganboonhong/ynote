@@ -88,7 +88,7 @@ var Nav = React.createClass({
                             {user.description}
                         </p>
 
-                        <Link to="/about">link to about</Link>         
+                        <Link to="/about"></Link>         
                                    
                             <div  className="category-wrapper">
                                 <ul style={{paddingLeft: 0}}>

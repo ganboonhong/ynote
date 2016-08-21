@@ -1,11 +1,11 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand">FRANCODE</a>
+            <a class="navbar-brand" href="/admin/article">HOME</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li><a href="/admin/function_type">Types</a></li>
+                {{--<li><a href="/admin/function_type">Types</a></li>--}}
                 {{--<li><a href="/admin/function">Function</a></li>--}}
                 <li><a href="/admin/category">Categories</a></li>
                 <li><a href="/admin/article">Articles</a></li>
@@ -24,6 +24,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="/admin/user/edit/{{Auth::user()->user_id}}">
+                        {{--
                         @if(\Illuminate\Support\Facades\Auth::user()->list_pic != "")
                             <img
                                     src="/server/php/files/{{\Illuminate\Support\Facades\Auth::user()->list_pic}}"
@@ -31,6 +32,9 @@
                         @else
                             <span class="glyphicon glyphicon-user"></span>
                         @endif
+                        --}}
+
+                        <span class="glyphicon glyphicon-user" style="margin-right: 10px;"></span>
                         {{Auth::user()->email}}
                     </a>
                 </li>

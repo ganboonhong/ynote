@@ -30,7 +30,7 @@ class CategoryController extends Controller implements AdminListInterface
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $categories = $this->user->categories()->get();
 

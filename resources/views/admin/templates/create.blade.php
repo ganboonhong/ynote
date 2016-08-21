@@ -65,7 +65,7 @@
     <h2>@yield('title')</h2>
     <hr/>
 
-    <div class="form-group">
+    <div class="form-group" id="jquery_image_upload">
             <label for="image">Image:</label>
 
                     <!-- The file upload form used as target for the file upload widget -->

@@ -19,7 +19,12 @@
         <button type="submit" class="btn btn-primary form-control" style="margin: 10px 0px 20px 0px">Create</button>
     {!! Form::close() !!}
 
+    <script src="/js/jquery_validation/jquery.validate.js"></script>
     <script>
+        $(document).ready(function(){
+             $("#jquery_image_upload").hide();
+        })
+
         $('#category_form').validate({
             rules:{
                 name:"required"

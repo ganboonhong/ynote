@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "322cf83f21d66acd05ad"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "52a0840d49f4c4d0ca88"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -43750,11 +43750,7 @@
 	                { id: 'author-description' },
 	                user.description
 	            ),
-	            React.createElement(
-	                _reactRouter.Link,
-	                { to: '/about' },
-	                'link to about'
-	            ),
+	            React.createElement(_reactRouter.Link, { to: '/about' }),
 	            React.createElement(
 	                'div',
 	                { className: 'category-wrapper' },
