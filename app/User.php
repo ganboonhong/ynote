@@ -39,6 +39,7 @@ class User extends Model implements AuthenticatableContract,
         'cloudinary_api_response',
         'description',
         'list_pic',
+        'side_panel_style',
     ];
 
     /**

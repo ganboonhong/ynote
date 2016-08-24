@@ -91,7 +91,7 @@ body{
     background: #bcb39d;
 }
 .category-name-selected{
-    color: white;
+    /*color: white;*/
     font-weight: bold;
 }
 /*author_side_bar-end*/

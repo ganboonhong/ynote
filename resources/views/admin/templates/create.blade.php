@@ -227,4 +227,9 @@
 * jQuery file upload ends   * 
 **************************-->
 
+
+@section('individual_js')
+    
+@show
+
 {!! HTML::script('js/jquery_validation/jquery.validate.js')!!}
