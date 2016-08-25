@@ -82,9 +82,15 @@
     </div>
 
     <div class="form-group">
-        <label for="nav_item_background">Navigation Category Background:</label>
+        <label for="nav_item_background">Navigation Buttons Background:</label>
         <input type='text' id="nav_item_background" name="nav_item_background" 
         value="{{json_decode($user->side_panel_style)->nav_item_background}}"  class="side_panel_class" />
+    </div>
+
+    <div class="form-group">
+        <label for="website_background">Website Background:</label>
+        <input type='text' id="website_background" name="website_background" 
+        value="{{json_decode($user->side_panel_style)->website_background}}"  class="side_panel_class" />
     </div>
 
     <input type="hidden" name="side_panel_style" id="side_panel_style"
@@ -116,7 +122,7 @@
             function spectrumChangeHandler(){
                 var side_panel_style = {};
 
-                $("#side_panel_background, #nav_item_background").serializeArray().map(
+                $("#side_panel_background, #nav_item_background, #website_background").serializeArray().map(
                     function(x){side_panel_style[x.name] = x.value;}
                 ); 
 
@@ -170,6 +176,34 @@
 
             $("#nav_item_background").spectrum({
                 color: $("#nav_item_background").val(),
+                showInput: true,
+                className: "full-spectrum",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxSelectionSize: 10,
+                preferredFormat: "hex",
+                localStorageKey: "spectrum.demo",
+                move: function (color) {
+                    
+                },
+                show: function () {
+                
+                },
+                beforeShow: function () {
+                
+                },
+                hide: function () {
+                
+                },
+                change: function() {
+                    spectrumChangeHandler();
+                },
+                palette: palette
+            });
+
+            $("#website_background").spectrum({
+                color: $("#website_background").val(),
                 showInput: true,
                 className: "full-spectrum",
                 showInitial: true,

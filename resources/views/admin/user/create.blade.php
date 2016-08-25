@@ -64,12 +64,17 @@
         </div>
 
         <div class="form-group">
-            <label for="nav_item_background">Navigation Category Background:</label>
+            <label for="nav_item_background">Navigation Buttons Background:</label>
             <input type='text' id="nav_item_background" name="nav_item_background" value="#bdad88"  class="side_panel_class" />
         </div>
 
+        <div class="form-group">
+            <label for="website_background">Website Background:</label>
+            <input type='text' id="website_background" name="website_background" value="#000000"  class="side_panel_class" />
+        </div>
+
         <input type="hidden" name="side_panel_style" id="side_panel_style" 
-        value='{"side_panel_background":"#ebe8e1","nav_item_background":"#bdad88"}'>
+        value='{"side_panel_background":"#ebe8e1","nav_item_background":"#bdad88", "website_background":"#000000"}'>
 
 
 
@@ -115,7 +120,7 @@
             function spectrumChangeHandler(){
                 var side_panel_style = {};
 
-                $("#side_panel_background, #nav_item_background").serializeArray().map(
+                $("#side_panel_background, #nav_item_background, #website_background").serializeArray().map(
                     function(x){side_panel_style[x.name] = x.value;}
                 ); 
 
@@ -170,6 +175,35 @@
 
             $("#nav_item_background").spectrum({
                 color: "#bdad88",
+                showInput: true,
+                className: "full-spectrum",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxSelectionSize: 10,
+                preferredFormat: "hex",
+                localStorageKey: "spectrum.demo",
+                move: function (color) {
+                    
+                },
+                show: function () {
+                
+                },
+                beforeShow: function () {
+                
+                },
+                hide: function () {
+                
+                },
+                change: function() {
+
+                    spectrumChangeHandler();
+                },
+                palette: palette
+            });
+
+            $("#website_background").spectrum({
+                color: "#000000",
                 showInput: true,
                 className: "full-spectrum",
                 showInitial: true,
