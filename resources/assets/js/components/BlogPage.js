@@ -40,6 +40,8 @@ var BlogPage = React.createClass({
             dataType: 'json',
             success: function(data){
                 navData = data;
+                var userCustomStyle = JSON.parse(data.user.side_panel_style);
+                $("body").css("background-color", userCustomStyle.website_background);
             }
         });
 

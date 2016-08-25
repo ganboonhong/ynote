@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "07c6a2ee54b85c017d56"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "143e3d12865fb1352e50"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32581,6 +32581,8 @@
 	            dataType: 'json',
 	            success: function success(data) {
 	                navData = data;
+	                var userCustomStyle = JSON.parse(data.user.side_panel_style);
+	                (0, _jQuery2.default)("body").css("background-color", userCustomStyle.website_background);
 	            }
 	        });
 
