@@ -2,6 +2,10 @@ body{
     background-color: #000; 
 }
 
+.body_class{
+    background-color: blue;    
+}
+
 .mask{
     position: absolute; 
     top: 0; 
@@ -19,7 +23,7 @@ body{
     z-index: 9999;
     /*background-image : url('http://loadinggif.com/images/image-selection/3.gif');*/
     background-image : url('/image/box.gif');
-    opacity : 1;
+    /*opacity : 1;*/
     background-repeat : no-repeat;
     background-position : center;
     left : 0;

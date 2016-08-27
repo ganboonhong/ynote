@@ -108,26 +108,8 @@ class ArticleController extends Controller implements AdminListInterface
     {
         $fileName = "";
 
-        // if($request->list_pic != ""){
-        //     $extension      = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-        //     $rawFileName    = rand(11111,99999);
-        //     $fileName       = $rawFileName.'.'.$extension; // renameing image
-        //     Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
-
-        //     // Cloudinary related
-        //     $default_upload_options = array("tags" => "basic_sample");
-        //     $cloudinary_api_response = \Cloudinary\Uploader::upload(
-        //         public_path().'/uploads/'.$fileName,
-        //         array_merge($default_upload_options, array("public_id" => $rawFileName))
-        //     );
-        // }
-
         $input = (array)$request->all();
-        $input['user_id'] = Auth::user()->user_id;
-        // $input['list_pic'] = $fileName;
-        // $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
-
-        
+        $input['user_id'] = Auth::user()->user_id;        
 
         $this->article->create($input);
 
@@ -191,24 +173,6 @@ class ArticleController extends Controller implements AdminListInterface
 
         $input = (array)$request->except('_token');
 
-        // if(Input::file('list_pic') != ""){
-        //     $extension          = Input::file('list_pic')->getClientOriginalExtension(); // getting image extension
-        //     $rawFileName        = rand(11111,99999);
-        //     $fileName           = $rawFileName.'.'.$extension; // renameing image
-        //     Input::file('list_pic')->move($this->destinationPath, $fileName); // uploading file to given path
-
-        //     //Cloudinary related
-        //     $default_upload_options     = array("tags" => "basic_sample");
-        //     $cloudinary_api_response    = \Cloudinary\Uploader::upload(public_path().'/uploads/'.$fileName,
-        //         array_merge($default_upload_options, array("public_id" => $rawFileName)));
-
-        //     $input['cloudinary_api_response'] = json_encode($cloudinary_api_response);
-        //     $input['list_pic'] = $fileName;
-        // }else{
-        //     unset($input['list_pic']);
-        //     unset($input['cloudinary_api_response']);
-        // }
-
         $input['user_id'] = Auth::user()->user_id;
         $this->article->where('article_id', $id)->update($input);
 
@@ -260,12 +224,13 @@ class ArticleController extends Controller implements AdminListInterface
             ->take($rowsToRetrive)
             ->get();
 
-        $categories = $this->categories;
-        $article_amount = $this->article_amount;
-        $category_arg = $categories->toArray();
 
-        foreach ( $category_arg as $key => $value) {
-            $category_arg[$key]['total'] = $article_amount[$value['category_id']];
+        $categories     = $user->categories()->orderBy('name')->get();
+        $article_amount = $this->article_amount;
+        $category_arg   = $categories->toArray();
+
+        foreach( $categories as $key => $category){
+            $category_arg[$key]['total'] = $category->articles()->count();
         }
 
         $category_arg       = array('categories'     => $category_arg);
@@ -277,7 +242,6 @@ class ArticleController extends Controller implements AdminListInterface
 
         if($request->input('isBlogContent')) return response()->json($articles);
 
-        return view('frontend.article.list', compact('articles', 'categories', 'user', 'article_amount'));
     }
 
     public function itemListWithCategory($user_id, $id, Request $request)

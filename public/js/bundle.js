@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "143e3d12865fb1352e50"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3c52dc01e53a941d3d39"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44308,6 +44308,7 @@
 	var BaseStore = __webpack_require__(380);
 	var CHANGE_EVENT = 'change';
 	var _url_params = _url_params;
+	var original_background_color;
 
 	var BlogPageStore = assign({}, BaseStore, {
 
@@ -44320,6 +44321,8 @@
 	    },
 
 	    startLoading: function startLoading() {
+	        original_background_color = (0, _jQuery2.default)('body').css('background-color');
+	        (0, _jQuery2.default)('body').css('background-color', 'black');
 	        (0, _jQuery2.default)('body').addClass('mask');
 	        (0, _jQuery2.default)('.loading').show();
 	    },
@@ -44327,7 +44330,7 @@
 	    completeLoading: function completeLoading() {
 	        var loadingInterval = setInterval(function () {
 	            if ((0, _jQuery2.default)('.list-item-container').length > 0) {
-
+	                (0, _jQuery2.default)('body').css('background-color', original_background_color);
 	                (0, _jQuery2.default)('body').removeClass('mask');
 	                (0, _jQuery2.default)('.loading').hide();
 	                clearInterval(loadingInterval);

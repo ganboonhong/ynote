@@ -5,6 +5,7 @@ var assign        = require('object-assign');
 var BaseStore     = require('../stores/BaseStore');
 var CHANGE_EVENT  = 'change';
 var _url_params   = _url_params;
+var original_background_color;
 
 var BlogPageStore = assign({}, BaseStore, {
 
@@ -17,6 +18,8 @@ var BlogPageStore = assign({}, BaseStore, {
     },
 
     startLoading: function(){
+        original_background_color = $('body').css('background-color');
+        $('body').css('background-color', 'black')
         $('body').addClass('mask');
         $('.loading').show();
     },
@@ -24,7 +27,7 @@ var BlogPageStore = assign({}, BaseStore, {
     completeLoading: function(){
         var loadingInterval = setInterval(function(){
                                     if($('.list-item-container').length > 0){
-                                        
+                                        $('body').css('background-color', original_background_color);
                                         $('body').removeClass('mask');
                                         $('.loading').hide();
                                         clearInterval(loadingInterval);
