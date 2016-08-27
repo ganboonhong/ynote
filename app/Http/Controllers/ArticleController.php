@@ -226,11 +226,13 @@ class ArticleController extends Controller implements AdminListInterface
 
 
         $categories     = $user->categories()->orderBy('name')->get();
-        $article_amount = $this->article_amount;
+        $article_amount['total'] = 0;
         $category_arg   = $categories->toArray();
+
 
         foreach( $categories as $key => $category){
             $category_arg[$key]['total'] = $category->articles()->count();
+            $article_amount['total'] += $category_arg[$key]['total'];
         }
 
         $category_arg       = array('categories'     => $category_arg);
