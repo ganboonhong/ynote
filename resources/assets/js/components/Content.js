@@ -9,15 +9,15 @@ var ContentActionCreators = require('../actions/ContentActionCreators');
 //github: https://github.com/yuanyan/boron
 var Modal = require('boron/WaveModal');
 var modalStyle = {
-        width: '90%',
+        width: '95%',
         height: '100%',
         position: 'fixed',
-        marginTop: '20px',
+        marginTop: '5px',
     };
 
 var contentStyle = {
     overflow: 'auto',
-    height: window.innerHeight - 50,
+    height: window.innerHeight - 10,
     borderTopLeftRadius: '15px',
     borderBottomLeftRadius: '15px',
     marginBottom: '200px',

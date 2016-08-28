@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "16619da5d3a2aa545440"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e905c1e842f757fb4e27"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -45704,15 +45704,15 @@
 	//github: https://github.com/yuanyan/boron
 	var Modal = __webpack_require__(392);
 	var modalStyle = {
-	    width: '90%',
+	    width: '95%',
 	    height: '100%',
 	    position: 'fixed',
-	    marginTop: '20px'
+	    marginTop: '5px'
 	};
 
 	var contentStyle = {
 	    overflow: 'auto',
-	    height: window.innerHeight - 50,
+	    height: window.innerHeight - 10,
 	    borderTopLeftRadius: '15px',
 	    borderBottomLeftRadius: '15px',
 	    marginBottom: '200px'
