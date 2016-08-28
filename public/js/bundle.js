@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3c52dc01e53a941d3d39"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "16619da5d3a2aa545440"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44989,16 +44989,11 @@
 	    displayName: 'Blog',
 	    render: function render() {
 	        var data = this.props.data;
-	        // var pic_url;
-
-	        // if(data.cloudinary_api_response){
-	        //     var cloudinary_api_response = JSON.parse(data.cloudinary_api_response);
-	        //     pic_url = cloudinary_api_response.secure_url;
-	        // }
+	        var imgStyle = { "textAlign": 'center' };
 
 	        return React.createElement(
 	            'div',
-	            { className: 'list-item-container' },
+	            { className: 'list-item-container', style: imgStyle },
 	            React.createElement(
 	                'div',
 	                { className: 'col-md-4 col-sm-5 col-xs-12 item' },
