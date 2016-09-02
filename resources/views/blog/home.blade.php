@@ -27,7 +27,6 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/sharer/cool-share/plugin.css" media="all" rel="stylesheet" />
     <script src="/sharer/cool-share/plugin.js"></script>
-    
     <meta name="google-site-verification" content="uOBGAl-u4gUNzKReYprdob-YEMffbmPR5a7O8Nqyzzc" />
     <title>Articles</title>
 
