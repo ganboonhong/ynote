@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FB sharer -->
     <meta property="og:image" content="/server/php/files/light-bulb.png"/>
-    <!-- test -->
+    <meta property="og:description" content="This blog records all the interesting things in the life of a passionnate programmer.">
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {!! HTML::style('css/frontend/general.css') !!}
     {!! HTML::style('css/frontend/article/list.css') !!}
