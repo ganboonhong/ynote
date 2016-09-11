@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e905c1e842f757fb4e27"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5f518bfeda2f65b31cd6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44804,10 +44804,7 @@
 	var retrivingData = false; // prevent retriving same record twice at the same time
 
 	function getBlog(data) {
-	    return React.createElement(Blog, {
-	        data: data,
-	        key: data.article_id
-	    });
+	    return React.createElement(Blog, { data: data, key: data.article_id });
 	}
 
 	function getStateFromStores() {

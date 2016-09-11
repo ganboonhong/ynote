@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:image" content="/server/php/files/light-bulb.png"/>
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {!! HTML::style('css/frontend/general.css') !!}
     {!! HTML::style('css/frontend/article/list.css') !!}
@@ -25,6 +27,7 @@
 
     {{--sharer plugin--}}
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- <link rel="icon" href="/server/php/files/light-bulb.png"> -->
     <link href="/sharer/cool-share/plugin.css" media="all" rel="stylesheet" />
     <script src="/sharer/cool-share/plugin.js"></script>
     <meta name="google-site-verification" content="uOBGAl-u4gUNzKReYprdob-YEMffbmPR5a7O8Nqyzzc" />

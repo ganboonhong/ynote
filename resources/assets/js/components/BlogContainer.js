@@ -14,10 +14,7 @@ var retrivingData      = false; // prevent retriving same record twice at the sa
 
 function getBlog(data){
     return(
-        <Blog 
-            data={data}
-            key={data.article_id}
-        />
+        <Blog data={data} key={data.article_id}/>
     )
 }
 
