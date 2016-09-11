@@ -143,6 +143,6 @@ body{
     .author{
         position: relative ;
         width: 100% ;
-        background-color: blue!important;
+        margin-top: 100px;
     }
 }
