@@ -1,6 +1,7 @@
 var React             = require('react');
 var NavActionCreators = require('../actions/NavActionCreators');
 var BlogPageStore     = require('../stores/BlogPageStore');
+var classNames        = require('classnames');
 
 var NavItem = React.createClass({
         getInitialState() {
@@ -18,6 +19,15 @@ var NavItem = React.createClass({
         render() {
             var data = this.props.data;
             var side_panel_style = JSON.parse(this.props.user.side_panel_style);
+            var category_class = classNames({
+                'category finger': true, 
+                'selected-category': (this.props.current_category == data.category_id)
+            });
+
+            var text_class = classNames({
+                'category-name-selected': (this.props.current_category == data.category_id),
+                'category-name': (this.props.current_category != data.category_id),
+            });
 
             var navItemStyle = {
                     color: (this.state.hover) ? side_panel_style.nav_item_background : "#fff",
@@ -26,18 +36,18 @@ var NavItem = React.createClass({
 
             if(data.total) {
                 return (
-                        <li style={navItemStyle} className={this.props.category_class} onClick={this._onClick} 
+                        <li style={navItemStyle} className={category_class} onClick={this._onClick} 
                         onMouseOver={this._mouseOver} onMouseOut={this._mouseOut}>
-                            <span className={this.props.text_class}>
+                            <span className={text_class}>
                                 {data.name} ( {data.total} )
                             </span>
                         </li>
                 );
             }else{
                 return (
-                        <li style={navItemStyle} className={this.props.category_class} 
+                        <li style={navItemStyle} className={category_class} 
                         onMouseOver={this._mouseOver} onMouseOut={this._mouseOut}>
-                            <span className={this.props.text_class}>
+                            <span className={text_class}>
                                 {data.name} ( {data.total} )
                             </span>
                         </li>

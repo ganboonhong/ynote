@@ -1,15 +1,13 @@
 var React              = require('react');
 var BlogActionCreators = require('../actions/BlogActionCreators');
-var ContentStore       = require('../stores/ContentStore');
 
 var Blog = React.createClass({
 
         render() {
-            var data     = this.props.data;
-            var imgStyle = {"textAlign": 'center'};
+            var data = this.props.data;
 
             return (
-                <div className="list-item-container" style={imgStyle}>
+                <div className="list-item-container">
                     
                         <div className="col-md-4 col-sm-5 col-xs-12 item">
                             <a onClick={this._onClick} className="finger">

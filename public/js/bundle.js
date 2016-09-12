@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5f518bfeda2f65b31cd6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f4b44701cbaf6a2e3959"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32552,26 +32552,6 @@
 	    },
 	    render: function render() {
 	        var url_params = BlogPageStore.getUrlParams();
-
-	        // $.extend({
-	        //     getValues: function(){
-	        //         var navData = null;
-	        //         $.getJSON(
-
-	        //             "/" + url_params.user_id + "/article/",
-
-	        //             { isNavBar: true },
-
-	        //             function (data) {
-	        //                 navData = data;
-	        //                 console.log(navData);
-	        //             }
-	        //         );
-
-	        //         return navData;
-	        //     }
-	        // })
-
 	        var navData;
 
 	        _jQuery2.default.ajax({
@@ -43673,8 +43653,7 @@
 	var BlogPageStore = __webpack_require__(378);
 	var NavActionCreator = __webpack_require__(373);
 	var NavActionCreators = __webpack_require__(373);
-	var article_amount;
-	var total;
+	var classNames = __webpack_require__(387);
 
 	function getCurrentCategory() {
 	    return NavStore.getCurrentCategory();
@@ -43702,12 +43681,12 @@
 
 
 	    componentDidMount: function componentDidMount() {
-	        var obj = this;
 	        var data = this.props.navData;
 
-	        article_amount = data.article_amount;
-	        obj.setState({ list: data.categories });
-	        obj.setState({ user: data.user });
+	        this.setState({
+	            list: data.categories,
+	            user: data.user
+	        });
 
 	        NavStore.addChangeListener(this._onChange);
 	    },
@@ -43717,6 +43696,10 @@
 	        var user = this.state.user;
 	        var navItemStyle = {};
 	        var navBarStyle = {};
+	        var all_category_class = classNames({
+	            'finger category': true,
+	            'selected-category': current_category == 'all'
+	        });
 
 	        if (user.side_panel_style != undefined) {
 
@@ -43732,36 +43715,16 @@
 	            };
 	        }
 
+	        navItemStyle['fontWeight'] = current_category == 'all' ? 'bold' : '';
+
 	        var blogNavBarItem = this.state.list.map(function (data) {
-
-	            var category_class = data.category_id == current_category ? "category finger selected-category" : "finger category";
-	            var text_class = data.category_id == current_category ? "category-name-selected" : "category-name";
-
 	            return React.createElement(NavItem, {
 	                user: user,
 	                data: data,
 	                key: data.category_id,
-	                category_class: category_class,
-	                text_class: text_class
+	                current_category: current_category
 	            });
 	        });
-
-	        var pic_url = '/server/php/files/' + user.list_pic;
-	        var _url_params = BlogPageStore.getUrlParams();
-	        var all_category_class_neccessary = "finger category";
-	        var all_category_class = this.state.current_category == 'all' ? all_category_class_neccessary + " selected-category" : all_category_class_neccessary;
-	        var all_text_class = this.state.current_category == 'all' ? "category-name-selected" : "";
-
-	        navItemStyle['fontWeight'] = this.state.current_category == 'all' ? 'bold' : '';
-
-	        if (article_amount) {
-	            total = article_amount.total;
-	        }
-
-	        // if(user.cloudinary_api_response){
-	        //     var cloudinary_api_response = JSON.parse(user.cloudinary_api_response);
-	        //     pic_url = cloudinary_api_response.secure_url;
-	        // }
 
 	        return React.createElement(
 	            'div',
@@ -43769,7 +43732,7 @@
 	            React.createElement(
 	                'div',
 	                null,
-	                React.createElement('img', { src: pic_url, id: 'profile-pic' })
+	                React.createElement('img', { src: '/server/php/files/' + user.list_pic, id: 'profile-pic' })
 	            ),
 	            React.createElement(
 	                'p',
@@ -43785,14 +43748,16 @@
 	                    { style: { paddingLeft: 0 } },
 	                    React.createElement(
 	                        'li',
-	                        { style: navItemStyle, className: all_category_class,
+	                        {
+	                            style: navItemStyle,
+	                            className: all_category_class,
 	                            onClick: this._onClick,
 	                            onMouseOver: this._mouseOver, onMouseOut: this._mouseOut },
 	                        React.createElement(
 	                            'span',
 	                            null,
 	                            'All ( ',
-	                            total,
+	                            this.props.navData.article_amount.total,
 	                            ' )'
 	                        )
 	                    ),
@@ -43864,6 +43829,7 @@
 	var React = __webpack_require__(4);
 	var NavActionCreators = __webpack_require__(373);
 	var BlogPageStore = __webpack_require__(378);
+	var classNames = __webpack_require__(387);
 
 	var NavItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'NavItem',
@@ -43879,6 +43845,15 @@
 	    render: function render() {
 	        var data = this.props.data;
 	        var side_panel_style = JSON.parse(this.props.user.side_panel_style);
+	        var category_class = classNames({
+	            'category finger': true,
+	            'selected-category': this.props.current_category == data.category_id
+	        });
+
+	        var text_class = classNames({
+	            'category-name-selected': this.props.current_category == data.category_id,
+	            'category-name': this.props.current_category != data.category_id
+	        });
 
 	        var navItemStyle = {
 	            color: this.state.hover ? side_panel_style.nav_item_background : "#fff",
@@ -43888,11 +43863,11 @@
 	        if (data.total) {
 	            return React.createElement(
 	                'li',
-	                { style: navItemStyle, className: this.props.category_class, onClick: this._onClick,
+	                { style: navItemStyle, className: category_class, onClick: this._onClick,
 	                    onMouseOver: this._mouseOver, onMouseOut: this._mouseOut },
 	                React.createElement(
 	                    'span',
-	                    { className: this.props.text_class },
+	                    { className: text_class },
 	                    data.name,
 	                    ' ( ',
 	                    data.total,
@@ -43902,11 +43877,11 @@
 	        } else {
 	            return React.createElement(
 	                'li',
-	                { style: navItemStyle, className: this.props.category_class,
+	                { style: navItemStyle, className: category_class,
 	                    onMouseOver: this._mouseOver, onMouseOut: this._mouseOut },
 	                React.createElement(
 	                    'span',
-	                    { className: this.props.text_class },
+	                    { className: text_class },
 	                    data.name,
 	                    ' ( ',
 	                    data.total,
@@ -44980,17 +44955,15 @@
 
 	var React = __webpack_require__(4);
 	var BlogActionCreators = __webpack_require__(384);
-	var ContentStore = __webpack_require__(385);
 
 	var Blog = _wrapComponent('_component')(React.createClass({
 	    displayName: 'Blog',
 	    render: function render() {
 	        var data = this.props.data;
-	        var imgStyle = { "textAlign": 'center' };
 
 	        return React.createElement(
 	            'div',
-	            { className: 'list-item-container', style: imgStyle },
+	            { className: 'list-item-container' },
 	            React.createElement(
 	                'div',
 	                { className: 'col-md-4 col-sm-5 col-xs-12 item' },

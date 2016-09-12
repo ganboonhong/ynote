@@ -11,26 +11,6 @@ var BlogPage = React.createClass({
     },
     render() {
         var url_params = BlogPageStore.getUrlParams();
-
-        // $.extend({
-        //     getValues: function(){
-        //         var navData = null;
-        //         $.getJSON(
-
-        //             "/" + url_params.user_id + "/article/",
-
-        //             { isNavBar: true },
-
-        //             function (data) {
-        //                 navData = data;
-        //                 console.log(navData);
-        //             }
-        //         );
-
-        //         return navData;
-        //     }
-        // })
-
         var navData;
 
         $.ajax({
