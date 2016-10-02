@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f4b44701cbaf6a2e3959"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9cc8c3a10b07762d4abe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -32541,7 +32541,7 @@
 
 	var React = __webpack_require__(4);
 	var Nav = __webpack_require__(371);
-	var BlogContainer = __webpack_require__(382);
+	var BlogContainer = __webpack_require__(383);
 	var Content = __webpack_require__(389);
 	var BlogPageStore = __webpack_require__(378);
 
@@ -43649,11 +43649,11 @@
 
 	var React = __webpack_require__(4);
 	var NavItem = __webpack_require__(372);
-	var NavStore = __webpack_require__(381);
+	var NavStore = __webpack_require__(382);
 	var BlogPageStore = __webpack_require__(378);
 	var NavActionCreator = __webpack_require__(373);
 	var NavActionCreators = __webpack_require__(373);
-	var classNames = __webpack_require__(387);
+	var classNames = __webpack_require__(381);
 
 	function getCurrentCategory() {
 	    return NavStore.getCurrentCategory();
@@ -43829,7 +43829,7 @@
 	var React = __webpack_require__(4);
 	var NavActionCreators = __webpack_require__(373);
 	var BlogPageStore = __webpack_require__(378);
-	var classNames = __webpack_require__(387);
+	var classNames = __webpack_require__(381);
 
 	var NavItem = _wrapComponent('_component')(React.createClass({
 	    displayName: 'NavItem',
@@ -43860,38 +43860,24 @@
 	            backgroundColor: !this.state.hover ? side_panel_style.nav_item_background : "#fff"
 	        };
 
-	        if (data.total) {
-	            return React.createElement(
-	                'li',
-	                { style: navItemStyle, className: category_class, onClick: this._onClick,
-	                    onMouseOver: this._mouseOver, onMouseOut: this._mouseOut },
-	                React.createElement(
-	                    'span',
-	                    { className: text_class },
-	                    data.name,
-	                    ' ( ',
-	                    data.total,
-	                    ' )'
-	                )
-	            );
-	        } else {
-	            return React.createElement(
-	                'li',
-	                { style: navItemStyle, className: category_class,
-	                    onMouseOver: this._mouseOver, onMouseOut: this._mouseOut },
-	                React.createElement(
-	                    'span',
-	                    { className: text_class },
-	                    data.name,
-	                    ' ( ',
-	                    data.total,
-	                    ' )'
-	                )
-	            );
-	        }
+	        return React.createElement(
+	            'li',
+	            { style: navItemStyle, className: category_class, onClick: this._onClick.bind(this, data.total),
+	                onMouseOver: this._mouseOver, onMouseOut: this._mouseOut },
+	            React.createElement(
+	                'span',
+	                { className: text_class },
+	                data.name,
+	                ' ( ',
+	                data.total,
+	                ' )'
+	            )
+	        );
 	    },
-	    _onClick: function _onClick() {
-	        NavActionCreators.clickCategory(this.props.data.category_id);
+	    _onClick: function _onClick(category_total) {
+	        if (category_total) {
+	            NavActionCreators.clickCategory(this.props.data.category_id);
+	        }
 	    }
 	}));
 
@@ -44661,6 +44647,60 @@
 /* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 382 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	var AppDispatcher = __webpack_require__(374);
@@ -44714,7 +44754,7 @@
 	module.exports = NavStore;
 
 /***/ },
-/* 382 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -44768,12 +44808,12 @@
 	}
 
 	var React = __webpack_require__(4);
-	var Blog = __webpack_require__(383);
+	var Blog = __webpack_require__(384);
 	var BlogStore = __webpack_require__(386);
-	var ContentStore = __webpack_require__(385);
+	var ContentStore = __webpack_require__(387);
 	var BlogPageStore = __webpack_require__(378);
-	var ClassNames = __webpack_require__(387);
-	var BlogActionCreators = __webpack_require__(384);
+	var ClassNames = __webpack_require__(381);
+	var BlogActionCreators = __webpack_require__(385);
 	var Waypoint = __webpack_require__(388);
 	var rowsToRetrive = 7;
 	var retrivingData = false; // prevent retriving same record twice at the same time
@@ -44906,7 +44946,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 383 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -44954,7 +44994,7 @@
 	}
 
 	var React = __webpack_require__(4);
-	var BlogActionCreators = __webpack_require__(384);
+	var BlogActionCreators = __webpack_require__(385);
 
 	var Blog = _wrapComponent('_component')(React.createClass({
 	    displayName: 'Blog',
@@ -44993,7 +45033,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ },
-/* 384 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45017,42 +45057,6 @@
 	};
 
 /***/ },
-/* 385 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var AppDispatcher = __webpack_require__(374);
-	var EventEmitter = __webpack_require__(379).EventEmitter;
-	var assign = __webpack_require__(7);
-	var BaseStore = __webpack_require__(380);
-	var CHANGE_EVENT = 'change';
-	var contentObj = {};
-
-	var ContentStore = assign({}, BaseStore, {
-
-	    getContent: function getContent() {
-	        return contentObj;
-	    }
-
-	});
-
-	ContentStore.dispatchToken = AppDispatcher.register(function (action) {
-	    switch (action.type) {
-
-	        case 'clickBlog':
-	            contentObj.content = action.content;
-	            ContentStore.emitChange();
-	            break;
-
-	        default:
-	        // do nothing
-	    }
-	});
-
-	module.exports = ContentStore;
-
-/***/ },
 /* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -45063,7 +45067,7 @@
 	var assign = __webpack_require__(7);
 	var CHANGE_EVENT = 'change';
 	var BlogPageStore = __webpack_require__(378);
-	var BlogActionCreators = __webpack_require__(384);
+	var BlogActionCreators = __webpack_require__(385);
 	var BaseStore = __webpack_require__(380);
 	var _blogs = [];
 	var _current_blogs = [];
@@ -45162,55 +45166,37 @@
 /* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
+	'use strict';
 
-	(function () {
-		'use strict';
+	var AppDispatcher = __webpack_require__(374);
+	var EventEmitter = __webpack_require__(379).EventEmitter;
+	var assign = __webpack_require__(7);
+	var BaseStore = __webpack_require__(380);
+	var CHANGE_EVENT = 'change';
+	var contentObj = {};
 
-		var hasOwn = {}.hasOwnProperty;
+	var ContentStore = assign({}, BaseStore, {
 
-		function classNames () {
-			var classes = [];
+	    getContent: function getContent() {
+	        return contentObj;
+	    }
 
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
+	});
 
-				var argType = typeof arg;
+	ContentStore.dispatchToken = AppDispatcher.register(function (action) {
+	    switch (action.type) {
 
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
+	        case 'clickBlog':
+	            contentObj.content = action.content;
+	            ContentStore.emitChange();
+	            break;
 
-			return classes.join(' ');
-		}
+	        default:
+	        // do nothing
+	    }
+	});
 
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
+	module.exports = ContentStore;
 
 /***/ },
 /* 388 */
@@ -45664,8 +45650,8 @@
 	}
 
 	var React = __webpack_require__(4);
-	var ContentStore = __webpack_require__(385);
-	var classNames = __webpack_require__(387);
+	var ContentStore = __webpack_require__(387);
+	var classNames = __webpack_require__(381);
 	var Paragraph = __webpack_require__(390);
 	// var Modal                 = require('react-modal');
 	var ContentActionCreators = __webpack_require__(391);
@@ -46668,7 +46654,7 @@
 	'use strict';
 
 	var NavActionCreators = __webpack_require__(373);
-	var BlogActionCreators = __webpack_require__(384);
+	var BlogActionCreators = __webpack_require__(385);
 
 	module.exports = {
 	    init: function init(arg) {

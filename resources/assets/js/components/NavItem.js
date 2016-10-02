@@ -33,30 +33,21 @@ var NavItem = React.createClass({
                     color: (this.state.hover) ? side_panel_style.nav_item_background : "#fff",
                     backgroundColor: (!this.state.hover) ? side_panel_style.nav_item_background : "#fff",
                 };
-
-            if(data.total) {
-                return (
-                        <li style={navItemStyle} className={category_class} onClick={this._onClick} 
-                        onMouseOver={this._mouseOver} onMouseOut={this._mouseOut}>
-                            <span className={text_class}>
-                                {data.name} ( {data.total} )
-                            </span>
-                        </li>
-                );
-            }else{
-                return (
-                        <li style={navItemStyle} className={category_class} 
-                        onMouseOver={this._mouseOver} onMouseOut={this._mouseOut}>
-                            <span className={text_class}>
-                                {data.name} ( {data.total} )
-                            </span>
-                        </li>
-                );
-            }
+            
+            return (
+                <li style={navItemStyle} className={category_class} onClick={this._onClick.bind(this, data.total)} 
+                onMouseOver={this._mouseOver} onMouseOut={this._mouseOut}>
+                    <span className={text_class}>
+                        {data.name} ( {data.total} )
+                    </span>
+                </li>
+            );
         },
 
-        _onClick(){
-            NavActionCreators.clickCategory(this.props.data.category_id);
+        _onClick(category_total){
+            if(category_total){
+                NavActionCreators.clickCategory(this.props.data.category_id);
+            }
         }
     });
 
