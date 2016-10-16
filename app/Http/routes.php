@@ -150,7 +150,7 @@ Route::group(['prefix' => 'admin', 'middleware'  => 'auth'], function(){
 
         Route::post('delete_multiple_items',
             [   'uses'  => 'CategoryController@deleteMultipleItems',
-                'as'    => 'delete_multiple_items']);
+                'as'    => 'category_delete_multiple_items']);
 
         Route::get('edit/{id}',
             [   'uses'  => 'CategoryController@edit',

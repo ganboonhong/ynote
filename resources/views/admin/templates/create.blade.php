@@ -233,3 +233,4 @@
 @show
 
 {!! HTML::script('js/jquery_validation/jquery.validate.js')!!}
+{!!  HTML::script('js/jquery.confirm.min.js')  !!}

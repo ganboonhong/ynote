@@ -6,7 +6,7 @@
 
 @section('title')
     User List
-    <a href="{{route('user_create')}}" class="btn btn-success btn-sm list_delete_btn" title="Create">
+    <a href="{{route('user_create')}}" class="btn btn-success btn-sm" title="Create">
         <span class="glyphicon glyphicon-leaf"></span>
     </a>
 
@@ -14,7 +14,7 @@
 
 @section('items')
 
-    {!! Form::open(array('action' => ('UserController@deleteMultipleItems'))) !!}
+    {!! Form::open(array('action' => ('UserController@deleteMultipleItems'), 'id' => 'list_form')) !!}
     @foreach( $users as $key => $user )
 
         @if($key == 0)
@@ -40,7 +40,7 @@
             {{$user->name}}
         </a>
 
-        <a href="{{route('user_destroy', ['id' => $user->user_id])}}" class="btn btn-danger btn-sm list_delete_btn">
+        <a data-href="{{route('user_destroy', ['id' => $user->user_id])}}" class="btn btn-danger btn-sm list_delete_btn">
             <span class="glyphicon glyphicon-remove"></span>
         </a>
         <br />

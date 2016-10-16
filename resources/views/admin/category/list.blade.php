@@ -6,14 +6,14 @@
 
     @section('title')
         Categories
-        <a href="{{route('category_create')}}" class="btn btn-success btn-sm list_delete_btn">
+        <a href="{{route('category_create')}}" class="btn btn-success btn-sm">
             <span class="glyphicon glyphicon-leaf" title="Create"></span>
         </a>
     @stop
 
     @section('items')
 
-        {!! Form::open(array('action' => ('CategoryController@deleteMultipleItems'))) !!}
+        {!! Form::open(array('action' => ('CategoryController@deleteMultipleItems'), 'id'=>'list_form')) !!}
 
             @foreach( $categories as $key => $category )
 
@@ -41,7 +41,7 @@
                    class="list-group-item item_row">
                     {{$category->name}}
                 </a>
-                <a href="{{route('category_destroy', ['id' => $category->category_id])}}"
+                <a data-href="{{route('category_destroy', ['id' => $category->category_id])}}"
                    class="btn btn-danger btn-sm list_delete_btn">
                     <span class="glyphicon glyphicon-remove"></span>
                 </a>
