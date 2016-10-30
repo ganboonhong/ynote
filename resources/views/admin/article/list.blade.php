@@ -6,7 +6,7 @@
 
     @section('title')
         Articles
-        <a href="{{route('article_create')}}" class="btn btn-success btn-sm list_delete_btn">
+        <a href="{{route('article_create')}}" class="btn btn-success btn-sm">
             <span class="glyphicon glyphicon-leaf" title="Create"></span>
         </a>
     @stop
