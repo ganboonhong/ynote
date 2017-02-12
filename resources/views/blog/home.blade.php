@@ -10,6 +10,8 @@
     <meta property="og:image" content="/server/php/files/light-bulb.png"/>
     <meta property="og:description" content="This blog records all the interesting things in the life of a passionnate programmer.">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <!-- bootstrap -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
@@ -19,7 +21,6 @@
     {!! HTML::style('css/frontend/general.css') !!}
     {!! HTML::style('css/frontend/article/list.css') !!}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
 
 
@@ -31,6 +32,7 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+    {!! HTML::script('js/jquery.confirm.min.js') !!}
     {!! HTML::script('js/_general_js.js') !!}
     {!! HTML::script('js/jquery_validation/jquery.validate.js')!!}
     {{--{!! HTML::script('js/jquery_validation/localization/messages_zh_TW.js')!!}--}}
